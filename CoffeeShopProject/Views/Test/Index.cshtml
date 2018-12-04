@@ -1,0 +1,284 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+@Html.Partial("~/Views/Layout/Admin/Head.cshtml")
+<body class="animsition">
+
+    <div class="page-wrapper">
+        <!-- HEADER MOBILE-->
+        @Html.Partial("~/Views/Layout/Admin/Header_mobile.cshtml")
+        <!-- END HEADER MOBILE-->
+        <!-- MENU SIDEBAR-->
+        @Html.Partial("~/Views/Layout/Admin/Menu_sidebar.cshtml")
+        <!-- END MENU SIDEBAR-->
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- HEADER DESKTOP-->
+            @Html.Partial("~/Views/Layout/Admin/Header_desktop.cshtml")
+            <!-- END HEADER DESKTOP-->
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <!-- SEARCH BAR-->
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="search_bar">
+                                    <div container="container">
+                                        <div class="row">
+                                            <div class="col-lg-8">
+                                                <form class="form-header search_bar" action="" method="POST">
+                                                    <input class="au-input au-input--xl" type="text" name="search" id="search_value" placeholder="Nhập tên sản phẩm..." />
+                                                    <button class="au-btn--submit" id="search_button" type="submit">
+                                                        <i class="zmdi zmdi-search"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END SEARCH BAR-->
+                        <!-- TABLE CONTENT-->
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="table-responsive table--no-card m-b-30">
+                                    <table class="table table-borderless table-striped table-earning">
+                                        <thead>
+                                            <tr>
+                                                <th>Mã sản phẩm</th>
+                                                <th>Tên sản phẩm</th>
+                                                <th>Đơn giá</th>
+                                                <th>Loại sản phẩm</th>
+                                                <th>Ngày tạo</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="table_body">
+                                            <tr data-id="">
+                                                <td></td>
+                                                <td></td>
+                                                <td>string.Format("{0:N0}", item.product_price) đ</td>
+                                                <td>
+                                                    item.category_name
+                                                </td>
+                                                <td>item.product_id.CreationTime</td>
+                                            </tr>
+                                            <tr data-id="item.product_id.Increment" style="display:none">
+                                                <td colspan="5" style="font-size:15px">
+                                                    <div class="detail">
+                                                        <div class="container">
+                                                            <div class="row">
+                                                                <div class="col-lg-2">
+
+                                                                    <img width="150" height="150" src="~/images/product/" />
+                                                                </div>
+                                                                <div class="col-lg-4">
+                                                                    <div class="row form-group detail-row">
+                                                                        <div class="col col-md-4">
+                                                                            <label class=" form-control-label">Mã sản phẩm:</label>
+                                                                        </div>
+                                                                        <div class="col-12 col-md-8">
+                                                                            <p class="form-control-static"></p>
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                    <div class="row form-group detail-row">
+                                                                        <div class="col col-md-4">
+                                                                            <label class=" form-control-label">Tên sản phẩm:</label>
+                                                                        </div>
+                                                                        <div class="col-12 col-md-8">
+                                                                            <p class="form-control-static"></p>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row form-group detail-row">
+                                                                        <div class="col col-md-4">
+                                                                            <label class=" form-control-label">Đơn giá:</label>
+                                                                        </div>
+                                                                        <div class="col-12 col-md-8">
+                                                                            <p class="form-control-static"></p>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row form-group detail-row">
+                                                                        <div class="col col-md-4">
+                                                                            <label class=" form-control-label">Loại sản phẩm:</label>
+                                                                        </div>
+                                                                        <div class="col-12 col-md-8">
+                                                                            <p class="form-control-static"></p>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="col-lg-5 ml-auto">
+                                                                    <div class="row form-group detail-row">
+                                                                        <div class="col col-md-4">
+                                                                            <label class=" form-control-label">Mô tả:</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-control-static">
+                                                                        <p class="form-control-static"></p>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="manage-button">
+                                                                    <button type="submit" class="btn btn-success btn-sm">
+                                                                        <i class="fa fa-edit"></i> Cập nhật
+                                                                    </button>
+                                                                    <button type="submit" class="btn btn-danger btn-sm">
+                                                                        <i class="fa fa-remove"></i> Xóa
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END TABLE CONTENT-->
+                        <!-- ROW BEHIND-->
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form_action">
+                                    <div container="container">
+                                        <div class="row">
+                                            <!-- ADD FORM -->
+                                            <div class="col-lg-6">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <strong>Them </strong>sản phẩm
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <!-- END ADD FORM -->
+                                            <div class="col-lg-6">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <!-- CATE TABLE -->
+                                                        <div class="col-lg-12">
+                                                            <div class="user-data m-b-30">
+                                                                <h3 class="title-3 m-b-30">
+                                                                    <i class="zmdi zmdi-view-dashboard"></i>Loại Sản Phẩm
+                                                                    <form action="">
+                                                                        <div class="input-group">
+                                                                            <input type="text" id="input2-group2" name="category_name" placeholder="Nhập tên loại" class="form-control" width="50">
+                                                                            <div class="input-group-btn">
+                                                                                <button type="submit" class="btn btn-primary" style="background-color: #2ecc71; border-color:#2ecc71; font-size: 20px">
+                                                                                    <i class="zmdi zmdi-plus"></i>
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                                </h3>
+                                                                <div class="table-responsive table-data">
+                                                                    <table class="table" style="text-align: center">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <td>Mã Loại</td>
+                                                                                <td>Tên Loại</td>
+                                                                                <td>Quản Lý</td>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody></tbody>
+                                                                        <tfoot>
+
+                                                                        </tfoot>
+                                                                    </table>
+
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <!-- END CATE TABLE -->
+                                                    </div>
+
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END ROW BEHIND-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+@Html.Partial("~/Views/Layout/Admin/JS.cshtml")
+
+</html>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $(function () {
+
+            $(document).on("click", "#search_button", function (event) {
+                event.preventDefault();
+                console.log("da clicked");
+                var $key = null;
+                if ($("#search_value").val() == "") {
+                    $key = "#%$null$%#";
+                }
+                else {
+                    $key = $("#search_value").val();
+                }
+                $.ajax({
+                    url: "/Product/Search/",
+                    dataType: "JSON",
+                    type: "POST",
+                    data: { key: $key },
+                    //contentType: "application/json",
+                    success: function (data) {
+                        $("#table_body tr").remove();
+                        $("#table_body").append(data);
+                    },
+                    error: function () {
+                        alert("Lỗi tìm kiếm");
+                    }
+
+                });
+            });
+
+            $(document).on("click", "#table_body tr:nth-child(odd)", function (event) {
+                console.log("da clicked");
+                var id = $(this).attr("data-id");
+                $('.table-earning tbody tr:nth-child(even)[data-id=' + id + ']').toggle();
+            });
+
+            $(document).on("click", "#edit_category", function (e) {
+                e.preventDefault();
+                console.log("da cliecked");
+                var id = $(this).attr("data-id");
+                $('span[data-id=' + id + ']').toggle();
+                $('.edit_ajax[data-id=' + id + ']').toggle();
+                var on = $('.edit_ajax[data-id=' + id + ']').is(':visible');
+                $(this).html(on ? '<i class="zmdi zmdi-close"></i>' : '<i class="zmdi zmdi-edit"></i>');
+            });
+
+        });
+
+
+    });
+</script>
+<!-- end document-->

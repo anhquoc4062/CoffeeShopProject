@@ -1,0 +1,87 @@
+    .table-responsive {
+        overflow-y: auto;
+        height: 400px;
+    }
+
+    form.form-header.search_bar {
+        top: -32px;
+        margin-top: -10px;
+        padding-bottom: 20px;
+    }
+
+    .search_bar {
+        margin-left: 340px;
+    }
+
+    .au-btn--submit {
+        background: #333;
+    }
+
+    .au-input--xl {
+        min-width: 500px;
+    }
+
+    .au-btn--submit:hover {
+        background: #c0392b;
+    }
+
+    .row.form-group.detail-row {
+        border-bottom: 1px solid #d2caca;
+    }
+
+    .manage-button {
+        margin-left: auto;
+    }
+
+    .table-earning tbody tr:nth-child(odd):hover td {
+        background: #80808042;
+    }
+
+    .detail {
+        margin-top: 10px;
+    }
+
+    .header-button {
+        margin-left: auto;
+    }
+
+    .table-responsive.table-data {
+        height: 630px;
+    }
+
+    table a {
+        background: #ccc6c64a;
+        padding: 0px 9px;
+        border-radius: 50px;
+    }
+
+    .input-group {
+        width: 50%;
+        margin-left: auto;
+    }
+
+    .input-group-btn button.btn.btn-primary {
+        text-align: center;
+        width: 40px;
+    }
+
+        .input-group-btn button.btn.btn-primary:hover {
+            opacity: 0.7;
+        }
+
+    .edit_ajax {
+        margin: auto;
+    }
+
+    .edit_ajax.input-group > .form-control:not(:last-child) {
+            border-radius: 30px;
+            text-align: center;
+            font-size: 15px;
+        }
+
+    .edit_ajax button.btn.btn-primary {
+            border-radius: 37px;
+            width: 37px;
+            margin-left: 4px;
+            height: 37px;
+        }
