@@ -16,20 +16,9 @@ namespace CoffeeShopProject.Controllers
         }
         public IActionResult Index()
         {
-            var dsThucDon = (from td in db.ThucDon
-                             join ltd in db.LoaiThucDon
-                             on td.MaLoai equals ltd.MaLoai
-                             select new ThucDonViewModel
-                             {
-                                 MaThucDon = td.MaThucDon,
-                                 TenThucDon = td.TenThucDon,
-                                 HinhAnh = td.HinhAnh,
-                                 TenLoai = ltd.TenLoai,
-                                 MaLoai = td.MaLoai,
-                                 Gia = td.Gia,
-                                 KhuyenMai = td.KhuyenMai
-                             }).ToList();
-            ViewBag.Test = dsThucDon;
+            ThucDonViewModel data = new ThucDonViewModel(db);
+            var test = data.GetAllData();
+            ViewBag.Test = test;
             return View();
         }
     }
