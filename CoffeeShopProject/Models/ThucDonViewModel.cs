@@ -68,6 +68,25 @@ namespace CoffeeShopProject.Models
                            }).FirstOrDefault();
             return thucdon;
         }
+        public List<ThucDonViewModel> GetDsById(string MaLoai)
+        {
+            var dsThucDon = (from td in db.ThucDon
+                             where td.MaLoai == int.Parse(MaLoai)
+                             join ltd in db.LoaiThucDon
+                             on td.MaLoai equals ltd.MaLoai
+                             select new ThucDonViewModel
+                             {
+                                 MaThucDon = td.MaThucDon,
+                                 TenThucDon = td.TenThucDon,
+                                 HinhAnh = td.HinhAnh,
+                                 TenLoai = ltd.TenLoai,
+                                 MaLoai = td.MaLoai,
+                                 Gia = td.Gia,
+                                 KhuyenMai = td.KhuyenMai
+                             }).ToList();
+
+            return dsThucDon;
+        }
     }
 
     
