@@ -54,20 +54,6 @@ namespace CoffeeShopProject.Models
             return thucdon;
         }
 
-        public ThucDonViewModel GetLoaiThucDon(string id)
-        {
-            var thucdon = (from td in db.LoaiThucDon
-                           where td.MaLoai == int.Parse(id)
-                           join ltd in db.LoaiThucDon
-                           on td.MaLoai equals ltd.MaLoai
-                           select new ThucDonViewModel
-                           {
-                               MaLoai=td.MaLoai,
-                               TenLoai=td.TenLoai
-                               
-                           }).FirstOrDefault();
-            return thucdon;
-        }
     }
 
     

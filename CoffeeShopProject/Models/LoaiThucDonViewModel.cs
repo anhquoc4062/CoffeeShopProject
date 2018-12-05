@@ -17,15 +17,12 @@ namespace CoffeeShopProject.Models
         public List<LoaiThucDonViewModel> GetLoaiThucDon()
         {
             var loaithucdon = (from td in db.LoaiThucDon
-                           //where td.MaLoai == int.Parse(id)
-                           join ltd in db.LoaiThucDon
-                           on td.MaLoai equals ltd.MaLoai
-                           select new LoaiThucDonViewModel
-                           {
-                               MaLoai=td.MaLoai,
-                               TenLoai = td.TenLoai,
+                               select new LoaiThucDonViewModel
+                               {
+                                   MaLoai= td.MaLoai,
+                                   TenLoai = td.TenLoai,
                              
-                           }).ToList();
+                               }).ToList();
             return loaithucdon;
         }
 

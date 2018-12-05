@@ -1,0 +1,119 @@
+﻿@model IEnumerable<CoffeeShopProject.Models.LoaiThucDon>
+
+<style>
+    .modal-dialog {
+        max-width: 700px;
+    }
+
+    #category_modal {
+        position: absolute;
+        bottom: 1px;
+        right: 33px;
+        border-radius: unset;
+        height: 36px;
+        background: #3498db;
+        border: unset;
+    }
+</style>
+
+<!--ADD MODAL-->
+<form method="post" enctype="multipart/form-data" class="form-horizontal" action="/Employee/Add">
+    <div class="modal fade" id="add_modal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Thêm thực đơn</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+
+                    <div class="card-body card-block">
+                        <input hidden="" name="id">
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="text-input" class=" form-control-label">Tên thực đơn</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" id="text-input" placeholder="Nhập tên thực đơn..." class="form-control" value="" name="emp_name">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="file-input" class=" form-control-label">Hình ảnh</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="file" id="image_input" name="image" class="form-control-file" onchange="previewImg(this, 'preview_img')">
+                                <br>
+                                <input hidden="" value="" name="old_image">
+                                <img id="preview_img" src="/images/product/no-preview.jpg" width="100" height="100">
+                            </div>
+                            <script>
+                                function previewImg(input, id_string) {
+                                    var exp_string = "#";
+                                    exp_string += id_string;
+                                    if (input.files && input.files[0]) {
+                                        var reader = new FileReader();
+
+                                        reader.onload = function (e) {
+                                            $(exp_string).attr('src', e.target.result);
+                                        }
+
+                                        reader.readAsDataURL(input.files[0]);
+                                    }
+                                }
+                            </script>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="select" class=" form-control-label">Loại</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <select name="emp_position" id="select" class="form-control">
+                                    <option selected="" disabled="" value="0">--- Chọn loại thực đơn ---</option>
+                                    @foreach (var item in ViewBag.ListCate)
+                                    {
+                                        <option value="@item.MaLoai">@item.TenLoai</option>
+                                    }
+
+
+                                </select>
+                                <button class="btn btn-primary" id="category_modal"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="text-input" class=" form-control-label">Giá</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="number" id="text-input" placeholder="Nhập giá..." class="form-control" value="" name="emp_name">
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="text-input" class=" form-control-label">Khuyến mãi</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="number" id="text-input" value="0" class="form-control" value="" name="emp_address">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Thêm</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+<!--END ADD MODAL-->
