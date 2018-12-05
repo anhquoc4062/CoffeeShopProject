@@ -4,23 +4,20 @@ using System.Linq;
 using System.Threading.Tasks;
 using CoffeeShopProject.Models;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 
 namespace CoffeeShopProject.Controllers
 {
-    public class TestController : Controller
+    public class ProductAdminController : Controller
     {
         private readonly CoffeeShopContext db;
-        public TestController(CoffeeShopContext _db)
+        public ProductAdminController(CoffeeShopContext _db)
         {
             db = _db;
         }
         public IActionResult Index()
         {
-            ThucDonViewModel data = new ThucDonViewModel(db);
-            var test = data.GetDataById("1");
-            var jsonData = JsonConvert.SerializeObject(test);
-            ViewBag.Test = jsonData;
+            ThucDonViewModel dsThucDon = new ThucDonViewModel(db);
+            ViewBag.List = dsThucDon.GetAllData();
             return View();
         }
     }

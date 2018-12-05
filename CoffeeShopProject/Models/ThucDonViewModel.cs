@@ -10,10 +10,7 @@ namespace CoffeeShopProject.Models
         public string TenLoai { get; set; }
 
         private readonly CoffeeShopContext db;
-        public ThucDonViewModel()
-        {
-
-        }
+        public ThucDonViewModel() { }
         public ThucDonViewModel (CoffeeShopContext _db)
         {
             db = _db;
@@ -36,6 +33,25 @@ namespace CoffeeShopProject.Models
                             }).ToList();
 
             return dsThucDon;
+        }
+
+        public ThucDonViewModel GetDataById(string id)
+        {
+            var thucdon = (from td in db.ThucDon
+                           where td.MaThucDon == int.Parse(id)
+                           join ltd in db.LoaiThucDon
+                           on td.MaLoai equals ltd.MaLoai
+                           select new ThucDonViewModel
+                           {
+                               MaThucDon = td.MaThucDon,
+                               TenThucDon = td.TenThucDon,
+                               HinhAnh = td.HinhAnh,
+                               TenLoai = ltd.TenLoai,
+                               MaLoai = td.MaLoai,
+                               Gia = td.Gia,
+                               KhuyenMai = td.KhuyenMai
+                           }).FirstOrDefault();
+            return thucdon;
         }
     }
 

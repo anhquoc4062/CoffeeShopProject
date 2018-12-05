@@ -1,0 +1,212 @@
+﻿@{
+    Layout = "~/Views/Layout/Admin/Layout.cshtml";
+    ViewData["Title"] = "List";
+}
+
+<div class="section__content section__content--p30">
+    <div class="container-fluid">
+        <!--TABLE CONTENT-->
+        <div class="row">
+            <div class="col-md-12">
+                <!-- DATA TABLE -->
+                <h3 class="title-5 m-b-35">DANH SÁCH THỰC ĐƠN</h3>
+                <div class="table-data__tool">
+                    <div class="table-data__tool-left">
+                        <button class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal" data-target="#add_modal">
+                            <i class="zmdi zmdi-plus"></i>thêm
+                        </button>
+                    </div>
+                    <div class="table-data__tool-right">
+                        <!-- SEARCH BAR-->
+                        <div class="search_bar">
+                            <div container="container">
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <form class="form-header search_bar" action="/Employee/Search" method="POST">
+                                            <input class="au-input au-input--xl" type="text" name="key_word" placeholder="Nhập tên nhân viên..." />
+                                            <button class="au-btn--submit" type="submit">
+                                                <i class="zmdi zmdi-search"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END SEARCH BAR-->
+                    </div>
+                </div>
+
+                <div class="table-responsive table-responsive-data2">
+                    <table class="table table-data2">
+                        <thead>
+                            <tr>
+                                <th>ảnh</th>
+                                <th>tên thực đơn</th>
+                                <th>loại thực đơn</th>
+                                <th>giá</th>
+                                <th>khuyến mãi</th>
+                                <th>quản lý</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in ViewBag.List)
+                            {
+                                <tr class="tr-shadow">
+                                    <td><img src="~/uploads/product/@item.HinhAnh" width="70" height="70" /></td>
+                                    <td>@item.TenThucDon</td>
+                                    <td>@item.TenLoai</td>
+                                    <td>@item.Gia</td>
+                                    <td>@item.KhuyenMai</td>
+                                    <td>
+                                        <div class="table-data-feature">
+                                            <button class="item" data-placement="top" title="" data-original-title="Edit">
+                                                <i class="zmdi zmdi-edit"></i>
+                                            </button>
+                                            <button class="item" data-placement="top" title="" data-original-title="Delete">
+                                                <i class="zmdi zmdi-delete"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="spacer"></tr>
+                            }
+
+                            <!--<tr class="tr-shadow">
+        <td align="center" style="font-size: 15px" colspan="8">Không tìm thấy thành viên</td>
+    </tr>-->
+                            <!--Không tìm thấy sản phẩm-->
+
+                        </tbody>
+
+                    </table>
+                </div>
+                <!-- END DATA TABLE -->
+
+            </div>
+
+
+        </div>
+        <!--END TABLE CONTENT-->
+
+    </div>
+</div>
+<!--ADD MODAL-->
+<form method="post" enctype="multipart/form-data" class="form-horizontal" action="/Employee/Add">
+    <div class="modal fade" id="add_modal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Thêm nhân viên</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+
+                    <div class="card-body card-block">
+                        <input hidden="" value="000000000000000000000000" name="emp_id">
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="text-input" class=" form-control-label">Họ tên</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" id="text-input" placeholder="Nhập tên nhân viên..." class="form-control" value="" name="emp_name">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="file-input" class=" form-control-label">Hình ảnh</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="file" id="image_input" name="image" class="form-control-file" onchange="previewImg(this, 'preview_img')">
+
+                                <br>
+                                <input hidden="" value="" name="old_image">
+                                <img id="preview_img" src="/images/product/no-preview.jpg" width="100" height="100">
+                            </div>
+                            <script>
+                                function previewImg(input, id_string) {
+                                    var exp_string = "#";
+                                    exp_string += id_string;
+                                    if (input.files && input.files[0]) {
+                                        var reader = new FileReader();
+
+                                        reader.onload = function (e) {
+                                            $(exp_string).attr('src', e.target.result);
+                                        }
+
+                                        reader.readAsDataURL(input.files[0]);
+                                    }
+                                }
+                            </script>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label class=" form-control-label">Giới tính</label>
+                            </div>
+                            <div class="col col-md-9">
+                                <div class="form-check-inline form-check">
+                                    <label for="inline-radio1" class="form-check-label ">
+                                        <input type="radio" checked id="inline-radio1" name="emp_sex" value="1" class="form-check-input">Nam
+                                    </label>
+                                    <label for="inline-radio2" class="form-check-label ">
+                                        <input type="radio" id="inline-radio2" name="emp_sex" value="0" class="form-check-input">Nữ
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="text-input" class=" form-control-label">Email</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="email" id="text-input" placeholder="Nhập email..." class="form-control" value="" name="emp_email">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="text-input" class=" form-control-label">Tel</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" id="text-input" placeholder="Nhập số điện thoại..." class="form-control" value="" name="emp_tel">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="select" class=" form-control-label">Chức vụ</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <select name="emp_position" id="select" class="form-control">
+                                    <option selected="" disabled="" value="0">--- Chọn chức vụ ---</option>
+                                    <option value="Pha chế">Pha chế</option>
+                                    <option value="Phục vụ">Phục vụ</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="text-input" class=" form-control-label">Địa chỉ</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" id="text-input" placeholder="Nhập địa chỉ..." class="form-control" value="" name="emp_address">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Thêm</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+<!--END ADD MODAL-->
