@@ -1,0 +1,20 @@
+.form-check-label {
+    margin-right: 30px;
+}
+
+.table-responsive {
+    height: 700px;
+    overflow-y: unset;
+}
+
+.pagination-container {
+    margin-bottom: 20px;
+}
+
+button.au-btn.au-btn-icon.au-btn--green.au-btn--small {
+    width: 93px;
+}
+
+.au-input--xl {
+    min-width: 447px;
+}

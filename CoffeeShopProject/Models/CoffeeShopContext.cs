@@ -16,8 +16,11 @@ namespace CoffeeShopProject.Models
         }
 
         public virtual DbSet<BanAn> BanAn { get; set; }
+        public virtual DbSet<ChiTietGioHang> ChiTietGioHang { get; set; }
         public virtual DbSet<ChiTietHoaDon> ChiTietHoaDon { get; set; }
+        public virtual DbSet<GioHang> GioHang { get; set; }
         public virtual DbSet<HoaDon> HoaDon { get; set; }
+        public virtual DbSet<KhachHang> KhachHang { get; set; }
         public virtual DbSet<LoaiThucDon> LoaiThucDon { get; set; }
         public virtual DbSet<NhanVien> NhanVien { get; set; }
         public virtual DbSet<PhanCong> PhanCong { get; set; }
@@ -28,7 +31,7 @@ namespace CoffeeShopProject.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=USERMIC-7EHB531\\SQLEXPRESSS; Database=CoffeeShop;Integrated Security=True;");
+                optionsBuilder.UseSqlServer("Server=DESKTOP-O9FKFQB\\SQLEXPRESS; Database=CoffeeShop;Integrated Security=True;");
             }
         }
 
@@ -41,6 +44,30 @@ namespace CoffeeShopProject.Models
                 entity.Property(e => e.MaBan).HasColumnName("maBan");
 
                 entity.Property(e => e.SoGhe).HasColumnName("soGhe");
+            });
+
+            modelBuilder.Entity<ChiTietGioHang>(entity =>
+            {
+                entity.HasKey(e => e.MaCtgioHang)
+                    .ForSqlServerIsClustered(false);
+
+                entity.Property(e => e.MaCtgioHang).HasColumnName("maCTGioHang");
+
+                entity.Property(e => e.MaGioHang).HasColumnName("maGioHang");
+
+                entity.Property(e => e.MaThucDon).HasColumnName("maThucDon");
+
+                entity.Property(e => e.SoLuong).HasColumnName("soLuong");
+
+                entity.HasOne(d => d.MaGioHangNavigation)
+                    .WithMany(p => p.ChiTietGioHang)
+                    .HasForeignKey(d => d.MaGioHang)
+                    .HasConstraintName("FK_CHITIETGIOHANG_REFERENCE_GIOHANG");
+
+                entity.HasOne(d => d.MaThucDonNavigation)
+                    .WithMany(p => p.ChiTietGioHang)
+                    .HasForeignKey(d => d.MaThucDon)
+                    .HasConstraintName("FK_CHITIETGIOHANG_REFERENCE_THUCDON");
             });
 
             modelBuilder.Entity<ChiTietHoaDon>(entity =>
@@ -66,6 +93,29 @@ namespace CoffeeShopProject.Models
                     .WithMany(p => p.ChiTietHoaDon)
                     .HasForeignKey(d => d.MaThucDon)
                     .HasConstraintName("FK_CHITIETH_REFERENCE_THUCDON");
+            });
+
+            modelBuilder.Entity<GioHang>(entity =>
+            {
+                entity.HasKey(e => e.MaGioHang)
+                    .ForSqlServerIsClustered(false);
+
+                entity.Property(e => e.MaGioHang).HasColumnName("maGioHang");
+
+                entity.Property(e => e.MaKhachHang).HasColumnName("maKhachHang");
+
+                entity.Property(e => e.NgayDat)
+                    .HasColumnName("ngayDat")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.TongCong).HasColumnName("tongCong");
+
+                entity.Property(e => e.TrangThai).HasColumnName("trangThai");
+
+                entity.HasOne(d => d.MaKhachHangNavigation)
+                    .WithMany(p => p.GioHang)
+                    .HasForeignKey(d => d.MaKhachHang)
+                    .HasConstraintName("FK_GIOHANG_REFERENCE_KHACHHANG");
             });
 
             modelBuilder.Entity<HoaDon>(entity =>
@@ -96,6 +146,34 @@ namespace CoffeeShopProject.Models
                     .WithMany(p => p.HoaDon)
                     .HasForeignKey(d => d.MaNhanVien)
                     .HasConstraintName("FK_HOADON_REFERENCE_NHANVIEN");
+            });
+
+            modelBuilder.Entity<KhachHang>(entity =>
+            {
+                entity.HasKey(e => e.MaKhachHang)
+                    .ForSqlServerIsClustered(false);
+
+                entity.Property(e => e.MaKhachHang).HasColumnName("maKhachHang");
+
+                entity.Property(e => e.DiaChi)
+                    .HasColumnName("diaChi")
+                    .HasMaxLength(254);
+
+                entity.Property(e => e.Email)
+                    .HasColumnName("email")
+                    .HasMaxLength(254);
+
+                entity.Property(e => e.SoDt)
+                    .HasColumnName("soDT")
+                    .HasMaxLength(20);
+
+                entity.Property(e => e.TenKhachHang)
+                    .HasColumnName("tenKhachHang")
+                    .HasMaxLength(254);
+
+                entity.Property(e => e.TinhThanh)
+                    .HasColumnName("tinhThanh")
+                    .HasMaxLength(254);
             });
 
             modelBuilder.Entity<LoaiThucDon>(entity =>
@@ -154,11 +232,6 @@ namespace CoffeeShopProject.Models
                 entity.Property(e => e.NgayPhanCong)
                     .HasColumnName("ngayPhanCong")
                     .HasColumnType("datetime");
-
-                entity.HasOne(d => d.MaBanNavigation)
-                    .WithMany(p => p.PhanCong)
-                    .HasForeignKey(d => d.MaBan)
-                    .HasConstraintName("FK_PHANCONG_REFERENCE_BANAN");
             });
 
             modelBuilder.Entity<ThucDon>(entity =>

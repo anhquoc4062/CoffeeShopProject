@@ -1,0 +1,37 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+@Html.Partial("~/Views/Layout/Admin/Head.cshtml")
+<body class="animsition">
+
+    <div class="page-wrapper">
+        <!-- HEADER MOBILE-->
+        @Html.Partial("~/Views/Layout/Admin/Header_mobile.cshtml")
+        <!-- END HEADER MOBILE-->
+        <!-- MENU SIDEBAR-->
+        @Html.Partial("~/Views/Layout/Admin/Menu_sidebar.cshtml")
+        <!-- END MENU SIDEBAR-->
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- HEADER DESKTOP-->
+            @Html.Partial("~/Views/Layout/Admin/Header_desktop.cshtml")
+            <!-- END HEADER DESKTOP-->
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+
+</body>
+@Html.Partial("~/Views/Layout/Admin/JS.cshtml")
+
+</html>
+
+
+<!-- end document-->

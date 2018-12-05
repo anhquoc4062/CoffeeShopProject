@@ -97,6 +97,42 @@ create table ThucDon (
    constraint PK_THUCDON primary key nonclustered (maThucDon)
 )
 go
+/*==============================================================*/
+/* Table: KhachHang                                               */
+/*==============================================================*/
+create table KhachHang (
+   maKhachHang            int identity(1,1) not null,
+   tenKhachHang           nvarchar(254)         null,
+   email              nvarchar(254)         null,
+   diaChi               nvarchar(254)          null,
+   tinhThanh			nvarchar(254)		 null,
+   soDT			nvarchar(20)					 null,
+   constraint PK_KHACHHANG primary key nonclustered (maKhachHang)
+)
+go
+/*==============================================================*/
+/* Table: GioHang                                             */
+/*==============================================================*/
+create table GioHang (
+   maGioHang            int identity(1,1) not null,
+   maKhachHang          int        null,
+   tongCong				float	   null,
+   ngayDat				datetime   null,
+   trangThai			int		   null,
+   constraint PK_GIOHANG primary key nonclustered (maGioHang)
+)
+go
+/*==============================================================*/
+/* Table: ChiTietGioHang                                            */
+/*==============================================================*/
+create table ChiTietGioHang (
+   maCTGioHang           int identity(1,1) not null,
+   maGioHang			int		null,
+   maThucDon          int        null,
+   soLuong				int	   null,
+   constraint PK_CHITIETGIOHANG primary key nonclustered (maCTGioHang)
+)
+go
 
 alter table ChiTietHoaDon
    add constraint FK_CHITIETH_REFERENCE_THUCDON foreign key (maThucDon)
@@ -128,6 +164,20 @@ go
 alter table ThucDon
    add constraint FK_THUCDON_REFERENCE_LOAITHUC foreign key (maLoai)
       references LoaiThucDon (maLoai)
+go
+
+alter table ChiTietGioHang
+   add constraint FK_CHITIETGIOHANG_REFERENCE_GIOHANG foreign key (maGioHang)
+      references GioHang (maGioHang)
+go
+alter table ChiTietGioHang
+   add constraint FK_CHITIETGIOHANG_REFERENCE_THUCDON foreign key (maThucDon)
+      references ThucDon (maThucDon)
+go
+
+alter table GioHang
+   add constraint FK_GIOHANG_REFERENCE_KHACHHANG foreign key (maKhachHang)
+      references KhachHang (maKhachHang)
 go
 
 select * from ThucDon

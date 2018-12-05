@@ -7,6 +7,7 @@ namespace CoffeeShopProject.Models
     {
         public ThucDon()
         {
+            ChiTietGioHang = new HashSet<ChiTietGioHang>();
             ChiTietHoaDon = new HashSet<ChiTietHoaDon>();
         }
 
@@ -18,6 +19,7 @@ namespace CoffeeShopProject.Models
         public int? KhuyenMai { get; set; }
 
         public LoaiThucDon MaLoaiNavigation { get; set; }
+        public ICollection<ChiTietGioHang> ChiTietGioHang { get; set; }
         public ICollection<ChiTietHoaDon> ChiTietHoaDon { get; set; }
     }
 }
