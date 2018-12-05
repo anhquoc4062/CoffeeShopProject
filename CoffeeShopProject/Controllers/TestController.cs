@@ -17,8 +17,8 @@ namespace CoffeeShopProject.Controllers
         }
         public IActionResult Index()
         {
-            ThucDonViewModel data = new ThucDonViewModel(db);
-            var test = data.GetDataById("1");
+            LoaiThucDonViewModel data = new LoaiThucDonViewModel(db);
+            var test = data.GetLoaiThucDon();
             var jsonData = JsonConvert.SerializeObject(test);
             ViewBag.Test = jsonData;
             return View();
