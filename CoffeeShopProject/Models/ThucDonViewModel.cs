@@ -72,7 +72,6 @@ namespace CoffeeShopProject.Models
 
             return dsThucDon;
         }
->>>>>>> fb470193f33da82dc409b047d3d27076d91cfc12
     }
 
     
