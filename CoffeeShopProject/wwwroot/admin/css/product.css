@@ -18,3 +18,16 @@ button.au-btn.au-btn-icon.au-btn--green.au-btn--small {
 .au-input--xl {
     min-width: 447px;
 }
+
+.modal-open .modal {
+    overflow-x: unset;
+}
+
+.modal#cate_modal .modal-content {
+    width: 500px;
+    position: absolute;
+    left: 100px;
+    background: #f5f5f5;
+    top: 200px;
+    box-shadow: 1px 2px #00000014;
+}
