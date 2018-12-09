@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace CoffeeShopProject.Models
 {
-    public class ThucDonViewModel:ThucDon
+    public class ThucDonViewModel : ThucDon
     {
         public string TenLoai { get; set; }
 
         private readonly CoffeeShopContext db;
         public ThucDonViewModel() { }
-        public ThucDonViewModel (CoffeeShopContext _db)
+        public ThucDonViewModel(CoffeeShopContext _db)
         {
             db = _db;
         }
@@ -19,18 +19,19 @@ namespace CoffeeShopProject.Models
         public List<ThucDonViewModel> GetAllData()
         {
             var dsThucDon = (from td in db.ThucDon
-                            join ltd in db.LoaiThucDon
-                            on td.MaLoai equals ltd.MaLoai
-                            select new ThucDonViewModel
-                            {
-                                MaThucDon = td.MaThucDon,
-                                TenThucDon = td.TenThucDon,
-                                HinhAnh = td.HinhAnh,
-                                TenLoai = ltd.TenLoai,
-                                MaLoai = td.MaLoai,
-                                Gia = td.Gia,
-                                KhuyenMai = td.KhuyenMai
-                            }).ToList();
+                             join ltd in db.LoaiThucDon
+                             on td.MaLoai equals ltd.MaLoai
+                             orderby td.MaThucDon descending
+                             select new ThucDonViewModel
+                             {
+                                 MaThucDon = td.MaThucDon,
+                                 TenThucDon = td.TenThucDon,
+                                 HinhAnh = td.HinhAnh,
+                                 TenLoai = ltd.TenLoai,
+                                 MaLoai = td.MaLoai,
+                                 Gia = td.Gia,
+                                 KhuyenMai = td.KhuyenMai
+                             }).ToList();
 
             return dsThucDon;
         }
@@ -72,7 +73,6 @@ namespace CoffeeShopProject.Models
 
             return dsThucDon;
         }
-
         //------------------------------------------
         public bool DeleteThucDonById(String id)
         {
@@ -111,6 +111,4 @@ namespace CoffeeShopProject.Models
             //return new ThucDonViewModel(db).GetDsThucDon();
         }
     }
-
-    
 }

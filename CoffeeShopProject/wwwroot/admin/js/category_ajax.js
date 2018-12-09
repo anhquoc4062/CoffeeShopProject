@@ -8,6 +8,7 @@
             },
             dataType: "JSON",
             success: function (data) {
+                swal("Thành công", ", Đã thêm loại sản phẩm", "success");
                 var htmlString = '<option selected="" disabled="" value=0>--- Chọn loại thực đơn ---</option>';
                 for (i in data) {
                     htmlString += '<option value="' + data[i].maLoai + '">' + data[i].tenLoai + '</option>';
