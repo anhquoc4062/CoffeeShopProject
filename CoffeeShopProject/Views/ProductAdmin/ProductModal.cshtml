@@ -17,7 +17,7 @@
 </style>
 
 <!--ADD MODAL-->
-<form method="post" enctype="multipart/form-data" class="form-horizontal" action="/Employee/Add">
+<form id="product_form" method="post" enctype="multipart/form-data" class="form-horizontal" action="#">
     <div class="modal fade" id="add_modal">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -30,7 +30,6 @@
 
                 <!-- Modal body -->
                 <div class="modal-body">
-
                     <div class="card-body card-block">
                         <input hidden="" name="id">
                         <div class="row form-group">
@@ -38,7 +37,7 @@
                                 <label for="text-input" class=" form-control-label">Tên thực đơn</label>
                             </div>
                             <div class="col-12 col-md-9">
-                                <input type="text" id="text-input" placeholder="Nhập tên thực đơn..." class="form-control" value="" name="emp_name">
+                                <input type="text" id="product_name" placeholder="Nhập tên thực đơn..." class="form-control" value="" name="emp_name">
                             </div>
                         </div>
                         <div class="row form-group">
@@ -46,7 +45,7 @@
                                 <label for="file-input" class=" form-control-label">Hình ảnh</label>
                             </div>
                             <div class="col-12 col-md-9">
-                                <input type="file" id="image_input" name="image" class="form-control-file" onchange="previewImg(this, 'preview_img')">
+                                <input type="file" id="product_img" name="image" class="form-control-file" onchange="previewImg(this, 'preview_img')">
                                 <br>
                                 <input hidden="" value="" name="old_image">
                                 <img id="preview_img" src="/images/product/no-preview.jpg" width="100" height="100">
@@ -89,7 +88,7 @@
                                 <label for="text-input" class=" form-control-label">Giá</label>
                             </div>
                             <div class="col-12 col-md-9">
-                                <input type="number" id="text-input" placeholder="Nhập giá..." class="form-control" value="" name="emp_name">
+                                <input type="number" id="product_price" placeholder="Nhập giá..." class="form-control" value="" name="emp_name">
                             </div>
                         </div>
 
@@ -98,7 +97,7 @@
                                 <label for="text-input" class=" form-control-label">Khuyến mãi</label>
                             </div>
                             <div class="col-12 col-md-9">
-                                <input type="number" id="text-input" value="0" class="form-control" value="" name="emp_address">
+                                <input type="number" id="product_discount" value="0" class="form-control" value="" name="emp_address">
                             </div>
                         </div>
 
@@ -108,7 +107,7 @@
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Thêm</button>
+                    <button type="submit" class="btn btn-success" id="add_product_btn">Thêm</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
                 </div>
 
@@ -116,8 +115,7 @@
         </div>
     </div>
     <!--CATEGORY MODAL-->
-    <form action="#" method="post" id="category_form">
-        <div class="modal fade" id="cate_modal" tabindex="-1" role="dialog">
+    <div class="modal fade" id="cate_modal" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -146,7 +144,6 @@
                 </div>
             </div>
         </div>
-    </form>
     <!--end CATEGORY MODAL-->
 </form>
 <!--END ADD MODAL-->

@@ -1,4 +1,7 @@
-    .table-responsive {
+.main-content {
+    min-height: 300vh;
+}    
+.table-responsive {
     overflow-y: auto;
     height: 400px;
     }
