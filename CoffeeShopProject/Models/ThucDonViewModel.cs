@@ -21,6 +21,7 @@ namespace CoffeeShopProject.Models
             var dsThucDon = (from td in db.ThucDon
                             join ltd in db.LoaiThucDon
                             on td.MaLoai equals ltd.MaLoai
+                            orderby td.MaThucDon descending
                             select new ThucDonViewModel
                             {
                                 MaThucDon = td.MaThucDon,
@@ -72,7 +73,16 @@ namespace CoffeeShopProject.Models
 
             return dsThucDon;
         }
+        public bool InsertThucDon(ThucDon thucDon)
+        {
+            if (thucDon != null)
+            {
+                db.ThucDon.Add(thucDon);
+                db.SaveChanges();
+                return true;
+            }
+            return false;
+        }
     }
 
-    
 }

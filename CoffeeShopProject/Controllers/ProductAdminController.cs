@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using CoffeeShopProject.Models;
@@ -34,6 +35,30 @@ namespace CoffeeShopProject.Controllers
             LoaiThucDonViewModel query = new LoaiThucDonViewModel(db);
             query.InsertLoaiThucDon(tenLoai);
             var response = query.GetLoaiThucDon();
+            return Json(response);
+        }
+        [HttpPost]
+        public IActionResult AddProduct(string product_name, IFormFile product_img, string product_category, string product_price, string product_discount)
+        {
+            ThucDon newProduct = new ThucDon();
+
+            if (product_img != null)
+            {
+                string path_to_image = "wwwroot/uploads/product/" + product_img.FileName;
+                using (var stream = new FileStream(path_to_image, FileMode.Create))
+                {
+                    product_img.CopyTo(stream);
+                }
+                newProduct.HinhAnh = product_img.FileName;
+            }
+            newProduct.TenThucDon = product_name;
+            newProduct.MaLoai = int.Parse(product_category);
+            newProduct.Gia = float.Parse(product_price);
+            newProduct.KhuyenMai = int.Parse(product_discount);
+
+            ThucDonViewModel query = new ThucDonViewModel(db);
+            query.InsertThucDon(newProduct);
+            var response = query.GetAllData();
             return Json(response);
         }
     }
