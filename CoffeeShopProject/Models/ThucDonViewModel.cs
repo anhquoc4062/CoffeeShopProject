@@ -72,6 +72,44 @@ namespace CoffeeShopProject.Models
 
             return dsThucDon;
         }
+
+        //------------------------------------------
+        public bool DeleteThucDonById(String id)
+        {
+            if (db.ThucDon.Find(int.Parse(id)) != null)
+            {
+                db.ThucDon.Remove(db.ThucDon.Find(int.Parse(id)));
+                db.SaveChanges();
+                return true;
+            }
+            return false;
+            //return new ThucDonViewModel(db).GetDsThucDon();
+        }
+
+        public bool InsertThucDon(ThucDon nv)
+        {
+            if (nv != null)
+            {
+                db.ThucDon.Add(nv);
+                db.SaveChanges();
+                return true;
+            }
+            return false;
+            //return new ThucDonViewModel(db).GetDsThucDon();
+        }
+        public bool EditThucDon(ThucDon ThucDon)
+        {
+            //Edit bằng id nghe
+            ThucDon nv = db.ThucDon.Find(ThucDon.MaThucDon);
+            if (nv != null)
+            {
+                db.Entry(nv).CurrentValues.SetValues(ThucDon);
+                db.SaveChanges();
+                return true;
+            }
+            return false;
+            //return new ThucDonViewModel(db).GetDsThucDon();
+        }
     }
 
     

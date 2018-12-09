@@ -53,6 +53,7 @@ namespace CoffeeShopProject.Models
         }
         public bool EditNhanVien(NhanVien nhanVien)
         {
+            //Edit bằng id nghe
             NhanVien nv = db.NhanVien.Find(nhanVien.MaNhanVien);
             if (nv != null)
             {
