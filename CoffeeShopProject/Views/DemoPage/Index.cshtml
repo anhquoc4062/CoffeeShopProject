@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Layout/Admin/Layout.cshtml";
+}
+
+<div class="col-md-12 graphs">
+    <div class="xs">
+        <h3>Đơn hàng</h3>
+        <div class="bs-example4" data-example-id="simple-responsive-table">
+            <div class="panel panel-warning" data-widget="{&quot;draggable&quot;: &quot;false&quot;}" data-widget-static="">
+                <div class="panel-body no-padding">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr class="warning">
+                                <th>STT</th>
+                                <th>Tên khách hàng</th>
+                                <th>Số điện thoại</th>
+                                <th>Chi tiết</th>
+                                <th>Tình trạng</th>
+                                <th>Ngày đặt</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>                      
+                            <tr>
+                                <td>1</td>
+                                <td>Nguyễn Văn A</td>
+                                <td>01234567890</td>
+                                <td><a href="detail-order.php?id=23">Xem chi tiết</a></td>
+                                <td><a href="list-order.php?id=23&amp;tinhtrang=1" style="text-decoration: none"><div class="tinhtrang" style="background-color: #2ecc71">Đã xử lý</div></a></td>
+                                <td>03/07/2018</td>
+                                <td><a href="list-order.php?id=23&amp;xoadonhang=1" onclick="return confirm('Bạn có muốn xóa đơn hàng này?')">Xóa</a></td>
+                            </tr>                      
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

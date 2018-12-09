@@ -6,7 +6,6 @@
 /*==============================================================*/
 /* Table: BanAn                                                 */
 /*==============================================================*/
-drop database CoffeeShop
 
 create database CoffeeShop
 go
@@ -190,8 +189,7 @@ go
 INSERT INTO LoaiThucDon VALUES ('Freeze');
 go
 
-INSERT INTO ThucDon VALUES (N'Cappuchino', 'cappuccino_PNG26.png', 16, 15, 0);
+INSERT INTO ThucDon VALUES (N'Cappuchino', 'cappuccino_PNG26.png', 1, 15, 0);
 go
 INSERT INTO ThucDon VALUES (N'Latte', 'ABC.jpg', 16, 12.5, 0);
 
-select * from thucdon
