@@ -4,6 +4,11 @@
     };
 
     $(".modal").on('show.bs.modal', function (e) {
+        $(this).attr("overflow-y", "auto");
+    });
+
+    $("#add_modal").on('show.bs.modal', function (e) {
+        $('#preview_img').attr('src', '/images/product/no-preview.jpg');
         $('#product_form').trigger("reset");
     });
 

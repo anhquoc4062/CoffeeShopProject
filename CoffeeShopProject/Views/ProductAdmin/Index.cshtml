@@ -12,7 +12,7 @@
                 <h3 class="title-5 m-b-35">DANH SÁCH THỰC ĐƠN</h3>
                 <div class="table-data__tool">
                     <div class="table-data__tool-left">
-                        <button class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal" data-target="#add_modal">
+                        <button class="au-btn au-btn-icon au-btn--green au-btn--small product_btn" data-action="Add" data-toggle="modal" data-target="#add_modal">
                             <i class="zmdi zmdi-plus"></i>thêm
                         </button>
                     </div>
@@ -56,13 +56,13 @@
                                     <td>@item.TenThucDon</td>
                                     <td>@item.TenLoai</td>
                                     <td>$@string.Format("{0:N2}", item.Gia)</td>
-                                    <td>@item.KhuyenMai</td>
+                                    <td>@item.KhuyenMai%</td>
                                     <td>
                                         <div class="table-data-feature">
-                                            <button class="item" data-placement="top" title="" data-original-title="Edit">
+                                            <button class="product_btn item"  data-placement="top" data-original-title="Edit" data-action="Edit" data-id="@item.MaThucDon" data-toggle="modal" data-target="#add_modal">
                                                 <i class="zmdi zmdi-edit"></i>
                                             </button>
-                                            <button class="item" data-placement="top" title="" data-original-title="Delete">
+                                            <button class="product_btn item" data-placement="top" data-original-title="Delete" data-action="Delete" data-id="@item.MaThucDon">
                                                 <i class="zmdi zmdi-delete"></i>
                                             </button>
                                         </div>

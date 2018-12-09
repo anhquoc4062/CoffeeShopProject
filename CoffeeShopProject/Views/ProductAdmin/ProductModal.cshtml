@@ -14,6 +14,10 @@
         background: #3498db;
         border: unset;
     }
+    #add_modal .modal-content {
+        min-width: 1200px;
+        margin-left: -220px;
+    }
 </style>
 
 <!--ADD MODAL-->
@@ -24,82 +28,97 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Thêm thực đơn</h4>
+                    <h4 class="modal-title" id="add_product_modal_title">Thêm thực đơn</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
                 <!-- Modal body -->
                 <div class="modal-body">
                     <div class="card-body card-block">
-                        <input hidden="" name="id">
-                        <div class="row form-group">
-                            <div class="col col-md-3">
-                                <label for="text-input" class=" form-control-label">Tên thực đơn</label>
-                            </div>
-                            <div class="col-12 col-md-9">
-                                <input type="text" id="product_name" placeholder="Nhập tên thực đơn..." class="form-control" value="" name="emp_name">
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col col-md-3">
-                                <label for="file-input" class=" form-control-label">Hình ảnh</label>
-                            </div>
-                            <div class="col-12 col-md-9">
-                                <input type="file" id="product_img" name="image" class="form-control-file" onchange="previewImg(this, 'preview_img')">
-                                <br>
-                                <input hidden="" value="" name="old_image">
-                                <img id="preview_img" src="/images/product/no-preview.jpg" width="100" height="100">
-                            </div>
-                            <script>
-                                function previewImg(input, id_string) {
-                                    var exp_string = "#";
-                                    exp_string += id_string;
-                                    if (input.files && input.files[0]) {
-                                        var reader = new FileReader();
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input hidden="" name="id" id="product_id">
+                                <div class="row form-group">
+                                    <div class="col col-md-3 text-right">
+                                        <label for="text-input" class=" form-control-label">Tên thực đơn</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <input type="text" id="product_name" placeholder="Nhập tên thực đơn..." class="form-control" value="" name="emp_name">
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3 text-right">
+                                        <label for="file-input" class=" form-control-label">Hình ảnh</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <input type="file" id="product_img" name="image" class="form-control-file" onchange="previewImg(this, 'preview_img')">
+                                        <br>
+                                        <input hidden="" value="" id="old_product_img" name="old_image">
+                                        <img id="preview_img" src="/images/product/no-preview.jpg" width="100" height="100">
+                                    </div>
+                                    <script>
+                                        function previewImg(input, id_string) {
+                                            var exp_string = "#";
+                                            exp_string += id_string;
+                                            if (input.files && input.files[0]) {
+                                                var reader = new FileReader();
 
-                                        reader.onload = function (e) {
-                                            $(exp_string).attr('src', e.target.result);
+                                                reader.onload = function (e) {
+                                                    $(exp_string).attr('src', e.target.result);
+                                                }
+
+                                                reader.readAsDataURL(input.files[0]);
+                                            }
                                         }
-
-                                        reader.readAsDataURL(input.files[0]);
-                                    }
-                                }
-                            </script>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col col-md-3">
-                                <label for="select" class=" form-control-label">Loại</label>
-                            </div>
-                            <div class="col-12 col-md-9">
-                                <select name="emp_position" id="category_select" class="form-control">
-                                    <option selected="" disabled="" value="0">--- Chọn loại thực đơn ---</option>
-                                    @foreach (var item in ViewBag.ListCate)
-                                    {
-                                        <option value="@item.MaLoai">@item.TenLoai</option>
-                                    }
+                                    </script>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3 text-right">
+                                        <label for="select" class=" form-control-label">Loại</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <select name="emp_position" id="category_select" class="form-control">
+                                            <option selected="" disabled="" value="0">--- Chọn loại thực đơn ---</option>
+                                            @foreach (var item in ViewBag.ListCate)
+                                            {
+                                                <option value="@item.MaLoai">@item.TenLoai</option>
+                                            }
 
 
-                                </select>
-                                <button type="button" class="btn btn-primary" id="category_modal" data-toggle="modal" data-target="#cate_modal"><i class="fas fa-plus"></i></button>
+                                        </select>
+                                        <button type="button" class="btn btn-primary" id="category_modal" data-toggle="modal" data-target="#cate_modal"><i class="fas fa-plus"></i></button>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3 text-right">
+                                        <label for="text-input" class=" form-control-label">Giá</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <input type="number" id="product_price" placeholder="Nhập giá..." class="form-control" value="" name="emp_name">
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3 text-right">
+                                        <label for="text-input" class=" form-control-label">Khuyến mãi</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <input type="number" id="product_discount" value="0" class="form-control" value="" name="emp_address">
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col col-md-3">
-                                <label for="text-input" class=" form-control-label">Giá</label>
-                            </div>
-                            <div class="col-12 col-md-9">
-                                <input type="number" id="product_price" placeholder="Nhập giá..." class="form-control" value="" name="emp_name">
-                            </div>
-                        </div>
 
-                        <div class="row form-group">
-                            <div class="col col-md-3">
-                                <label for="text-input" class=" form-control-label">Khuyến mãi</label>
-                            </div>
-                            <div class="col-12 col-md-9">
-                                <input type="number" id="product_discount" value="0" class="form-control" value="" name="emp_address">
+                            <div class="col-md-6">
+                                <div class="row form-group">
+                                    <div class="col col-md-3 text-right">
+                                        <label for="text-input" class=" form-control-label">Mô tả</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <textarea class="form-control" placeholder="Nhập mô tả..." style="margin-top: 0px; margin-bottom: 0px; height: 369px;" id="product_info"></textarea>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        
 
                     </div>
 
@@ -107,7 +126,7 @@
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success" id="add_product_btn">Thêm</button>
+                    <button type="submit" class="btn btn-success" id="add_product_btn" data-action="add_submit">Thêm</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
                 </div>
 
@@ -127,7 +146,7 @@
 
                         <div class="card-body card-block">
                             <div class="row form-group">
-                                <div class="col col-md-3">
+                                <div class="col col-md-3 text-right">
                                     <label for="text-input" class=" form-control-label">Tên loại</label>
                                 </div>
                                 <div class="col-12 col-md-9">

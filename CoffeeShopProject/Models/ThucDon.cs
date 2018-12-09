@@ -17,6 +17,7 @@ namespace CoffeeShopProject.Models
         public int? MaLoai { get; set; }
         public double? Gia { get; set; }
         public int? KhuyenMai { get; set; }
+        public string MoTa { get; set; }
 
         public LoaiThucDon MaLoaiNavigation { get; set; }
         public ICollection<ChiTietGioHang> ChiTietGioHang { get; set; }

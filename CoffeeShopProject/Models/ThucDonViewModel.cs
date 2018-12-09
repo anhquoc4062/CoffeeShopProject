@@ -30,7 +30,8 @@ namespace CoffeeShopProject.Models
                                  TenLoai = ltd.TenLoai,
                                  MaLoai = td.MaLoai,
                                  Gia = td.Gia,
-                                 KhuyenMai = td.KhuyenMai
+                                 KhuyenMai = td.KhuyenMai,
+                                 MoTa = td.MoTa
                              }).ToList();
 
             return dsThucDon;
@@ -50,7 +51,9 @@ namespace CoffeeShopProject.Models
                                TenLoai = ltd.TenLoai,
                                MaLoai = td.MaLoai,
                                Gia = td.Gia,
-                               KhuyenMai = td.KhuyenMai
+                               KhuyenMai = td.KhuyenMai,
+                               MoTa = td.MoTa
+
                            }).FirstOrDefault();
             return thucdon;
         }
@@ -68,7 +71,8 @@ namespace CoffeeShopProject.Models
                                  TenLoai = ltd.TenLoai,
                                  MaLoai = td.MaLoai,
                                  Gia = td.Gia,
-                                 KhuyenMai = td.KhuyenMai
+                                 KhuyenMai = td.KhuyenMai,
+                                 MoTa = td.MoTa
                              }).ToList();
 
             return dsThucDon;
