@@ -20,11 +20,26 @@ namespace CoffeeShopProject.Controllers
         public IActionResult Index()
         {
             ThucDonViewModel dsThucDon = new ThucDonViewModel(db);
-            ViewBag.List = dsThucDon.GetAllData();
+            //var pageNumber = page ?? 1;
+            //var allProduct = dsThucDon.GetAllData();
+            //var onePageProduct = allProduct.ToPagedList(pageNumber, 5);
+            ViewBag.List = dsThucDon.GetDataWithCateByPage("0", 1);
             LoaiThucDonViewModel dsLoai = new LoaiThucDonViewModel(db);
             var data = dsLoai.GetLoaiThucDon();
             ViewBag.ListCate = data;
             return View();
+        }
+        public IActionResult GetProductCount(string MaLoai = "0")
+        {
+            ThucDonViewModel query = new ThucDonViewModel(db);
+            var response = query.GetAllDataByCate(MaLoai).Count();
+            return Json(response);
+        }
+        public IActionResult GetProductByPage(string maloai, string page)
+        {
+            ThucDonViewModel query = new ThucDonViewModel(db);
+            var response = query.GetDataWithCateByPage(maloai, int.Parse(page));
+            return Json(response);
         }
         [HttpPost]
         public IActionResult AddCategory(string tenLoai)
@@ -40,8 +55,8 @@ namespace CoffeeShopProject.Controllers
         }
         [HttpPost]
         public IActionResult AddProduct(string product_name, IFormFile product_img, 
-            string product_category, string product_price, 
-            string product_discount, string product_info)
+            string product_category, string product_price, string filter,
+            string product_discount, string product_info, string page)
         {
             ThucDon newProduct = new ThucDon();
 
@@ -62,7 +77,7 @@ namespace CoffeeShopProject.Controllers
 
             ThucDonViewModel query = new ThucDonViewModel(db);
             query.InsertThucDon(newProduct);
-            var response = query.GetAllData();
+            var response = query.GetDataWithCateByPage(filter,int.Parse(page));
             return Json(response);
         }
 
@@ -75,8 +90,8 @@ namespace CoffeeShopProject.Controllers
         [HttpPost]
         public IActionResult UpdateProduct(string product_id, string product_name, 
             IFormFile product_img, string product_category, 
-            string product_price, string product_discount, 
-            string old_product_img, string product_info)
+            string product_price, string product_discount, string filter,
+            string old_product_img, string product_info, string page)
         {
             ThucDon editProduct = new ThucDon
             {
@@ -102,15 +117,22 @@ namespace CoffeeShopProject.Controllers
             }
             ThucDonViewModel query = new ThucDonViewModel(db);
             query.EditThucDon(editProduct);
-            var response = query.GetAllData();
+            var response = query.GetDataWithCateByPage(filter ,int.Parse(page));
             return Json(response);
         }
-        public IActionResult DeleteProduct(string id)
+        public IActionResult DeleteProduct(string id, string filter, string page)
         {
             ThucDonViewModel query = new ThucDonViewModel(db);
             query.DeleteThucDonById(id);
-            var response = query.GetAllData();
+            var response = query.GetDataWithCateByPage(filter, int.Parse(page));
             return Json(response);
         }
+        public IActionResult FilterProduct(string maloai)
+        {
+            ThucDonViewModel query = new ThucDonViewModel(db);
+            var response = query.GetDataWithCateByPage(maloai, 1);
+            return Json(response);
+        }
+        
     }
 }

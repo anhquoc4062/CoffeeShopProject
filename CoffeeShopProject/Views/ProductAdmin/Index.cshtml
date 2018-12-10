@@ -2,7 +2,11 @@
     Layout = "~/Views/Layout/Admin/Layout.cshtml";
     ViewData["Title"] = "List";
 }
+<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
 
+@using X.PagedList.Mvc.Common;
+@using X.PagedList;
 <div class="section__content section__content--p30">
     <div class="container-fluid">
         <!--TABLE CONTENT-->
@@ -15,6 +19,17 @@
                         <button class="au-btn au-btn-icon au-btn--green au-btn--small product_btn" data-action="Add" data-toggle="modal" data-target="#add_modal">
                             <i class="zmdi zmdi-plus"></i>thêm
                         </button>
+                        <div class="rs-select2--light rs-select2--md">
+                            <select class="js-select2 select2-hidden-accessible" name="property" tabindex="-1" aria-hidden="true" id="category_filter">
+                                <option  disabled>Lọc theo loại</option>
+                                <option class="selected" selected="selected" value="0">Tất cả</option>
+                                @foreach (var item in ViewBag.ListCate)
+                                {
+                                    <option value="@item.MaLoai">@item.TenLoai</option>
+                                }
+                            </select>
+                            <div class="dropDownSelect2"></div>
+                        </div>
                     </div>
                     <div class="table-data__tool-right">
                         <!-- SEARCH BAR-->
@@ -59,7 +74,7 @@
                                     <td>@item.KhuyenMai%</td>
                                     <td>
                                         <div class="table-data-feature">
-                                            <button class="product_btn item"  data-placement="top" data-original-title="Edit" data-action="Edit" data-id="@item.MaThucDon" data-toggle="modal" data-target="#add_modal">
+                                            <button class="product_btn item" data-placement="top" data-original-title="Edit" data-action="Edit" data-id="@item.MaThucDon" data-toggle="modal" data-target="#add_modal">
                                                 <i class="zmdi zmdi-edit"></i>
                                             </button>
                                             <button class="product_btn item" data-placement="top" data-original-title="Delete" data-action="Delete" data-id="@item.MaThucDon">
@@ -72,8 +87,8 @@
                             }
 
                             <!--<tr class="tr-shadow">
-                                <td align="center" style="font-size: 15px" colspan="8">Không tìm thấy thành viên</td>
-                            </tr>-->
+                            <td align="center" style="font-size: 15px" colspan="8">Không tìm thấy thành viên</td>
+                        </tr>-->
                             <!--Không tìm thấy sản phẩm-->
 
                         </tbody>
@@ -81,15 +96,21 @@
                     </table>
                 </div>
                 <!-- END DATA TABLE -->
+                @*@Html.PagedListPager((IPagedList)ViewBag.List, page => Url.Action("Index", new { page = page }),
+                new PagedListRenderOptions {
+                    LiElementClasses = new string[] { "page-item" },
+                    PageClasses = new string[] { "page-link" }
+                })*@
 
             </div>
 
 
         </div>
         <!--END TABLE CONTENT-->
+        <ul id="pagination-demo" class="pagination-md"></ul>
 
     </div>
 </div>
 @{
     Html.RenderPartial("ProductModal");
- }
+}

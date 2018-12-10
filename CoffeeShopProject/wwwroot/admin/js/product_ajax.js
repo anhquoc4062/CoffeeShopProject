@@ -1,23 +1,25 @@
-﻿$(document).ready(function () {
-    function LoadProduct(data) {
-        var htmlString = "";
-        for (i in data) {
-            htmlString += '<tr class="tr-shadow">'
-            htmlString += '<td><img src="/uploads/product/' + data[i].hinhAnh + '" width="70" height="70" /></td>';
-            htmlString += '<td>' + data[i].tenThucDon + '</td>';
-            htmlString += '<td>' + data[i].tenLoai + '</td>';
-            htmlString += '<td>$' + data[i].gia.toFixed(2) + '</td>';
-            htmlString += '<td>' + data[i].khuyenMai + '%</td>';
-            htmlString += '<td><div class="table-data-feature">';
-            htmlString += '<button class="product_btn item"  data-placement="top"  data-original-title="Edit" data-action="Edit" data-id="' + data[i].maThucDon + '" data-toggle="modal" data-target="#add_modal">';
-            htmlString += '<i class="zmdi zmdi-edit"></i></button>';
-            htmlString += '<button class="product_btn item" data-placement="top" data-original-title="Delete" data-action="Delete" data-id="' + data[i].maThucDon + '">';
-            htmlString += '<i class="zmdi zmdi-delete"></i></button></div></td></tr>';
-            htmlString += '<tr class="spacer"></tr>';
-        }
-        $("#table_product_list tr").remove();
-        $("#table_product_list").append(htmlString).hide().fadeOut(1000).fadeIn(1000);
+﻿
+function LoadProduct(data) {
+    var htmlString = "";
+    for (i in data) {
+        htmlString += '<tr class="tr-shadow">'
+        htmlString += '<td><img src="/uploads/product/' + data[i].hinhAnh + '" width="70" height="70" /></td>';
+        htmlString += '<td>' + data[i].tenThucDon + '</td>';
+        htmlString += '<td>' + data[i].tenLoai + '</td>';
+        htmlString += '<td>$' + data[i].gia.toFixed(2) + '</td>';
+        htmlString += '<td>' + data[i].khuyenMai + '%</td>';
+        htmlString += '<td><div class="table-data-feature">';
+        htmlString += '<button class="product_btn item"  data-placement="top"  data-original-title="Edit" data-action="Edit" data-id="' + data[i].maThucDon + '" data-toggle="modal" data-target="#add_modal">';
+        htmlString += '<i class="zmdi zmdi-edit"></i></button>';
+        htmlString += '<button class="product_btn item" data-placement="top" data-original-title="Delete" data-action="Delete" data-id="' + data[i].maThucDon + '">';
+        htmlString += '<i class="zmdi zmdi-delete"></i></button></div></td></tr>';
+        htmlString += '<tr class="spacer"></tr>';
     }
+    $("#table_product_list tr").remove();
+    $("#table_product_list").append(htmlString).hide().fadeIn(1000);
+}
+
+$(document).ready(function () {
 
     function FormAppend(formData) {
         var image = document.getElementById("product_img").files[0];
@@ -26,6 +28,8 @@
         var price = $("#product_price").val();
         var discount = $("#product_discount").val();
         var info = $("#product_info").val();
+        var page = $('li.page-item.active').find("a.page-link").text();
+        var filter = $("#category_filter").children("option:selected").val();
 
         formData.append("product_img", image);
         formData.append("product_name", name);
@@ -33,6 +37,8 @@
         formData.append("product_price", price);
         formData.append("product_discount", discount);
         formData.append("product_info", info);
+        formData.append("page", page);
+        formData.append("filter", filter);
     }
 
     function DataToForm(id) {
@@ -49,7 +55,6 @@
                 $("#product_info").val(response.moTa);
                 $("#preview_img").attr('src', '/uploads/product/' + response.hinhAnh);
                 $("#old_product_img").val(response.hinhAnh);
-                console.log(response);
             },
             error: function (error) {
                 alert("errror");
@@ -58,6 +63,7 @@
     }
 
     function AddProduct(formData) {
+        var filter = $("#category_filter").children("option:selected").val();
         $.ajax({
             type: "POST",
             url: '/ProductAdmin/AddProduct',
@@ -69,6 +75,7 @@
                 $("#add_modal").modal('hide');
                 swal("Thành công", "Đã thêm thực đơn", "success");
                 LoadProduct(response);
+                LoadPagination(filter);
             },
             error: function (error) {
                 alert("errror");
@@ -96,9 +103,11 @@
     }
 
     function DeleteProduct(id) {
+        var page = $('li.page-item.active').find("a.page-link").text();
+        var filter = $("#category_filter").children("option:selected").val();
         $.ajax({
             type: "GET",
-            url: '/ProductAdmin/DeleteProduct/' + id,
+            url: '/ProductAdmin/DeleteProduct?id=' + id + '&filter=' + filter + '&page=' + page,
             dataType: 'json',
             success: function (response) {
                 $("#add_modal").modal('hide');
@@ -114,7 +123,7 @@
 
 
     $(document).on('click', '.product_btn', function (event) {
-
+        var filter = $("#category_filter").children("option:selected").val();
         if ($(this).attr('data-action') == 'Add') {
             $("#add_product_modal_title").html('Thêm sản phẩm');
             $("#add_product_btn").html('Thêm').attr('data-action', 'add_submit');
@@ -140,6 +149,7 @@
                         swal("Xóa thành công!", {
                             icon: "success",
                         });
+                        LoadPagination(filter);
                     }
                 });
         }

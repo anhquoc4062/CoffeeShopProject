@@ -27,23 +27,23 @@ namespace CoffeeShopProject.Models
             return loaithucdon;
         }
 
-        public bool DeleteLoaiThucDon(string i)
-        {
-            var loai = db.LoaiThucDon.Where(x => x.MaLoai == int.Parse(i)).SingleOrDefault();
-            var dsSanPhamCungId = new ThucDonViewModel(db).GetDataByCate(i);
-            if (loai != null&&dsSanPhamCungId!=null)
-            {
-                foreach (var item in dsSanPhamCungId)
-                {
-                    db.ThucDon.Remove(item);
-                }
-                db.SaveChanges();
-                db.LoaiThucDon.Remove(loai);
-                db.SaveChanges();
-                return true;
-            }
-            return false;
-        }
+        //public bool DeleteLoaiThucDon(string i)
+        //{
+        //    var loai = db.LoaiThucDon.Where(x => x.MaLoai == int.Parse(i)).SingleOrDefault();
+        //    var dsSanPhamCungId = new ThucDonViewModel(db).GetDataByCate(i);
+        //    if (loai != null&&dsSanPhamCungId!=null)
+        //    {
+        //        foreach (var item in dsSanPhamCungId)
+        //        {
+        //            db.ThucDon.Remove(item);
+        //        }
+        //        db.SaveChanges();
+        //        db.LoaiThucDon.Remove(loai);
+        //        db.SaveChanges();
+        //        return true;
+        //    }
+        //    return false;
+        //}
 
         public bool InsertLoaiThucDon(String TenLoai)
         {
