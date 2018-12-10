@@ -16,7 +16,7 @@
             htmlString += '<tr class="spacer"></tr>';
         }
         $("#table_product_list tr").remove();
-        $("#table_product_list").append(htmlString).children(':last').hide().fadeIn(2000);
+        $("#table_product_list").append(htmlString).hide().fadeIn(2000);
     }
 
     function FormAppend(formData) {
@@ -66,8 +66,8 @@
             contentType: false,
             processData: false,
             success: function (response) {
-                swal("Thành công", "Đã thêm thực đơn", "success");
                 $("#add_modal").modal('hide');
+                swal("Thành công", "Đã thêm thực đơn", "success");
                 LoadProduct(response);
             },
             error: function (error) {
