@@ -5,7 +5,7 @@
             htmlString += '<tr class="tr-shadow">'
             htmlString += '<td><img src="/uploads/product/' + data[i].hinhAnh + '" width="70" height="70" /></td>';
             htmlString += '<td>' + data[i].tenThucDon + '</td>';
-            htmlString += '<td>' + data[i].tenLoai+'</td>';
+            htmlString += '<td>' + data[i].tenLoai + '</td>';
             htmlString += '<td>$' + data[i].gia.toFixed(2) + '</td>';
             htmlString += '<td>' + data[i].khuyenMai + '%</td>';
             htmlString += '<td><div class="table-data-feature">';
@@ -16,7 +16,7 @@
             htmlString += '<tr class="spacer"></tr>';
         }
         $("#table_product_list tr").remove();
-        $("#table_product_list").append(htmlString).children(':last').hide().fadeIn(2000);
+        $("#table_product_list").append(htmlString).hide().fadeOut(1000).fadeIn(1000);
     }
 
     function FormAppend(formData) {
@@ -66,8 +66,8 @@
             contentType: false,
             processData: false,
             success: function (response) {
-                swal("Thành công", "Đã thêm thực đơn", "success");
                 $("#add_modal").modal('hide');
+                swal("Thành công", "Đã thêm thực đơn", "success");
                 LoadProduct(response);
             },
             error: function (error) {
@@ -103,7 +103,7 @@
             success: function (response) {
                 $("#add_modal").modal('hide');
                 LoadProduct(response);
-                
+
             },
             error: function (error) {
                 alert("Lỗi");
@@ -126,22 +126,22 @@
             DataToForm(id);
         }
         else {
-             var id = $(this).attr('data-id');
-             swal({
+            var id = $(this).attr('data-id');
+            swal({
                 title: "Bạn có muốn xóa sản phẩm này?",
                 text: "Một khi đã xóa thì không thể hoàn lại được!",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
-             })
-             .then((willDelete) => {
-                if (willDelete) {
-                    DeleteProduct(id);
-                    swal("Xóa thành công!", {
-                        icon: "success",
-                    });
-                }
-            });
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        DeleteProduct(id);
+                        swal("Xóa thành công!", {
+                            icon: "success",
+                        });
+                    }
+                });
         }
     });
 
@@ -157,6 +157,6 @@
             formData.append("product_id", $("#product_id").val());
             UpdateProduct(formData);
         }
-        
+
     });
 });  
