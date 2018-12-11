@@ -18,12 +18,14 @@ namespace CoffeeShopProject.Models
         public virtual DbSet<BanAn> BanAn { get; set; }
         public virtual DbSet<ChiTietGioHang> ChiTietGioHang { get; set; }
         public virtual DbSet<ChiTietHoaDon> ChiTietHoaDon { get; set; }
+        public virtual DbSet<ChucVu> ChucVu { get; set; }
         public virtual DbSet<GioHang> GioHang { get; set; }
         public virtual DbSet<HoaDon> HoaDon { get; set; }
         public virtual DbSet<KhachHang> KhachHang { get; set; }
         public virtual DbSet<LoaiThucDon> LoaiThucDon { get; set; }
         public virtual DbSet<NhanVien> NhanVien { get; set; }
         public virtual DbSet<PhanCong> PhanCong { get; set; }
+        public virtual DbSet<TaiKhoan> TaiKhoan { get; set; }
         public virtual DbSet<ThucDon> ThucDon { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -93,6 +95,18 @@ namespace CoffeeShopProject.Models
                     .WithMany(p => p.ChiTietHoaDon)
                     .HasForeignKey(d => d.MaThucDon)
                     .HasConstraintName("FK_CHITIETH_REFERENCE_THUCDON");
+            });
+
+            modelBuilder.Entity<ChucVu>(entity =>
+            {
+                entity.HasKey(e => e.MaChucVu)
+                    .ForSqlServerIsClustered(false);
+
+                entity.Property(e => e.MaChucVu).HasColumnName("maChucVu");
+
+                entity.Property(e => e.TenChucVu)
+                    .HasColumnName("tenChucVu")
+                    .HasMaxLength(254);
             });
 
             modelBuilder.Entity<GioHang>(entity =>
@@ -195,25 +209,41 @@ namespace CoffeeShopProject.Models
 
                 entity.Property(e => e.MaNhanVien).HasColumnName("maNhanVien");
 
-                entity.Property(e => e.ChucVu)
-                    .HasColumnName("chucVu")
+                entity.Property(e => e.Cmnd)
+                    .HasColumnName("CMND")
+                    .HasMaxLength(20);
+
+                entity.Property(e => e.Email)
+                    .HasColumnName("email")
+                    .HasMaxLength(20);
+
+                entity.Property(e => e.HinhAnh)
+                    .HasColumnName("hinhAnh")
                     .HasMaxLength(254);
 
                 entity.Property(e => e.HoTen)
                     .HasColumnName("hoTen")
                     .HasMaxLength(254);
 
-                entity.Property(e => e.MatKhau)
-                    .HasColumnName("matKhau")
-                    .HasMaxLength(254);
+                entity.Property(e => e.Luong).HasColumnName("luong");
 
-                entity.Property(e => e.NgaySinh)
-                    .HasColumnName("ngaySinh")
-                    .HasColumnType("datetime");
+                entity.Property(e => e.MaChucVu).HasColumnName("maChucVu");
 
-                entity.Property(e => e.TenDangNhap)
-                    .HasColumnName("tenDangNhap")
-                    .HasMaxLength(254);
+                entity.Property(e => e.MaTaiKhoan).HasColumnName("maTaiKhoan");
+
+                entity.Property(e => e.MoTa)
+                    .HasColumnName("moTa")
+                    .HasColumnType("ntext");
+
+                entity.HasOne(d => d.MaChucVuNavigation)
+                    .WithMany(p => p.NhanVien)
+                    .HasForeignKey(d => d.MaChucVu)
+                    .HasConstraintName("FK_CHUCVU_REFERENCE_NHANVIEN");
+
+                entity.HasOne(d => d.MaTaiKhoanNavigation)
+                    .WithMany(p => p.NhanVien)
+                    .HasForeignKey(d => d.MaTaiKhoan)
+                    .HasConstraintName("FK_TAIKHOAN_REFERENCE_NHANVIEN");
             });
 
             modelBuilder.Entity<PhanCong>(entity =>
@@ -232,6 +262,29 @@ namespace CoffeeShopProject.Models
                 entity.Property(e => e.NgayPhanCong)
                     .HasColumnName("ngayPhanCong")
                     .HasColumnType("datetime");
+
+                entity.HasOne(d => d.MaBanNavigation)
+                    .WithMany(p => p.PhanCong)
+                    .HasForeignKey(d => d.MaBan)
+                    .HasConstraintName("FK_PHANCONG_REFERENCE_BANAN");
+            });
+
+            modelBuilder.Entity<TaiKhoan>(entity =>
+            {
+                entity.HasKey(e => e.MaTaiKhoan)
+                    .ForSqlServerIsClustered(false);
+
+                entity.Property(e => e.MaTaiKhoan).HasColumnName("maTaiKhoan");
+
+                entity.Property(e => e.MatKhau)
+                    .IsRequired()
+                    .HasColumnName("matKhau")
+                    .HasMaxLength(254);
+
+                entity.Property(e => e.TenTaiKhoan)
+                    .IsRequired()
+                    .HasColumnName("tenTaiKhoan")
+                    .HasMaxLength(254);
             });
 
             modelBuilder.Entity<ThucDon>(entity =>
@@ -251,7 +304,9 @@ namespace CoffeeShopProject.Models
 
                 entity.Property(e => e.MaLoai).HasColumnName("maLoai");
 
-                entity.Property(e => e.MoTa).HasColumnType("text");
+                entity.Property(e => e.MoTa)
+                    .HasColumnName("moTa")
+                    .HasColumnType("ntext");
 
                 entity.Property(e => e.TenThucDon)
                     .HasColumnName("tenThucDon")

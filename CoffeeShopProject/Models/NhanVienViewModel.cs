@@ -7,6 +7,7 @@ namespace CoffeeShopProject.Models
 {
     public class NhanVienViewModel:NhanVien
     {
+        public string TenChucVu { get; set; }
         private readonly CoffeeShopContext db;
         public NhanVienViewModel() { }
         public NhanVienViewModel(CoffeeShopContext _db)
@@ -16,16 +17,22 @@ namespace CoffeeShopProject.Models
 
         public List<NhanVienViewModel> GetDsNhanVien()
         {
-            var ds= (from td in db.NhanVien
+            var ds= (from nv in db.NhanVien
+                     join cv in db.ChucVu
+                     on nv.MaChucVu equals cv.MaChucVu
+                     orderby nv.MaChucVu descending
                      select new NhanVienViewModel
                      {
-                         MaNhanVien=td.MaNhanVien,
-                         HoTen=td.HoTen,
-                         NgaySinh=td.NgaySinh,
-                         TenDangNhap=td.TenDangNhap,
-                         MatKhau=td.MatKhau,
-                         ChucVu=td.ChucVu
-
+                         MaNhanVien=nv.MaNhanVien,
+                         HoTen= nv.HoTen,
+                         HinhAnh = nv.HinhAnh,
+                         Cmnd  = nv.Cmnd,
+                         Email = nv.Email,
+                         MoTa   = nv.MoTa,
+                         Luong  = nv.Luong,
+                         MaChucVu = nv.MaChucVu,
+                         MaTaiKhoan = nv.MaTaiKhoan,
+                         TenChucVu= cv.TenChucVu
                      }).ToList();
             return ds;
         }

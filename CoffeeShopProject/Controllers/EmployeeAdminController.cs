@@ -8,19 +8,17 @@ using Newtonsoft.Json;
 
 namespace CoffeeShopProject.Controllers
 {
-    public class TestController : Controller
+    public class EmployeeAdminController : Controller
     {
         private readonly CoffeeShopContext db;
-        public TestController(CoffeeShopContext _db)
+        public EmployeeAdminController(CoffeeShopContext _db)
         {
             db = _db;
         }
         public IActionResult Index()
         {
-            NhanVienViewModel data = new NhanVienViewModel(db);
-            var test = data.GetDsNhanVien();
-            var jsonData = JsonConvert.SerializeObject(test);
-            ViewBag.Test = jsonData;
+            NhanVienViewModel query = new NhanVienViewModel(db);
+            ViewBag.List = query.GetDsNhanVien();
             return View();
         }
     }

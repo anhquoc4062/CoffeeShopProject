@@ -285,3 +285,12 @@ table a {
 .table-data__tool .table-data__tool-left > div {
     margin-left: 10px;
 }
+
+.account-field .btn.btn-primary {
+    width: 100%;
+    padding: 10px 0px;
+}
+
+label.form-control-label {
+    margin-top: 5px;
+}

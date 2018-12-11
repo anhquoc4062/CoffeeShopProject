@@ -1,4 +1,4 @@
-/*==============================================================*/
+﻿/*==============================================================*/
 /* DBMS name:      Microsoft SQL Server 2012                    */
 /* Created on:     30/11/2018 8:52:02 CH                        */
 /*==============================================================*/
@@ -7,6 +7,7 @@
 /* Table: BanAn                                                 */
 /*==============================================================*/
 
+go
 create database CoffeeShop
 go
 use CoffeeShop
@@ -61,11 +62,14 @@ go
 /*==============================================================*/
 create table NhanVien (
    maNhanVien          int      identity(1,1)            not null,
+   CMND					nvarchar(20)		  null,
+   hinhAnh				nvarchar(254)		  null,	
    hoTen                nvarchar(254)         null,
-   ngaySinh             datetime             null,
-   tenDangNhap          nvarchar(254)         null,
-   matKhau              nvarchar(254)         null,
-   chucVu               nvarchar(254)         null,
+   email				nvarchar(20)	null,
+   luong				  float		null,
+   moTa					  ntext		null,
+   maChucVu               int       null,
+   maTaiKhoan			  int		null,
    constraint PK_NHANVIEN primary key nonclustered (maNhanVien)
 )
 go
@@ -93,6 +97,7 @@ create table ThucDon (
    maLoai               int                  null,
    gia					float				 null,
    khuyenMai			int					 null,
+   moTa					ntext				 null,
    constraint PK_THUCDON primary key nonclustered (maThucDon)
 )
 go
@@ -132,7 +137,24 @@ create table ChiTietGioHang (
    constraint PK_CHITIETGIOHANG primary key nonclustered (maCTGioHang)
 )
 go
-
+/*==============================================================*/
+/* Table: ChucVu                                           */
+/*==============================================================*/
+create table ChucVu(
+	maChucVu		int identity(1,1) not null,
+	tenChucVu		nvarchar(254)     null,
+	constraint PK_CHUCVU primary key nonclustered (maChucVu)
+)
+/*==============================================================*/
+/* Table: TaiKhoan                                           */
+/*==============================================================*/
+create table TaiKhoan(
+	maTaiKhoan		int identity(1,1) not null,
+	tenTaiKhoan		nvarchar(254)     not null,
+	matKhau			nvarchar(254)	  not null,
+	constraint PK_TAIKHOAN primary key nonclustered (maTaiKhoan)
+)
+go
 alter table ChiTietHoaDon
    add constraint FK_CHITIETH_REFERENCE_THUCDON foreign key (maThucDon)
       references ThucDon (maThucDon)
@@ -177,19 +199,41 @@ go
 alter table GioHang
    add constraint FK_GIOHANG_REFERENCE_KHACHHANG foreign key (maKhachHang)
       references KhachHang (maKhachHang)
-go
-
-alter table ThucDon
-	add MoTa text null
 
 go
-
+alter table NhanVien
+	add constraint FK_CHUCVU_REFERENCE_NHANVIEN foreign key (maChucVu)
+      references ChucVu (maChucVu)
+go
+alter table NhanVien
+	add constraint FK_TAIKHOAN_REFERENCE_NHANVIEN foreign key (maTaiKhoan)
+      references TaiKhoan (maTaiKhoan)
+go
 INSERT INTO LoaiThucDon VALUES ('Coffee');
 go
 INSERT INTO LoaiThucDon VALUES ('Freeze');
 go
 
-INSERT INTO ThucDon VALUES (N'Cappuchino', 'cappuccino_PNG26.png', 1, 15, 0);
+INSERT INTO ThucDon VALUES (N'Cappuchino', 'cappuccino_PNG26.png', 1, 15, 0, N'mô tả đó nhé');
 go
-INSERT INTO ThucDon VALUES (N'Latte', 'ABC.jpg', 16, 12.5, 0);
+INSERT INTO ThucDon VALUES (N'Latte', 'ABC.jpg', 1, 12.5, 0, N'fsdfasd');
+go
 
+INSERT INTO ChucVu VALUES (N'Pha Chế');
+go
+INSERT INTO ChucVu VALUES (N'Phục Vụ');
+go
+INSERT INTO ChucVu VALUES (N'Thu Ngân');
+go
+
+INSERT INTO TaiKhoan VALUES ('nva123','123456');
+go
+INSERT INTO TaiKhoan VALUES ('ntb456','654321');
+go
+
+INSERT INTO NhanVien VALUES ('123456', 'example.jpg', N'Nguyễn Văn A', 'abc@gmail.com', 50, N'mô tả đó nhé', 1, 1);
+go
+INSERT INTO NhanVien VALUES ('789321', 'example.jpg', N'Nguyễn Thị B', 'def@gmail.com', 40, N'mô tả của nhân viên', 2, 2);
+
+
+select * from NhanVien

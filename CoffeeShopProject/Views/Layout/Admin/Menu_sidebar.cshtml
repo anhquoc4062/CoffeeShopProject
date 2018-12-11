@@ -27,15 +27,27 @@
             </ul>
         </li>*@
                 <li>
-                    <a href="/Product/List">
+                    <a asp-controller="ProductAdmin" asp-action="Index">
                         <i class="fas fa-bars"></i>Thực đơn
                     </a>
                 </li>
                 <li>
-                    <a href="/Employee/List">
+                    <a asp-controller="EmployeeAdmin" asp-action="Index">
                         <i class="fa fa-user"></i>Nhân viên
                     </a>
                 </li>
+                <li>
+                    <a asp-controller="BillAdmin" asp-action="Index">
+                        <i class="fas fa-money-bill"></i>Hóa đơn
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="OrderAdmin" asp-action="Index">
+                        <i class="fa fa-shopping-cart"></i>Đơn hàng
+                    </a>
+                </li>
+
+
 
             </ul>
         </nav>

@@ -23,7 +23,7 @@ button.au-btn.au-btn-icon.au-btn--green.au-btn--small {
     overflow-x: unset;
 }
 
-.modal#cate_modal .modal-content {
+.modal.child_modal .modal-content {
     width: 500px;
     position: absolute;
     left: 100px;

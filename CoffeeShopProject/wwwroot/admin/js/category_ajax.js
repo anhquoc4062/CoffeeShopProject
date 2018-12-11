@@ -15,6 +15,8 @@
                 }
                 $("#cate_modal").modal('hide');
                 $("#category_select").html(htmlString);
+                var filterHtmlString = '<option value="' + data[data.length - 1].maLoai + '">' + data[data.length - 1].tenLoai + '</option>';
+                $("#category_filter").append(filterHtmlString);
             },
             error: function () {
                 alert("Lỗi")

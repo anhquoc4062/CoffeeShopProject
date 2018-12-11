@@ -10,5 +10,7 @@ namespace CoffeeShopProject.Models
         public int? MaBan { get; set; }
         public int? Ca { get; set; }
         public DateTime? NgayPhanCong { get; set; }
+
+        public BanAn MaBanNavigation { get; set; }
     }
 }

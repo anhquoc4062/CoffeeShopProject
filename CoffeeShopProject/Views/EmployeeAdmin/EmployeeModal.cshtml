@@ -1,0 +1,211 @@
+﻿<style>
+    .modal-dialog {
+        max-width: 700px;
+    }
+    #position_modal_btn {
+        position: absolute;
+        bottom: 1px;
+        right: 33px;
+        border-radius: unset;
+        height: 36px;
+        background: #3498db;
+        border: unset;
+    }
+
+    #add_employee_modal .modal-content {
+        min-width: 1200px;
+        margin-left: -220px;
+    }
+</style>
+<form id="employee_form" method="post" enctype="multipart/form-data" class="form-horizontal" action="#">
+    <div class="modal fade parent_modal" id="add_employee_modal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title" id="add_emp_modal_title">Thêm nhân viên</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="card-body card-block">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input hidden="" name="id" id="emp_id">
+                                <div class="row form-group">
+                                    <div class="col col-md-3 text-right">
+                                        <label for="text-input" class=" form-control-label">Họ và tên</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <input type="text" id="emp_name" placeholder="Nhập tên nhân viên..." class="form-control" value="" name="emp_name">
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3 text-right">
+                                        <label for="text-input" class=" form-control-label">CMND</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <input type="text" id="emp_indentity" placeholder="Nhập chứng minh nhân dân..." class="form-control" value="" name="emp_name">
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3 text-right">
+                                        <label for="file-input" class=" form-control-label">Hình ảnh</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <input type="file" id="emp_img" name="image" class="form-control-file" onchange="previewImg(this, 'preview_img')">
+                                        <br>
+                                        <input hidden="" value="" id="old_emp_img" name="old_image">
+                                        <img id="preview_img" src="/images/product/no-preview.jpg" width="100" height="100">
+                                    </div>
+                                    <script>
+                                        function previewImg(input, id_string) {
+                                            var exp_string = "#";
+                                            exp_string += id_string;
+                                            if (input.files && input.files[0]) {
+                                                var reader = new FileReader();
+
+                                                reader.onload = function (e) {
+                                                    $(exp_string).attr('src', e.target.result);
+                                                }
+
+                                                reader.readAsDataURL(input.files[0]);
+                                            }
+                                        }
+                                    </script>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3 text-right">
+                                        <label for="select" class=" form-control-label">Chức vụ</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <select name="emp_position" id="position_select" class="form-control">
+                                            <option selected="" disabled="" value="0">--- Chọn chức vụ ---</option>
+                                        </select>
+                                        <button type="button" id="position_modal_btn" class="btn btn-primary" data-toggle="modal" data-target="#position_modal"><i class="fas fa-plus"></i></button>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3 text-right">
+                                        <label for="text-input" class=" form-control-label">Lương</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <input type="number" id="emp_price" placeholder="Nhập mức lương..." class="form-control" value="0" name="emp_name">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="row form-group">
+                                    <div class="col col-md-3 text-right">
+                                        <label for="text-input" class=" form-control-label">Mô tả</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <textarea class="form-control" placeholder="Nhập mô tả..." style="margin-top: 0px; margin-bottom: 0px; height: 314px;" id="emp_info"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="row form-group account-field">
+                                    <div class="col col-md-3 text-right">
+                                        <label for="text-input" class=" form-control-label" style="margin-top:10px">Tài khoản</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#account_modal">Kiểm tra tài khoản</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success" id="add_emp_btn" data-action="add_submit">Thêm</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--position MODAL-->
+    <div class="modal fade child_modal" id="position_modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Thêm chức vụ</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                </div>
+                <div class="modal-body">
+
+                    <div class="card-body card-block">
+                        <div class="row form-group">
+                            <div class="col col-md-3 text-right">
+                                <label for="text-input" class=" form-control-label">Chức vụ</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" id="position_name" name="position_name" placeholder="Nhập tên chức vụ cần thêm..." class="form-control" value="">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="add_position_btn">Thêm</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Thoát</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end position MODAL-->
+
+    <!--ACCOUNT MODAL-->
+    <div class="modal fade child_modal" id="account_modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Thông tin tài khoản</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                </div>
+                <div class="modal-body">
+
+                    <div class="card-body card-block">
+                        <div class="alert alert-danger" role="alert">
+                            Nhân viên chưa có tài khoản
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3 text-right">
+                                <label for="text-input" class=" form-control-label">Tài khoản</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" id="account_name" name="account_name" placeholder="Nhập tên tài khoản..." class="form-control" value="">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3 text-right">
+                                <label for="text-input" class=" form-control-label">Mật khẩu</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" id="account_password" name="account_password" placeholder="Nhập mật khẩu..." class="form-control" value="">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="add_position_btn">Thêm</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Thoát</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end ACCOUNT MODAL-->
+</form>
