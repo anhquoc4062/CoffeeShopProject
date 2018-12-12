@@ -1,23 +1,54 @@
 ﻿
 function LoadProduct(data) {
     var htmlString = "";
-    for (i in data) {
-        htmlString += '<tr class="tr-shadow">'
-        htmlString += '<td><img src="/uploads/product/' + data[i].hinhAnh + '" width="70" height="70" /></td>';
-        htmlString += '<td>' + data[i].tenThucDon + '</td>';
-        htmlString += '<td>' + data[i].tenLoai + '</td>';
-        htmlString += '<td>$' + data[i].gia.toFixed(2) + '</td>';
-        htmlString += '<td>' + data[i].khuyenMai + '%</td>';
-        htmlString += '<td><div class="table-data-feature">';
-        htmlString += '<button class="product_btn item"  data-placement="top"  data-original-title="Edit" data-action="Edit" data-id="' + data[i].maThucDon + '" data-toggle="modal" data-target="#add_modal">';
-        htmlString += '<i class="zmdi zmdi-edit"></i></button>';
-        htmlString += '<button class="product_btn item" data-placement="top" data-original-title="Delete" data-action="Delete" data-id="' + data[i].maThucDon + '">';
-        htmlString += '<i class="zmdi zmdi-delete"></i></button></div></td></tr>';
-        htmlString += '<tr class="spacer"></tr>';
+    if (data.length == 0) {
+        htmlString += '<tr class="tr-shadow"><td align="center" style="font-size: 15px" colspan="8">Không tìm thấy sản phẩm</td></tr>';
     }
+    else {
+        for (i in data) {
+            htmlString += '<tr class="tr-shadow">'
+            htmlString += '<td><img src="/uploads/product/' + data[i].hinhAnh + '" width="70" height="70" /></td>';
+            htmlString += '<td>' + data[i].tenThucDon + '</td>';
+            htmlString += '<td>' + data[i].tenLoai + '</td>';
+            htmlString += '<td>$' + data[i].gia.toFixed(2) + '</td>';
+            htmlString += '<td>' + data[i].khuyenMai + '%</td>';
+            htmlString += '<td><div class="table-data-feature">';
+            htmlString += '<button class="product_btn item"  data-placement="top"  data-original-title="Edit" data-action="Edit" data-id="' + data[i].maThucDon + '" data-toggle="modal" data-target="#add_modal">';
+            htmlString += '<i class="zmdi zmdi-edit"></i></button>';
+            htmlString += '<button class="product_btn item" data-placement="top" data-original-title="Delete" data-action="Delete" data-id="' + data[i].maThucDon + '">';
+            htmlString += '<i class="zmdi zmdi-delete"></i></button></div></td></tr>';
+            htmlString += '<tr class="spacer"></tr>';
+        }
+    }
+
     $("#table_product_list tr").remove();
     $("#table_product_list").append(htmlString).hide().fadeIn(1000);
 }
+
+function ResetSearchBar() {
+    $("#search_button").attr("data-press-check", "0");
+    $("#search_input").val("");
+
+}
+
+
+function SearchProduct(keyword, page) {
+    $.ajax({
+        type: "GET",
+        url: '/ProductAdmin/SearchProduct?keyword=' + keyword + '&page=' + page,
+        dataType: 'json',
+        success: function (response) {
+            console.log(response);
+            LoadProduct(response);
+
+        },
+        error: function (error) {
+            alert("Lỗi");
+            console.log(error);
+        }
+    });
+}
+
 
 $(document).ready(function () {
 
@@ -166,6 +197,21 @@ $(document).ready(function () {
             formData.append("old_product_img", $("#old_product_img").val());
             formData.append("product_id", $("#product_id").val());
             UpdateProduct(formData);
+        }
+
+    });
+
+    $(document).on('click', '#search_button', function (event) {
+        event.preventDefault();
+        var keyword = $("#search_input").val();
+        $("#category_filter").val("-1");
+        if (keyword == "") {
+            swal("Chưa nhập từ khóa", { icon: "warning"});
+        }
+        else {
+            $(this).attr("data-press-check", "1");
+            SearchProduct(keyword, "1");
+            LoadPaginationByName(keyword);
         }
 
     });

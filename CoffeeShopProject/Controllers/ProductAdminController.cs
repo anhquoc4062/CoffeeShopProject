@@ -133,6 +133,18 @@ namespace CoffeeShopProject.Controllers
             var response = query.GetDataWithCateByPage(maloai, 1);
             return Json(response);
         }
-        
+        public IActionResult GetProductSearchCount(string keyword)
+        {
+            ThucDonViewModel query = new ThucDonViewModel(db);
+            var response = query.GetDataByName(keyword).Count();
+            return Json(response);
+        }
+        public IActionResult SearchProduct(string keyword, string page="1")
+        {
+            var page_num = int.Parse(page);
+            ThucDonViewModel query = new ThucDonViewModel(db);
+            var response = query.GetDataByNameWithPage(keyword, page_num);
+            return Json(response);
+        }
     }
 }

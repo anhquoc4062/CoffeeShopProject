@@ -126,6 +126,20 @@ namespace CoffeeShopProject.Models
             return dsThucDon;
         }
         //------------------------------------------
+        public IEnumerable<ThucDonViewModel> GetDataByName(string keyword)
+        {
+            keyword = keyword.ToLower();
+            var dsThucDon = GetAllData().Where(self => self.TenThucDon.ToLower().Contains(keyword));
+            return dsThucDon;
+        }
+        public IEnumerable<ThucDonViewModel> GetDataByNameWithPage(string keyword, int page)
+        {
+            var limit = 5;
+            var offset = (page - 1) * limit;
+            keyword = keyword.ToLower();
+            var dsThucDon = GetAllData().Where(self => self.TenThucDon.ToLower().Contains(keyword)).Skip(offset).Take(limit);
+            return dsThucDon;
+        }
         public bool DeleteThucDonById(String id)
         {
             if (db.ThucDon.Find(int.Parse(id)) != null)

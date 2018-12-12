@@ -1,6 +1,7 @@
 ﻿$(document).ready(function () {
 
     $(document).on('change', '#category_filter', function (event) {
+        ResetSearchBar();
         var category_id = $(this).children("option:selected").val();
         $.ajax({
             type: "GET",
