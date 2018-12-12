@@ -47,7 +47,15 @@
                                         <label for="text-input" class=" form-control-label">CMND</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="text" id="emp_indentity" placeholder="Nhập chứng minh nhân dân..." class="form-control" value="" name="emp_name">
+                                        <input type="text" id="emp_identity" placeholder="Nhập chứng minh nhân dân..." class="form-control" value="" name="emp_name">
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3 text-right">
+                                        <label for="text-input" class=" form-control-label">Email</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <input type="email" id="emp_email" placeholder="Nhập email..." class="form-control" value="" name="emp_name">
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -83,6 +91,10 @@
                                     <div class="col-12 col-md-9">
                                         <select name="emp_position" id="position_select" class="form-control">
                                             <option selected="" disabled="" value="0">--- Chọn chức vụ ---</option>
+                                            @foreach (var chucvu in ViewBag.ListPos)
+                                            {
+                                            <option value="@chucvu.MaChucVu">@chucvu.TenChucVu</option>
+                                            }
                                         </select>
                                         <button type="button" id="position_modal_btn" class="btn btn-primary" data-toggle="modal" data-target="#position_modal"><i class="fas fa-plus"></i></button>
                                     </div>
@@ -92,7 +104,7 @@
                                         <label for="text-input" class=" form-control-label">Lương</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="number" id="emp_price" placeholder="Nhập mức lương..." class="form-control" value="0" name="emp_name">
+                                        <input type="number" id="emp_salary" placeholder="Nhập mức lương..." class="form-control" value="0" name="emp_salary">
                                     </div>
                                 </div>
 
@@ -104,7 +116,7 @@
                                         <label for="text-input" class=" form-control-label">Mô tả</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <textarea class="form-control" placeholder="Nhập mô tả..." style="margin-top: 0px; margin-bottom: 0px; height: 314px;" id="emp_info"></textarea>
+                                        <textarea class="form-control" placeholder="Nhập mô tả..." style="margin-top: 0px; margin-bottom: 0px; height: 367px;" id="emp_info"></textarea>
                                     </div>
                                 </div>
 
@@ -113,7 +125,7 @@
                                         <label for="text-input" class=" form-control-label" style="margin-top:10px">Tài khoản</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#account_modal">Kiểm tra tài khoản</button>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#account_modal" id="account_check">Kiểm tra tài khoản</button>
                                     </div>
                                 </div>
                             </div>
@@ -126,7 +138,8 @@
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success" id="add_emp_btn" data-action="add_submit">Thêm</button>
+                    <button type="button" class="btn btn-success" id="add_emp_btn" data-action="add_submit">Thêm</button>
+                    <button type="button" class="btn btn-danger" id="delete_emp_btn" data-action="delete_submit" style="display: none">Xóa</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
                 </div>
 
@@ -178,7 +191,7 @@
                 <div class="modal-body">
 
                     <div class="card-body card-block">
-                        <div class="alert alert-danger" role="alert">
+                        <div class="alert alert-danger" role="alert" id="account_alert">
                             Nhân viên chưa có tài khoản
                         </div>
                         <div class="row form-group">
@@ -201,7 +214,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="add_position_btn">Thêm</button>
+                    <button type="button" class="btn btn-primary" id="add_account_btn">Cấp tài khoản</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Thoát</button>
                 </div>
             </div>

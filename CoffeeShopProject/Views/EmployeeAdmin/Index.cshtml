@@ -13,7 +13,7 @@
                         <i class="zmdi zmdi-account-calendar"></i>danh sách nhân viên
                     </h3>
                     <div class="filters m-b-45">
-                        <button class="au-btn au-btn-icon au-btn--green au-btn--small product_btn" data-action="Add" data-toggle="modal" data-target="#add_employee_modal">
+                        <button class="au-btn au-btn-icon au-btn--green au-btn--small emp_btn" data-action="Add" data-toggle="modal" data-target="#add_employee_modal">
                             <i class="zmdi zmdi-plus"></i>thêm
                         </button>
                     </div>
@@ -29,7 +29,7 @@
                                     <td>tác vụ</td>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="table_employee_list">
                                 @foreach (var item in ViewBag.List)
                                 {
                                     <tr>
@@ -55,7 +55,7 @@
                                             $@string.Format("{0:N2}", item.Luong)
                                         </td>
                                         <td>
-                                            <button class="btn btn-danger"><i class="fas fa-user-edit"></i></button>
+                                            <button class="btn btn-danger emp_btn" data-action="Edit" data-id="@item.MaNhanVien" data-toggle="modal" data-target="#add_employee_modal"><i class="fas fa-user-edit"></i></button>
                                         </td>
                                     </tr>
                                 }

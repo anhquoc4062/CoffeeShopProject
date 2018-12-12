@@ -5,7 +5,7 @@
 
     $(".parent_modal").on('show.bs.modal', function (e) {
         $('#preview_img').attr('src', '/images/product/no-preview.jpg');
-        //$('form').trigger("reset");
+        $('form').trigger("reset");
     });
 
     $('.child_modal').on('show.bs.modal', function (e) {

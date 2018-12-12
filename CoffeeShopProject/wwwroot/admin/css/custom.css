@@ -1,5 +1,5 @@
 .main-content {
-    min-height: 300vh;
+    min-height: 150vh;
 }
 
 .table-responsive {
@@ -293,4 +293,8 @@ table a {
 
 label.form-control-label {
     margin-top: 5px;
+}
+
+.table-responsive.table-data {
+    height: 1200px;
 }
