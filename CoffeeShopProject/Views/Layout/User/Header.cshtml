@@ -1,4 +1,6 @@
-﻿<header id="header" id="home">
+﻿@using Microsoft.AspNetCore.Http
+@Context.Session.GetString("GioHang")
+<header id="header" id="home">
     <div class="header-top">
         <div class="container">
             <div class="row justify-content-end">
@@ -11,7 +13,10 @@
                             Sat-Sun: 11am to 4pm
                         </li>
                         <li>
-                            <a href="tel:(012) 6985 236 7512">(012) 6985 236 7512</a>
+                            <a href="#">(012) 6985 236 7512</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fas fa-user-alt"></i> Login</a>
                         </li>
                     </ul>
                 </div>
@@ -25,31 +30,21 @@
             </div>
             <nav id="nav-menu-container">
                 <ul class="nav-menu">
-                    <li class="menu-active"><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#coffee">Coffee</a></li>
-                    <li><a href="#review">Review</a></li>
-                    <li><a href="#blog">Blog</a></li>
+                    <li class="menu-active"><a asp-action="Index" asp-controller="TrangChu">Home</a></li>
+                    <li><a asp-action="Index" asp-controller="Menu">Menu</a></li>
+                    <li><a asp-action="Index" asp-controller="Cart">Cart</a></li>
+                    <li><a asp-action="Index" asp-controller="Checkout">Checkout</a></li>
+                    <li><a asp-action="Index" asp-controller="Contact">Contact</a></li>
                     <li class="cart-icon" style="cursor:pointer">
                         <span class="amount-cart">0</span><i class="fas fa-shopping-cart"></i>
-                        <ul style="display: block">
+                        <ul style="display: block" id="cart_hidden">
                             <li>
-                                <a href="generic.html">
+                                <a href="#">
                                     <img src="~/user/img/cappuccino_PNG26.png" alt="" width="75" height="75">
                                     <div class="item-info">
                                         <h5>CAPPUCHINO</h5>
                                         <p class="item-quantity">Số lượng : 1</p>
-                                        <p class="item-price">$18.00</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="generic.html">
-                                    <img src="~/user/img/cappuccino_PNG26.png" alt="" width="75" height="75">
-                                    <div class="item-info">
-                                        <h5>CAPPUCHINO</h5>
-                                        <p class="item-quantity">Số lượng : 1</p>
-                                        <p class="item-price">$18.00</span>
+                                        <p class="item-price">$18.00</p>
                                     </div>
                                 </a>
                             </li>

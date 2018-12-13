@@ -26,7 +26,6 @@
             });
         },
         error: function (error) {
-            alert("errror");
         }
     });
 }
@@ -76,7 +75,6 @@ $(document).ready(function () {
                     LoadMenuProduct(response);
                 },
                 error: function (error) {
-                    alert("errror");
                 }
             });
         //}
@@ -104,7 +102,6 @@ $(document).ready(function () {
                 LoadMenuPagination(maloai, sapxep);
             },
             error: function (error) {
-                alert("errror");
             }
         });
     });
@@ -122,7 +119,6 @@ $(document).ready(function () {
                 LoadMenuPagination(maloai, sapxep);
             },
             error: function (error) {
-                alert("errror");
             }
         });
     });

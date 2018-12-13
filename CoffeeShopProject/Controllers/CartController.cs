@@ -5,23 +5,22 @@ using System.Threading.Tasks;
 using CoffeeShopProject.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 
 namespace CoffeeShopProject.Controllers
 {
-    public class TestController : Controller
+    public class CartController : Controller
     {
         private readonly CoffeeShopContext db;
-        public TestController(CoffeeShopContext _db)
+        public CartController(CoffeeShopContext _db)
         {
             db = _db;
         }
         public IActionResult Index()
         {
-            var cart = SessionHelper.Get<List<CartItem>>(HttpContext.Session, "cart");
-            ViewBag.Cart = cart;
+            ViewBag.Cart = GetGioHang;
             return View();
         }
+
         public List<CartItem> GetGioHang
         {
             get
@@ -34,8 +33,9 @@ namespace CoffeeShopProject.Controllers
                 return myCart;
             }
         }
-        public IActionResult Buy(int product_id)
+        public IActionResult AddToCart(string id)
         {
+            int product_id = int.Parse(id);
             //lấy giỏ hàng đang có
             var gioHang = GetGioHang;
             //kiểm tra xem hàng đã có trong giỏ chưa
@@ -56,17 +56,12 @@ namespace CoffeeShopProject.Controllers
                     HinhAnh = hh.HinhAnh,
                     GiaBan = hh.GiaKhuyenMai
                 };
-                //gioHang.Add(item);
+                gioHang.Add(item);
             }
             //lưu session
             SessionHelper.Set(HttpContext.Session, "cart", gioHang);
             //chuyển tới trang giỏ hàng để xem
             return RedirectToAction("Index");
-        }
-
-        public IActionResult NextPage()
-        {
-            return View();
         }
     }
 }

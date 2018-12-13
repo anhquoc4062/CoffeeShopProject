@@ -1,0 +1,114 @@
+﻿@model ThucDonViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Layout/User/Layout.cshtml";
+}
+<section class="generic-banner relative">
+    <div class="container">
+        <div class="row height align-items-center justify-content-center">
+            <div class="col-lg-10">
+                <div class="generic-banner-content">
+                    <h2 class="text-white">CHI TIẾT THỰC ĐƠN</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Start video-sec Area -->
+<section class="video-sec-area pt-100" id="about">
+    <div class="container">
+        <div class="row justify-content-start align-items-center">
+            <div class="col-lg-6 video-right justify-content-center align-items-center d-flex">
+                <img class="img-fluid" src="~/uploads/product/@Model.HinhAnh" alt="">
+            </div>
+            <div class="col-lg-6 video-left">
+                <h1>@Model.TenThucDon</h1>
+                <h6>$@string.Format("{0:N2}", Model.GiaKhuyenMai) <del style="color: #bdc3c7; font-size: 15px">$@string.Format("{0:N2}", Model.Gia)</del> </h6>
+                <p>
+                    <span style="text-transform:uppercase; font-weight:bold; color: #262626">Thể loại:</span> @Model.TenLoai
+                </p>
+                <div id="exTab1">
+                    <ul class="nav nav-pills">
+                        <li class="active">
+                            <a href="#1a" data-toggle="tab">Mô tả</a>
+                        </li>
+                        <li>
+                            <a href="#2a" data-toggle="tab">Thông tin thêm</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content clearfix">
+                        <div class="tab-pane active" id="1a">
+                            <p>@Model.MoTa</p>
+                        </div>
+                        <div class="tab-pane" id="2a">
+                            <p>
+                                We use the class nav-pills instead of nav-tabs which automatically creates a background color for the tab
+                                fasdfasdfasdfasdfasdfasdfatbs btfbhjyjnfufnu ukunjfujnuf kukkngukgunknyuk uykuynkfuku
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End video-sec Area -->
+<!-- Start Related Product -->
+<div class="related-product">
+    <div class="container">
+        <div class="row">
+            <h2>CÁC SẢN PHẨM LIÊN QUAN</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-3 text-center">
+                <div class="image-related" width="400" height="400">
+                    <img src="~/user/img/Cafe-Espresso-PNG-Free-Download.png" alt="" width="100%" height="100%">
+                    <div class="button-add-to-cart">
+                        <a href="#">THÊM VÀO GIỎ</a>
+                    </div>
+                </div>
+                <div class="content-related">
+                    <h5><a href="#">Cappuchino</a></h5>
+                    <span class="price">$50.0</span>
+                </div>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="image-related" width="400" height="400">
+                    <img src="~/user/img/Cafe-Espresso-PNG-Free-Download.png" alt="" width="100%" height="100%">
+                    <div class="button-add-to-cart">
+                        <a href="#">THÊM VÀO GIỎ</a>
+                    </div>
+                </div>
+                <div class="content-related">
+                    <h5><a href="#">Cappuchino</a></h5>
+                    <span class="price">$50.0</span>
+                </div>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="image-related" width="400" height="400">
+                    <img src="~/user/img/Cafe-Espresso-PNG-Free-Download.png" alt="" width="100%" height="100%">
+                    <div class="button-add-to-cart">
+                        <a href="#">THÊM VÀO GIỎ</a>
+                    </div>
+                </div>
+                <div class="content-related">
+                    <h5><a href="#">Cappuchino</a></h5>
+                    <span class="price">$50.0</span>
+                </div>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="image-related" width="400" height="400">
+                    <img src="~/user/img/Cafe-Espresso-PNG-Free-Download.png" alt="" width="100%" height="100%">
+                    <div class="button-add-to-cart">
+                        <a href="#">THÊM VÀO GIỎ</a>
+                    </div>
+                </div>
+                <div class="content-related">
+                    <h5><a href="#">Cappuchino</a></h5>
+                    <span class="price">$50.0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Related Product -->
