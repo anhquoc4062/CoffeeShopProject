@@ -10,7 +10,7 @@ namespace CoffeeShopProject.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return View("~/Views/Layout/User/Layout.cshtml");
         }
 
         public IActionResult chiTietDatHang()

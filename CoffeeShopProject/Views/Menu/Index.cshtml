@@ -1,0 +1,91 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Layout/User/Layout.cshtml";
+}
+
+<section class="generic-banner relative">
+    <div class="container">
+        <div class="row height align-items-center justify-content-center">
+            <div class="col-lg-10">
+                <div class="generic-banner-content">
+                    <h2 class="text-white">MENU</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End banner Area -->
+<section class="menu-area section-gap">
+    <div class="container">
+        <div class="row">
+            <!--Left side menu-->
+            <div class="col-lg-9">
+                <div class="container">
+                    <!--Filter select box-->
+                    <div class="row">
+                        <div class="default-select" id="default-select">
+                            <select id="sort_product">
+                                <option disabled>--Sắp xếp theo--</option>
+                                <option selected value="0">Tất cả</option>
+                                <option value="1">Giá tăng dần</option>
+                                <option value="2">Sản phẩm mới</option>
+                                <option value="3">Đang khuyến mãi</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--end Filter select box-->
+                    <!--Menu area-->
+                    <div class="row" id="menu_area">
+                        @foreach (var product in ViewBag.ListProduct)
+                        {
+
+                            <div class="col-lg-4">
+                                <div class="menu-image">
+                                    <img src="~/uploads/product/@product.HinhAnh" alt="" width="200" height="200">
+                                </div>
+                                <div class="single-menu">
+                                    <div class="title-div justify-content-between d-flex">
+                                        <h4>@product.TenThucDon</h4>
+                                    </div>
+                                    <p class="price">
+                                        $@if (product.KhuyenMai == 0)
+                                        {
+                                            @string.Format("{0:N2}", product.Gia)
+                                        }
+                                        else
+                                        {
+                                            @string.Format("{0:N2}", product.GetGiaKhuyenMai)
+                                            <del style="font-size:15px; color: gray; padding-left: 5px">$@string.Format("{0:N2}", product.Gia)</del>
+                                        }
+
+                                    </p>
+                                    <div class="order-button">
+                                        <button class="btn btn-primary" data-id="@product.MaThucDon">Mua hàng</button>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <!--end Menu area-->
+
+                </div>
+                <!--Pagination area-->
+                <div class="row align-items-center justify-content-center">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center" id="menu_pagination"></ul>
+                    </nav>
+                </div>
+                <!--end Pagination area-->
+            </div>
+
+            <!--end Left side menu-->
+            <!--right side menu-->
+            @{
+                Html.RenderPartial("RightSide");
+            }
+            <!--end right side menu-->
+        </div>
+    </div>
+</section>
+

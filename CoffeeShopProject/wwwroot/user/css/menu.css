@@ -1,0 +1,36 @@
+﻿.order-button .btn.btn-primary {
+    background: #be9c79;
+    border: none;
+    width: 100%;
+    border-radius: unset;
+    font-size: 20px;
+    padding: 10px 0px;
+    margin-top: 10px;
+}
+
+.single-menu h4 {
+    font-family: inherit;
+    font-size: 22px;
+}
+
+.order-button .btn.btn-primary:hover {
+    background: #262626;
+}
+
+.page-item.active .page-link {
+    color: #be9c79;
+    background: none;
+}
+
+#menu_pagination .page-item.disabled .page-link {
+    color: #d8d5d5;
+    background: none;
+}
+
+#menu_area {
+    height: 800px;
+}
+
+.list-group-cate li.selected a {
+    color: #be9c79;
+}

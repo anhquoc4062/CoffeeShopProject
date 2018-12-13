@@ -17,8 +17,8 @@ namespace CoffeeShopProject.Models
         public string Email { get; set; }
         public double? Luong { get; set; }
         public string MoTa { get; set; }
-        public int? MaChucVu { get; set; }
         public int? MaTaiKhoan { get; set; }
+        public int? MaChucVu { get; set; }
 
         public ChucVu MaChucVuNavigation { get; set; }
         public TaiKhoan MaTaiKhoanNavigation { get; set; }

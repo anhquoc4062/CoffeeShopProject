@@ -1,0 +1,636 @@
+body{
+    font-family: 'Varela Round', sans-serif;
+    background-color: #fff
+}
+.single-menu {
+    padding-top: 90px;
+    margin-top: -100px;
+}
+.generic-banner .height {
+    height: 200px;
+}
+
+.generic-banner .generic-banner-content h2 {
+    padding-top: 25%;
+    font-size: 50px;
+    font-weight: 100;
+    font-family: 'Varela Round', sans-serif;
+}
+.video-right {
+    background: none;
+}
+.video-left {
+    margin-top: -150px;
+}
+.video-left h6 {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.video-left p {
+    margin-top: 14px;
+}
+.generic-banner {
+    background: url(../img/background.jpg);
+    background-size: cover;
+    height: 400px;
+    background-attachment: fixed;
+}
+#exTab1 .tab-content {
+    background-color: #ffffff;
+    padding : 5px 15px;
+    border: 1px solid #ebebeb;
+    position: absolute;
+    width: 442px;
+  }
+
+.tab-content.clearfix {}
+ul.nav.nav-pills {position: relative;width: 100%;vertical-align: middle;display: table;list-style: none;margin: 0;padding: 0;text-align: center;clear: both;z-index: 1;}
+
+.nav-pills li {
+    padding: 12px;
+    position: relative;
+    display: table-cell;
+    vertical-align: middle;
+    background-color: #f6f6f6;
+    color: white;
+}
+
+.nav-pills li.active {
+    background: #be9c79;
+}
+.nav-pills li.hover {
+    background: #be9c79;
+}
+#exTab1 .nav-pills > li.active > a {
+    color: white;
+}
+#exTab1 .nav-pills > li.hover > a {
+    color: white;
+}
+
+#exTab1 .nav-pills > li > a {
+    font-size: 15px;
+    color: #656565;
+}
+
+.tab-pane {
+    background: white;
+}
+
+.tab-pane p {
+    margin: 22px 27px;
+    font-size: 13px;
+}
+
+.button-add-to-cart {background: #be9c79;width: 200px;height: 50px;line-height: 50px;top: 45%;left: 10%;position: absolute;margin-bottom: 19px;display: none}
+
+.button-add-to-cart a {
+    color: #fff;
+}
+
+.button-add-to-cart:hover {
+    background: black;
+    cursor: pointer;
+}
+  
+.related-product h2 {
+    font-family: 'Varela Round', sans-serif;
+    margin-bottom: 30px;
+}
+
+.related-product {
+    margin-top: 150px;
+    margin-bottom: 100px;
+}
+
+.content-related a {
+    color: #262626;
+    font-size: 24px;
+}
+
+span.price {
+    font-size: 16px;
+}
+
+.content-related h5 {
+    margin-bottom: 7px;
+}
+
+.content-related a:hover {
+    color: #be9c79;
+}
+
+.title-about h2 {
+    font-size: 45px;
+    font-family: 'Varela Round', sans-serif;
+}
+  
+.image-related {
+    position: relative;
+}
+
+.image-related:hover {
+    opacity: 0.7;
+    transition: 0.4s;
+}
+
+.image-related:hover .button-add-to-cart {
+    display: block;
+    transition: 0.4s;
+}
+
+h1.mb-10 {
+    font-family: 'Varela Round', sans-serif;
+    font-size: 45px;
+}
+
+.content h5 {
+    font-size: 20px;
+    font-family: 'Varela Round', sans-serif;
+    text-align: center;
+    padding: 10px 0;
+    font-weight: 100;
+}
+
+.offers-content {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.offers-area.col-md-3 {
+    width: 50%;
+}
+
+.offers-area {
+    margin: 80px;
+}
+
+.title h6 {
+    font-size: 18px;
+    font-weight: 300;
+    padding-top: 24px;
+    margin: auto;
+    color: #777777;
+    width: 600px;
+}
+div#coffee {
+    margin-top: -20px;
+}
+img#title-separator-img, img#title-above-img {
+    width: unset;
+}
+.row.img-gallery img:hover {
+    opacity: 0.5;
+}
+.my-logo {
+    height: 600px;
+    background: url(../img/h1-bacground-img-2.jpg);
+    background-attachment: fixed;
+    background-position: 50% 49px;
+}
+.my-logo img {
+    margin: 0;
+    padding: 0;
+    margin-left: 42%;
+    margin-top: 12%;
+}
+
+ul.list-group-cate {
+    font-size: 16px;
+    margin-top: -14px;
+}
+
+.list-group-cate li {
+    padding: 8px;
+}
+
+.list-group-cate li a {
+    color: #656565;
+    font-weight: 100;
+    font-family: 'Varela Round', sans-serif;
+    font-size: 17px;
+}
+
+.list-group-cate li a:hover {
+    color: #be9c79;
+}
+h3.mb-30 {
+    font-family: 'Varela Round', sans-serif;
+}
+
+.stylish-input-group .input-group-addon{
+    background: white !important;
+    border: 1px solid #ccc;
+    border-left: none;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding: 10px;
+    color: #ccc;
+}
+.stylish-input-group .form-control{
+	border-right:0;
+	box-shadow:0 0 0;
+	border-color:#ccc;
+	border-top-left-radius: 20px;
+	padding-left: 18px;
+	border-bottom-left-radius: 20px;
+}
+.stylish-input-group button{
+    border:0;
+    background:transparent;
+    color: #9c9c9c;
+}
+.single-element-widget {
+    margin-top: 50px;
+    margin-left: 30px;
+}
+
+.page-link {
+    color: #656565;
+    border: none;
+    background: none;
+    font-size: 18px;
+}
+
+.page-link:hover {
+    color: #be9c79;
+    background: none;
+    transition: 0.4s;
+}
+
+li.page-item {
+    border: none;
+}
+
+ul.pagination.justify-content-center {margin-top: 20px;}
+
+.list-group-product h5 {
+    margin-top: -78px;
+    font-size: 18px;
+    margin-left: 111px;
+}
+
+.list-group-product p {
+    margin-left: 111px;
+    color: #be9c79;
+    padding-top: 5px;
+    font-size: 19px;
+}
+
+.list-group-product li {
+    margin-top: 32px;
+}
+
+div#imaginary_container {
+    margin-left: 30px;
+}
+
+ul.list-group-product {
+    margin-top: -16px;
+}
+
+.list-group-product del {
+    font-size: 13px;
+    color: gray;
+}
+
+.default-select .nice-select {
+    border: 1px solid #ccc;
+    width: 200px;
+    background: white;
+}
+
+div#default-select {
+    margin-bottom: 27px;
+    margin-left: auto;
+}
+
+.default-select .nice-select .list .option {
+    font-size: 14px;
+}
+
+.cart-icon span.amount-cart {
+    color: white;
+    position: relative;
+    left: 26px;
+    bottom: 7px;
+    font-size: 10px;
+}
+
+li.cart-icon {
+    color: #fff;
+}
+
+
+.cart-icon ul .item-info {
+    position: relative;
+    bottom: 66px;
+    left: 100px;
+}
+
+.cart-icon ul {
+    width: 280px;
+    background: #413332;
+    color: #fff;
+    left: -250px;
+}
+
+.cart-icon ul li a {
+    color: #fff;
+}
+
+.item-info h5 {
+    color: #fff;
+}
+
+.cart-icon ul li {
+    height: 100px;
+}
+
+.cart-icon ul li a:hover {
+    color: #fff;
+}
+
+.cart-icon ul li.item-total {
+    padding: 10px;
+    height: 40px;
+}
+
+span.total-amount {
+    padding-left: 120px;
+}
+
+span.total {
+    float: left;
+}
+
+span.total-price {
+    float: right;
+}
+
+.action-button a {
+    width: 119px;
+    float: left;
+    background: #be9c79;
+    margin: 4px;
+    border-radius: 0px;
+}
+
+.cart-icon ul li.action-button {
+    height: 40px;
+}
+.cart-icon ul li.action-button a:hover {
+    color: #262626;
+    background: #262626;
+}
+.cart-icon ul li.action-button:hover a {
+    color: unset;
+}
+
+ul.nav-menu.sf-js-enabled.sf-arrows {
+    font-size: 15px;
+}
+
+.nav-menu a {
+    font-size: 15px;
+    padding-top: 13px;
+}
+
+li.cart-icon {
+    padding-top: 10px;
+}
+
+table.cart-item {
+    width: 100%;
+    margin-top: 100px;
+}
+
+table.cart-item  thead {
+    font-size: 17px;
+}
+
+table.cart-item th {
+    padding: 10px 0px;
+}
+
+table.cart-item tr {
+    border-bottom: 1px solid #ccc;
+}
+
+table.cart-item th,td {
+    padding-left: 10px;
+}
+
+.coupon input.form-control {
+    width: 168px;
+    font-size: 12px;
+    border-radius: 0px;
+    float: left;
+    padding: 10px;
+}
+
+.coupon .btn.btn-default {
+    background: #be9c79;
+    font-size: 12px;
+    padding: 10px 26px;
+    font-weight: 400;
+    position: relative;
+    border-radius: unset;
+    color: #fff;
+    left: 15px;
+}
+
+.coupon .btn.btn-default:hover {
+    background: #262626;
+}
+
+.coupon {
+    padding: 20px;
+    float: left;
+}
+
+.update-cart.btn.btn-default {
+    background: #be9c79;
+    border-radius: unset;
+    font-size: 12px;
+    position: relative;
+    color: #fff;
+    padding: 10px 20px;
+    top: 20px;
+    right: 292px;
+}
+
+.update-cart.btn.btn-default:hover {
+    background: #262626;
+}
+
+table.cart-total {
+    width: 100%;
+    margin-top: 20px;
+}
+
+table.cart-total td {
+    width: 80%;
+    text-align: left;
+}
+
+table.cart-total tr {
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+.cart-total-wrapper {
+    margin-top: 25px;
+}
+
+.table.cart-total th,td {
+    padding: 20px;
+}
+
+.cart-total-wrapper h3 {
+    font-size: 30px;
+    font-family: 'Varela Round', sans-serif;
+}
+
+.form-control:focus {
+    border-color: #be9c79;
+    box-shadow: unset;
+}
+
+p.item-price {
+    font-size: 17px;
+}
+
+.checkout-action .btn.btn-default {
+    border-radius: unset;
+    background: #be9c79;
+    color: #fff;
+    padding: 10px 20px;
+    margin: 40px 0px;
+    font-size: 12px;
+}
+
+.checkout-action .btn.btn-default:hover {
+    background: #262626;
+}
+
+.form-field {
+    text-align: left;
+    font-size: 17px;
+    font-weight: 300;
+    margin: 40px 0px;
+}
+
+.cart-checkout table.cart-item {
+    margin-top: 20px;
+}
+
+.cart-checkout table.cart-item td {
+    padding: 20px 0px;
+}
+
+.cart-checkout table.cart-item th {
+    padding: 20px 0px;
+}
+
+table.cart-item strong {
+    font-weight: 700;
+}
+
+.form-field h5 {
+    font-size: 35px;
+    font-family: 'Varela Round', sans-serif;
+}
+
+.form-field .cart-checkout {
+    margin-top: 50px;
+}
+.form-field.checkout-button.btn.btn-default {
+    color: #fff;
+    background: #be9c79;
+    border-radius: 0px;
+    font-size: 15px;
+    padding: 17px 32px;
+    right: 471px;
+    top: -35px;
+    position: relative;
+}
+
+.form-field.checkout-button.btn.btn-default:hover {
+    background: #262626;
+}
+
+.container.checkout-area {
+    padding-top: 80px;
+}
+
+.contact-icon {
+    text-align: left;
+    margin-top: 20px;
+}
+
+.contact-main-wrapper h3 {
+    font-family: 'Varela Round', sans-serif;
+    font-size: 35px;
+    margin-top: 70px;
+}
+
+.contact-main-wrapper p {
+    font-size: 17px;
+    margin: 20px 0px;
+}
+
+ul.contact-ul {list-style: none;font-size: 17px;}
+
+.contact-ul li:before {
+    content: "â€¢ ";
+    color: #be9c79;
+    padding-right: 10px;
+}
+
+.contact-ul li {
+    padding-top: 10px;
+}
+
+.contact-icon a {
+    padding: 10px;
+    font-size: 17px;
+    color: #b3b3b3;
+}
+
+.contact-icon a:hover {
+    color: #be9c79;
+}
+
+.contact-form .btn.btn-default {
+    position: relative;
+    border-radius: unset;
+    right: 180px;
+    padding: 15px 31px;
+    color: #fff;
+    background: #be9c79;
+}
+
+form.contact-form .form-field {margin: 33px auto;}
+
+form.contact-form {
+    margin: 70px 0px;
+}
+
+.contact-area {
+    margin-top: 20px;
+}
+
+.contact-form .btn.btn-default:hover {
+    background: #262626;
+}
+
+.contact-ul li:before {
+    content: "•";
+}
+
+#header #logo img {
+    position: relative;
+    bottom: 20px;
+}

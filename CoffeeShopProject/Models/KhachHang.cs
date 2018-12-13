@@ -16,7 +16,9 @@ namespace CoffeeShopProject.Models
         public string DiaChi { get; set; }
         public string TinhThanh { get; set; }
         public string SoDt { get; set; }
+        public int? MaTaiKhoan { get; set; }
 
+        public TaiKhoan MaTaiKhoanNavigation { get; set; }
         public ICollection<GioHang> GioHang { get; set; }
     }
 }

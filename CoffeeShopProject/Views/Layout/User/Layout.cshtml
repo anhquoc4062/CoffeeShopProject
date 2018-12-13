@@ -1,0 +1,26 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+@Html.Partial("~/Views/Layout/User/Head.cshtml")
+<body>
+
+    @Html.Partial("~/Views/Layout/User/Header.cshtml")<!-- #header -->
+
+    @RenderBody()
+    <!-- start footer Area -->
+    @Html.Partial("~/Views/Layout/User/Footer.cshtml")
+    <!-- End footer Area -->
+    @Html.Partial("~/Views/Layout/User/JS.cshtml")
+</body>
+</html>
+
+
+
+
+
+
+

@@ -18,6 +18,7 @@ namespace CoffeeShopProject.Models
         public double? Gia { get; set; }
         public int? KhuyenMai { get; set; }
         public string MoTa { get; set; }
+        public double? GiaKhuyenMai => (Gia - Gia * KhuyenMai / 100);
 
         public LoaiThucDon MaLoaiNavigation { get; set; }
         public ICollection<ChiTietGioHang> ChiTietGioHang { get; set; }

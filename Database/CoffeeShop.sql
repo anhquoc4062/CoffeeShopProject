@@ -68,8 +68,8 @@ create table NhanVien (
    email				nvarchar(20)	null,
    luong				  float		null,
    moTa					  ntext		null,
-   maChucVu               int       null,
    maTaiKhoan			  int		null,
+   maChucVu				  int		null,
    constraint PK_NHANVIEN primary key nonclustered (maNhanVien)
 )
 go
@@ -111,6 +111,7 @@ create table KhachHang (
    diaChi               nvarchar(254)          null,
    tinhThanh			nvarchar(254)		 null,
    soDT			nvarchar(20)					 null,
+   maTaiKhoan	int								null,
    constraint PK_KHACHHANG primary key nonclustered (maKhachHang)
 )
 go
@@ -152,7 +153,17 @@ create table TaiKhoan(
 	maTaiKhoan		int identity(1,1) not null,
 	tenTaiKhoan		nvarchar(254)     not null,
 	matKhau			nvarchar(254)	  not null,
+	maPhanQuyen        varchar(20)       null,
 	constraint PK_TAIKHOAN primary key nonclustered (maTaiKhoan)
+)
+/*==============================================================*/
+/* Table: PhanQuyen                                         */
+/*==============================================================*/
+go
+create table PhanQuyen(
+	maPhanQuyen		varchar(20) not null,
+	quyenHan	nvarchar(254)     null,
+	constraint PK_PHANQUYEN primary key nonclustered (maPhanQuyen)
 )
 go
 alter table ChiTietHoaDon
@@ -202,13 +213,22 @@ alter table GioHang
 
 go
 alter table NhanVien
-	add constraint FK_CHUCVU_REFERENCE_NHANVIEN foreign key (maChucVu)
+	add constraint FK_NHANVIEN_REFERENCE_CHUCVU foreign key (maChucVu)
       references ChucVu (maChucVu)
 go
 alter table NhanVien
-	add constraint FK_TAIKHOAN_REFERENCE_NHANVIEN foreign key (maTaiKhoan)
+	add constraint FK_NHANVIEN_REFERENCE_TAIKHOAN foreign key (maTaiKhoan)
       references TaiKhoan (maTaiKhoan)
 go
+alter table KhachHang
+	add constraint FK_KHACHHANG_REFERENCE_TAIKHOAN foreign key (maTaiKhoan)
+      references TaiKhoan (maTaiKhoan)
+go
+alter table TaiKhoan
+	add constraint FK_TAIKHOAN_REFERENCE_PHANQUYEN foreign key (maPhanQuyen)
+      references PhanQuyen (maPhanQuyen)
+go
+
 INSERT INTO LoaiThucDon VALUES ('Coffee');
 go
 INSERT INTO LoaiThucDon VALUES ('Freeze');
@@ -226,9 +246,16 @@ go
 INSERT INTO ChucVu VALUES (N'Thu Ngân');
 go
 
-INSERT INTO TaiKhoan VALUES ('nva123','123456');
+INSERT INTO PhanQuyen VALUES ('kh', N'Khách Hàng');
 go
-INSERT INTO TaiKhoan VALUES ('ntb456','654321');
+INSERT INTO PhanQuyen VALUES ('nv', N'Nhân Viên');
+go
+INSERT INTO PhanQuyen VALUES ('qtv', N'Quản Trị Viên')
+go
+
+INSERT INTO TaiKhoan VALUES ('nva123','123456', 'nv');
+go
+INSERT INTO TaiKhoan VALUES ('ntb456','654321', 'nv');
 go
 
 INSERT INTO NhanVien VALUES ('123456', 'example.jpg', N'Nguyễn Văn A', 'abc@gmail.com', 50, N'mô tả đó nhé', 1, 1);
@@ -236,4 +263,4 @@ go
 INSERT INTO NhanVien VALUES ('789321', 'example.jpg', N'Nguyễn Thị B', 'def@gmail.com', 40, N'mô tả của nhân viên', 2, 2);
 
 
-select * from NhanVien
+select * from TaiKhoan

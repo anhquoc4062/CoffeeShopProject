@@ -32,7 +32,8 @@ namespace CoffeeShopProject.Controllers
             TaiKhoan newAcc = new TaiKhoan
             {
                 TenTaiKhoan = account_name,
-                MatKhau = account_password
+                MatKhau = account_password,
+                MaPhanQuyen = "nv"
             };
             query_account.InsertTaiKhoan(newAcc);
 
