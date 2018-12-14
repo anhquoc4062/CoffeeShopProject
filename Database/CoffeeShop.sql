@@ -263,4 +263,4 @@ go
 INSERT INTO NhanVien VALUES ('789321', 'example.jpg', N'Nguyễn Thị B', 'def@gmail.com', 40, N'mô tả của nhân viên', 2, 2);
 
 
-select * from TaiKhoan
+select * from ThucDon
