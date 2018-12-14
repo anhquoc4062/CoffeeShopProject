@@ -1,20 +1,38 @@
 ﻿@using Microsoft.AspNetCore.Http
-@Context.Session.GetString("GioHang")
-<header id="header" id="home">
+<header id="header">
     <div class="header-top">
         <div class="container">
             <div class="row justify-content-end">
                 <div class="col-lg-8 col-sm-4 col-8 header-top-right no-padding">
                     <ul>
-                        <li>
-                            <a href="#"><i class="fas fa-user-tie"></i> Management</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fas fa-user-alt"></i> Profile</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fas fa-sign-in-alt"></i> Login</a>
-                        </li>
+
+                        @if (Context.Session.GetString("MaTaiKhoan") == null)
+                        {
+                            <li>
+                                <a asp-controller="Login" asp-action="Index"><i class="fas fa-sign-in-alt"></i> Login</a>
+                            </li>
+                        }
+                        else
+                        {
+                            @if (Context.Session.GetString("MaPhanQuyen").Trim('"') == "kh")
+                            {
+                                <li>
+                                    <a asp-controller="Profile" asp-action="Index"><i class="fas fa-user-alt"></i> Profile</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a asp-controller="ProductAdmin" asp-action="Index"><i class="fas fa-user-tie"></i> Adminstrator</a>
+                                </li>
+                            }
+                            <li>
+                                Xin chào, @Context.Session.GetString("HoTen").Trim('"')
+                            </li>
+                            <li>
+                                <a asp-controller="Login" asp-action="SignOut"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                            </li>
+                        }
 
                     </ul>
                 </div>
@@ -36,7 +54,7 @@
                     <li class="cart-icon" style="cursor:pointer">
                         <span class="amount-cart">0</span><i class="fas fa-shopping-cart"></i>
                         <ul style="display: block" id="cart_hidden">
-                            <li>
+                            <li class="item-in-cart">
                                 <a href="#">
                                     <img src="~/user/img/cappuccino_PNG26.png" alt="" width="75" height="75">
                                     <div class="item-info">
@@ -51,8 +69,8 @@
                                 <span class="total-price">$18</span>
                             </li>
                             <li class="action-button">
-                                <a href="" class="btn btn-default">XEM GIỎ HÀNG</a>
-                                <a href="" class="btn btn-default">THANH TOÁN</a>
+                                <a asp-action="Index" asp-controller="Cart" class="btn btn-default">XEM GIỎ HÀNG</a>
+                                <a asp-action="Index" asp-controller="Checkout" class="btn btn-default">THANH TOÁN</a>
                             </li>
 
                         </ul>
