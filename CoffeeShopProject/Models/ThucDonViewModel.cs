@@ -74,7 +74,7 @@ namespace CoffeeShopProject.Models
                            }).FirstOrDefault();
             return thucdon;
         }
-        public IEnumerable<ThucDonViewModel> GetDataByPage(int page, int limit = 5) {
+        public IEnumerable<ThucDonViewModel> GetDataByPage(int page, int limit = 7) {
             var offset = (page - 1) * limit;
             var dsThucDon = (from td in db.ThucDon
                              join ltd in db.LoaiThucDon
@@ -140,7 +140,7 @@ namespace CoffeeShopProject.Models
             var dsThucDon = GetAllDataWithFilter(maloai, sapxep).Skip(offset).Take(limit);
             return dsThucDon;
         }
-        public IEnumerable<ThucDonViewModel> GetDataWithCateByPage(string MaLoai, int page, int limit = 5)
+        public IEnumerable<ThucDonViewModel> GetDataWithCateByPage(string MaLoai, int page, int limit = 7)
         {
             var offset = (page - 1) * limit;
             var dsThucDon = (from td in db.ThucDon
@@ -176,7 +176,7 @@ namespace CoffeeShopProject.Models
             var dsThucDon = GetAllData().Where(self => self.TenThucDon.ToLower().Contains(keyword));
             return dsThucDon;
         }
-        public IEnumerable<ThucDonViewModel> GetDataByNameWithPage(string keyword, int page, int limit = 5)
+        public IEnumerable<ThucDonViewModel> GetDataByNameWithPage(string keyword, int page, int limit = 7)
         {
             var offset = (page - 1) * limit;
             keyword = keyword.ToLower();

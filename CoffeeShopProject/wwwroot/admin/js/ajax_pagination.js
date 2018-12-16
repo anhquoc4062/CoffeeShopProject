@@ -8,7 +8,7 @@
                 $totalpage = 1;
             }
             else {
-                var $totalpage = Math.ceil(parseInt(response) / 5);
+                var $totalpage = Math.ceil(parseInt(response) / 7);
             }
             
             $('#pagination-demo').empty();

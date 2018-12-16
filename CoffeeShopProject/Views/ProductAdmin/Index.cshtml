@@ -21,7 +21,7 @@
                         </button>
                         <div class="rs-select2--light rs-select2--md">
                             <select class="js-select2 select2-hidden-accessible" name="property" tabindex="-1" aria-hidden="true" id="category_filter">
-                                <option  value="-1" disabled>Lọc theo loại</option>
+                                <option value="-1" disabled>Lọc theo loại</option>
                                 <option class="selected" selected="selected" value="0">Tất cả</option>
                                 @foreach (var item in ViewBag.ListCate)
                                 {
@@ -38,7 +38,7 @@
                                 <div class="row">
                                     <div class="col-lg-8">
                                         <form class="form-header search_bar" action="/Employee/Search" method="POST">
-                                            <input class="au-input au-input--xl" type="text" name="key_word" placeholder="Nhập tên sản phẩm..." id="search_input"/>
+                                            <input class="au-input au-input--xl" type="text" name="key_word" placeholder="Nhập tên sản phẩm..." id="search_input" />
                                             <button class="au-btn--submit" type="submit" id="search_button" data-press-check="0">
                                                 <i class="zmdi zmdi-search"></i>
                                             </button>
@@ -64,7 +64,7 @@
                             </tr>
                         </thead>
                         <tbody id="table_product_list">
-                            
+
                             @foreach (var item in ViewBag.List)
                             {
                                 <tr class="tr-shadow">
@@ -88,25 +88,21 @@
                             }
 
 
+
                             <!--Không tìm thấy sản phẩm-->
 
                         </tbody>
 
                     </table>
+                    <ul id="pagination-demo" style="margin-top: 50px" classs="pagination-md"></ul>
                 </div>
-                <!-- END DATA TABLE -->
-                @*@Html.PagedListPager((IPagedList)ViewBag.List, page => Url.Action("Index", new { page = page }),
-                new PagedListRenderOptions {
-                    LiElementClasses = new string[] { "page-item" },
-                    PageClasses = new string[] { "page-link" }
-                })*@
 
             </div>
 
 
         </div>
         <!--END TABLE CONTENT-->
-        <ul id="pagination-demo" class="pagination-md"></ul>
+        
 
     </div>
 </div>

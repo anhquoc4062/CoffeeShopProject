@@ -27,6 +27,7 @@ namespace CoffeeShopProject.Models
         public virtual DbSet<PhanCong> PhanCong { get; set; }
         public virtual DbSet<PhanQuyen> PhanQuyen { get; set; }
         public virtual DbSet<TaiKhoan> TaiKhoan { get; set; }
+        public virtual DbSet<TinhThanh> TinhThanh { get; set; }
         public virtual DbSet<ThucDon> ThucDon { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -34,7 +35,7 @@ namespace CoffeeShopProject.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=DESKTOP-O9FKFQB\\SQLEXPRESS; Database=CoffeeShop;Integrated Security=True;");
+                optionsBuilder.UseSqlServer("Server=USERMIC-7EHB531\\SQLEXPRESSS; Database=CoffeeShop;Integrated Security=True;");
             }
         }
 
@@ -180,16 +181,14 @@ namespace CoffeeShopProject.Models
 
                 entity.Property(e => e.MaTaiKhoan).HasColumnName("maTaiKhoan");
 
+                entity.Property(e => e.MaTinhThanh).HasColumnName("maTinhThanh");
+
                 entity.Property(e => e.SoDt)
                     .HasColumnName("soDT")
                     .HasMaxLength(20);
 
                 entity.Property(e => e.TenKhachHang)
                     .HasColumnName("tenKhachHang")
-                    .HasMaxLength(254);
-
-                entity.Property(e => e.TinhThanh)
-                    .HasColumnName("tinhThanh")
                     .HasMaxLength(254);
 
                 entity.HasOne(d => d.MaTaiKhoanNavigation)
@@ -319,6 +318,17 @@ namespace CoffeeShopProject.Models
                     .WithMany(p => p.TaiKhoan)
                     .HasForeignKey(d => d.MaPhanQuyen)
                     .HasConstraintName("FK_TAIKHOAN_REFERENCE_PHANQUYEN");
+            });
+
+            modelBuilder.Entity<TinhThanh>(entity =>
+            {
+                entity.HasKey(e => e.MaTinhThanh);
+
+                entity.Property(e => e.MaTinhThanh).HasColumnName("maTinhThanh");
+
+                entity.Property(e => e.TenTinhThanh)
+                    .HasColumnName("tenTinhThanh")
+                    .HasMaxLength(255);
             });
 
             modelBuilder.Entity<ThucDon>(entity =>

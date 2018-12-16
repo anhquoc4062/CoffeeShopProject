@@ -23,7 +23,7 @@ namespace CoffeeShopProject.Models
                                  TenKhachHang = td.TenKhachHang,
                                  Email = td.Email,
                                  DiaChi = td.DiaChi,
-                                 TinhThanh = td.TinhThanh,
+                                 MaTinhThanh = td.MaTinhThanh,
                                  SoDt = td.SoDt
 
                              }).ToList();
