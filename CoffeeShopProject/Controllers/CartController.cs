@@ -18,6 +18,7 @@ namespace CoffeeShopProject.Controllers
         public IActionResult Index()
         {
             ViewBag.Cart = GetGioHang;
+            ViewBag.Total = 0;
             return View();
         }
 

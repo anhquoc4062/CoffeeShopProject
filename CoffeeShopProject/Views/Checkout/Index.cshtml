@@ -1,0 +1,110 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Layout/User/Layout.cshtml";
+}
+
+<section class="generic-banner relative">
+    <div class="container">
+        <div class="row height align-items-center justify-content-center">
+            <div class="col-lg-10">
+                <div class="generic-banner-content">
+                    <h2 class="text-white">THANH TOÁN</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End banner Area -->
+<!-- About Generic Start -->
+
+<div class="main-wrapper">
+    <div class="container checkout-area">
+        <form>
+            <div class="form-field">
+                <label for="fullname" style="text-align: left">
+                    Họ tên
+                    <abbr title="required" class="required">*</abbr>
+                </label>
+                <input type="text" name="fullname" id="fullname" class="form-control">
+            </div>
+            <div class="form-field">
+                <label for="address" style="text-align: left">
+                    Địa chỉ
+                    <abbr title="required" class="required">*</abbr>
+                </label>
+                <input type="text" name="address" id="address" class="form-control">
+            </div>
+            <div class="form-field">
+                <label for="email" style="text-align: left">
+                    Email
+                    <abbr title="required" class="required">*</abbr>
+                </label>
+                <input type="text" name="email" id="email" class="form-control">
+            </div>
+            <div class="form-field">
+                <label for="city" style="text-align: left">
+                    Thành phố
+                    <abbr title="required" class="required">*</abbr>
+                </label>
+                <select name="city" id="city" class="form-control">
+                    <option value="">A</option>
+                    <option value="">B</option>
+                    <option value="">C</option>
+                </select>
+            </div>
+            <div class="form-field">
+                <label for="email" style="text-align: left">
+                    Số điện thoại
+                    <abbr title="required" class="required">*</abbr>
+                </label>
+                <input type="text" name="email" id="email" class="form-control">
+            </div>
+            <div class="form-field">
+                <label for="email" style="text-align: left">
+                    Ghi chú đặt hàng
+                </label>
+                <textarea name="" id="" cols="30" rows="5" class="form-control" placeholder="Ghi chú về đơn đặt hàng"></textarea>
+            </div>
+            <div class="form-field cart-checkout">
+                <h5>Đơn hàng của bạn</h5>
+                <table class="cart-item">
+                    <thead>
+                        <tr>
+                            <th>Sản phẩm</th>
+                            <th style="width: 70%">Tổng cộng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Cappuchino x 1</td>
+                            <td>$18.00</td>
+                        </tr>
+                        <tr>
+                            <td>Cappuchino x 1</td>
+                            <td>$18.00</td>
+                        </tr>
+                        <tr>
+
+                            <td><strong>Subtotal</strong></td>
+                            <td>$54.00</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Shipping</strong></td>
+                            <td>Free</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Total</strong></td>
+                            <td><strong>$54.00</strong></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <button class="form-field checkout-button btn btn-default">THANH TOÁN</button>
+
+        </form>
+    </div>
+</div>
+

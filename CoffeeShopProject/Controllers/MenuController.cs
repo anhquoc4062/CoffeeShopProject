@@ -20,6 +20,7 @@ namespace CoffeeShopProject.Controllers
             ViewBag.ListProduct = query_thucdon.GetDataByPage(1,6);
             LoaiThucDonViewModel query_loaithucdon = new LoaiThucDonViewModel(db);
             ViewBag.ListCate = query_loaithucdon.GetLoaiThucDon();
+            ViewBag.ListDiscount = query_thucdon.GetAllData().Where(x => x.KhuyenMai != 0).Take(4);
             return View();
         }
         public IActionResult GetProductCountWithFilter(string maloai, string sapxep)

@@ -18,6 +18,7 @@ namespace CoffeeShopProject.Controllers
         {
             ThucDonViewModel query = new ThucDonViewModel(db);
             var td = query.GetDataById(id);
+            ViewBag.CungLoai = query.GetAllDataByCate(td.MaLoai.ToString()).Take(4);
             return View(td);
         }
     }

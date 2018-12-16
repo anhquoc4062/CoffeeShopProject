@@ -79,115 +79,35 @@
         <div class="row d-flex justify-content-center">
             <div class="menu-content pb-60 col-lg-10">
                 <div class="title text-center">
-                    <h1 class="mb-10">OUR MENU</h1>
+                    <h1 class="mb-10">NEWEST MENU</h1>
                     <img src="~/user/img/title-separator.png" alt="">
                     <h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore</h6>
                 </div>
             </div>
         </div>
-        <div class="row" id="coffee" style="opacity:0">
-            <div class="col-lg-4">
-                <div class="menu-image">
-                    <img src="~/user/img/cappuccino_PNG26.png" alt="" width="200" height="200">
-                </div>
-                <div class="single-menu">
+        <div class="row" id="coffee" style="opacity:0; position: relative">
+            @foreach (var product in ViewBag.ListProduct)
+            {
+                
+                <div class="col-lg-4">
+                    <a asp-controller="SingleProduct" asp-action="Index" asp-route-id="@product.MaThucDon">
+                        <div class="menu-image">
+                            <img src="~/uploads/product/@product.HinhAnh" alt="" width="200" height="200">
+                        </div>
+                        <div class="single-menu">
 
-                    <div class="title-div justify-content-between d-flex">
-                        <h4>Cappuccino</h4>
-                        <p class="price float-right">
-                            $49
-                        </p>
-                    </div>
-                    <p>
-                        Usage of the Internet is becoming more common due to rapid advance.
-                    </p>
+                            <div class="title-div justify-content-between d-flex">
+                                <h4>@product.TenThucDon</h4>
+                                <p class="price float-right">
+                                    $@string.Format("{0:N2}", product.GetGiaKhuyenMai)
+                                </p>
+                            </div>
+                            <p style="color: #777777">Category: <span style="color: #be9c79; font-weight:bold">@product.TenLoai</span></p>
+                        </div>
+                    </a>
                 </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="menu-image">
-                    <img src="~/user/img/cappuccino_PNG26.png" alt="" width="200" height="200" style="padding: auto">
-                </div>
-                <div class="single-menu">
+            }
 
-                    <div class="title-div justify-content-between d-flex">
-                        <h4>Cappuccino</h4>
-                        <p class="price float-right">
-                            $49
-                        </p>
-                    </div>
-                    <p>
-                        Usage of the Internet is becoming more common due to rapid advance.
-                    </p>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="menu-image">
-                    <img src="~/user/img/bac-xiu.png" alt="" width="200" height="200">
-                </div>
-                <div class="single-menu">
-
-                    <div class="title-div justify-content-between d-flex">
-                        <h4>Cappuccino</h4>
-                        <p class="price float-right">
-                            $49
-                        </p>
-                    </div>
-                    <p>
-                        Usage of the Internet is becoming more common due to rapid advance.
-                    </p>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="menu-image">
-                    <img src="~/user/img/Cafe-Espresso-PNG-Free-Download.png" alt="" width="200" height="200">
-                </div>
-                <div class="single-menu">
-
-                    <div class="title-div justify-content-between d-flex">
-                        <h4>Cappuccino</h4>
-                        <p class="price float-right">
-                            $49
-                        </p>
-                    </div>
-                    <p>
-                        Usage of the Internet is becoming more common due to rapid advance.
-                    </p>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="menu-image">
-                    <img src="~/user/img/Coffee_Latte_Art_PNG_Clip_Art_Image.png" alt="" width="200" height="200">
-                </div>
-                <div class="single-menu">
-
-                    <div class="title-div justify-content-between d-flex">
-                        <h4>Cappuccino</h4>
-                        <p class="price float-right">
-                            $49
-                        </p>
-                    </div>
-                    <p>
-                        Usage of the Internet is becoming more common due to rapid advance.
-                    </p>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="menu-image">
-                    <img src="~/user/img/cappuccino_PNG26.png" alt="" width="200" height="200">
-                </div>
-                <div class="single-menu">
-
-                    <div class="title-div justify-content-between d-flex">
-                        <h4>Cappuccino</h4>
-                        <p class="price float-right">
-                            $49
-                        </p>
-                    </div>
-                    <p>
-                        Usage of the Internet is becoming more common due to rapid advance.
-                    </p>
-                </div>
-            </div>
         </div>
     </div>
 </section>

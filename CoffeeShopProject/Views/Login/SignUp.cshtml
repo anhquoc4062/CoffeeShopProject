@@ -1,0 +1,104 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+@Html.Partial("~/Views/Layout/Admin/Head.cshtml")
+<style>
+    .page-content--bge5 {
+        height: 150vh;
+    }
+    .login-logo {
+        position: relative;
+        bottom: 70px;
+    }
+
+    .login-form {
+        position: relative;
+        bottom: 150px;
+    }
+    .login-content {
+        height: 950px;
+    }
+    .login-form .au-btn--green {
+        background: #be9c79;
+        border-radius: unset;
+        text-align: center;
+    }
+
+    input.au-input.au-input--full:focus {
+        border-color: #be9c79;
+    }
+
+    .login-form .au-btn--green:hover {
+        background: #262626;
+    }
+</style>
+<body class="animsition">
+    <div class="page-wrapper">
+        <div class="page-content--bge5">
+            <div class="container">
+                <div class="login-wrap">
+                    <div class="login-content">
+                        <div class="login-logo">
+                            <a href="#">
+                                <img src="~/images/icon/logo.png" alt="CoolAdmin">
+                            </a>
+                        </div>
+                        <div class="login-form">
+                            <form action="" method="post">
+                                <div class="form-group">
+                                    <label>Fullname</label>
+                                    <input class="au-input au-input--full" type="text" name="fullname" placeholder="Nhập họ tên...">
+                                </div>
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    <input class="au-input au-input--full" type="text" name="username" placeholder="Nhập tên tài khoản...">
+                                </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input class="au-input au-input--full" type="password" name="password" placeholder="Nhập mật khẩu...">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input class="au-input au-input--full" type="email" name="email" placeholder="Nhập email...">
+                                </div>
+                                <div class="form-group">
+                                    <label>Tỉnh/Thành</label>
+                                    <select class="form-control" name="city">
+                                        <option disabled selected>--Chọn tỉnh thành--</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    <input class="au-input au-input--full" type="email" name="address" placeholder="Nhập địa chỉ...">
+                                </div>
+                                <div class="form-group">
+                                    <label>Tel</label>
+                                    <input class="au-input au-input--full" type="email" name="tel" placeholder="Nhập số điện thoại...">
+                                </div>
+                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">register</button>
+                            </form>
+                            <div class="register-link">
+                                <p>
+                                    Already have account?
+                                    <a asp-controller="Login" asp-action="Index">Sign In</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    @Html.Partial("~/Views/Layout/Admin/JS.cshtml")
+
+</body>
+
+</html>
+<!-- end document-->

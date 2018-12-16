@@ -57,57 +57,26 @@
 <div class="related-product">
     <div class="container">
         <div class="row">
-            <h2>CÁC SẢN PHẨM LIÊN QUAN</h2>
+            <h2>CÁC SẢN PHẨM CÙNG LOẠI</h2>
         </div>
+        
         <div class="row">
-            <div class="col-md-3 text-center">
-                <div class="image-related" width="400" height="400">
-                    <img src="~/user/img/Cafe-Espresso-PNG-Free-Download.png" alt="" width="100%" height="100%">
-                    <div class="button-add-to-cart">
-                        <a href="#">THÊM VÀO GIỎ</a>
+            @foreach (var product in ViewBag.CungLoai)
+            {
+                <div class="col-md-3 text-center">
+                    <div class="image-related" width="400" height="400">
+                        <img src="~/uploads/product/@product.HinhAnh" alt="" width="100%" height="100%">
+                        <div class="button-add-to-cart">
+                            <a href="#">THÊM VÀO GIỎ</a>
+                        </div>
+                    </div>
+                    <div class="content-related">
+                        <h5><a asp-action="Index" asp-controller="SingleProduct" asp-route-id="@product.MaThucDon">@product.TenThucDon</a></h5>
+                        <span class="price">$@string.Format("{0:N2}", product.GetGiaKhuyenMai)</span>
                     </div>
                 </div>
-                <div class="content-related">
-                    <h5><a href="#">Cappuchino</a></h5>
-                    <span class="price">$50.0</span>
-                </div>
-            </div>
-            <div class="col-md-3 text-center">
-                <div class="image-related" width="400" height="400">
-                    <img src="~/user/img/Cafe-Espresso-PNG-Free-Download.png" alt="" width="100%" height="100%">
-                    <div class="button-add-to-cart">
-                        <a href="#">THÊM VÀO GIỎ</a>
-                    </div>
-                </div>
-                <div class="content-related">
-                    <h5><a href="#">Cappuchino</a></h5>
-                    <span class="price">$50.0</span>
-                </div>
-            </div>
-            <div class="col-md-3 text-center">
-                <div class="image-related" width="400" height="400">
-                    <img src="~/user/img/Cafe-Espresso-PNG-Free-Download.png" alt="" width="100%" height="100%">
-                    <div class="button-add-to-cart">
-                        <a href="#">THÊM VÀO GIỎ</a>
-                    </div>
-                </div>
-                <div class="content-related">
-                    <h5><a href="#">Cappuchino</a></h5>
-                    <span class="price">$50.0</span>
-                </div>
-            </div>
-            <div class="col-md-3 text-center">
-                <div class="image-related" width="400" height="400">
-                    <img src="~/user/img/Cafe-Espresso-PNG-Free-Download.png" alt="" width="100%" height="100%">
-                    <div class="button-add-to-cart">
-                        <a href="#">THÊM VÀO GIỎ</a>
-                    </div>
-                </div>
-                <div class="content-related">
-                    <h5><a href="#">Cappuchino</a></h5>
-                    <span class="price">$50.0</span>
-                </div>
-            </div>
+            }
+
         </div>
     </div>
 </div>

@@ -1,49 +1,104 @@
 ﻿
 @{
-    Layout = null;
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Layout/User/Layout.cshtml";
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Layout/User/Layout.cshtml";
+}
+<link rel="stylesheet" href="~/user/css/plusmin.css">
+<section class="generic-banner relative">
+    <div class="container">
+        <div class="row height align-items-center justify-content-center">
+            <div class="col-lg-10">
+                <div class="generic-banner-content">
+                    <h2 class="text-white">GIỎ HÀNG</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End banner Area -->
+<!-- About Generic Start -->
 
-    <h3>Cart Page</h3>
-    <table cellpadding="2" cellspacing="2" border="1">
-        <tr>
-            <th>Option</th>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Photo</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Sub Total</th>
-        </tr>
-        @if (ViewBag.cart == null)
-        {
-            <p>null</p>
-        }
-        else
-        {
-            @foreach (var item in ViewBag.cart)
-            {
+<div class="main-wrapper">
+    <div class="container">
+        <div class="row">
+            <table class="cart-item">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th>Sản phẩm</th>
+                        <th>Giá</th>
+                        <th>Số lượng</th>
+                        <th>Tổng tiền</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in ViewBag.Cart)
+                    {
+                        <tr>
+                            <td style="width:75px"><a href="">x</a></td>
+                            <td style="text-align: left; width: 96px"><img src="~/uploads/product/@item.HinhAnh" alt="" height="86" width="86"></td>
+                            <td>@item.TenThucDon</td>
+                            <td>$@string.Format("{0:N2}", item.GiaBan)</td>
+                            <td>
+                                <div class="qty mt-5">
+                                    <span class="minus bg-dark">-</span>
+                                    <input type="number" class="count" name="qty" value="@item.SoLuong">
+                                    <span class="plus bg-dark">+</span>
+                                </div>
+                            </td>
+                            <td>$@string.Format("{0:N2}", item.GiaBan * item.SoLuong)</td>
+                        </tr>
+                    }
+
+                    <tr style="border: none">
+                        <td colspan="6">
+                            <div class="coupon">
+                                <form action="">
+                                    <input type="text" placeholder="Nhập mã khuyến mãi" class="form-control">
+                                    <button class="btn btn-default">NHẬP MÃ</button>
+                                </form>
+
+                            </div>
+                            <button class="update-cart btn btn-default">CẬP NHẬT GIỎ HÀNG</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row cart-total-wrapper">
+            <div class="container">
+                <div class="row">
+                    <h3>CART TOTALS</h3>
+                </div>
+            </div>
+
+            <table class="cart-total">
                 <tr>
-                    <td>@item.TenThucDon</td>
-                    <td>@item.SoLuong</td>
+                    <th>Subtotal</th>
+                    <td>$@string.Format("{0:N2}", ViewBag.Total)</td>
                 </tr>
-            }
-        }
+                <tr>
+                    <th>Shipping</th>
+                    <td>Free</td>
+                </tr>
+                <tr>
+                    <th>Total</th>
+                    <td>$@string.Format("{0:N2}", ViewBag.Total)</td>
+                </tr>
+            </table>
 
-        <tr>
-            <td align="right" colspan="6">Sum</td>
-            <td></td>
-        </tr>
-    </table>
-    <br>
-
-</body>
-</html>
+            <div class="checkout-action">
+                <button class="btn btn-default">ĐẾN TRANG THANH TOÁN</button>
+            </div>
+        </div>
+    </div>
+</div>

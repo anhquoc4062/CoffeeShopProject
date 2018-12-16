@@ -34,7 +34,7 @@ function LoadMenuProduct(data) {
     var htmlString = "";
     for (i in data) {
         htmlString += '<div class="col-lg-4"><div class="menu-image">';
-        htmlString += '<img src="/uploads/product/' + data[i].hinhAnh + '" alt="" width="200" height="200"></div>';
+        htmlString += '<a href="/SingleProduct/Index/' + data[i].maThucDon + '"><img src="/uploads/product/' + data[i].hinhAnh + '" alt="" width="200" height="200"></a></div>';
         htmlString += '<div class="single-menu"><div class="title-div justify-content-between d-flex">';
         htmlString += '<h4>' + data[i].tenThucDon + '</h4></div><p class="price">';
         if (data[i].khuyenMai == 0) {

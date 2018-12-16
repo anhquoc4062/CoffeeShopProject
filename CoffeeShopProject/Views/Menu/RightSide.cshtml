@@ -20,37 +20,20 @@
 
     </div>
     <div class="single-element-widget">
-        <h3 class="mb-30">SẢN PHẨM HOT</h3>
+        <h3 class="mb-30">ĐANG GIẢM GIÁ</h3>
         <ul class="list-group-product">
-            <li>
-                <a href="#">
-                    <img src="~/user/img/cappuccino_PNG26.png" width="100" height="100">
-                    <h5>ABC</h5>
-                    <p>$50.00  <del>$60.00</del></p>
-                </a>
+            @foreach (var item in ViewBag.ListDiscount)
+            {
+                <li>
+                    <a asp-controller="SingleProduct" asp-action="Index" asp-route-id="@item.MaThucDon">
+                        <img src="~/uploads/product/@item.HinhAnh" width="100" height="100">
+                        <h5>@item.TenThucDon</h5>
+                        <p>$@string.Format("{0:N2}", item.GetGiaKhuyenMai)  <del>$@string.Format("{0:N2}", item.Gia)</del></p>
+                    </a>
 
-            </li>
-            <li>
-                <a href="#">
-                    <img src="~/user/img/cappuccino_PNG26.png" width="100" height="100">
-                    <h5>ABC</h5>
-                    <p>$50.00</p>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <img src="~/user/img/cappuccino_PNG26.png" width="100" height="100">
-                    <h5>ABC</h5>
-                    <p>$50.00</p>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <img src="~/user/img/cappuccino_PNG26.png" width="100" height="100">
-                    <h5>ABC</h5>
-                    <p>$50.00</p>
-                </a>
-            </li>
+                </li>
+            }
+
         </ul>
 
     </div>
