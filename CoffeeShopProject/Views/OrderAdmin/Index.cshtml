@@ -1,0 +1,152 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Layout/Admin/Layout.cshtml";
+}
+
+<style>
+    #order_detail .modal-content {
+        height: 600px;
+        width: 1200px;
+        position: relative;
+        right: 170px;
+    }
+
+    #order_detail .table-data .table td {
+        border-bottom: 1px solid #d5d0d0;
+    }
+</style>
+<div class="section__content section__content--p30">
+    <div class="container-fluid">
+        <h3 class="title-5 m-b-35">DANH SÁCH ĐƠN HÀNG</h3>
+        <div class="row m-t-30">
+            <div class="col-md-12">
+                <!-- DATA TABLE-->
+                <div class="table-responsive m-b-40">
+                    <table class="table table-borderless table-data3">
+                        <thead>
+                            <tr>
+                                <th>tên</th>
+                                <th>email</th>
+                                <th>trạng thái</th>
+                                <th></th>
+                                <th>ngày</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Trịnh Hoàng Huy</td>
+                                <td>moneracvt1905@gmail.com</td>
+                                <td class="process">Đã giao</td>
+                                <td>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#order_detail">
+                                        <i class="fa fa-star"></i>
+                                        &nbsp; Xem chi tiết
+                                    </button>
+                                </td>
+                                <td>19/07</td>
+                            </tr>
+                            <tr>
+                                <td>Trịnh Hoàng Huy 2</td>
+                                <td>huy.trinh1905@gmail.com</td>
+                                <td class="denied">Chưa giao</td>
+                                <td>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#order_detail">
+                                        <i class="fa fa-star"></i>
+                                        &nbsp; Xem chi tiết
+                                    </button>
+                                </td>
+                                <td>20/11</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- END DATA TABLE-->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="order_detail" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="largeModalLabel">Order Detail</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card-body card-block">
+                            <div class="form-group">
+                                <label for="vat" class=" form-control-label">Tên Khách Hàng</label>
+                                <input type="text" id="vat" value="Trịnh Hoàng Huy" class="form-control" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="postal-code" class=" form-control-label">Email</label>
+                                <input type="text" id="postal-code" value="huy.trinh1905@gmail.com" class="form-control" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="street" class=" form-control-label">Địa Chỉ</label>
+                                <input type="text" id="street" value="351 Lạc Long Quân" class="form-control" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="city" class=" form-control-label">Tỉnh/Thành</label>
+                                <input type="text" id="city" value="Hồ Chí Minh" class="form-control" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="country" class=" form-control-label">Số điện thoại</label>
+                                <input type="text" id="country" value="0906021727" class="form-control" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="table-responsive table-data">
+                            <table class="table text-center">
+                                <thead>
+                                    <tr>
+                                        <td>tên sản phẩm</td>
+                                        <td>số lượng</td>
+                                        <td>tổng cộng</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="table-data__info">
+                                                Cần Sa
+                                            </div>
+                                        </td>
+                                        <td>2</td>
+                                        <td>$788.34</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="table-data__info">
+                                                Lá đu đủ
+                                            </div>
+                                        </td>
+                                        <td>3</td>
+                                        <td>$988.56</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            Tổng cộng
+                                        </td>
+                                        <td>$1777.90</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -24,6 +24,7 @@
                 <div class="container">
                     <!--Filter select box-->
                     <div class="row">
+
                         <div class="default-select" id="default-select">
                             <select id="sort_product">
                                 <option disabled>--Sắp xếp theo--</option>
@@ -33,14 +34,26 @@
                                 <option value="3">Đang khuyến mãi</option>
                             </select>
                         </div>
+                        <div id="imaginary_container">
+                            <div class="input-group stylish-input-group">
+                                <input type="text" class="form-control" placeholder="Search" id="search_input">
+                                <span class="input-group-addon">
+                                    <button type="submit" id="search_button" data-pressed="0"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                        </div>
                     </div>
                     <!--end Filter select box-->
                     <!--Menu area-->
+                    <div class="row" style="font-size: 18px; display: none" id="alert_search">
+                        <p>Tìm thấy <span id="quantity"></span> sản phẩm với từ khóa <span id="keyword" style="font-weight: bold;"></span></p>
+                    </div>
                     <div class="row" id="menu_area">
                         @foreach (var product in ViewBag.ListProduct)
                         {
-
+                            
                             <div class="col-lg-4">
+
                                 <div class="menu-image">
                                     <a asp-action="Index" asp-controller="SingleProduct" asp-route-id="@product.MaThucDon"><img src="~/uploads/product/@product.HinhAnh" alt="" width="200" height="200"></a>
                                 </div>

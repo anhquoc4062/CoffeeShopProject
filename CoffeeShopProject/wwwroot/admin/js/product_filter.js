@@ -2,7 +2,8 @@
 
     $(document).on('change', '#category_filter', function (event) {
         ResetSearchBar();
-        var category_id = $(this).children("option:selected").val();
+        var category_id = $(this).val();
+        console.log(category_id);
         $.ajax({
             type: "GET",
             url: '/ProductAdmin/FilterProduct?maloai=' + category_id,

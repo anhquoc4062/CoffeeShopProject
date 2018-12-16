@@ -42,14 +42,15 @@ namespace CoffeeShopProject.Controllers
             return Json(response);
         }
         [HttpPost]
-        public IActionResult AddCategory(string tenLoai)
+        public IActionResult AddCategory(string tenLoai, string danhMuc)
         {
             LoaiThucDon newCate = new LoaiThucDon
             {
-                TenLoai = tenLoai
+                TenLoai = tenLoai,
+                MaLoaiCha = int.Parse(danhMuc)
             };
             LoaiThucDonViewModel query = new LoaiThucDonViewModel(db);
-            query.InsertLoaiThucDon(tenLoai);
+            query.InsertLoaiThucDon(newCate);
             var response = query.GetLoaiThucDon();
             return Json(response);
         }

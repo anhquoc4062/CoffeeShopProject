@@ -36,16 +36,16 @@ namespace CoffeeShopProject
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddSession();
             services.AddDbContext<CoffeeShopContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CoffeeShop")));
-            services.AddSession(options =>
-            {
-                options.IdleTimeout = TimeSpan.FromMinutes(5);
-            });
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+
+            app.UseSession();
 
             if (env.IsDevelopment())
             {
@@ -60,7 +60,6 @@ namespace CoffeeShopProject
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-            app.UseSession();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

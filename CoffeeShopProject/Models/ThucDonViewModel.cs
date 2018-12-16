@@ -79,7 +79,6 @@ namespace CoffeeShopProject.Models
             var dsThucDon = (from td in db.ThucDon
                              join ltd in db.LoaiThucDon
                              on td.MaLoai equals ltd.MaLoai
-                             orderby td.MaThucDon descending
                              select new ThucDonViewModel
                              {
                                  MaThucDon = td.MaThucDon,

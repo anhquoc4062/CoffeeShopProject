@@ -79,9 +79,23 @@
                                     <div class="col-12 col-md-9">
                                         <select name="emp_position" id="category_select" class="form-control">
                                             <option selected="" disabled="" value="0">--- Chọn loại thực đơn ---</option>
-                                            @foreach (var item in ViewBag.ListCate)
+                                            @foreach (var parent in ViewBag.ListCate)
                                             {
-                                                <option value="@item.MaLoai">@item.TenLoai</option>
+                                                if (parent.MaLoaiCha == 0)
+                                                {
+                                                <optgroup label="@parent.TenLoai">
+                                                @foreach (var child in ViewBag.ListCate)
+                                                {
+                                                    if (child.MaLoaiCha == parent.MaLoai)
+                                                    {
+                                                        <option value="@child.MaLoai">@child.TenLoai</option>
+                                                    }
+
+                                                }
+
+                                                </optgroup>
+                                                }
+                                                
                                             }
 
 
@@ -151,6 +165,25 @@
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <input type="text" id="category_name" name="category_name" placeholder="Nhập tên loại cần thêm..." class="form-control" value="">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3 text-right">
+                                    <label for="text-input" class=" form-control-label">Danh mục</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <select id="category_parent" class="form-control">
+                                        <option selected disabled>--Chọn danh mục cho loại--</option>
+                                        <option value="0">Là danh mục</option>
+                                        @foreach (var parent in ViewBag.ListCate)
+                                        {
+                                            if(parent.MaLoaiCha == 0)
+                                            {
+                                                <option value="@parent.MaLoai">@parent.TenLoai</option>
+                                            }
+                                        }
+
+                                    </select>
                                 </div>
                             </div>
                         </div>

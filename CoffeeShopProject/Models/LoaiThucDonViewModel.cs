@@ -22,7 +22,7 @@ namespace CoffeeShopProject.Models
                                {
                                    MaLoai= td.MaLoai,
                                    TenLoai = td.TenLoai,
-                             
+                                   MaLoaiCha = td.MaLoaiCha
                                }).ToList();
             return loaithucdon;
         }
@@ -45,13 +45,11 @@ namespace CoffeeShopProject.Models
         //    return false;
         //}
 
-        public bool InsertLoaiThucDon(String TenLoai)
+        public bool InsertLoaiThucDon(LoaiThucDon loai)
         {
-            LoaiThucDon neww = new LoaiThucDon();
-            neww.TenLoai = TenLoai;
-            if (neww != null)
+            if (loai != null)
             {
-                db.LoaiThucDon.Add(neww);
+                db.LoaiThucDon.Add(loai);
                 db.SaveChanges();
                 return true;
             }

@@ -34,9 +34,9 @@ namespace CoffeeShopProject.Controllers
                 return myCart;
             }
         }
-        public IActionResult AddToCart(string id)
+        public IActionResult AddToCart(int id)
         {
-            int product_id = int.Parse(id);
+            int product_id = id;
             //lấy giỏ hàng đang có
             var gioHang = GetGioHang;
             //kiểm tra xem hàng đã có trong giỏ chưa

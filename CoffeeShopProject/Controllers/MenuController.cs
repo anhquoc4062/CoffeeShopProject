@@ -36,5 +36,26 @@ namespace CoffeeShopProject.Controllers
             var response = query_thucdon.GetAllDataWithFilterByPage(page, limit, maloai, sapxep);
             return Json(response);
         }
+        public IActionResult GetProductCountWithKeyword(string keyword)
+        {
+            keyword = keyword.ToLower();
+            ThucDonViewModel query_thucdon = new ThucDonViewModel(db);
+            var response = query_thucdon.GetDataByName(keyword).Count();
+            return Json(response);
+        }
+        public IActionResult GetProductByName(string keyword, int page = 1, int limit = 6)
+        {
+            keyword = keyword.ToLower();
+            ThucDonViewModel query_thucdon = new ThucDonViewModel(db);
+            var response = query_thucdon.GetDataByNameWithPage(keyword, page, limit);
+            return Json(response);
+        }
+
+        public IActionResult GetNameProduct()
+        {
+            string term = HttpContext.Request.Query["term"].ToString();
+            var names = db.ThucDon.Where(p => p.TenThucDon.Contains(term)).Select(p => p.TenThucDon).ToList();
+            return Json(names);
+        }
     }
 }

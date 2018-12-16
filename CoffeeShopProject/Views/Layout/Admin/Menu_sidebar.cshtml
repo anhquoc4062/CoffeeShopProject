@@ -31,10 +31,18 @@
                         <i class="fas fa-bars"></i>Thực đơn
                     </a>
                 </li>
-                <li>
-                    <a asp-controller="EmployeeAdmin" asp-action="Index">
-                        <i class="fa fa-user"></i>Nhân viên
+                <li class="has-sub">
+                    <a class="js-arrow" href="#">
+                        <i class="fas fa-user"></i>Thông tin
                     </a>
+                    <ul class="list-unstyled navbar__sub-list js-sub-list">
+                        <li>
+                            <a asp-controller="EmployeeAdmin" asp-action="Index">Nhân viên</a>
+                        </li>
+                        <li>
+                            <a asp-controller="CustomerAdmin" asp-action="Index">Khách Hàng</a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
                     <a asp-controller="BillAdmin" asp-action="Index">
@@ -47,7 +55,7 @@
                     </a>
                 </li>
                 <li>
-                    <a asp-controller="OrderAdmin" asp-action="Index">
+                    <a asp-controller="TrangChu" asp-action="Index">
                         <i class="fas fa-sign-out-alt"></i>Trở về trang chủ
                     </a>
                 </li>

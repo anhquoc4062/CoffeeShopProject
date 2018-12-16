@@ -204,6 +204,8 @@ namespace CoffeeShopProject.Models
 
                 entity.Property(e => e.MaLoai).HasColumnName("maLoai");
 
+                entity.Property(e => e.MaLoaiCha).HasColumnName("maLoaiCha");
+
                 entity.Property(e => e.TenLoai)
                     .HasColumnName("tenLoai")
                     .HasMaxLength(254);

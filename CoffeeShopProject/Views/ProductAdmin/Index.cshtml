@@ -23,9 +23,23 @@
                             <select class="js-select2 select2-hidden-accessible" name="property" tabindex="-1" aria-hidden="true" id="category_filter">
                                 <option value="-1" disabled>Lọc theo loại</option>
                                 <option class="selected" selected="selected" value="0">Tất cả</option>
-                                @foreach (var item in ViewBag.ListCate)
+                                @foreach (var parent in ViewBag.ListCate)
                                 {
-                                    <option value="@item.MaLoai">@item.TenLoai</option>
+                                    if (parent.MaLoaiCha == 0)
+                                    {
+                                        <optgroup label="@parent.TenLoai">
+                                            @foreach (var child in ViewBag.ListCate)
+                                            {
+                                                if (child.MaLoaiCha == parent.MaLoai)
+                                                {
+                                                    <option value="@child.MaLoai">@child.TenLoai</option>
+                                                }
+
+                                            }
+
+                                        </optgroup>
+                                    }
+
                                 }
                             </select>
                             <div class="dropDownSelect2"></div>
@@ -86,8 +100,6 @@
                                 </tr>
                                 <tr class="spacer"></tr>
                             }
-
-
 
                             <!--Không tìm thấy sản phẩm-->
 
