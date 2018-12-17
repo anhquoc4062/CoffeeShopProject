@@ -7,6 +7,8 @@ namespace CoffeeShopProject.Models
 {
     public class ChiTietGioHangViewModel:ChiTietGioHang
     {
+        public string TenThucDon { get; set; }
+        public double? Gia { get; set; }
         private readonly CoffeeShopContext db;
         public ChiTietGioHangViewModel() { }
         public ChiTietGioHangViewModel(CoffeeShopContext _db)
@@ -14,25 +16,31 @@ namespace CoffeeShopProject.Models
             db = _db;
         }
 
-        public List<ChiTietGioHangViewModel> GetDsChiTietGioHang()
+        public IEnumerable<ChiTietGioHangViewModel> GetDsChiTietGioHang(string cart_id)
         {
-            var ds = (from td in db.ChiTietGioHang
+            var ds = from ctgh in db.ChiTietGioHang
+                      where ctgh.MaGioHang == int.Parse(cart_id)
+                      join td in db.ThucDon
+                        on ctgh.MaThucDon equals td.MaThucDon
                       select new ChiTietGioHangViewModel
                       {
-                          MaCtgioHang = td.MaCtgioHang,
-                          MaGioHang = td.MaGioHang,
-                          MaThucDon=td.MaThucDon,
-                          SoLuong=td.SoLuong,
+                          MaCtgioHang = ctgh.MaCtgioHang,
+                          MaGioHang = ctgh.MaGioHang,
+                          MaThucDon= ctgh.MaThucDon,
+                          TenThucDon = td.TenThucDon,
+                          Gia = td.GiaKhuyenMai,
+                          SoLuong= ctgh.SoLuong,
 
-                      }).ToList();
+                      };
             return ds;
         }
 
-        public bool DeleteChiTietGioHangById(String id)
+        public bool DeleteChiTietGioHangByCartId(string cart_id)
         {
-            if (db.ChiTietGioHang.Find(int.Parse(id)) != null)
+            var records = db.ChiTietGioHang.Where(c => c.MaGioHang == int.Parse(cart_id));
+            if (records != null)
             {
-                db.ChiTietGioHang.Remove(db.ChiTietGioHang.Find(int.Parse(id)));
+                db.ChiTietGioHang.RemoveRange(records);
                 db.SaveChanges();
                 return true;
             }

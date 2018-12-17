@@ -1,0 +1,46 @@
+﻿
+$(document).ready(function () {
+    function GetCustomerInfo(customer_id) {
+        $.ajax({
+            type: "GET",
+            url: '/CustomerAdmin/GetCustomerInfo?customer_id=' + customer_id,
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                $("#customer_name").val(data.tenKhachHang);
+                $("#customer_email").val(data.email);
+                $("#customer_address").val(data.diaChi);
+                $("#customer_city").val(data.tenTinhThanh);
+                $("#customer_tel").val(data.soDt);
+            }
+        });
+    }
+    function GetListDetail(cart_id) {
+        $.ajax({
+            type: "GET",
+            url: '/OrderAdmin/GetDetailOrder?cart_id=' + cart_id,
+            dataType: 'json',
+            success: function (data) {
+                var htmlString = "";
+                var total = 0;
+                for (i in data) {
+                    total += data[i].soLuong * data[i].gia;
+                    htmlString += '<tr id = "item"><td>' + data[i].tenThucDon + '</td><td>' + data[i].soLuong + '</td><td>$' + (data[i].soLuong * data[i].gia).toFixed(2) + '</td></tr>';
+                }
+                $("#order_detail .item").remove();
+                $("#amount").before(htmlString);
+                $("#total_amount").html('$' + total.toFixed(2));
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+    $(document).on('click', '.detail_order_btn', function (event) {
+        var cart_id = $(this).attr("data-id-cart");
+        var customer_id = $(this).attr("data-id-customer");
+        GetListDetail(cart_id);
+        GetCustomerInfo(customer_id);
+    });
+
+});  

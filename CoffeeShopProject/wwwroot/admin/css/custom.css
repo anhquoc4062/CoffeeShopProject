@@ -298,3 +298,8 @@ label.form-control-label {
 .table-responsive.table-data {
     height: 1200px;
 }
+
+ul#pagination-demo {
+    top: 210px;
+    position: relative;
+}

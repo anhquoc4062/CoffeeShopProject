@@ -7,6 +7,9 @@ namespace CoffeeShopProject.Models
 {
     public class KhachHangViewModel : KhachHang
     {
+        public string TenTinhThanh { get; set; }
+        public string TenTaiKhoan { get; set; }
+        public string MatKhau { get; set; }
         private readonly CoffeeShopContext db;
         public KhachHangViewModel() { }
         public KhachHangViewModel(CoffeeShopContext _db)
@@ -16,23 +19,30 @@ namespace CoffeeShopProject.Models
         public List<KhachHangViewModel> GetDsKhachHang()
         {
 
-            var khachhang = (from td in db.KhachHang
+            var khachhang = (from kh in db.KhachHang
+                             join tp in db.TinhThanh
+                                on kh.MaTinhThanh equals tp.MaTinhThanh 
+                             join tk in db.TaiKhoan
+                             on kh.MaTaiKhoan equals tk.MaTaiKhoan
                              select new KhachHangViewModel
                              {
-                                 MaKhachHang = td.MaKhachHang,
-                                 TenKhachHang = td.TenKhachHang,
-                                 Email = td.Email,
-                                 DiaChi = td.DiaChi,
-                                 MaTinhThanh = td.MaTinhThanh,
-                                 SoDt = td.SoDt
+                                 MaKhachHang = kh.MaKhachHang,
+                                 TenKhachHang = kh.TenKhachHang,
+                                 Email = kh.Email,
+                                 DiaChi = kh.DiaChi,
+                                 MaTinhThanh = tp.MaTinhThanh,
+                                 TenTinhThanh = tp.TenTinhThanh,
+                                 MaTaiKhoan = kh.MaTaiKhoan,
+                                 TenTaiKhoan = tk.TenTaiKhoan,
+                                 MatKhau = tk.MatKhau,
+                                 SoDt = kh.SoDt
 
                              }).ToList();
             return khachhang;
         }
-        public KhachHang GetKhachHangById(String id)
+        public KhachHang GetKhachHangById(string id)
         {
-            //Không có thì nó return null nhé :)
-            KhachHang khachhang = db.KhachHang.Find(int.Parse(id));
+            var khachhang = GetDsKhachHang().Where(x => x.MaKhachHang == int.Parse(id)).FirstOrDefault();
             return khachhang;
         }
         public bool DeleteKhachHang(string id)

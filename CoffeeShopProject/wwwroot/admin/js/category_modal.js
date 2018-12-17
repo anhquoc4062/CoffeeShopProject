@@ -9,7 +9,7 @@
     });
 
     $('.child_modal').on('show.bs.modal', function (e) {
-        $(".child_modal input").val("");
+        //$(".child_modal input").val("");
         testAnim("bounceIn");
     });
     $('.child_modal').on('hide.bs.modal', function (e) {

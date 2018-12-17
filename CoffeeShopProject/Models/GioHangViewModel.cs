@@ -7,6 +7,8 @@ namespace CoffeeShopProject.Models
 {
     public class GioHangViewModel:GioHang
     {
+        public string TenKhachHang { get; set; }
+        public string Email { get; set; }
         private readonly CoffeeShopContext db;
         public GioHangViewModel() { }
         public GioHangViewModel(CoffeeShopContext _db)
@@ -16,15 +18,17 @@ namespace CoffeeShopProject.Models
 
         public List<GioHangViewModel> GetDsGioHang()
         {
-            var ds = (from td in db.GioHang
+            var ds = (from gh in db.GioHang
+                      join kh in db.KhachHang
+                        on gh.MaKhachHang equals kh.MaKhachHang
                       select new GioHangViewModel
                       {
-                          MaGioHang=td.MaGioHang,
-                          MaKhachHang=td.MaKhachHang,
-                          TongCong=td.TongCong,
-                          NgayDat=td.NgayDat,
-                          TrangThai=td.TrangThai
-
+                          MaGioHang=gh.MaGioHang,
+                          MaKhachHang=gh.MaKhachHang,
+                          TenKhachHang = kh.TenKhachHang,
+                          Email = kh.Email,
+                          NgayDat=gh.NgayDat,
+                          TrangThai=gh.TrangThai
                       }).ToList();
             return ds;
         }

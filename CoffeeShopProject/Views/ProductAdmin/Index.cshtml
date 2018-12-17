@@ -2,11 +2,6 @@
     Layout = "~/Views/Layout/Admin/Layout.cshtml";
     ViewData["Title"] = "List";
 }
-<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
-@using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
-
-@using X.PagedList.Mvc.Common;
-@using X.PagedList;
 <div class="section__content section__content--p30">
     <div class="container-fluid">
         <!--TABLE CONTENT-->
@@ -106,9 +101,9 @@
                         </tbody>
 
                     </table>
-                    <ul id="pagination-demo" style="margin-top: 50px" classs="pagination-md"></ul>
-                </div>
 
+                </div>
+                <ul id="pagination-demo" style="margin-top: 50px" classs="pagination-md"></ul>
             </div>
 
 

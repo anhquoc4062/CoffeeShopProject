@@ -74,7 +74,7 @@ $(document).ready(function () {
         var searchBtnIsPressed = $("#search_button").attr("data-press-check");
 
         if (searchBtnIsPressed == "0") {
-            var category_id = $("#category_filter").children("option:selected").val();
+            var category_id = $("#category_filter").val();
             $.ajax({
                 type: "GET",
                 url: '/ProductAdmin/GetProductByPage?maloai=' + category_id + '&page=' + page,
