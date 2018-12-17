@@ -3,6 +3,7 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Layout/User/Layout.cshtml";
 }
+
 <section class="generic-banner relative">
     <div class="container">
         <div class="row height align-items-center justify-content-center">
@@ -42,8 +43,11 @@
                         </div>
                         <div class="tab-pane" id="2a">
                             <p>
-                                We use the class nav-pills instead of nav-tabs which automatically creates a background color for the tab
-                                fasdfasdfasdfasdfasdfasdfatbs btfbhjyjnfufnu ukunjfujnuf kukkngukgunknyuk uykuynkfuku
+                                <form action="#">
+                                    <label>Lời nhận xét</label>
+                                    <textarea style="margin-top: 0px; margin-bottom: 0px; height: 195px;" class="form-control" name="rating" placeholder="Nhập lời nhận xét..."></textarea>
+                                    <button class="btn btn-primary">GỬI ĐÁNH GIÁ</button>
+                                </form>
                             </p>
                         </div>
                     </div>
@@ -53,13 +57,17 @@
     </div>
 </section>
 <!-- End video-sec Area -->
+@{
+    Html.RenderPartial("RatingArea");
+}
+
 <!-- Start Related Product -->
 <div class="related-product">
     <div class="container">
         <div class="row">
             <h2>CÁC SẢN PHẨM CÙNG LOẠI</h2>
         </div>
-        
+
         <div class="row">
             @foreach (var product in ViewBag.CungLoai)
             {

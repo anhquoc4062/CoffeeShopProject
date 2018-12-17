@@ -1,0 +1,84 @@
+﻿/* CSS Test begin */
+.comment-box {
+    margin-top: 30px !important;
+}
+    /* CSS Test end */
+
+    .comment-box img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .comment-box .media-left {
+        padding-right: 10px;
+        width: 65px;
+    }
+
+    .comment-box .media-body p.rating-comment {
+        border: 1px solid #ddd;
+        padding: 16px;
+        border-bottom: unset;
+    }
+
+    .comment-box .media-body .media p {
+        margin-bottom: 0;
+    }
+
+    .comment-box .media-heading {
+        background-color: #be9c79;
+        border: 1px solid #ddd;
+        padding: 7px 10px;
+        position: relative;
+        margin-bottom: -1px;
+    }
+
+        .comment-box .media-heading:before {
+            content: "";
+            width: 12px;
+            height: 12px;
+            background-color: #be9c79;
+            border: 1px solid #ddd;
+            border-width: 1px 0 0 1px;
+            -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+            position: absolute;
+            top: 10px;
+            left: -6px;
+        }
+
+.rating-product {
+    margin-top: 180px;
+}
+
+h4.media-heading {
+    color: #fff;
+    font-family: inherit;
+    font-weight: 400;
+}
+
+.rating-product h3 {
+    font-family: inherit;
+    font-size: 28px;
+}
+
+p.rating-date {
+    margin-top: -17px;
+    border: 1px solid #ddd;
+    padding: 7px;
+    font-size: 12px;
+    border-top: unset;
+    font-style: italic;
+    text-align: right;
+}
+
+button.btn.btn-primary {
+    border-radius: unset;
+    padding: 10px 20px;
+    border: none;
+    background: #be9c79;
+    margin-top: 18px;
+}
+
+    button.btn.btn-primary:hover {
+        background: #262626;
+    }

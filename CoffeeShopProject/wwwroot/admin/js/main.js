@@ -222,7 +222,7 @@
           datasets: [
             {
               label: "My First dataset",
-              data: [78, 81, 80, 65, 58, 75, 60, 75, 65, 60, 60, 75],
+              data: [5, 81, 80, 65, 58, 75, 60, 75, 65, 60, 60, 75],
               borderColor: "transparent",
               borderWidth: "0",
               backgroundColor: "rgba(255,255,255,.3)"
