@@ -66,6 +66,31 @@ namespace CoffeeShopProject.Controllers
             return Json(response);
         }
 
+        public IActionResult UpdateCart(int id, int quantity)
+        {
+            var gioHang = GetGioHang;
+            CartItem item = gioHang.SingleOrDefault(p => p.MaThucDon == id);
+            item.SoLuong = quantity;
+            SessionHelper.Set(HttpContext.Session, "cart", gioHang);
+            var response = item.SoLuong * item.GiaBan;
+            return Json(response);
+        }
+
+        public IActionResult RemoveItem(int id)
+        {
+            var gioHang = GetGioHang;
+            CartItem item = gioHang.SingleOrDefault(p => p.MaThucDon == id);
+            gioHang.Remove(item);
+            SessionHelper.Set(HttpContext.Session, "cart", gioHang);
+            var response = true;
+            return Json(response);
+        }
+        public IActionResult GetTotal()
+        {
+            var gioHang = GetGioHang.Sum(x => x.SoLuong * x.GiaBan);
+            return Json(gioHang);
+        }
+
         public IActionResult LoadCartHidden()
         {
             var response = GetGioHang;

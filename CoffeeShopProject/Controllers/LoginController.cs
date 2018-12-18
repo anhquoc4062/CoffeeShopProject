@@ -33,8 +33,10 @@ namespace CoffeeShopProject.Controllers
             {
                 HttpContext.Session.SetString("USERNAME_SESSION", tk.TenTaiKhoan.ToString());
                 HttpContext.Session.SetString("CREDENTITY_SESSION", tk.MaPhanQuyen);
+                HttpContext.Session.SetString("ACCID_SESSION", tk.MaTaiKhoan.ToString());
                 CommonConstant.ACCOUNT_SESSION = HttpContext.Session.GetString("USERNAME_SESSION");
                 CommonConstant.CREDENTITY = HttpContext.Session.GetString("CREDENTITY_SESSION");
+                CommonConstant.ACCID_SESSION = HttpContext.Session.GetString("ACCID_SESSION");
                 if (CommonConstant.CREDENTITY == "kh")
                 {
                     return RedirectToAction("Index", "TrangChu");
@@ -44,7 +46,6 @@ namespace CoffeeShopProject.Controllers
                     return RedirectToAction("Index", "ProductAdmin");
                 }
             }
-            return View();
         }
         public IActionResult SignUp()
         {

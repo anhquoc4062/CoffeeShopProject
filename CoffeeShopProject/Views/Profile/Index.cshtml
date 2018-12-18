@@ -25,8 +25,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!-- //for-mobile-apps -->
     <link href="~/user/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
     <link href="~/css/profile.css" rel="stylesheet" type="text/css" media="all" />
+
     <script type="text/javascript" src="~/user/js/vendor/jquery-3.1.1.js"></script>
     <script type="text/javascript" src="~/user/js/vendor/bootstrap.min.js"></script>
+    <script src="~/user/js/profile.js"></script>
     <link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300italic,300,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
     <link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 </head>
@@ -123,20 +125,35 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                             <thead>
                                                 <tr>
                                                     <th>Ngày đặt</th>
-                                                    <th>Tổng tiền</th>
                                                     <th>Trạng thái</th>
                                                     <th></th>
                                                     <th>Tác vụ</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @foreach (var item in ViewBag.ListOrder)
+                                                {
                                                 <tr>
-                                                    <td>19/10/1998</td>
-                                                    <td>$59.00</td>
-                                                    <td><span style="color: red">Đang giao</span></td>
-                                                    <td><button class="btn btn-primary" style="cursor: pointer" data-toggle="modal" data-target="#my_order">Xem chi tiết</button></td>
+                                                    <td>@item.NgayDat</td>
+                                                    @if (item.TrangThai == 0)
+                                                    {
+
+                                                        <td><span style="color: red">Đang giao</span></td>
+                                                    }
+                                                    else if (item.TrangThai == 1)
+                                                    {
+                                                        <td><span style="color: green">Đã giao</span></td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td><span style="color: orange">Đã hủy</span></td>
+                                                    }
+
+                                                    <td><button class="btn btn-primary profile-detail-order" style="cursor: pointer" data-id="@item.MaGioHang" data-toggle="modal" data-target="#my_order">Xem chi tiết</button></td>
                                                     <td><button class="btn btn-primary" style="cursor: pointer">Hủy</button></td>
                                                 </tr>
+                                                }
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -154,24 +171,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                                     <table>
                                                         <thead>
                                                             <tr>
-                                                                <th>Hình ảnh</th>
                                                                 <th>Tên thực đơn</th>
                                                                 <th>Giá</th>
                                                                 <th>Số lượng</th>
                                                                 <th>Tổng cộng</th>
                                                             </tr>
                                                         </thead>
-                                                        <tbody>
-                                                            <tr>
+                                                        <tbody class="detail-order-list">
+                                                            <tr class="detail-order">
                                                                 <td><img src="~/uploads/product/1Blu Yogurt.png" width="70" height="70"/></td>
                                                                 <td>Yogurt</td>
                                                                 <td>$15.00</td>
                                                                 <td>3</td>
                                                                 <td>$45.00</td>
                                                             </tr>
-                                                            <tr>
-                                                                <td colspan="4">Thành tiền</td>
-                                                                <td style="font-weight:bold">$45.00</td>
+                                                            <tr class="total-order-div">
+                                                                <td colspan="3">Thành tiền</td>
+                                                                <td style="font-weight:bold" class="total-order">$45.00</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>

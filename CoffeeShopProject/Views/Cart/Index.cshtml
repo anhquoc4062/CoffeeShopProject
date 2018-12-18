@@ -50,19 +50,19 @@
                     {
                         @foreach (var item in ViewBag.Cart)
                         {
-                            <tr>
-                                <td style="width:75px"><a href="">x</a></td>
+                            <tr class="item-cart" data-id="@item.MaThucDon">
+                                <td style="width:75px"><a class="remove-item-cart" href="#" data-id="@item.MaThucDon">x</a></td>
                                 <td style="text-align: left; width: 96px"><img src="~/uploads/product/@item.HinhAnh" alt="" height="86" width="86"></td>
                                 <td>@item.TenThucDon</td>
                                 <td>$@string.Format("{0:N2}", item.GiaBan)</td>
                                 <td>
                                     <div class="qty mt-5">
-                                        <span class="minus bg-dark">-</span>
-                                        <input type="number" class="count" name="qty" value="@item.SoLuong">
-                                        <span class="plus bg-dark">+</span>
+                                        <span class="minus bg-dark" data-id="@item.MaThucDon">-</span>
+                                        <input type="number" class="count" data-id="@item.MaThucDon" name="qty" value="@item.SoLuong">
+                                        <span class="plus bg-dark" data-id="@item.MaThucDon">+</span>
                                     </div>
                                 </td>
-                                <td>$@string.Format("{0:N2}", item.GiaBan * item.SoLuong)</td>
+                                <td class="total-item" data-id="@item.MaThucDon">$@string.Format("{0:N2}", item.GiaBan * item.SoLuong)</td>
                             </tr>
                         }
                     }
@@ -94,7 +94,7 @@
             <table class="cart-total">
                 <tr>
                     <th>Subtotal</th>
-                    <td>$@string.Format("{0:N2}", ViewBag.Total)</td>
+                    <td class="subtotal-cart">$@string.Format("{0:N2}", ViewBag.Total)</td>
                 </tr>
                 <tr>
                     <th>Coupon</th>
@@ -102,7 +102,7 @@
                 </tr>
                 <tr>
                     <th>Total</th>
-                    <td>$@string.Format("{0:N2}", ViewBag.Total)</td>
+                    <td class="total-cart">$@string.Format("{0:N2}", ViewBag.Total)</td>
                 </tr>
             </table>
 

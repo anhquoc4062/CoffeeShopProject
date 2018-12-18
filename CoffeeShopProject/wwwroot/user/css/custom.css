@@ -355,7 +355,7 @@ div#default-select {
 .cart-icon span.amount-cart {
     color: white;
     position: relative;
-    left: 26px;
+    left: 31px;
     bottom: 7px;
     font-size: 10px;
 }
@@ -633,7 +633,7 @@ ul.contact-ul {
 }
 
 .contact-ul li:before {
-    content: "ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ ";
+    content: "ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¢ ";
     color: #be9c79;
     padding-right: 10px;
 }
@@ -678,7 +678,7 @@ form.contact-form {
 }
 
 .contact-ul li:before {
-    content: "Ã¢â‚¬Â¢";
+    content: "ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢";
 }
 
 #header #logo img {
@@ -692,6 +692,7 @@ form.contact-form {
     position: relative;
     top: 50px;
 }
+
 .none-item p {
     padding: 40px 25px;
 }
@@ -706,6 +707,7 @@ form.contact-form {
     .checkout-button.btn.btn-default:hover {
         background: #262626;
     }
+
 .alert-login button.btn.btn-default {
     padding: 10px 20px;
     color: #fff;
@@ -717,4 +719,15 @@ form.contact-form {
 
     .alert-login button.btn.btn-default:hover {
         background: #262626;
+    }
+
+.cart-item a {
+    background: #343a40;
+    border-radius: 50px;
+    padding: 0px 5px;
+    color: #fff;
+}
+
+    .cart-item a:hover {
+        background: #be9c79;
     }

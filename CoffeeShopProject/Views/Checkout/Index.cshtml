@@ -1,4 +1,4 @@
-﻿
+﻿@using Microsoft.AspNetCore.Http 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Layout/User/Layout.cshtml";
@@ -21,7 +21,7 @@
 <div class="main-wrapper">
     <div class="container checkout-area">
         <form asp-controller="Checkout" asp-action="AddOrder">
-            <input name="account_id" value="" hidden/>
+            <input name="account_id" value="@Context.Session.GetString("ACCID_SESSION")" hidden/>
             <div class="form-field">
                 <label for="fullname" style="text-align: left">
                     Họ tên

@@ -37,7 +37,7 @@ blockquote, q {
 table {
     border-collapse: collapse;
     border-spacing: 0;
-    border: 1px solid #9b9696;
+    border: unset;
     width: 100%;
     text-align: center;
     margin-top: 20px;
@@ -1100,7 +1100,7 @@ select.btn.btn-default.button-one {
 }
 
 th, td {
-    border: 1px solid #bab9b9;
+    border: unset;
     padding: 12px;
     vertical-align: middle;
 }
@@ -1124,4 +1124,8 @@ th {
     width: 170%;
     line-height: 16px;
     right: 180px;
+}
+
+tr {
+    border-bottom: 1px solid #0000002b;
 }
