@@ -1,20 +1,37 @@
 ﻿@using Microsoft.AspNetCore.Http
-@Context.Session.GetString("GioHang")
 <header id="header" id="home">
     <div class="header-top">
         <div class="container">
             <div class="row justify-content-end">
                 <div class="col-lg-8 col-sm-4 col-8 header-top-right no-padding">
                     <ul>
-                        <li>
-                            <a asp-controller="ProductAdmin" asp-action="Index"><i class="fas fa-user-tie"></i> Management</a>
-                        </li>
-                        <li>
-                            <a asp-controller="Profile" asp-action="Index"><i class="fas fa-user-alt"></i> Profile</a>
-                        </li>
-                        <li>
-                            <a asp-controller="Login" asp-action="Index"><i class="fas fa-sign-in-alt"></i> Login</a>
-                        </li>
+                        @if (Context.Session.GetString("USERNAME_SESSION") == null)
+                        {
+                            <li>
+                                <a asp-controller="Login" asp-action="Index"><i class="fas fa-sign-in-alt"></i> Login</a>
+                            </li>
+                        }
+                        else
+                        {
+                            if (Context.Session.GetString("CREDENTITY_SESSION") == "kh")
+                            {
+                                <li>
+                                    <a asp-controller="Profile" asp-action="Index"><i class="fas fa-user-alt"></i> Profile</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a asp-controller="ProductAdmin" asp-action="Index"><i class="fas fa-user-tie"></i> Management</a>
+                                </li>
+                            }
+                            <li>
+                                Xin chào, @Context.Session.GetString("USERNAME_SESSION")
+                            </li>
+                            <li>
+                                <a asp-controller="Login" asp-action="SignOut"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                            </li>
+                        }
 
                     </ul>
                 </div>
@@ -36,19 +53,10 @@
                     <li class="cart-icon" style="cursor:pointer">
                         <span class="amount-cart">0</span><i class="fas fa-shopping-cart"></i>
                         <ul style="display: block" id="cart_hidden">
-                            <li>
-                                <a href="#">
-                                    <img src="~/uploads/product/cappuccino_PNG26.png" alt="" width="75" height="75">
-                                    <div class="item-info">
-                                        <h5>CAPPUCHINO</h5>
-                                        <p class="item-quantity">Số lượng : 1</p>
-                                        <p class="item-price">$18.00</p>
-                                    </div>
-                                </a>
-                            </li>
+                            <li class="none-item"><p>Chưa có sản phẩm trong giỏ</p></li>
                             <li class="item-total">
                                 <span class="total">TỔNG CỘNG: </span>
-                                <span class="total-price">$18</span>
+                                <span class="total-price">$0.00</span>
                             </li>
                             <li class="action-button">
                                 <a asp-action="Index" asp-controller="Cart">XEM GIỎ HÀNG</a>

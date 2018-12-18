@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeeShopProject.Controllers
 {
-    public class CustomerAdminController : Controller
+    public class CustomerAdminController : BaseController
     {
         private readonly CoffeeShopContext db;
         public CustomerAdminController(CoffeeShopContext _db)

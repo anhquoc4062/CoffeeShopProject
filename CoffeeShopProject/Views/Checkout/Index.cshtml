@@ -20,7 +20,8 @@
 
 <div class="main-wrapper">
     <div class="container checkout-area">
-        <form>
+        <form asp-controller="Checkout" asp-action="AddOrder">
+            <input name="account_id" value="" hidden/>
             <div class="form-field">
                 <label for="fullname" style="text-align: left">
                     Họ tên
@@ -48,9 +49,10 @@
                     <abbr title="required" class="required">*</abbr>
                 </label>
                 <select name="city" id="city" class="form-control">
-                    <option value="">A</option>
-                    <option value="">B</option>
-                    <option value="">C</option>
+                    @foreach (var city in ViewBag.City)
+                    {
+                        <option value="@city.MaTinhThanh">@city.TenTinhThanh</option>
+                    }
                 </select>
             </div>
             <div class="form-field">
@@ -58,7 +60,7 @@
                     Số điện thoại
                     <abbr title="required" class="required">*</abbr>
                 </label>
-                <input type="text" name="email" id="email" class="form-control">
+                <input type="text" name="tel" id="email" class="form-control">
             </div>
             <div class="form-field">
                 <label for="email" style="text-align: left">
@@ -76,33 +78,35 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Cappuchino x 1</td>
-                            <td>$18.00</td>
-                        </tr>
-                        <tr>
-                            <td>Cappuchino x 1</td>
-                            <td>$18.00</td>
-                        </tr>
-                        <tr>
+                        @if (ViewBag.Cart != null) { 
+                            foreach (var item in ViewBag.Cart)
+                            {
+                                <tr>
+                                    <td>@item.TenThucDon x @item.SoLuong</td>
+                                    <td>$@string.Format("{0:N2}", item.GiaBan)</td>
+                                </tr>
+                            }
+                        }
 
+                        <tr>
                             <td><strong>Subtotal</strong></td>
-                            <td>$54.00</td>
+                            <td>$@string.Format("{0:N2}", ViewBag.Total)</td>
                         </tr>
                         <tr>
-                            <td><strong>Shipping</strong></td>
-                            <td>Free</td>
+                            <td><strong>Coupon</strong></td>
+                            <td>None</td>
                         </tr>
                         <tr>
                             <td><strong>Total</strong></td>
-                            <td><strong>$54.00</strong></td>
+                            <td><strong>$@string.Format("{0:N2}", ViewBag.Total)</strong></td>
                         </tr>
 
                     </tbody>
                 </table>
             </div>
-
-            <button class="form-field checkout-button btn btn-default">THANH TOÁN</button>
+            <div class="form-field">
+                <button class="checkout-button btn btn-default">THANH TOÁN</button>
+            </div>
 
         </form>
     </div>

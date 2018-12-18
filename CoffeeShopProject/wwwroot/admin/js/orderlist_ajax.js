@@ -25,7 +25,7 @@ $(document).ready(function () {
                 var total = 0;
                 for (i in data) {
                     total += data[i].soLuong * data[i].gia;
-                    htmlString += '<tr id = "item"><td>' + data[i].tenThucDon + '</td><td>' + data[i].soLuong + '</td><td>$' + (data[i].soLuong * data[i].gia).toFixed(2) + '</td></tr>';
+                    htmlString += '<tr class="item"><td>' + data[i].tenThucDon + '</td><td>' + data[i].soLuong + '</td><td>$' + (data[i].soLuong * data[i].gia).toFixed(2) + '</td></tr>';
                 }
                 $("#order_detail .item").remove();
                 $("#amount").before(htmlString);
@@ -39,6 +39,7 @@ $(document).ready(function () {
     $(document).on('click', '.detail_order_btn', function (event) {
         var cart_id = $(this).attr("data-id-cart");
         var customer_id = $(this).attr("data-id-customer");
+        console.log(customer_id);
         GetListDetail(cart_id);
         GetCustomerInfo(customer_id);
     });

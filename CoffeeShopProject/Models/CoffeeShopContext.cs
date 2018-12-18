@@ -35,7 +35,7 @@ namespace CoffeeShopProject.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=USERMIC-7EHB531\\SQLEXPRESSS; Database=CoffeeShop;Integrated Security=True;");
+                optionsBuilder.UseSqlServer("Server=DESKTOP-O9FKFQB\\SQLEXPRESS; Database=CoffeeShop;Integrated Security=True;");
             }
         }
 
@@ -119,6 +119,8 @@ namespace CoffeeShopProject.Models
                 entity.Property(e => e.MaGioHang).HasColumnName("maGioHang");
 
                 entity.Property(e => e.MaKhachHang).HasColumnName("maKhachHang");
+
+                entity.Property(e => e.MaTaiKhoan).HasColumnName("maTaiKhoan");
 
                 entity.Property(e => e.NgayDat)
                     .HasColumnName("ngayDat")

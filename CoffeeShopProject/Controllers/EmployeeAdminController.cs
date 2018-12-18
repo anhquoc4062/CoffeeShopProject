@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace CoffeeShopProject.Controllers
 {
-    public class EmployeeAdminController : Controller
+    public class EmployeeAdminController : BaseController
     {
         private readonly CoffeeShopContext db;
         public EmployeeAdminController(CoffeeShopContext _db)

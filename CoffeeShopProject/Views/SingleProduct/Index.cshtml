@@ -3,6 +3,7 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Layout/User/Layout.cshtml";
 }
+@using Microsoft.AspNetCore.Http
 
 <section class="generic-banner relative">
     <div class="container">
@@ -43,11 +44,23 @@
                         </div>
                         <div class="tab-pane" id="2a">
                             <p>
-                                <form action="#">
-                                    <label>Lời nhận xét</label>
-                                    <textarea style="margin-top: 0px; margin-bottom: 0px; height: 195px;" class="form-control" name="rating" placeholder="Nhập lời nhận xét..."></textarea>
-                                    <button class="btn btn-primary">GỬI ĐÁNH GIÁ</button>
-                                </form>
+                                @if (Context.Session.GetString("USERNAME_SESSION") != null)
+                                {
+                                    <form action="#">
+                                        <label>Lời nhận xét</label>
+                                        <textarea style="margin-top: 0px; margin-bottom: 0px; height: 195px;" class="form-control" name="rating" placeholder="Nhập lời nhận xét..."></textarea>
+                                        <button class="btn btn-primary">GỬI ĐÁNH GIÁ</button>
+                                    </form>
+                                }else
+                                {
+                                    <div class="alert-login">
+                                        <p style="font-size: 15px; text-align: center">Để nhận xét về sản phẩm bạn phải đăng nhập</p>
+                                        <form action="#">
+                                            <button class="btn btn-default">Đăng nhập</button>
+                                        </form>
+                                    </div>
+
+                                }
                             </p>
                         </div>
                     </div>

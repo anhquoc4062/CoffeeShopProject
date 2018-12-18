@@ -18,7 +18,7 @@ namespace CoffeeShopProject.Controllers
         public IActionResult Index()
         {
             ViewBag.Cart = GetGioHang;
-            ViewBag.Total = 0;
+            ViewBag.Total = GetGioHang.Sum(x => x.SoLuong*x.GiaBan);
             return View();
         }
 
@@ -61,8 +61,15 @@ namespace CoffeeShopProject.Controllers
             }
             //lưu session
             SessionHelper.Set(HttpContext.Session, "cart", gioHang);
+            var response = SessionHelper.Get<List<CartItem>>(HttpContext.Session, "cart");
             //chuyển tới trang giỏ hàng để xem
-            return RedirectToAction("Index");
+            return Json(response);
+        }
+
+        public IActionResult LoadCartHidden()
+        {
+            var response = GetGioHang;
+            return Json(response);
         }
     }
 }

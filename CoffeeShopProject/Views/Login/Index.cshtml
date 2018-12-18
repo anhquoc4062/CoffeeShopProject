@@ -48,7 +48,13 @@
                             </a>
                         </div>
                         <div class="login-form">
-                                <p style="text-align:center; color: red">Tài khoản không tồn tại</p><!--Check account exist-->
+                            @if (ViewBag.NotExist != null)
+                            {
+                                if (ViewBag.NotExist == false)
+                                {
+                                    <p style='text-align:center; color: red'>Tài khoản không tồn tại</p>
+                                }
+                            }<!--Check account exist-->
                             <form method="post" asp-controller="Login" asp-action="SignIn">
                                 <div class="form-group">
                                     <label>Username</label>

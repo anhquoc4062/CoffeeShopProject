@@ -10,7 +10,7 @@ using X.PagedList;
 
 namespace CoffeeShopProject.Controllers
 {
-    public class ProductAdminController : Controller
+    public class ProductAdminController : BaseController
     {
         private readonly CoffeeShopContext db;
         public ProductAdminController(CoffeeShopContext _db)

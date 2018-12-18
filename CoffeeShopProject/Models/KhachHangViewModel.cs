@@ -18,26 +18,47 @@ namespace CoffeeShopProject.Models
         }
         public List<KhachHangViewModel> GetDsKhachHang()
         {
+            var khachhang = new List<KhachHangViewModel>();
+            if(MaTaiKhoan != null)
+            {
+                khachhang = (from kh in db.KhachHang
+                                 join tp in db.TinhThanh
+                                    on kh.MaTinhThanh equals tp.MaTinhThanh
+                                 join tk in db.TaiKhoan
+                                    on kh.MaTaiKhoan equals tk.MaTaiKhoan
+                                 select new KhachHangViewModel
+                                     {
+                                         MaKhachHang = kh.MaKhachHang,
+                                         TenKhachHang = kh.TenKhachHang,
+                                         Email = kh.Email,
+                                         DiaChi = kh.DiaChi,
+                                         MaTinhThanh = tp.MaTinhThanh,
+                                         TenTinhThanh = tp.TenTinhThanh,
+                                         MaTaiKhoan = kh.MaTaiKhoan,
+                                         TenTaiKhoan = tk.TenTaiKhoan,
+                                         MatKhau = tk.MatKhau,
+                                         SoDt = kh.SoDt
 
-            var khachhang = (from kh in db.KhachHang
-                             join tp in db.TinhThanh
-                                on kh.MaTinhThanh equals tp.MaTinhThanh 
-                             join tk in db.TaiKhoan
-                             on kh.MaTaiKhoan equals tk.MaTaiKhoan
-                             select new KhachHangViewModel
-                             {
-                                 MaKhachHang = kh.MaKhachHang,
-                                 TenKhachHang = kh.TenKhachHang,
-                                 Email = kh.Email,
-                                 DiaChi = kh.DiaChi,
-                                 MaTinhThanh = tp.MaTinhThanh,
-                                 TenTinhThanh = tp.TenTinhThanh,
-                                 MaTaiKhoan = kh.MaTaiKhoan,
-                                 TenTaiKhoan = tk.TenTaiKhoan,
-                                 MatKhau = tk.MatKhau,
-                                 SoDt = kh.SoDt
+                                     }).ToList();
+            }
+            else
+            {
+               khachhang = (from kh in db.KhachHang
+                                 join tp in db.TinhThanh
+                                    on kh.MaTinhThanh equals tp.MaTinhThanh
+                                 select new KhachHangViewModel
+                                 {
+                                     MaKhachHang = kh.MaKhachHang,
+                                     TenKhachHang = kh.TenKhachHang,
+                                     Email = kh.Email,
+                                     DiaChi = kh.DiaChi,
+                                     MaTinhThanh = tp.MaTinhThanh,
+                                     TenTinhThanh = tp.TenTinhThanh,
+                                     SoDt = kh.SoDt
 
-                             }).ToList();
+                                 }).ToList();
+            }
+           
             return khachhang;
         }
         public KhachHang GetKhachHangById(string id)

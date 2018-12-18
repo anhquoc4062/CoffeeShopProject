@@ -40,23 +40,33 @@
                 </thead>
 
                 <tbody>
-                    @foreach (var item in ViewBag.Cart)
+                    @if (ViewBag.Cart.Count == 0)
                     {
-                        <tr>
-                            <td style="width:75px"><a href="">x</a></td>
-                            <td style="text-align: left; width: 96px"><img src="~/uploads/product/@item.HinhAnh" alt="" height="86" width="86"></td>
-                            <td>@item.TenThucDon</td>
-                            <td>$@string.Format("{0:N2}", item.GiaBan)</td>
-                            <td>
-                                <div class="qty mt-5">
-                                    <span class="minus bg-dark">-</span>
-                                    <input type="number" class="count" name="qty" value="@item.SoLuong">
-                                    <span class="plus bg-dark">+</span>
-                                </div>
-                            </td>
-                            <td>$@string.Format("{0:N2}", item.GiaBan * item.SoLuong)</td>
+                        <tr class="none-item-cart">
+                            <td colspan="6" style="font-size: 17px">Chưa có sản phẩm trong giỏ</td>
                         </tr>
                     }
+                    else
+                    {
+                        @foreach (var item in ViewBag.Cart)
+                        {
+                            <tr>
+                                <td style="width:75px"><a href="">x</a></td>
+                                <td style="text-align: left; width: 96px"><img src="~/uploads/product/@item.HinhAnh" alt="" height="86" width="86"></td>
+                                <td>@item.TenThucDon</td>
+                                <td>$@string.Format("{0:N2}", item.GiaBan)</td>
+                                <td>
+                                    <div class="qty mt-5">
+                                        <span class="minus bg-dark">-</span>
+                                        <input type="number" class="count" name="qty" value="@item.SoLuong">
+                                        <span class="plus bg-dark">+</span>
+                                    </div>
+                                </td>
+                                <td>$@string.Format("{0:N2}", item.GiaBan * item.SoLuong)</td>
+                            </tr>
+                        }
+                    }
+
 
                     <tr style="border: none">
                         <td colspan="6">
@@ -87,8 +97,8 @@
                     <td>$@string.Format("{0:N2}", ViewBag.Total)</td>
                 </tr>
                 <tr>
-                    <th>Shipping</th>
-                    <td>Free</td>
+                    <th>Coupon</th>
+                    <td>None</td>
                 </tr>
                 <tr>
                     <th>Total</th>

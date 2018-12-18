@@ -51,9 +51,6 @@ body {
     width: 442px;
 }
 
-.tab-content.clearfix {
-}
-
 ul.nav.nav-pills {
     position: relative;
     width: 100%;
@@ -372,6 +369,7 @@ li.cart-icon {
     position: relative;
     bottom: 66px;
     left: 100px;
+    text-align: left;
 }
 
 .cart-icon ul {
@@ -635,7 +633,7 @@ ul.contact-ul {
 }
 
 .contact-ul li:before {
-    content: "Ã¢â‚¬Â¢ ";
+    content: "ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ ";
     color: #be9c79;
     padding-right: 10px;
 }
@@ -680,16 +678,43 @@ form.contact-form {
 }
 
 .contact-ul li:before {
-    content: "â€¢";
+    content: "Ã¢â‚¬Â¢";
 }
 
 #header #logo img {
     position: relative;
     bottom: 20px;
 }
+
 #not-found p {
     font-size: 18px;
     vertical-align: middle;
     position: relative;
     top: 50px;
 }
+.none-item p {
+    padding: 40px 25px;
+}
+
+.checkout-button.btn.btn-default {
+    padding: 10px 20px;
+    background: #be9c79;
+    color: #fff;
+    border-radius: unset;
+}
+
+    .checkout-button.btn.btn-default:hover {
+        background: #262626;
+    }
+.alert-login button.btn.btn-default {
+    padding: 10px 20px;
+    color: #fff;
+    border-radius: unset;
+    position: relative;
+    left: 150px;
+    background: #be9c79;
+}
+
+    .alert-login button.btn.btn-default:hover {
+        background: #262626;
+    }
