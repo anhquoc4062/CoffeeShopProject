@@ -50,6 +50,10 @@ namespace CoffeeShopProject.Controllers
                 }
                 newEmp.HinhAnh = emp_img.FileName;
             }
+            else
+            {
+                newEmp.HinhAnh = "none-avatar.jpg";
+            }
             newEmp.HoTen = emp_name;
             newEmp.MaChucVu = int.Parse(emp_position);
             newEmp.Luong = float.Parse(emp_salary);
@@ -67,7 +71,7 @@ namespace CoffeeShopProject.Controllers
                                           string emp_identity, string emp_email,
                                           string emp_position, string emp_salary,
                                           string emp_info, string old_emp_img,
-                                          string emp_id)
+                                          string emp_id, string acc_id)
         {
             NhanVien editEmployee = new NhanVien
             {
@@ -79,6 +83,14 @@ namespace CoffeeShopProject.Controllers
                 MoTa = emp_info,
                 Cmnd = emp_identity
             };
+            if (acc_id == "0")
+            {
+                editEmployee.MaTaiKhoan = null;
+            }
+            else
+            {
+                editEmployee.MaTaiKhoan = int.Parse(acc_id);
+            }
             if (emp_img == null)
             {
                 editEmployee.HinhAnh = old_emp_img;
@@ -95,6 +107,14 @@ namespace CoffeeShopProject.Controllers
 
             NhanVienViewModel query = new NhanVienViewModel(db);
             query.EditNhanVien(editEmployee);
+            if(editEmployee.MaTaiKhoan != null)
+            {
+                TaiKhoan thisTaiKhoan = db.TaiKhoan.Where(x => x.MaTaiKhoan == editEmployee.MaTaiKhoan).SingleOrDefault();
+                thisTaiKhoan.AnhDaiDien = editEmployee.HinhAnh;
+                thisTaiKhoan.Email = editEmployee.Email;
+                TaiKhoanViewModel query_tk = new TaiKhoanViewModel(db);
+                query_tk.EditTaiKhoan(thisTaiKhoan);
+            }
             var response = query.GetDsNhanVien();
             return Json(response);
         }

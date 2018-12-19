@@ -9,7 +9,7 @@
 @Html.Partial("~/Views/Layout/Admin/Head.cshtml")
 <style>
     .page-content--bge5 {
-        height: 150vh;
+        height: 110vh;
     }
     .login-logo {
         position: relative;
@@ -21,7 +21,7 @@
         bottom: 150px;
     }
     .login-content {
-        height: 950px;
+        height: 730px;
     }
     .login-form .au-btn--green {
         background: #be9c79;
@@ -49,11 +49,7 @@
                             </a>
                         </div>
                         <div class="login-form">
-                            <form asp-action="SignUp" asp-controller="Login" method="post">
-                                <div class="form-group">
-                                    <label>Fullname</label>
-                                    <input class="au-input au-input--full" type="text" name="fullname" placeholder="Nhập họ tên...">
-                                </div>
+                            <form asp-action="SignUp" asp-controller="Login" method="post" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label>Username</label>
                                     <input class="au-input au-input--full" type="text" name="username" placeholder="Nhập tên tài khoản...">
@@ -67,23 +63,25 @@
                                     <input class="au-input au-input--full" type="email" name="email" placeholder="Nhập email...">
                                 </div>
                                 <div class="form-group">
-                                    <label>Tỉnh/Thành</label>
-                                    <select class="form-control" name="city">
-                                        <option disabled selected>--Chọn tỉnh thành--</option>
-                                        @foreach (var city in ViewBag.City)
-                                        {
-                                            <option value="@city.MaTinhThanh">@city.TenTinhThanh</option>
+                                    <label>Ảnh đại diện</label>
+                                    <input class="form-control-file" type="file" name="avatar" onchange="previewImg(this,'preview_img')">
+                                    <img id="preview_img" src="/images/product/no-preview.jpg" width="100" height="100">
+                                </div>
+                                <script>
+                                        function previewImg(input, id_string) {
+                                            var exp_string = "#";
+                                            exp_string += id_string;
+                                            if (input.files && input.files[0]) {
+                                                var reader = new FileReader();
+
+                                                reader.onload = function (e) {
+                                                    $(exp_string).attr('src', e.target.result);
+                                                }
+
+                                                reader.readAsDataURL(input.files[0]);
+                                            }
                                         }
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Address</label>
-                                    <input class="au-input au-input--full" type="email" name="address" placeholder="Nhập địa chỉ...">
-                                </div>
-                                <div class="form-group">
-                                    <label>Tel</label>
-                                    <input class="au-input au-input--full" type="email" name="tel" placeholder="Nhập số điện thoại...">
-                                </div>
+                                </script>
                                 <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">register</button>
                             </form>
                             <div class="register-link">

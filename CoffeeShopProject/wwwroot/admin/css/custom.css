@@ -1,3 +1,20 @@
+﻿body::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+body::-webkit-scrollbar {
+    width: 6px;
+    background-color: #F5F5F5;
+}
+
+body::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+}
+
 .main-content {
     min-height: 180vh;
 }
@@ -300,6 +317,38 @@ label.form-control-label {
 }
 
 ul#pagination-demo {
-    top: 210px;
     position: relative;
+    top: 200px;
+}
+
+.table-data3 a.sucess {
+    width: 90%;
+    text-align: center;
+    font-size: 13px;
+    background: #2ecc71;
+    color: #fff;
+}
+
+.table-data3 a.fail {
+    width: 90%;
+    text-align: center;
+    font-size: 13px;
+    background: #e74c3c;
+    color: #fff;
+}
+
+.table-data3 a.cancel {
+    width: 90%;
+    text-align: center;
+    font-size: 13px;
+    background: #e67e22;
+    color: #fff;
+}
+
+.table-data3 a:hover {
+    background: #262626;
+}
+
+.table-data3 a.cancel:hover {
+    background: #e67e22;
 }

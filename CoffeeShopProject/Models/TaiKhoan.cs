@@ -15,6 +15,8 @@ namespace CoffeeShopProject.Models
         public string TenTaiKhoan { get; set; }
         public string MatKhau { get; set; }
         public string MaPhanQuyen { get; set; }
+        public string Email { get; set; }
+        public string AnhDaiDien { get; set; }
 
         public PhanQuyen MaPhanQuyenNavigation { get; set; }
         public ICollection<KhachHang> KhachHang { get; set; }

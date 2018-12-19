@@ -72,5 +72,22 @@ namespace CoffeeShopProject.Models
             return false;
             //return new GioHangViewModel(db).GetDsGioHang();
         }
+
+        public double? GetEarningByMonth(int month)
+        {
+            var listGh = db.GioHang.Where(x => x.NgayDat.Value.Month == month).ToList();
+            double? total = 0.0;
+            foreach (var gh in listGh)
+            {
+                var listDetail = db.ChiTietGioHang.Where(x => x.MaGioHang == gh.MaGioHang).ToList();
+                foreach (var ctgh in listDetail)
+                {
+                    var giaTd = (from td in db.ThucDon
+                                 select td).Where(x => x.MaThucDon == ctgh.MaThucDon).Select(x => x.GiaKhuyenMai).SingleOrDefault();
+                    total += giaTd*ctgh.SoLuong;
+                }
+            }
+            return total;
+        }
     }
 }

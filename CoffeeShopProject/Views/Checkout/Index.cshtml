@@ -20,8 +20,15 @@
 
 <div class="main-wrapper">
     <div class="container checkout-area">
+        @if (ViewBag.Success != null)
+        {
+            <div class="alert alert-success" role="alert">
+                Đơn hàng của bạn đã được gửi đi.
+            </div>
+        }
+
         <form asp-controller="Checkout" asp-action="AddOrder">
-            <input name="account_id" value="@Context.Session.GetString("ACCID_SESSION")" hidden/>
+            <input name="account_id" value="@Context.Session.GetString("ACCID_SESSION")" hidden />
             <div class="form-field">
                 <label for="fullname" style="text-align: left">
                     Họ tên
@@ -78,7 +85,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if (ViewBag.Cart != null) { 
+                        @if (ViewBag.Cart != null)
+                        {
                             foreach (var item in ViewBag.Cart)
                             {
                                 <tr>

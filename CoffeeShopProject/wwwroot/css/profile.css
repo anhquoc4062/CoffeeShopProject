@@ -40,6 +40,7 @@ table {
     border: unset;
     width: 100%;
     text-align: center;
+    color: #555555ba;
     margin-top: 20px;
 }
 /* start editing from here */
@@ -1109,6 +1110,7 @@ th {
     font-weight: bold;
 }
 
+
 .work-play button.btn.btn-primary {
     padding: 7px 13px;
     color: #154be5;
@@ -1129,3 +1131,18 @@ th {
 tr {
     border-bottom: 1px solid #0000002b;
 }
+
+a:hover {
+    text-decoration: none
+}
+
+button.btn.btn-default {
+    background: #be9c79;
+    color: #fff;
+    border-radius: unset;
+    padding: 10px 20px;
+}
+
+    button.btn.btn-default:hover {
+        background: #262626;
+    }

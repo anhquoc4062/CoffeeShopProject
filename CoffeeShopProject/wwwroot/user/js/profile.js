@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
 
     $(document).on('click', '.profile-detail-order', function (event) {
-        console.log("da click");
+        event.preventDefault();
         var cart_id = $(this).attr("data-id");
         $.ajax({
             type: "GET",
@@ -17,6 +17,7 @@
                 for (i in data) {
                     total += data[i].gia * data[i].soLuong;
                     htmlString += '<tr class="detail-order">';
+                    htmlString += '<td><img src="uploads/product/' + data[i].hinhAnh + '" width="70" height="70" /></td>';
                     htmlString += '<td>' + data[i].tenThucDon + '</td><td>$' + data[i].gia.toFixed(2) + '</td><td>' + data[i].soLuong + '</td><td>$' + (data[i].gia * data[i].soLuong).toFixed(2) + '</td></tr>';
                 }
                 $(".detail-order-list .detail-order").remove();

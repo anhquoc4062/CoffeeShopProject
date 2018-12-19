@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using CoffeeShopProject.Common;
@@ -34,6 +35,9 @@ namespace CoffeeShopProject.Controllers
                 HttpContext.Session.SetString("USERNAME_SESSION", tk.TenTaiKhoan.ToString());
                 HttpContext.Session.SetString("CREDENTITY_SESSION", tk.MaPhanQuyen);
                 HttpContext.Session.SetString("ACCID_SESSION", tk.MaTaiKhoan.ToString());
+                HttpContext.Session.SetString("AVATAR_SESSION", tk.AnhDaiDien.ToString());
+                HttpContext.Session.SetString("EMAIL_SESSION", tk.Email.ToString());
+                HttpContext.Session.SetString("ACCID_SESSION", tk.MaTaiKhoan.ToString());
                 CommonConstant.ACCOUNT_SESSION = HttpContext.Session.GetString("USERNAME_SESSION");
                 CommonConstant.CREDENTITY = HttpContext.Session.GetString("CREDENTITY_SESSION");
                 CommonConstant.ACCID_SESSION = HttpContext.Session.GetString("ACCID_SESSION");
@@ -53,29 +57,32 @@ namespace CoffeeShopProject.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult SignUp(string fullname, string username, 
-                                    string password, string address,
-                                    string city, string email, string tel)
+        public IActionResult SignUp(string username, string password, 
+                                    string email, IFormFile avatar)
         {
             TaiKhoan newTk = new TaiKhoan
             {
                 TenTaiKhoan = username,
                 MatKhau = password,
+                Email = email,
                 MaPhanQuyen = "kh"
             };
+            if (avatar != null)
+            {
+                string path_to_image = "wwwroot/uploads/employee/" + avatar.FileName;
+                using (var stream = new FileStream(path_to_image, FileMode.Create))
+                {
+                    avatar.CopyTo(stream);
+                }
+                newTk.AnhDaiDien = avatar.FileName;
+            }
+            else
+            {
+                newTk.AnhDaiDien = "none-avatar.jpg";
+            }
             db.TaiKhoan.Add(newTk);
             db.SaveChanges();
-            KhachHang newKh = new KhachHang
-            {
-                TenKhachHang = fullname,
-                Email = email,
-                MaTaiKhoan = newTk.MaTaiKhoan,
-                SoDt = tel,
-                DiaChi = address,
-                MaTinhThanh = int.Parse(city)
-            };
-            db.KhachHang.Add(newKh);
-            db.SaveChanges();
+            
             return RedirectToAction("Index");
         }
 

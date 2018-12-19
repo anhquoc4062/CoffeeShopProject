@@ -41,6 +41,24 @@ $(document).ready(function () {
     LoadHiddenCart();
 
     $(document).on('click', '.order-button button', function (event) {
+        event.preventDefault();
+        console.log("da click");
+        var product_id = $(this).attr("data-id");
+        $.ajax({
+            type: "GET",
+            url: '/Cart/AddToCart?id=' + product_id,
+            dataType: 'json',
+            success: function (response) {
+                console.log(response);
+                LoadCart(response);
+            },
+            error: function (error) {
+            }
+        });
+    });
+
+    $(document).on('click', '.button-add-to-cart a', function (event) {
+        event.preventDefault();
         console.log("da click");
         var product_id = $(this).attr("data-id");
         $.ajax({

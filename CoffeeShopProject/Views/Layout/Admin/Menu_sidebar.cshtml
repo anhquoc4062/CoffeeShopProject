@@ -1,4 +1,5 @@
-﻿<aside class="menu-sidebar d-none d-lg-block">
+﻿@using Microsoft.AspNetCore.Http
+<aside class="menu-sidebar d-none d-lg-block">
     <div class="logo">
         <a href="#">
             <img src="~/images/icon/logo.png" alt="Cool Admin" />
@@ -27,8 +28,13 @@
             </ul>
         </li>*@
                 <li>
+                    <a asp-controller="Dashboard" asp-action="Index">
+                        <i class="fas fa-tachometer-alt"></i>Tổng quan
+                    </a>
+                </li>
+                <li>
                     <a asp-controller="ProductAdmin" asp-action="Index">
-                        <i class="fas fa-bars"></i>Thực đơn
+                        <i class="fas fa-coffee"></i>Thực đơn
                     </a>
                 </li>
                 <li class="has-sub">
@@ -36,22 +42,27 @@
                         <i class="fas fa-user"></i>Thông tin
                     </a>
                     <ul class="list-unstyled navbar__sub-list js-sub-list">
-                        <li>
-                            <a asp-controller="EmployeeAdmin" asp-action="Index">Nhân viên</a>
-                        </li>
+                        @if (Context.Session.GetString("CREDENTITY_SESSION") == "qtv")
+                        {
+                            <li>
+                                <a asp-controller="EmployeeAdmin" asp-action="Index">Nhân viên</a>
+                            </li>
+                        }
+
                         <li>
                             <a asp-controller="CustomerAdmin" asp-action="Index">Khách Hàng</a>
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a asp-controller="BillAdmin" asp-action="Index">
-                        <i class="fas fa-money-bill"></i>Hóa đơn
-                    </a>
-                </li>
+
                 <li>
                     <a asp-controller="OrderAdmin" asp-action="Index">
                         <i class="fa fa-shopping-cart"></i>Đơn hàng
+                    </a>
+                </li>
+                <li>
+                    <a href="https://app.purechat.com/" target="_blank">
+                        <i class="fas fa-comments"></i>Chat trực tuyến
                     </a>
                 </li>
                 <li>

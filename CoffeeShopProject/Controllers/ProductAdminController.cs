@@ -123,6 +123,16 @@ namespace CoffeeShopProject.Controllers
         }
         public IActionResult DeleteProduct(string id, string filter, string page)
         {
+            List<ChiTietGioHang> ctgh = db.ChiTietGioHang.Where(x => x.MaThucDon == int.Parse(id)).ToList();
+            foreach(var item in ctgh)
+            {
+                db.ChiTietGioHang.Remove(item);
+            }
+            List<DanhGia> dg = db.DanhGia.Where(x => x.MaThucDon == int.Parse(id)).ToList();
+            foreach (var item in dg)
+            {
+                db.DanhGia.Remove(item);
+            }
             ThucDonViewModel query = new ThucDonViewModel(db);
             query.DeleteThucDonById(id);
             var response = query.GetDataWithCateByPage(filter, int.Parse(page));

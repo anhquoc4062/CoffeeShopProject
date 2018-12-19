@@ -47,12 +47,15 @@ $(document).ready(function () {
                 $("#emp_info").val(response.moTa);
                 $("#preview_img").attr('src', '/uploads/employee/' + response.hinhAnh);
                 $("#old_emp_img").val(response.hinhAnh);
+                
                 if (response.maTaiKhoan == null) {
 
                     $("#account_check").attr("data-id", "0");
+                    $("#acc_id").val("0");
                 }
                 else {
                     $("#account_check").attr("data-id", response.maTaiKhoan);
+                    $("#acc_id").val(response.maTaiKhoan);
                 }
             },
             error: function (error) {
@@ -75,7 +78,7 @@ $(document).ready(function () {
                 LoadEmployee(response);
             },
             error: function (error) {
-                alert("errror");
+                alert("lỗi thêm nhân viên");
             }
         });
     }
@@ -140,6 +143,7 @@ $(document).ready(function () {
         else {
             formData.append("old_emp_img", $("#old_emp_img").val());
             formData.append("emp_id", $("#emp_id").val());
+            formData.append("acc_id", $("#acc_id").val());
             UpdateEmployee(formData);
         }
 

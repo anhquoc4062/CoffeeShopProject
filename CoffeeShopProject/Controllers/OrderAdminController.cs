@@ -34,5 +34,13 @@ namespace CoffeeShopProject.Controllers
             query_dh.DeleteGioHangById(id);
             return RedirectToAction("Index");
         }
+        public IActionResult ChangeProgress(int id, int status)
+        {
+            GioHang gh = db.GioHang.SingleOrDefault(x => x.MaGioHang == id);
+            gh.TrangThai = status;
+            GioHangViewModel query = new GioHangViewModel(db);
+            query.EditGioHang(gh);
+            return Json(true);
+        }
     }
 }

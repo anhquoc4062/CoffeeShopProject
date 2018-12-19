@@ -44,4 +44,33 @@ $(document).ready(function () {
         GetCustomerInfo(customer_id);
     });
 
+    function ChangeProgress(id, status) {
+        $.ajax({
+            type: "GET",
+            url: '/OrderAdmin/ChangeProgress?id=' + id + '&status=' + status,
+            dataType: 'json',
+            success: function (response) {
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+    $(document).on('click', '.table-data3 a', function (event) {
+        event.preventDefault()
+        var id = $(this).attr("data-id");
+        if ($(this).hasClass("fail")) {
+            $(this).text("Đã xử lý");
+            $(this).removeClass("fail");
+            $(this).addClass("sucess");
+            ChangeProgress(id, 1);
+        }
+        else if ($(this).hasClass("sucess")) {
+            $(this).text("Đang xử lý");
+            $(this).removeClass("sucess");
+            $(this).addClass("fail");
+            ChangeProgress(id, 0);
+        }
+    });
+
 });  

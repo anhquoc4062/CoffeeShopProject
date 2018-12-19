@@ -19,6 +19,7 @@ namespace CoffeeShopProject.Models
         public virtual DbSet<ChiTietGioHang> ChiTietGioHang { get; set; }
         public virtual DbSet<ChiTietHoaDon> ChiTietHoaDon { get; set; }
         public virtual DbSet<ChucVu> ChucVu { get; set; }
+        public virtual DbSet<DanhGia> DanhGia { get; set; }
         public virtual DbSet<GioHang> GioHang { get; set; }
         public virtual DbSet<HoaDon> HoaDon { get; set; }
         public virtual DbSet<KhachHang> KhachHang { get; set; }
@@ -35,7 +36,7 @@ namespace CoffeeShopProject.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=DESKTOP-O9FKFQB\\SQLEXPRESS; Database=CoffeeShop;Integrated Security=True;");
+                optionsBuilder.UseSqlServer("Server=USERMIC-7EHB531\\SQLEXPRESSS; Database=CoffeeShop;Integrated Security=True;");
             }
         }
 
@@ -109,6 +110,25 @@ namespace CoffeeShopProject.Models
                 entity.Property(e => e.TenChucVu)
                     .HasColumnName("tenChucVu")
                     .HasMaxLength(254);
+            });
+
+            modelBuilder.Entity<DanhGia>(entity =>
+            {
+                entity.HasKey(e => e.MaDanhGia);
+
+                entity.Property(e => e.MaDanhGia).HasColumnName("maDanhGia");
+
+                entity.Property(e => e.LoiNhanXet)
+                    .HasColumnName("loiNhanXet")
+                    .HasColumnType("ntext");
+
+                entity.Property(e => e.MaTaiKhoan).HasColumnName("maTaiKhoan");
+
+                entity.Property(e => e.MaThucDon).HasColumnName("maThucDon");
+
+                entity.Property(e => e.NgayDanhGia)
+                    .HasColumnName("ngayDanhGia")
+                    .HasColumnType("datetime");
             });
 
             modelBuilder.Entity<GioHang>(entity =>
@@ -226,7 +246,7 @@ namespace CoffeeShopProject.Models
 
                 entity.Property(e => e.Email)
                     .HasColumnName("email")
-                    .HasMaxLength(20);
+                    .HasMaxLength(254);
 
                 entity.Property(e => e.HinhAnh)
                     .HasColumnName("hinhAnh")
@@ -302,6 +322,15 @@ namespace CoffeeShopProject.Models
                     .ForSqlServerIsClustered(false);
 
                 entity.Property(e => e.MaTaiKhoan).HasColumnName("maTaiKhoan");
+
+                entity.Property(e => e.AnhDaiDien)
+                    .HasColumnName("anhDaiDien")
+                    .HasMaxLength(254);
+
+                entity.Property(e => e.Email)
+                    .HasColumnName("email")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.MaPhanQuyen)
                     .HasColumnName("maPhanQuyen")

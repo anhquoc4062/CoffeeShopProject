@@ -34,6 +34,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <input hidden="" name="id" id="emp_id">
+                                <input hidden="" name="acc_id" id="acc_id" value="0">
                                 <div class="row form-group">
                                     <div class="col col-md-3 text-right">
                                         <label for="text-input" class=" form-control-label">Họ và tên</label>
@@ -93,7 +94,7 @@
                                             <option selected="" disabled="" value="0">--- Chọn chức vụ ---</option>
                                             @foreach (var chucvu in ViewBag.ListPos)
                                             {
-                                            <option value="@chucvu.MaChucVu">@chucvu.TenChucVu</option>
+                                                <option value="@chucvu.MaChucVu">@chucvu.TenChucVu</option>
                                             }
                                         </select>
                                         <button type="button" id="position_modal_btn" class="btn btn-primary" data-toggle="modal" data-target="#position_modal"><i class="fas fa-plus"></i></button>

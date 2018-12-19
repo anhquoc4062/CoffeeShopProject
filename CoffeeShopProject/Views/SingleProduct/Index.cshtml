@@ -46,8 +46,9 @@
                             <p>
                                 @if (Context.Session.GetString("USERNAME_SESSION") != null)
                                 {
-                                    <form action="#">
+                                    <form asp-action="AddRating" asp-controller="SingleProduct" method="post">
                                         <label>Lời nhận xét</label>
+                                        <input hidden value="@Model.MaThucDon" name="product_id"/>
                                         <textarea style="margin-top: 0px; margin-bottom: 0px; height: 195px;" class="form-control" name="rating" placeholder="Nhập lời nhận xét..."></textarea>
                                         <button class="btn btn-primary">GỬI ĐÁNH GIÁ</button>
                                     </form>
@@ -55,7 +56,7 @@
                                 {
                                     <div class="alert-login">
                                         <p style="font-size: 15px; text-align: center">Để nhận xét về sản phẩm bạn phải đăng nhập</p>
-                                        <form action="#">
+                                        <form asp-action="Index" asp-controller="Login">
                                             <button class="btn btn-default">Đăng nhập</button>
                                         </form>
                                     </div>
@@ -88,7 +89,7 @@
                     <div class="image-related" width="400" height="400">
                         <img src="~/uploads/product/@product.HinhAnh" alt="" width="100%" height="100%">
                         <div class="button-add-to-cart">
-                            <a href="#">THÊM VÀO GIỎ</a>
+                            <a href="#" data-id="@product.MaThucDon">THÊM VÀO GIỎ</a>
                         </div>
                     </div>
                     <div class="content-related">

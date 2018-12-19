@@ -2,8 +2,8 @@
 @{
     Layout = null;
 }
-
-
+@model TaiKhoan
+@using Microsoft.AspNetCore.Http
 <!--
 Author: W3layouts
 Author URL: http://w3layouts.com
@@ -34,7 +34,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 <body>
     <div class="main">
-        <h1>User Profile</h1>
+        <h1>@Model.TenTaiKhoan's Profile</h1>
         <div class="content">
             <div class="sap_tabs">
                 <div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
@@ -65,141 +65,158 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="portfolio-grid">
                         <div class="port-left">
                             <ul class="resp-tabs-list">
-                                <img class="lady" src="images/pic1.jpg" alt="" />
+                                <img class="lady" src="~/uploads/employee/@Model.AnhDaiDien" alt="" width="100%" height="100%"/>
                                 <li class="resp-tab-item" aria-controls="tab_item-0" role="tab"><span>Information</span></li>
                                 <li class="resp-tab-item" aria-controls="tab_item-1" role="tab"><span>Account</span></li>
                                 <li class="resp-tab-item" aria-controls="tab_item-2" role="tab"><span>Order</span></li>
-                                <li class="resp-tab-item" aria-controls="tab_item-4" role="tab"><span>Back To Home Page</span></li>
+                                <a asp-action="Index" asp-controller="TrangChu"><li class="resp-tab-item" aria-controls="tab_item-4" role="tab"><span>Back To Home Page</span></li></a>
                                 <div class="clear"></div>
                             </ul>
                         </div>
                         <div class="port-right">
+                            <form asp-action="EditProfile" asp-controller="Profile" enctype="multipart/form-data" method="post">
+                                <div class="resp-tabs-container">
+                                    <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
+                                        <div class="work-play">
+                                            <h3>Basic Information</h3>
+                                            <h4>Change email</h4>
+                                            <input hidden name="id" value="@Model.MaTaiKhoan"/>
+                                            <input hidden name="old_img" value="@Model.AnhDaiDien"/>
+                                            <input type="text" name="email" value="@Model.Email">
+                                            <h4>Change avatar</h4>
+                                            <img src="~/uploads/employee/@Model.AnhDaiDien" width="100" height="100" id="preview_img"/>
+                                            <script>
+                                                function previewImg(input, id_string) {
+                                                    var exp_string = "#";
+                                                    exp_string += id_string;
+                                                    if (input.files && input.files[0]) {
+                                                        var reader = new FileReader();
 
-                            <div class="resp-tabs-container">
-                                <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
-                                    <div class="work-play">
-                                        <h3>Basic Information</h3>
-                                        
-                                        <form>
-                                            <h4>Fullname</h4>
-                                            <input type="text" name="fullname" value="">
-                                            <h4>Email</h4>
-                                            <input type="text" value="" name="email">
-                                            <h4>Tel</h4>
-                                            <input type="text" value="" name="tel">
-                                            <h4>City</h4>
-                                            <select name="city" class="form-control">
-                                                <option>City1</option>
-                                            </select>
-                                            <h4>Address</h4>
-                                            <input type="text" value="" name="adress">
-                                        </form>
-                                        
+                                                        reader.onload = function (e) {
+                                                            $(exp_string).attr('src', e.target.result);
+                                                        }
+
+                                                        reader.readAsDataURL(input.files[0]);
+                                                    }
+                                                }
+                                            </script>
+                                            <br />
+                                            <div class="custom-file" style="width: 50%">
+                                                <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="img" onchange="previewImg(this,'preview_img')">
+                                                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="update">
+                                            <button class="btn btn-default">Update</button>
+                                        </div>
+                                        <div class="clear"></div>
                                     </div>
-                                    <div class="update">
-                                        <a href="#">Update</a>
-                                    </div>
-                                    <div class="clear"></div>
+                            </form>
+                            <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-1">
+                                <div class="work-play">
+                                    <h3>Account Setting</h3>
+                                    <form>
+                                        <h4>Old Password</h4>
+                                        <input type="text" name="username" value="" disabled>
+                                        <h4>Password</h4>
+                                        <input type="text" value="" name="password">
+                                        <h4>Retype Password</h4>
+                                        <input type="text" value="" name="re-password">
+                                    </form>
                                 </div>
-                                <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-1">
-                                    <div class="work-play">
-                                        <h3>Account Setting</h3>
-                                        <form>
-                                            <h4>Username</h4>
-                                            <input type="text" name="username" value="" disabled>
-                                            <h4>Password</h4>
-                                            <input type="text" value="" name="password">
-                                            <h4>Retype Password</h4>
-                                            <input type="text" value="" name="re-password">
-                                        </form>
-                                    </div>
-                                    <div class="update">
-                                        <a href="#">Update</a>
-                                    </div>
-                                    <div class="clear"></div>
+                                <div class="update">
+                                    <a href="#">Update</a>
                                 </div>
-                                <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-2">
-                                    <div class="work-play">
-                                        <h3>Ordered List</h3>
-                                        <table>
-                                            <thead>
-                                                <tr>
-                                                    <th>Ngày đặt</th>
-                                                    <th>Trạng thái</th>
-                                                    <th></th>
-                                                    <th>Tác vụ</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach (var item in ViewBag.ListOrder)
-                                                {
+                                <div class="clear"></div>
+                            </div>
+                            <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-2">
+                                <div class="work-play">
+                                    <h3>Ordered List</h3>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Ngày đặt</th>
+                                                <th>Trạng thái</th>
+                                                <th></th>
+                                                <th>Tác vụ</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in ViewBag.ListOrder)
+                                            {
                                                 <tr>
                                                     <td>@item.NgayDat</td>
                                                     @if (item.TrangThai == 0)
                                                     {
 
-                                                        <td><span style="color: red">Đang giao</span></td>
+                                                        <td><span style="color: #e74c3c">Đang xử lý</span></td>
                                                     }
                                                     else if (item.TrangThai == 1)
                                                     {
-                                                        <td><span style="color: green">Đã giao</span></td>
+                                                        <td><span style="color: #2ecc71">Đã xử lý</span></td>
                                                     }
                                                     else
                                                     {
-                                                        <td><span style="color: orange">Đã hủy</span></td>
+                                                        <td><span style="color: #e67e22">Đã hủy</span></td>
                                                     }
 
                                                     <td><button class="btn btn-primary profile-detail-order" style="cursor: pointer" data-id="@item.MaGioHang" data-toggle="modal" data-target="#my_order">Xem chi tiết</button></td>
-                                                    <td><button class="btn btn-primary" style="cursor: pointer">Hủy</button></td>
+                                                    <td>
+                                                        <form asp-action="CancelOrder" asp-controller="Profile" asp-route-id="@item.MaGioHang" method="get">
+                                                            <button class="btn btn-primary" style="cursor: pointer">Hủy</button>
+                                                        </form>
+                                                    </td>
                                                 </tr>
-                                                }
+                                            }
 
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="modal fade" id="my_order" role="dialog">
-                                        <div class="modal-dialog">
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="modal fade" id="my_order" role="dialog">
+                                    <div class="modal-dialog">
 
-                                            <!-- Modal content-->
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h4 class="modal-title">Order Detail</h4>
-                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Order Detail</h4>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-                                                </div>
-                                                <div class="modal-body">
-                                                    <table>
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Tên thực đơn</th>
-                                                                <th>Giá</th>
-                                                                <th>Số lượng</th>
-                                                                <th>Tổng cộng</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody class="detail-order-list">
-                                                            <tr class="detail-order">
-                                                                <td><img src="~/uploads/product/1Blu Yogurt.png" width="70" height="70"/></td>
-                                                                <td>Yogurt</td>
-                                                                <td>$15.00</td>
-                                                                <td>3</td>
-                                                                <td>$45.00</td>
-                                                            </tr>
-                                                            <tr class="total-order-div">
-                                                                <td colspan="3">Thành tiền</td>
-                                                                <td style="font-weight:bold" class="total-order">$45.00</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                </div>
                                             </div>
-
+                                            <div class="modal-body">
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Hình ảnh</th>
+                                                            <th>Tên thực đơn</th>
+                                                            <th>Giá</th>
+                                                            <th>Số lượng</th>
+                                                            <th>Tổng cộng</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="detail-order-list">
+                                                        <tr class="detail-order">
+                                                            <td><img src="~/uploads/product/1Blu Yogurt.png" width="70" height="70" /></td>
+                                                            <td>Yogurt</td>
+                                                            <td>$15.00</td>
+                                                            <td>3</td>
+                                                            <td>$45.00</td>
+                                                        </tr>
+                                                        <tr class="total-order-div">
+                                                            <td colspan="4">Thành tiền</td>
+                                                            <td style="font-weight:bold" class="total-order">$45.00</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
                                         </div>
+
                                     </div>
                                 </div>
+                            </div>
                             </div>
 
                         </div>

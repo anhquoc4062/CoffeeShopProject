@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace CoffeeShopProject.Models
 {
-    public class LoginModel
+    public class EarningMonth
     {
-        public string username { get; set; }
-        public string password { get; set; }
+        public string Month { get; set; }
+        public double? Earning { get; set; }
     }
 }

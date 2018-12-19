@@ -19,7 +19,7 @@
     }
 
     .login-content {
-        height: 550px;
+        height: 600px;
     }
 
     .login-form .au-btn--green {
@@ -52,7 +52,9 @@
                             {
                                 if (ViewBag.NotExist == false)
                                 {
-                                    <p style='text-align:center; color: red'>Tài khoản không tồn tại</p>
+                                    <div class="alert alert-danger" role="alert">
+                                        Tài khoản không tồn tại
+                                    </div>
                                 }
                             }<!--Check account exist-->
                             <form method="post" asp-controller="Login" asp-action="SignIn">

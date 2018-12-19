@@ -66,7 +66,20 @@ namespace CoffeeShopProject.Controllers
                 db.ChiTietGioHang.Add(newDetail);
                 db.SaveChanges();
             }
-            return RedirectToAction("Index", "TrangChu");
+            HttpContext.Session.Remove("cart");
+            ViewBag.Success = "success";
+            ViewBag.City = (from tt in db.TinhThanh select tt);
+            var gioHang = SessionHelper.Get<List<CartItem>>(HttpContext.Session, "cart");
+            ViewBag.Cart = gioHang;
+            if (gioHang != null)
+            {
+                ViewBag.Total = gioHang.Sum(x => x.SoLuong * x.GiaBan);
+            }
+            else
+            {
+                ViewBag.Total = 0;
+            }
+            return View("Index");
         }
     }
 }

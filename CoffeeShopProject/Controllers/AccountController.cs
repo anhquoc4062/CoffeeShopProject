@@ -28,20 +28,20 @@ namespace CoffeeShopProject.Controllers
 
         public IActionResult AddAccountForEmployee(string emp_id, string account_name, string account_password)
         {
+            NhanVien tmp = new NhanVien();
+            tmp.MaNhanVien = int.Parse(emp_id);
+            NhanVien editNv = db.NhanVien.Find(tmp.MaNhanVien);
             TaiKhoanViewModel query_account = new TaiKhoanViewModel(db);
             TaiKhoan newAcc = new TaiKhoan
             {
                 TenTaiKhoan = account_name,
                 MatKhau = account_password,
-                MaPhanQuyen = "nv"
+                MaPhanQuyen = "nv",
+                Email = editNv.Email,
+                AnhDaiDien = editNv.HinhAnh
             };
             query_account.InsertTaiKhoan(newAcc);
-
-            NhanVien tmp = new NhanVien();
-            tmp.MaNhanVien = int.Parse(emp_id);
-            NhanVien editNv = db.NhanVien.Find(tmp.MaNhanVien);
             editNv.MaTaiKhoan = newAcc.MaTaiKhoan;//get last inserted id
-
             NhanVienViewModel query_employee = new NhanVienViewModel(db);
             query_employee.EditNhanVien(editNv);
             var response = query_employee.GetNhanVienById(emp_id);

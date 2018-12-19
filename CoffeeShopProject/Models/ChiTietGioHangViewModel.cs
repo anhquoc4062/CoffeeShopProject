@@ -9,6 +9,7 @@ namespace CoffeeShopProject.Models
     {
         public string TenThucDon { get; set; }
         public double? Gia { get; set; }
+        public string HinhAnh { get; set; }
         private readonly CoffeeShopContext db;
         public ChiTietGioHangViewModel() { }
         public ChiTietGioHangViewModel(CoffeeShopContext _db)
@@ -30,7 +31,7 @@ namespace CoffeeShopProject.Models
                           TenThucDon = td.TenThucDon,
                           Gia = td.GiaKhuyenMai,
                           SoLuong= ctgh.SoLuong,
-
+                          HinhAnh = td.HinhAnh
                       };
             return ds;
         }

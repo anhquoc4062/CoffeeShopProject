@@ -6,7 +6,7 @@
 
 <style>
     #order_detail .modal-content {
-        height: 600px;
+        height: 100%;
         width: 1200px;
         position: relative;
         right: 170px;
@@ -33,7 +33,7 @@
                                 <th>tên</th>
                                 <th>email</th>
                                 <th>trạng thái</th>
-                                <th></th>
+                                <th>chi tiết</th>
                                 <th>ngày đặt</th>
                                 <th>tác vụ</th>
                             </tr>
@@ -46,24 +46,23 @@
                                 <td>@item.Email</td>
                                 @if (item.TrangThai == 1)
                                 {
-                                    <td class="process">Đã xử lý</td>
+                                    <td><a class="sucess" href="#" data-id="@item.MaGioHang">Đã xử lý</a></td>
                                 }
                                 else if (item.TrangThai == 0)
                                 {
-                                    <td class="process" style="color: #d35400 ">Đang xử lý</td>
+                                    <td><a class="fail" href="#" data-id="@item.MaGioHang">Đang xử lý</a></td>
                                 }
                                 else
                                 {
-                                    <td class="process" style="color: #c0392b">Đã hủy</td>
+                                    <td><a class="cancel" href="#" data-id="@item.MaGioHang">Đã hủy</a></td>
                                 }
                                 <td>
                                     <button type="button" class="btn btn-primary detail_order_btn" data-toggle="modal" data-target="#order_detail" data-id-cart="@item.MaGioHang" data-id-customer="@item.MaKhachHang">
-                                        <i class="fa fa-star"></i>
-                                        &nbsp; Xem chi tiết
+                                        <i class="fas fa-eye"></i>
                                     </button>
                                 </td>
                                 <td>@string.Format("{0:d}", item.NgayDat) </td>
-                                <td><a asp-action="RemoveOrder" asp-controller="OrderAdmin" asp-route-id="@item.MaGioHang"><i class="fas fa-trash-alt"></i></a></td>
+                                <td><a asp-action="RemoveOrder" asp-controller="OrderAdmin" asp-route-id="@item.MaGioHang" style="color: #c0392b"><i class="fas fa-trash-alt"></i></a></td>
                             </tr>
                             }
 
