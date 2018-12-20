@@ -47,7 +47,7 @@ namespace CoffeeShopProject.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index", "ProductAdmin");
+                    return RedirectToAction("Index", "DashBoard");
                 }
             }
         }

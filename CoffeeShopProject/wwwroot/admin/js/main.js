@@ -9,7 +9,7 @@ function ChartEmployee(labels, values) {
                 type: 'line',
                 datasets: [{
                     data: values,
-                    label: 'Dataset',
+                    label: 'Employee Quantity',
                     backgroundColor: 'rgba(255,255,255,.1)',
                     borderColor: 'rgba(255,255,255,.55)',
                 },]
@@ -43,6 +43,9 @@ function ChartEmployee(labels, values) {
                         display: false,
                         ticks: {
                             display: false,
+                            suggestedMin: 0,    // minimum will be 0, unless there is a lower value.
+                            // OR //
+                            beginAtZero: true,   // minimum value will be 0.
                         }
                     }]
                 },
@@ -76,7 +79,7 @@ function ChartItem(labels, values) {
                 type: 'line',
                 datasets: [{
                     data: values,
-                    label: 'Dataset',
+                    label: 'Product Quantity',
                     backgroundColor: 'transparent',
                     borderColor: 'rgba(255,255,255,.55)',
                 },]
@@ -149,7 +152,7 @@ function ChartOther(labels, values) {
                 type: 'line',
                 datasets: [{
                     data: values,
-                    label: 'Dataset',
+                    label: 'Order Quantity',
                     backgroundColor: 'transparent',
                     borderColor: 'rgba(255,255,255,.55)',
                 },]
@@ -219,7 +222,7 @@ function ChartEarning(labels, values) {
                 labels: labels,
                 datasets: [
                     {
-                        label: "Doanh thu trong tháng ($)",
+                        label: "Total Earning ($)",
                         data: values,
                         borderColor: "transparent",
                         borderWidth: "0",

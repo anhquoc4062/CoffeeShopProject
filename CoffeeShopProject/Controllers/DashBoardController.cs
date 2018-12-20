@@ -29,7 +29,7 @@ namespace CoffeeShopProject.Controllers
                 listEarning.Add(new EarningMonth
                 {
                     Month = "Tháng " + i.ToString(),
-                    Earning = query_gh.GetEarningByMonth(i),
+                    Earning = Math.Round(query_gh.GetEarningByMonth(i).GetValueOrDefault(), 0),
                     EmployeeCount = query_nv.GetCountEmployeeByMonth(i),
                     ItemCount = query_gh.GetItemCountByMonth(i),
                     OrderCount = query_gh.GetOrderCountByMonth(i),
