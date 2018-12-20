@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 
 namespace CoffeeShopProject.Models
 {
-    public class DanhGiaViewModel:DanhGia
+    public class DanhGiaViewModel : DanhGia
     {
         public string AnhDaiDien { get; set; }
         public string TenTaiKhoan { get; set; }
+        public string HinhAnh { get; set; }
+        public string TenThucDon { get; set; }
         private readonly CoffeeShopContext db;
         public DanhGiaViewModel() { }
         public DanhGiaViewModel(CoffeeShopContext _db)
@@ -30,6 +32,12 @@ namespace CoffeeShopProject.Models
                           TenTaiKhoan = tk.TenTaiKhoan,
                           NgayDanhGia = dg.NgayDanhGia
                       }).ToList();
+            foreach(var item in ds)
+            {
+                var td = db.ThucDon.Where(x => x.MaThucDon == item.MaThucDon).SingleOrDefault();
+                item.HinhAnh = td.HinhAnh;
+                item.TenThucDon = td.TenThucDon;
+            }
             return ds;
         }
         public List<DanhGiaViewModel> GetDanhGiaByProduct(string product_id)

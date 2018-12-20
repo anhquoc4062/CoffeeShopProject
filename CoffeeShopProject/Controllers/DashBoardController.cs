@@ -19,18 +19,28 @@ namespace CoffeeShopProject.Controllers
         {
             ViewBag.EmployeeCount = (from nv in db.NhanVien select nv).Count();
             var listEarning = new List<EarningMonth>();
-            GioHangViewModel query = new GioHangViewModel(db);
+            GioHangViewModel query_gh = new GioHangViewModel(db);
+            NhanVienViewModel query_nv = new NhanVienViewModel(db);
             double? totalEarning = 0.0;
+            int? totalItems = 0;
+            int totalOrders = 0;
             for(int i = 1; i <= 12; i++)
             {
                 listEarning.Add(new EarningMonth
                 {
                     Month = "Tháng " + i.ToString(),
-                    Earning = query.GetEarningByMonth(i)
+                    Earning = query_gh.GetEarningByMonth(i),
+                    EmployeeCount = query_nv.GetCountEmployeeByMonth(i),
+                    ItemCount = query_gh.GetItemCountByMonth(i),
+                    OrderCount = query_gh.GetOrderCountByMonth(i),
                 });
-                totalEarning += query.GetEarningByMonth(i);
+                totalEarning += query_gh.GetEarningByMonth(i);
+                totalItems += query_gh.GetItemCountByMonth(i);
+                totalOrders += query_gh.GetOrderCountByMonth(i);
             }
             ViewBag.TotalEarning = totalEarning;
+            ViewBag.TotalItems = totalItems;
+            ViewBag.TotalOrders = totalOrders;
             return View(listEarning);
         }
     }

@@ -79,5 +79,11 @@ namespace CoffeeShopProject.Models
             return false;
             //return new NhanVienViewModel(db).GetDsNhanVien();
         }
+        
+        public int GetCountEmployeeByMonth(int month)
+        {
+            int count = db.NhanVien.Where(x => x.NgayBatDau.Value.Month == month).Count();
+            return count;
+        }
     }
 }

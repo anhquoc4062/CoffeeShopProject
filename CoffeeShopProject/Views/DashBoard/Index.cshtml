@@ -1,7 +1,10 @@
 ﻿@model List<EarningMonth>
 @{
     var Labels = Newtonsoft.Json.JsonConvert.SerializeObject(Model.Select(x => x.Month).ToList());
-    var Values = Newtonsoft.Json.JsonConvert.SerializeObject(Model.Select(x => x.Earning).ToList());
+    var Employee = Newtonsoft.Json.JsonConvert.SerializeObject(Model.Select(x => x.EmployeeCount).ToList());
+    var Earning = Newtonsoft.Json.JsonConvert.SerializeObject(Model.Select(x => x.Earning).ToList());
+    var Item = Newtonsoft.Json.JsonConvert.SerializeObject(Model.Select(x => x.ItemCount).ToList());
+    var Order = Newtonsoft.Json.JsonConvert.SerializeObject(Model.Select(x => x.OrderCount).ToList());
     ViewData["Title"] = "Index";
     Layout = "~/Views/Layout/Admin/Layout.cshtml";
 }
@@ -41,11 +44,11 @@
                     <div class="overview__inner">
                         <div class="overview-box clearfix">
                             <div class="icon">
-                                <i class="zmdi zmdi-shopping-cart"></i>
+                                <i class="zmdi zmdi-coffee"></i>
                             </div>
                             <div class="text">
-                                <h2>388,688</h2>
-                                <span>items solid</span>
+                                <h2>@ViewBag.TotalItems</h2>
+                                <span>products sold</span>
                             </div>
                         </div>
                         <div class="overview-chart">
@@ -59,11 +62,11 @@
                     <div class="overview__inner">
                         <div class="overview-box clearfix">
                             <div class="icon">
-                                <i class="zmdi zmdi-calendar-note"></i>
+                                <i class="zmdi zmdi-shopping-cart"></i>
                             </div>
                             <div class="text">
-                                <h2>1,086</h2>
-                                <span>this week</span>
+                                <h2>@ViewBag.TotalOrders</h2>
+                                <span>total orders</span>
                             </div>
                         </div>
                         <div class="overview-chart">
@@ -86,44 +89,7 @@
                         </div>
                         <div class="overview-chart">
                             <canvas id="widgetChart4"></canvas>
-                            <script type="text/javascript">
-                                //totalEarning
-                                var ctx = document.getElementById("widgetChart4");
-                                if (ctx) {
-                                    ctx.height = 115;
-                                    var myChart = new Chart(ctx, {
-                                        type: 'bar',
-                                        data: {
-                                            labels: @Html.Raw(Labels),
-                                            datasets: [
-                                                {
-                                                    label: "Doanh thu trong tháng ($)",
-                                                    data: @Html.Raw(Values),
-                                                    borderColor: "transparent",
-                                                    borderWidth: "0",
-                                                    backgroundColor: "rgba(255,255,255,.3)"
-                                                }
-                                            ]
-                                        },
-                                        options: {
-                                            maintainAspectRatio: true,
-                                            legend: {
-                                                display: false
-                                            },
-                                            scales: {
-                                                xAxes: [{
-                                                    display: false,
-                                                    categoryPercentage: 1,
-                                                    barPercentage: 0.65
-                                                }],
-                                                yAxes: [{
-                                                    display: false
-                                                }]
-                                            }
-                                        }
-                                    });
-                                }
-                            </script>
+                            
                         </div>
                     </div>
                 </div>
@@ -231,4 +197,12 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        ChartEarning(@Html.Raw(Labels), @Html.Raw(Earning));
+        ChartEmployee(@Html.Raw(Labels), @Html.Raw(Employee));
+        ChartItem(@Html.Raw(Labels), @Html.Raw(Item));
+        ChartOther(@Html.Raw(Labels), @Html.Raw(Order));
+    });
+</script>
 

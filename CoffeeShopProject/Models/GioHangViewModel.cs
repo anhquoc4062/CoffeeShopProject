@@ -89,5 +89,28 @@ namespace CoffeeShopProject.Models
             }
             return total;
         }
+
+        public int? GetItemCountByMonth(int month)
+        {
+            var listGh = db.GioHang.Where(x => x.NgayDat.Value.Month == month).ToList();
+            int? total = 0;
+            foreach (var gh in listGh)
+            {
+                var listDetail = db.ChiTietGioHang.Where(x => x.MaGioHang == gh.MaGioHang).ToList();
+                foreach (var ctgh in listDetail)
+                {
+                    var giaTd = (from td in db.ThucDon
+                                 select td).Where(x => x.MaThucDon == ctgh.MaThucDon).Select(x => x.GiaKhuyenMai).SingleOrDefault();
+                    total += ctgh.SoLuong;
+                }
+            }
+            return total;
+        }
+
+        public int GetOrderCountByMonth(int month)
+        {
+            int count = db.GioHang.Where(x => x.NgayDat.Value.Month == month).Count();
+            return count;
+        }
     }
 }

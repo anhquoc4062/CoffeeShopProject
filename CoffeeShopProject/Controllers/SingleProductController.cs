@@ -22,7 +22,7 @@ namespace CoffeeShopProject.Controllers
             var td = query.GetDataById(id);
             ViewBag.CungLoai = query.GetAllDataByCate(td.MaLoai.ToString()).Take(4);
             DanhGiaViewModel query_dg = new DanhGiaViewModel(db);
-            ViewBag.ListDanhGia = query_dg.GetDanhGiaByProduct(id);
+            ViewBag.ListDanhGia = query_dg.GetDanhGiaByProduct(id).OrderByDescending(x => x.MaDanhGia);
             return View(td);
         }
         [HttpPost]

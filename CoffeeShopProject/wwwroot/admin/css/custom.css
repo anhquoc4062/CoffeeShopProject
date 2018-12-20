@@ -352,3 +352,6 @@ ul#pagination-demo {
 .table-data3 a.cancel:hover {
     background: #e67e22;
 }
+.table-earning tbody tr td {
+    vertical-align: middle;
+}

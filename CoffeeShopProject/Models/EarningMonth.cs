@@ -9,5 +9,8 @@ namespace CoffeeShopProject.Models
     {
         public string Month { get; set; }
         public double? Earning { get; set; }
+        public int EmployeeCount { get; set; }
+        public int? ItemCount { get; set; }
+        public int OrderCount { get; set; }
     }
 }
