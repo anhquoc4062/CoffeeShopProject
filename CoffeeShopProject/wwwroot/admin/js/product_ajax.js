@@ -106,7 +106,6 @@ $(document).ready(function () {
                 $("#add_modal").modal('hide');
                 swal("Thành công", "Đã thêm thực đơn", "success");
                 LoadProduct(response);
-                LoadPagination(filter);
             },
             error: function (error) {
                 alert("errror");

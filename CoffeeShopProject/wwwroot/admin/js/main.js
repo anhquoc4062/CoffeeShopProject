@@ -254,7 +254,7 @@ function ChartPercent(labels, values) {
     // Percent Chart
     var ctx = document.getElementById("percent-chart");
     if (ctx) {
-        ctx.height = 280;
+        ctx.height = 150;
         var myChart = new Chart(ctx, {
             type: 'doughnut',
             data: {
@@ -264,16 +264,19 @@ function ChartPercent(labels, values) {
                         data: values,
                         backgroundColor: [
                             '#00b5e9',
-                            '#fa4251'
+                            '#fa4251',
+                            '#00ad5f'
                         ],
                         hoverBackgroundColor: [
                             '#00b5e9',
-                            '#fa4251'
+                            '#fa4251',
+                            '#00ad5f'
                         ],
                         borderWidth: [
                             0, 0
                         ],
                         hoverBorderColor: [
+                            'transparent',
                             'transparent',
                             'transparent'
                         ]
@@ -394,59 +397,59 @@ function ChartPercent(labels, values) {
     }
 
     // Percent Chart
-    var ctx = document.getElementById("percent-chart");
-    if (ctx) {
-      ctx.height = 280;
-      var myChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-          datasets: [
-            {
-              label: "My First dataset",
-              data: [60, 40],
-              backgroundColor: [
-                '#00b5e9',
-                '#fa4251'
-              ],
-              hoverBackgroundColor: [
-                '#00b5e9',
-                '#fa4251'
-              ],
-              borderWidth: [
-                0, 0
-              ],
-              hoverBorderColor: [
-                'transparent',
-                'transparent'
-              ]
-            }
-          ],
-          labels: [
-            'Products',
-            'Services'
-          ]
-        },
-        options: {
-          maintainAspectRatio: false,
-          responsive: true,
-          cutoutPercentage: 55,
-          animation: {
-            animateScale: true,
-            animateRotate: true
-          },
-          legend: {
-            display: false
-          },
-          tooltips: {
-            titleFontFamily: "Poppins",
-            xPadding: 15,
-            yPadding: 10,
-            caretPadding: 0,
-            bodyFontSize: 16
-          }
-        }
-      });
-    }
+    //var ctx = document.getElementById("percent-chart");
+    //if (ctx) {
+    //  ctx.height = 280;
+    //  var myChart = new Chart(ctx, {
+    //    type: 'doughnut',
+    //    data: {
+    //      datasets: [
+    //        {
+    //          label: "My First dataset",
+    //          data: [60, 40],
+    //          backgroundColor: [
+    //            '#00b5e9',
+    //            '#fa4251'
+    //          ],
+    //          hoverBackgroundColor: [
+    //            '#00b5e9',
+    //            '#fa4251'
+    //          ],
+    //          borderWidth: [
+    //            0, 0
+    //          ],
+    //          hoverBorderColor: [
+    //            'transparent',
+    //            'transparent'
+    //          ]
+    //        }
+    //      ],
+    //      labels: [
+    //        'Products',
+    //        'Services'
+    //      ]
+    //    },
+    //    options: {
+    //      maintainAspectRatio: false,
+    //      responsive: true,
+    //      cutoutPercentage: 55,
+    //      animation: {
+    //        animateScale: true,
+    //        animateRotate: true
+    //      },
+    //      legend: {
+    //        display: false
+    //      },
+    //      tooltips: {
+    //        titleFontFamily: "Poppins",
+    //        xPadding: 15,
+    //        yPadding: 10,
+    //        caretPadding: 0,
+    //        bodyFontSize: 16
+    //      }
+    //    }
+    //  });
+    //}
 
   } catch (error) {
     console.log(error);

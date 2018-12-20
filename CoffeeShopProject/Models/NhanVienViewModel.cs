@@ -85,5 +85,20 @@ namespace CoffeeShopProject.Models
             int count = db.NhanVien.Where(x => x.NgayBatDau.Value.Month == month).Count();
             return count;
         }
+
+        public int GetPercentEmployeePosition(int position_id)
+        {
+            var list = (from nv in db.NhanVien select nv).ToList();
+            double total = list.Count();
+            double totalPosition = list.Where(x => x.MaChucVu == position_id).Count();
+            var res = Convert.ToInt32((totalPosition / total) * 100);
+            return res;
+        }
+
+        public string GetNameOfPosition(int position_id)
+        {
+            string name = db.ChucVu.Where(x => x.MaChucVu == position_id).Select(x => x.TenChucVu).ToString();
+            return name;
+        }
     }
 }

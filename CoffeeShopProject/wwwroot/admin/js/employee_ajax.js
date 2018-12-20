@@ -5,7 +5,7 @@
         htmlString += '</td><td><img src="/uploads/employee/' + data[i].hinhAnh + '" width="80" height="70" /></td>';
         htmlString += '<td><div class="table-data__info"><h6>' + data[i].hoTen + '</h6><span><a href="#">' + data[i].email + '</a></span></div>';
         htmlString += '</td><td>'+data[i].tenChucVu+'</td><td>$' + data[i].luong.toFixed(2) + '</td>';
-        htmlString += '<td><button class="btn btn-danger emp_btn" data-action="Edit" data-id="' + data[i].maNhanVien + '" data-toggle="modal" data-target="#add_employee_modal"><i class="fas fa-user-edit"></i></button></td></tr>';
+        htmlString += '<td><button class="btn btn-danger emp_btn" data-action="Edit" data-id="' + data[i].maNhanVien + '" data-toggle="modal" data-target="#add_employee_modal"><i class="zmdi zmdi-edit"></i></td></tr>';
     }
     $("#table_employee_list tr").remove();
     $("#table_employee_list").append(htmlString).hide().fadeIn(1000);

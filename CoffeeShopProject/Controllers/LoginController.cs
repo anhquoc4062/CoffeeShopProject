@@ -60,30 +60,40 @@ namespace CoffeeShopProject.Controllers
         public IActionResult SignUp(string username, string password, 
                                     string email, IFormFile avatar)
         {
-            TaiKhoan newTk = new TaiKhoan
+            var check_exist = db.TaiKhoan.SingleOrDefault(x => x.TenTaiKhoan == username);
+            if (check_exist == null)
             {
-                TenTaiKhoan = username,
-                MatKhau = password,
-                Email = email,
-                MaPhanQuyen = "kh"
-            };
-            if (avatar != null)
-            {
-                string path_to_image = "wwwroot/uploads/employee/" + avatar.FileName;
-                using (var stream = new FileStream(path_to_image, FileMode.Create))
+                TaiKhoan newTk = new TaiKhoan
                 {
-                    avatar.CopyTo(stream);
+                    TenTaiKhoan = username,
+                    MatKhau = password,
+                    Email = email,
+                    MaPhanQuyen = "kh"
+                };
+                if (avatar != null)
+                {
+                    string path_to_image = "wwwroot/uploads/employee/" + avatar.FileName;
+                    using (var stream = new FileStream(path_to_image, FileMode.Create))
+                    {
+                        avatar.CopyTo(stream);
+                    }
+                    newTk.AnhDaiDien = avatar.FileName;
                 }
-                newTk.AnhDaiDien = avatar.FileName;
+                else
+                {
+                    newTk.AnhDaiDien = "none-avatar.jpg";
+                }
+                db.TaiKhoan.Add(newTk);
+                db.SaveChanges();
+                ViewBag.RegisterSucess = true;
+                return View("Index");
             }
             else
             {
-                newTk.AnhDaiDien = "none-avatar.jpg";
+                ViewBag.AccExist = false;
+                return View("SignUp");
             }
-            db.TaiKhoan.Add(newTk);
-            db.SaveChanges();
             
-            return RedirectToAction("Index");
         }
 
         public IActionResult SignOut()

@@ -36,8 +36,8 @@
                             <tr>
                                 <th>họ tên</th>
                                 <th>email</th>
-                                <th>tài khoản</th>
                                 <th class="text-center">số điện thoại</th>
+                                <th>tỉnh thành</th>
                                 <th>tác vụ</th>
                             </tr>
                         </thead>
@@ -47,15 +47,8 @@
                             <tr>
                                 <td>@cus.TenKhachHang</td>
                                 <td>@cus.Email</td>
-                                @if (cus.MaTaiKhoan != null)
-                                {
-                                    <td class="process">Đã đăng ký</td>
-                                }
-                                else
-                                {
-                                    <td class="denied">Chưa đăng ký</td>
-                                }
                                 <td class="text-center">@cus.SoDt</td>
+                                <td>@cus.TenTinhThanh</td>
                                 <td>
                                     <button class="btn btn-danger customer_btn" data-action="Edit" data-id="@cus.MaKhachHang" data-toggle="modal" data-target="#view_customer_modal"><i class="fas fa-user"></i></button>
                                 </td>

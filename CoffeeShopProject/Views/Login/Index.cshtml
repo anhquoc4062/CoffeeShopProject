@@ -57,6 +57,12 @@
                                     </div>
                                 }
                             }<!--Check account exist-->
+                            @if (ViewBag.RegisterSucess != null)
+                            {
+                                    <div class="alert alert-success" role="alert">
+                                        Đăng ký thành công. Bạn có thể đăng nhập
+                                    </div>
+                            }<!--Success sign up-->
                             <form method="post" asp-controller="Login" asp-action="SignIn">
                                 <div class="form-group">
                                     <label>Username</label>

@@ -8,15 +8,24 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Layout/Admin/Layout.cshtml";
 }
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="~/admin/vendor/jquery-3.2.1.min.js"></script>
+<script src="~/admin/vendor/chartjs/Chart.bundle.min.js"></script>
+<style>
+    .au-card.recent-report {
+        margin-top: -28px;
+        height: 380px;
+    }
 
+    .main-content {
+        min-height: 150vh;
+    }
+</style>
 <div class="section__content section__content--p30">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="overview-wrap">
-                    <h2 class="title-1">overview</h2>
+                    <h2 class="title-1">Overview</h2>
                 </div>
             </div>
         </div>
@@ -100,17 +109,21 @@
             <div class="col-lg-6">
                 <div class="au-card chart-percent-card">
                     <div class="au-card-inner">
-                        <h3 class="title-2 tm-b-5">char by %</h3>
+                        <h3 class="title-2 tm-b-5">position by %</h3>
                         <div class="row no-gutters">
                             <div class="col-xl-6">
                                 <div class="chart-note-wrap">
                                     <div class="chart-note mr-0 d-block">
                                         <span class="dot dot--blue"></span>
-                                        <span>products</span>
+                                        <span>pha chế</span>
                                     </div>
                                     <div class="chart-note mr-0 d-block">
                                         <span class="dot dot--red"></span>
-                                        <span>services</span>
+                                        <span>phục vụ</span>
+                                    </div>
+                                    <div class="chart-note mr-0 d-block">
+                                        <span class="dot dot--green"></span>
+                                        <span>thu ngân</span>
                                     </div>
                                 </div>
                             </div>
@@ -119,6 +132,41 @@
                                     <canvas id="percent-chart"></canvas>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="au-card recent-report">
+                    <div class="au-card-inner">
+                        <h3 class="title-2">recent reports</h3>
+                        <div class="chart-info">
+                            <div class="chart-info__left">
+                                <div class="chart-note">
+                                    <span class="dot dot--blue"></span>
+                                    <span>products</span>
+                                </div>
+                                <div class="chart-note mr-0">
+                                    <span class="dot dot--green"></span>
+                                    <span>services</span>
+                                </div>
+                            </div>
+                            <div class="chart-info__right">
+                                <div class="chart-statis">
+                                    <span class="index incre">
+                                        <i class="zmdi zmdi-long-arrow-up"></i>25%
+                                    </span>
+                                    <span class="label">products</span>
+                                </div>
+                                <div class="chart-statis mr-0">
+                                    <span class="index decre">
+                                        <i class="zmdi zmdi-long-arrow-down"></i>10%
+                                    </span>
+                                    <span class="label">services</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="recent-report__chart">
+                            <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                            <canvas id="recent-rep-chart" height="312" width="595" class="chartjs-render-monitor" style="display: block; height: 250px; width: 476px;"></canvas>
                         </div>
                     </div>
                 </div>
@@ -203,6 +251,7 @@
         ChartEmployee(@Html.Raw(Labels), @Html.Raw(Employee));
         ChartItem(@Html.Raw(Labels), @Html.Raw(Item));
         ChartOther(@Html.Raw(Labels), @Html.Raw(Order));
+        ChartPercent(@Html.Raw(ViewBag.PositionName), @Html.Raw(ViewBag.Percent))
     });
 </script>
 

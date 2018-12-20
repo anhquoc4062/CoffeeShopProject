@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-lg-9">
                 <div class="rating-content">
-                    @if (ViewBag.ListDanhGia.Count == 0)
+                    @if (ViewBag.ListDanhGia == null)
                     {
                         <div class="container">
                             <div class="row text-center">
@@ -19,31 +19,41 @@
                     }
                     else
                     {
+                        var total = 0;
                         @foreach (var item in ViewBag.ListDanhGia)
                         {
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-11">
-                                    <div class="media comment-box">
-                                        <div class="media-left">
-                                            <a href="#">
-                                                <img class="img-responsive user-photo" src="~/uploads/employee/@item.AnhDaiDien">
-                                            </a>
-                                        </div>
-                                        <div class="media-body">
-                                            <h4 class="media-heading">@item.TenTaiKhoan</h4>
+                            total++;
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-11">
+                                        <div class="media comment-box">
+                                            <div class="media-left">
+                                                <a href="#">
+                                                    <img class="img-responsive user-photo" src="~/uploads/employee/@item.AnhDaiDien">
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="media-heading">@item.TenTaiKhoan</h4>
 
-                                            <p class="rating-comment">@item.LoiNhanXet</p>
-                                            <p class="rating-date">Vào lúc @item.NgayDanhGia</p>
+                                                <p class="rating-comment">@item.LoiNhanXet</p>
+                                                <p class="rating-date">Vào lúc @item.NgayDanhGia</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
                         }
+                        if (total == 0)
+                        {
+                            <div class="container">
+                                <div class="row text-center">
+                                    <p style="padding: 18px">Chưa có lời đánh giá nào cho sản phẩm này. Bạn hãy là người đầu tiên.</p>
+                                </div>
+                            </div>
+                        }
                     }
-                        </div>
+                </div>
 
                     </div>
         </div>
