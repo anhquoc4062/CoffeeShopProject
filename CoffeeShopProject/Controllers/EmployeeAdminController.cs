@@ -60,6 +60,7 @@ namespace CoffeeShopProject.Controllers
             newEmp.Cmnd = emp_identity;
             newEmp.Email = emp_email;
             newEmp.MoTa = emp_info;
+            newEmp.NgayBatDau = DateTime.Now;
 
             NhanVienViewModel query = new NhanVienViewModel(db);
             query.InsertNhanVien(newEmp);
@@ -104,7 +105,8 @@ namespace CoffeeShopProject.Controllers
                 }
                 editEmployee.HinhAnh = emp_img.FileName;
             }
-
+            NhanVien tmp = db.NhanVien.SingleOrDefault(x => x.MaNhanVien == int.Parse(emp_id));
+            editEmployee.NgayBatDau = tmp.NgayBatDau;
             NhanVienViewModel query = new NhanVienViewModel(db);
             query.EditNhanVien(editEmployee);
             if(editEmployee.MaTaiKhoan != null)
