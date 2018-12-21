@@ -17,7 +17,7 @@ namespace CoffeeShopProject.Controllers
         public IActionResult Index()
         {
             DanhGiaViewModel query = new DanhGiaViewModel(db);
-            ViewBag.ListReview = query.GetDsDanhGia();
+            ViewBag.ListReview = query.GetDsDanhGia().OrderByDescending(x => x.NgayDanhGia);
             return View();
         }
         public IActionResult RemoveReview(int id)

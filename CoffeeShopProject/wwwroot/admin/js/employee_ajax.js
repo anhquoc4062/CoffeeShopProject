@@ -59,7 +59,6 @@ $(document).ready(function () {
                 }
             },
             error: function (error) {
-                alert("errror");
             }
         });
     }
@@ -78,7 +77,6 @@ $(document).ready(function () {
                 LoadEmployee(response);
             },
             error: function (error) {
-                alert("lỗi thêm nhân viên");
             }
         });
     }
@@ -97,7 +95,6 @@ $(document).ready(function () {
                 LoadEmployee(response);
             },
             error: function (error) {
-                alert("errror");
             }
         });
     }
@@ -112,7 +109,6 @@ $(document).ready(function () {
                 LoadEmployee(response);
             },
             error: function (error) {
-                alert("errror");
             }
         });
     }

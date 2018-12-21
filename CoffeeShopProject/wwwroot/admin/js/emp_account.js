@@ -9,7 +9,6 @@
                 $("#account_password").val(response.matKhau);
             },
             error: function (error) {
-                alert("errror");
             }
         });
     }
@@ -49,7 +48,6 @@
                 console.log(response);
             },
             error: function (error) {
-                alert("errror");
             }
         });
     });

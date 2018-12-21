@@ -22,11 +22,27 @@
     <div class="container checkout-area">
         @if (ViewBag.Success != null)
         {
-            <div class="alert alert-success" role="alert">
-                Đơn hàng của bạn đã được gửi đi.
+            if (ViewBag.Success == true)
+            {
+                <div class="alert alert-success" role="alert">
+                    Đơn hàng của bạn đã được gửi đi.
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-danger" role="alert">
+                    Giỏ hàng đang trống. Bạn không thể thanh toán.
+                </div>
+            }
+
+        }
+        @if (Context.Session.GetString("USERNAME_SESSION") == null && ViewBag.Success == null)
+        {
+
+            <div class="alert alert-info" role="alert">
+                Nếu bạn có tài khoản. Hãy <a asp-action="Index" asp-controller="Login">đăng nhập</a> để có thể xem thông tin đơn hàng
             </div>
         }
-
         <form asp-controller="Checkout" asp-action="AddOrder">
             <input name="account_id" value="@Context.Session.GetString("ACCID_SESSION")" hidden />
             <div class="form-field">
@@ -94,6 +110,12 @@
                                     <td>$@string.Format("{0:N2}", item.GiaBan)</td>
                                 </tr>
                             }
+                        }
+                        @if (ViewBag.Total == 0)
+                        {
+                            <tr>
+                                <td colspan="2" style="padding-left: 80px">Chưa có sản phẩm trong giỏ</td>
+                            </tr>
                         }
 
                         <tr>

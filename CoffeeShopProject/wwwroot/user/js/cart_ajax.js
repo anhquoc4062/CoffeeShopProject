@@ -29,7 +29,6 @@ function LoadHiddenCart() {
         url: '/Cart/LoadCartHidden',
         dataType: 'json',
         success: function (response) {
-            console.log(response);
             LoadCart(response);
         },
         error: function (error) {
@@ -40,16 +39,25 @@ $(document).ready(function () {
 
     LoadHiddenCart();
 
+    function ResetButton(that) {
+        $(that).html('<i class="fas fa-check"></i>');
+    }
+
     $(document).on('click', '.order-button button', function (event) {
         event.preventDefault();
         console.log("da click");
         var product_id = $(this).attr("data-id");
+        var $this = $(this);
+        $(this).html('<i class="fas fa-check"></i>');
+        setTimeout(function () {
+            console.log($this.text());
+            $this.html('Mua hàng');
+        }, 1000);
         $.ajax({
             type: "GET",
             url: '/Cart/AddToCart?id=' + product_id,
             dataType: 'json',
             success: function (response) {
-                console.log(response);
                 LoadCart(response);
             },
             error: function (error) {
@@ -61,12 +69,16 @@ $(document).ready(function () {
         event.preventDefault();
         console.log("da click");
         var product_id = $(this).attr("data-id");
+        var $this = $(this);
+        $(this).html('<i class="fas fa-check"></i>');
+        setTimeout(function () {
+            $this.html('THÊM VÀO GIỎ');
+        }, 1000);
         $.ajax({
             type: "GET",
             url: '/Cart/AddToCart?id=' + product_id,
             dataType: 'json',
             success: function (response) {
-                console.log(response);
                 LoadCart(response);
             },
             error: function (error) {

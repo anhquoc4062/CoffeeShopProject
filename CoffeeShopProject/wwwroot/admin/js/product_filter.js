@@ -13,7 +13,6 @@
                 LoadPagination(category_id);
             },
             error: function (error) {
-                alert("errror");
             }
         });
     });

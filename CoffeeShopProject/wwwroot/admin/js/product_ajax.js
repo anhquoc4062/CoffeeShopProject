@@ -38,13 +38,10 @@ function SearchProduct(keyword, page) {
         url: '/ProductAdmin/SearchProduct?keyword=' + keyword + '&page=' + page,
         dataType: 'json',
         success: function (response) {
-            console.log(response);
             LoadProduct(response);
 
         },
         error: function (error) {
-            alert("Lỗi");
-            console.log(error);
         }
     });
 }
@@ -60,7 +57,7 @@ $(document).ready(function () {
         var discount = $("#product_discount").val();
         var info = $("#product_info").val();
         var page = $('li.page-item.active').find("a.page-link").text();
-        var filter = $("#category_filter").children("option:selected").val();
+        var filter = $("#category_filter").val();
 
         formData.append("product_img", image);
         formData.append("product_name", name);
@@ -88,13 +85,12 @@ $(document).ready(function () {
                 $("#old_product_img").val(response.hinhAnh);
             },
             error: function (error) {
-                alert("errror");
             }
         });
     }
 
     function AddProduct(formData) {
-        var filter = $("#category_filter").children("option:selected").val();
+        var filter = $("#category_filter").val();
         $.ajax({
             type: "POST",
             url: '/ProductAdmin/AddProduct',
@@ -108,7 +104,6 @@ $(document).ready(function () {
                 LoadProduct(response);
             },
             error: function (error) {
-                alert("errror");
             }
         });
     }
@@ -127,33 +122,44 @@ $(document).ready(function () {
                 LoadProduct(response);
             },
             error: function (error) {
-                alert("errror");
             }
         });
     }
 
     function DeleteProduct(id) {
         var page = $('li.page-item.active').find("a.page-link").text();
-        var filter = $("#category_filter").children("option:selected").val();
-        $.ajax({
-            type: "GET",
-            url: '/ProductAdmin/DeleteProduct?id=' + id + '&filter=' + filter + '&page=' + page,
-            dataType: 'json',
-            success: function (response) {
-                $("#add_modal").modal('hide');
-                LoadProduct(response);
+        var filter = $("#category_filter").val();
+        if (filter == null) {
+            var keyword = $("#search_input").val();
+            $.ajax({
+                type: "GET",
+                url: '/ProductAdmin/DeleteProductSearch?id=' + id + '&keyword=' + keyword + '&page=' + page,
+                dataType: 'json',
+                success: function (response) {
+                    $("#add_modal").modal('hide');
+                    LoadProduct(response);
 
-            },
-            error: function (error) {
-                alert("Lỗi");
-                console.log(error);
-            }
-        });
+                }
+            });
+        }
+        else {
+            $.ajax({
+                type: "GET",
+                url: '/ProductAdmin/DeleteProduct?id=' + id + '&filter=' + filter + '&page=' + page,
+                dataType: 'json',
+                success: function (response) {
+                    $("#add_modal").modal('hide');
+                    LoadProduct(response);
+
+                }
+            });
+        }
+        
     }
 
 
     $(document).on('click', '.product_btn', function (event) {
-        var filter = $("#category_filter").children("option:selected").val();
+        var filter = $("#category_filter").val();
         if ($(this).attr('data-action') == 'Add') {
             $("#add_product_modal_title").html('Thêm sản phẩm');
             $("#add_product_btn").html('Thêm').attr('data-action', 'add_submit');
@@ -179,7 +185,6 @@ $(document).ready(function () {
                         swal("Xóa thành công!", {
                             icon: "success",
                         });
-                        LoadPagination(filter);
                     }
                 });
         }

@@ -30,7 +30,6 @@
                 $("#category_filter").append(filterHtmlString);
             },
             error: function () {
-                alert("Lỗi")
             }
         }); 
     });

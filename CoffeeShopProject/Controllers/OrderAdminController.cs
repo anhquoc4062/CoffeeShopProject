@@ -17,7 +17,7 @@ namespace CoffeeShopProject.Controllers
         public IActionResult Index()
         {
             GioHangViewModel query = new GioHangViewModel(db);
-            ViewBag.ListOrder = query.GetDsGioHang();
+            ViewBag.ListOrder = query.GetDsGioHang().OrderByDescending(x => x.NgayDat);
             return View();
         }
         public IActionResult GetDetailOrder(string cart_id)

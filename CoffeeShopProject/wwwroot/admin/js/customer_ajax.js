@@ -27,7 +27,6 @@
         });
     }
     $(document).on('click', '.customer_btn', function (event) {
-        console.log("da click");
         var customer_id = $(this).attr("data-id");
         GetCustomerInfo(customer_id);
     });

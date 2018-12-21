@@ -25,7 +25,13 @@
             </div>
             <div class="col-lg-6 video-left">
                 <h1>@Model.TenThucDon</h1>
-                <h6>$@string.Format("{0:N2}", Model.GiaKhuyenMai) <del style="color: #bdc3c7; font-size: 15px">$@string.Format("{0:N2}", Model.Gia)</del> </h6>
+                <h6>
+                    $@string.Format("{0:N2}", Model.GiaKhuyenMai)
+                    @if (Model.KhuyenMai != 0)
+                    {
+                        <del style="color: #bdc3c7; font-size: 15px">$@string.Format("{0:N2}", Model.Gia)</del>
+                    }
+                </h6>
                 <p>
                     <span style="text-transform:uppercase; font-weight:bold; color: #262626">Thể loại:</span> @Model.TenLoai
                 </p>
