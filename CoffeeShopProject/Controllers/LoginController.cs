@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using CoffeeShopProject.Common;
 using CoffeeShopProject.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -37,7 +39,6 @@ namespace CoffeeShopProject.Controllers
                 HttpContext.Session.SetString("ACCID_SESSION", tk.MaTaiKhoan.ToString());
                 HttpContext.Session.SetString("AVATAR_SESSION", tk.AnhDaiDien.ToString());
                 HttpContext.Session.SetString("EMAIL_SESSION", tk.Email.ToString());
-                HttpContext.Session.SetString("ACCID_SESSION", tk.MaTaiKhoan.ToString());
                 CommonConstant.ACCOUNT_SESSION = HttpContext.Session.GetString("USERNAME_SESSION");
                 CommonConstant.CREDENTITY = HttpContext.Session.GetString("CREDENTITY_SESSION");
                 CommonConstant.ACCID_SESSION = HttpContext.Session.GetString("ACCID_SESSION");
@@ -50,6 +51,13 @@ namespace CoffeeShopProject.Controllers
                     return RedirectToAction("Index", "DashBoard");
                 }
             }
+        }
+        public IActionResult SignInFacebook(string provider = "Facebook", string returnUrl = null) => Challenge(new AuthenticationProperties { RedirectUri = Url.Action("CallBackFacebook") }, provider);
+        public IActionResult CallBackFacebook()
+        {
+            HttpContext.Session.SetString("USERNAME_SESSION", User.Identity.Name);
+            HttpContext.Session.SetString("CREDENTITY_SESSION", "kh");
+            return RedirectToAction("Index", "TrangChu");
         }
         public IActionResult SignUp()
         {
@@ -99,6 +107,7 @@ namespace CoffeeShopProject.Controllers
         public IActionResult SignOut()
         {
             HttpContext.Session.Clear();
+            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             CommonConstant.ACCOUNT_SESSION = HttpContext.Session.GetString("USERNAME_SESSION");
             CommonConstant.CREDENTITY = HttpContext.Session.GetString("CREDENTITY_SESSION");
             return RedirectToAction("Index", "TrangChu");

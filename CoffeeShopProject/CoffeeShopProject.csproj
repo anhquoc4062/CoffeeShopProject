@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\lib\%40aspnet\signalr\" />
     <Folder Include="wwwroot\uploads\" />
   </ItemGroup>
 

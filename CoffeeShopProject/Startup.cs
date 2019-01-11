@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CoffeeShopProject.Hubs;
 using CoffeeShopProject.Models;
+using CoffeeShopProject.Models.Identity;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -38,13 +42,33 @@ namespace CoffeeShopProject
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSession();
             services.AddDbContext<CoffeeShopContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CoffeeShop")));
-            
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+               .AddEntityFrameworkStores<CoffeeShopContext>()
+               .AddDefaultTokenProviders();
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            })
+            .AddFacebook(options =>
+            {
+                options.AppId = "368714247038215";
+                options.AppSecret = "ea0c9c8ba75071a9abf9a7dd55d217a0";
+            })
+            .AddCookie(options => {
+                options.LoginPath = "/Login/SignInFacebook";
+            });
+
+            services.AddSignalR();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
 
+            app.UseAuthentication();
             app.UseSession();
 
             if (env.IsDevelopment())
@@ -60,6 +84,10 @@ namespace CoffeeShopProject
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<ChatHub>("/chatHub");
+            });
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

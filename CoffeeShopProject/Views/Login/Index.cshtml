@@ -1,4 +1,6 @@
 ﻿
+@inject IAuthenticationSchemeProvider SchemeProvider
+@using Microsoft.AspNetCore.Authentication
 @{
     Layout = null;
 }
@@ -59,30 +61,31 @@
                             }<!--Check account exist-->
                             @if (ViewBag.RegisterSucess != null)
                             {
-                                    <div class="alert alert-success" role="alert">
-                                        Đăng ký thành công. Bạn có thể đăng nhập
-                                    </div>
+                                <div class="alert alert-success" role="alert">
+                                    Đăng ký thành công. Bạn có thể đăng nhập
+                                </div>
                             }<!--Success sign up-->
-                            <form method="post" asp-controller="Login" asp-action="SignIn">
-                                <div class="form-group">
-                                    <label>Username</label>
-                                    <input class="au-input au-input--full" type="text" name="username" placeholder="Nhập tên tài khoản...">
-                                </div>
-                                <div class="form-group">
-                                    <label>Password</label>
-                                    <input class="au-input au-input--full" type="password" name="password" placeholder="Nhập tên mật khẩu...">
-                                </div>
-                                <div class="login-checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember">Remember Me
-                                    </label>
-                                    <label>
-                                        <a href="#">Forgotten Password?</a>
-                                    </label>
-                                </div>
-                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">sign in</button>
-                                <a class="au-btn au-btn--block au-btn--green m-b-20" asp-action="Index" asp-controller="TrangChu"><i class="fas fa-long-arrow-alt-left"></i> back to homepage</a>
-                            </form>
+                                <form method="post" asp-controller="Login" asp-action="SignIn">
+                                    <div class="form-group">
+                                        <label>Username</label>
+                                        <input class="au-input au-input--full" type="text" name="username" placeholder="Nhập tên tài khoản...">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Password</label>
+                                        <input class="au-input au-input--full" type="password" name="password" placeholder="Nhập tên mật khẩu...">
+                                    </div>
+                                    <div class="login-checkbox">
+                                        <label>
+                                            <input type="checkbox" name="remember">Remember Me
+                                        </label>
+                                        <label>
+                                            <a href="#">Forgotten Password?</a>
+                                        </label>
+                                    </div>
+                                    <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">sign in</button>
+                                    <a class="au-btn au-btn--block au-btn--green m-b-20" asp-action="SignInFacebook" asp-controller="Login" style="background: #4267b2"><i class="fab fa-facebook"></i> sign in with facebook</a>
+                                    <a class="au-btn au-btn--block au-btn--green m-b-20" asp-action="Index" asp-controller="TrangChu"><i class="fas fa-long-arrow-alt-left"></i> back to homepage</a>
+                                </form>
                             <div class="register-link">
                                 <p>
                                     Don't you have account?

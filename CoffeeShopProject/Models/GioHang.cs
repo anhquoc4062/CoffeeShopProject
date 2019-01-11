@@ -16,6 +16,7 @@ namespace CoffeeShopProject.Models
         public DateTime? NgayDat { get; set; }
         public int? TrangThai { get; set; }
         public int? MaTaiKhoan { get; set; }
+        public int? MaCoupon { get; set; }
 
         public KhachHang MaKhachHangNavigation { get; set; }
         public ICollection<ChiTietGioHang> ChiTietGioHang { get; set; }

@@ -1721,10 +1721,6 @@ function ChartPercent(labels, values) {
     var message = $('.au-message__item');
     message.each(function(){
       var that = $(this);
-
-      that.on('click', function(){
-        $(this).parent().parent().parent().toggleClass('show-chat-box');
-      });
     });
     
 
