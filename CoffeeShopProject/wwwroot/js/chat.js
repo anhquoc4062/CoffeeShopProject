@@ -11,19 +11,27 @@ function LoadRoomsList() {
         success: function (response) {
             var htmlString = '';
             for (var i in response) {
-                //join room chat
-                connection.invoke("JoinGroup", response[i].maPhongChat).catch(function (err) {
-                    return console.error(err.toString());
-                });
                 //load append
                 var checkRead = "unread";
-                if (response[i].status == 1) {
-                    var checkRead = "read";
+                var checkMe = "";
+                var myId = $("#myId").text();
+                var quantityNew = '';
+                if (response[i].quantityNewMessages > 0) {
+                    quantityNew += ' (' + response[i].quantityNewMessages + ')';
+                }
+                if (response[i].ownLastMessage != myId) {
+                    if (response[i].status == 1) {
+                        checkRead = "read";
+                    }
+                }
+                else {
+                    checkRead = "read";
+                    checkMe += "You: "
                 }
                 htmlString += '<div class="au-message__item ' + checkRead + '" data-room-id="' + response[i].maPhongChat + '">';
                 htmlString += '<div class="au-message__item-inner"><div class="au-message__item-text"><div class="avatar-wrap online"><div class="avatar">';
-                htmlString += '<img src="uploads/employee/' + response[i].avatar + '" alt="Michelle Sims"></div></div><div class="text">'
-                htmlString += '<h5 class="name">' + response[i].realName + '</h5><p>' + response[i].lastMessage + '</p></div></div>';
+                htmlString += '<img src="uploads/employee/' + response[i].avatar + '" alt="Michelle Sims"></div></div><div class="text">';
+                htmlString += '<h5 class="name">' + response[i].realName + quantityNew + '</h5><p>' + checkMe + response[i].lastMessage + '</p></div></div>';
                 htmlString += '<div class="au-message__item-time">';
                 htmlString += '<time class="timeago" datetime="' + response[i].time + '" title="' + response[i].time + '">đổi dùm con</time>';
                 htmlString += '</div ></div ></div >';
@@ -35,6 +43,13 @@ function LoadRoomsList() {
     });
 }
 
+
+function AutoScrollDown() {
+    $("#messagesList").animate({
+        scrollTop: $("#messagesList").get(0).scrollHeight
+    }, 10);
+}
+
 connection.on("ReceiveMessage", function (user_id, message) {
     //var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
     var check = document.getElementById("myAccountId").value;
@@ -43,19 +58,23 @@ connection.on("ReceiveMessage", function (user_id, message) {
     if (check == user_id) {
         htmlString += '<div class="send-mess-wrap"><div class="send-mess__inner"><div class="send-mess-list">';
         htmlString += '<div class="send-mess">' + message + '</div></div></div></div>';
+        console.log("Đã nhận từ tôi");
     }
     else {
         htmlString += '<div class="recei-mess-wrap"><div class="recei-mess__inner"><div class="avatar avatar--tiny">';
         htmlString += '<img src="' + avatar + '" alt="John Smith"></div>';
         htmlString += '<div class="recei-mess-list"><div class="recei-mess">' + message + '</div></div></div></div>';
+
+        console.log("Đã nhận từ ngta");
     }
     $("#messagesList").append(htmlString);
+    AutoScrollDown();
     LoadRoomsList();
 });
 
-connection.on("UserConnected", function (user_id) {
-    console.log(user_id + " has connected");
-});
+//connection.on("UserConnected", function (user_id) {
+//    console.log(user_id + " has connected");
+//});
 
 connection.on("IsTyping", function (user) {
     //var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -82,20 +101,58 @@ connection.start().catch(function (err) {
    
 //});
 
+function JoinAllGroupsChat() {
+    $.ajax({
+        type: "GET",
+        url: '/Chat/GetAllRoomsList',
+        dataType: 'json',
+        success: function (response) {
+            for (var i in response) {
+                //join room chat
+                connection.invoke("JoinGroup", response[i].maPhongChat).catch(function (err) {
+                    return console.error(err.toString());
+                });
+                console.log("Đã join group " + response[i].maPhongChat);
+            }
+        }
+    });
+                
+}
 
+function OutAllGroupsChatExcept(room_id) {
+    $.ajax({
+        type: "GET",
+        url: '/Chat/GetAllRoomsList',
+        dataType: 'json',
+        success: function (response) {
+            for (var i in response) {
+                //out room chat
+                connection.invoke("OutGroup", response[i].maPhongChat).catch(function (err) {
+                    return console.error(err.toString());
+                });
+                console.log("Đã out group " + response[i].maPhongChat);
+            }
+            JoinGroupChat(room_id);
+            console.log("Bạn đang ở room " + room_id);
+        }
+    });
+}
+
+function JoinGroupChat(room_id) {
+    connection.invoke("JoinGroup", room_id).catch(function (err) {
+        return console.error(err.toString());
+    });
+    console.log("Đã join group " + room_id);
+}
 
 function SetReadMessage(room_id) {
 
 }
 
 $(document).ready(function () {
-    function AutoScrollDown() {
-        $("#messagesList").animate({
-            scrollTop: $("#messagesList").get(0).scrollHeight
-        }, 10);
-        console.log("đã scroll");
-    }
+
     LoadRoomsList();
+    JoinAllGroupsChat();
     $(".timeago").timeago();
 
     function AddMessage(room_id, message) {
@@ -115,10 +172,12 @@ $(document).ready(function () {
     $(document).on('click', '#backToMessageList', function (event) {
         $(".show-chat-box").removeClass("show-chat-box");
         LoadRoomsList();
+        JoinAllGroupsChat();
     });
     
     $(document).on('click', '.au-message__item', function () {
         var room_id = $(this).attr("data-room-id");
+        OutAllGroupsChatExcept(room_id);
         //call ajax here
         var avatar = "";
         var name = "";
@@ -153,14 +212,13 @@ $(document).ready(function () {
                         }
                         $("#messagesList > div").remove();
                         $("#messagesList").append(htmlString);
-
+                        AutoScrollDown();
                     }
+
                 });
             }
         });
         $(this).parent().parent().parent().toggleClass('show-chat-box');
-
-        AutoScrollDown();
     });
 
     $(document).on('click', '#sendButton', function (event) {

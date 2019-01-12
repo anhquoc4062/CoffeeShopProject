@@ -42,27 +42,6 @@
                                 </p>
                             </div>
                             <div class="au-message-list" id="roomsList">
-                                @foreach (var item in ViewBag.ListConversations)
-                                {
-                                    <div class="au-message__item @(item.Status==0?"unread":"")" data-room-id="@item.MaPhongChat">
-                                        <div class="au-message__item-inner">
-                                            <div class="au-message__item-text">
-                                                <div class="avatar-wrap online">
-                                                    <div class="avatar">
-                                                        <img src="~/uploads/employee/@item.Avatar" alt="Michelle Sims">
-                                                    </div>
-                                                </div>
-                                                <div class="text">
-                                                    <h5 class="name">@item.RealName</h5>
-                                                    <p>@item.LastMessage</p>
-                                                </div>
-                                            </div>
-                                            <div class="au-message__item-time">
-                                                <time class="timeago" datetime="@item.Time" title="@item.Time">July 17, 2008</time>
-                                            </div>
-                                        </div>
-                                    </div>
-                                }
 
                             </div>
                             <div class="au-message__footer">

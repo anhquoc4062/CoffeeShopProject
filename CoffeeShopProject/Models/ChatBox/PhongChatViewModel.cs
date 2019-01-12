@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,6 +13,8 @@ namespace CoffeeShopProject.Models.ChatBox
         public string LastMessage { get; set; }
         public string Time { get; set; }
         public int Status { get; set; }
+        public int OwnLastMessage { get; set; }
+        public int QuantityNewMessages { get; set; }
         private readonly CoffeeShopContext db;
         public PhongChatViewModel() { }
         public PhongChatViewModel(CoffeeShopContext _db)
@@ -28,17 +31,34 @@ namespace CoffeeShopProject.Models.ChatBox
             var listConversations = new List<PhongChatViewModel>();
             foreach(var roomChat in listRoomChat)
             {
-                var participant = db.NgThamGia.Where(x=> x.MaTaiKhoan != user_id).SingleOrDefault(x => x.MaPhongChat == roomChat);
+                var participant = db.NgThamGia.Where(x=> x.MaTaiKhoan != user_id)
+                    .SingleOrDefault(x => x.MaPhongChat == roomChat);
                 var conversation = new PhongChatViewModel();
                 var informarion = GetInfoOf(participant.MaTaiKhoan);
-                var lastMessage = db.TinNhan.Where(x => x.MaPhongChat == participant.MaPhongChat).OrderByDescending(x => x.MaTinNhan).FirstOrDefault();
+                var lastMessage = db.TinNhan.Where(x => x.MaPhongChat == participant.MaPhongChat)
+                    .OrderByDescending(x => x.MaTinNhan)
+                    .FirstOrDefault();
 
                 conversation.MaPhongChat = roomChat;
                 conversation.RealName = informarion.RealName;
                 conversation.Avatar = informarion.Avatar;
-                conversation.LastMessage = lastMessage.TinNhan1;
-                conversation.Time = lastMessage.NgayTao.Value.ToString("o");
-                conversation.Status = lastMessage.TrangThai.Value;
+                if (lastMessage != null)
+                {
+                    conversation.LastMessage = lastMessage.TinNhan1;
+                    conversation.Time = lastMessage.NgayTao.Value.ToString("o");
+                    conversation.Status = lastMessage.TrangThai.Value;
+                    conversation.OwnLastMessage = lastMessage.MaTaiKhoan.Value;
+                    conversation.QuantityNewMessages = GetQuantityNewMessages(roomChat);
+                }
+                else
+                {
+                    conversation.LastMessage = "You are now connected";
+                    conversation.Time = DateTime.Now.ToString("o");
+                    conversation.Status = 0;
+                    conversation.OwnLastMessage = -1;
+                    conversation.QuantityNewMessages = 1;
+                }
+
                 listConversations.Add(conversation);
             }
             return listConversations;
@@ -64,6 +84,33 @@ namespace CoffeeShopProject.Models.ChatBox
         {
             var messages = db.TinNhan.Where(x => x.MaPhongChat == room_id).ToList();
             return messages;
+        }
+
+        public int GetQuantityNewMessages(int room_id)
+        {
+            var myId = Common.CommonConstant.ACCID_SESSION;
+            var listMessageOfRoom = db.TinNhan.Where(x => x.MaPhongChat == room_id).OrderByDescending(x => x.NgayTao);
+            var count = 0;
+            foreach(var mess in listMessageOfRoom)
+            {
+                if (mess.MaTaiKhoan != int.Parse(myId))
+                {
+                    if (mess.TrangThai == 1)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        count++;
+                    }
+                }
+                else
+                {
+                    break;
+                }
+                
+            }
+            return count;
         }
     }
 }

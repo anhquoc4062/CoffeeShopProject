@@ -32,6 +32,10 @@ namespace CoffeeShopProject.Hubs
         {
             return Groups.AddToGroupAsync(Context.ConnectionId, group_id);
         }
+        public Task OutGroup(string group_id)
+        {
+            return Groups.RemoveFromGroupAsync(Context.ConnectionId, group_id);
+        }
         public Task SendMessageInGroup(string group_id, int user_id, string message)
         {
             return Clients.Group(group_id).SendAsync("ReceiveMessage", user_id, message);
