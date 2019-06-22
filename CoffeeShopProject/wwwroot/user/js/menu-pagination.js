@@ -68,8 +68,16 @@ function LoadProductWithKeywordByPage(keyword, page) {
         type: "GET",
         url: '/Menu/GetProductByName?keyword=' + keyword + '&page=' + page,
         dataType: 'json',
+        beforeSend: function () {
+            $("#menu_area .col-lg-4").remove();
+            $("#menu_area .col-lg-12").remove();
+            $('#LoadingMenu').css("display", "block");
+        },
         success: function (response) {
-            LoadMenuProduct(response);
+            setTimeout(function () {
+                $('#LoadingMenu').css("display", "none");
+                LoadMenuProduct(response);
+            }, 500);
         },
         error: function (error) {
         }
@@ -107,8 +115,10 @@ function LoadMenuProduct(data) {
     $("#menu_area").append(htmlString).hide().fadeIn(1000);
 }
 
+
 $(document).ready(function () {
-    LoadMenuPagination(0,0);
+    LoadMenuPagination(0, 0);
+
     $(document).on('click', 'li.page-item > a.page-link', function (event) {
         var page = $('#menu_pagination li.page-item.active').find("a.page-link").text();
         if ($("#search_button").attr("data-pressed") == "0") {
@@ -119,11 +129,17 @@ $(document).ready(function () {
                 type: "GET",
                 url: '/Menu/GetProductByPageWithFilter?page=' + page + '&maloai=' + maloai + '&sapxep=' + sapxep,
                 dataType: 'json',
-                success: function (response) {
-                    LoadMenuProduct(response);
+                beforeSend: function () {
+                    $("#menu_area .col-lg-4").remove();
+                    $("#menu_area .col-lg-12").remove();
+                    $('#LoadingMenu').css("display", "block");
                 },
-                error: function (error) {
-                }
+                success: function (response) {
+                    setTimeout(function () {
+                        $('#LoadingMenu').css("display", "none");
+                        LoadMenuProduct(response);
+                    }, 500);
+                },
             });
         }
         else {
@@ -144,9 +160,17 @@ $(document).ready(function () {
             type: "GET",
             url: '/Menu/GetProductByPageWithFilter?maloai=' + maloai + '&sapxep=' + sapxep,
             dataType: 'json',
+            beforeSend: function () {
+                $("#menu_area .col-lg-4").remove();
+                $("#menu_area .col-lg-12").remove();
+                $('#LoadingMenu').css("display", "block");
+            },
             success: function (response) {
-                LoadMenuProduct(response);
-                LoadMenuPagination(maloai, sapxep);
+                setTimeout(function () {
+                    $('#LoadingMenu').css("display", "none");
+                    LoadMenuProduct(response);
+                    LoadMenuPagination(maloai, sapxep);
+                }, 500);
             },
             error: function (error) {
             }
@@ -161,11 +185,17 @@ $(document).ready(function () {
             type: "GET",
             url: '/Menu/GetProductByPageWithFilter?maloai=' + maloai + '&sapxep=' + sapxep,
             dataType: 'json',
-            success: function (response) {
-                LoadMenuProduct(response);
-                LoadMenuPagination(maloai, sapxep);
+            beforeSend: function () {
+                $("#menu_area .col-lg-4").remove();
+                $("#menu_area .col-lg-12").remove();
+                $('#LoadingMenu').css("display", "block");
             },
-            error: function (error) {
+            success: function (response) {
+                setTimeout(function () {
+                    $('#LoadingMenu').css("display", "none");
+                    LoadMenuProduct(response);
+                    LoadMenuPagination(maloai, sapxep);
+                }, 500);
             }
         });
     });

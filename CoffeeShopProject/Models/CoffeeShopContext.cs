@@ -374,6 +374,9 @@ namespace CoffeeShopProject.Models
                     .HasColumnName("anhDaiDien")
                     .HasMaxLength(254);
 
+                entity.Property(e => e.DangHoatDong)
+                    .HasColumnName("dangHoatDong");
+
                 entity.Property(e => e.Email)
                     .HasColumnName("email")
                     .HasMaxLength(50)

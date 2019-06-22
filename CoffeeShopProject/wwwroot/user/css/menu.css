@@ -34,3 +34,18 @@
 .list-group-cate li.selected a {
     color: #be9c79;
 }
+
+svg#LoadingImg {
+    margin: auto;
+    display: block;
+    align-items: center;
+    vertical-align: middle;
+    top: 20%;
+    position: relative;
+}
+
+div#LoadingMenu {
+    width: 100%;
+    height: 100%;
+    display: none
+}

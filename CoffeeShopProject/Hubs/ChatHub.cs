@@ -19,13 +19,14 @@ namespace CoffeeShopProject.Hubs
         }
         public override async Task OnConnectedAsync()
         {
-            //var user_id = Common.CommonConstant.ACCID_SESSION;
-            await Clients.All.SendAsync("UserConnected", Context.ConnectionId);
+            var user_id = Context.User.Identity.Name;
+            await Clients.All.SendAsync("UserConnected", Context.ConnectionId, user_id);
             await base.OnConnectedAsync();
         }
         public override async Task OnDisconnectedAsync(Exception ex)
         {
-            await Clients.All.SendAsync("UserDisConnected", Context.ConnectionId);
+            var user_id = Context.User.Identity.Name;
+            await Clients.All.SendAsync("UserDisConnected", Context.ConnectionId, user_id);
             await base.OnDisconnectedAsync(ex);
         }
         public Task JoinGroup(string group_id)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using CoffeeShopProject.Common;
 using CoffeeShopProject.Models;
@@ -24,7 +25,7 @@ namespace CoffeeShopProject.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult SignIn(string username, string password)
+        public async Task<IActionResult> SignIn(string username, string password)
         {
             var tk = db.TaiKhoan.SingleOrDefault(x => x.TenTaiKhoan == username && x.MatKhau == password);
             if(tk == null)
@@ -34,6 +35,15 @@ namespace CoffeeShopProject.Controllers
             }
             else
             {
+                //Ghi nhận authorization
+                var claims = new List<Claim>();
+                claims.Add(new Claim(ClaimTypes.Name, tk.MaTaiKhoan.ToString()));
+                ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "login");
+                ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+
+                await HttpContext.SignInAsync(claimsPrincipal);
+
+                //Ghi Session
                 HttpContext.Session.SetString("USERNAME_SESSION", tk.TenTaiKhoan.ToString());
                 HttpContext.Session.SetString("CREDENTITY_SESSION", tk.MaPhanQuyen);
                 HttpContext.Session.SetString("ACCID_SESSION", tk.MaTaiKhoan.ToString());

@@ -15,6 +15,7 @@ namespace CoffeeShopProject.Models.ChatBox
         public int Status { get; set; }
         public int OwnLastMessage { get; set; }
         public int QuantityNewMessages { get; set; }
+        public int IsActive { get; set; }
         private readonly CoffeeShopContext db;
         public PhongChatViewModel() { }
         public PhongChatViewModel(CoffeeShopContext _db)
@@ -32,9 +33,9 @@ namespace CoffeeShopProject.Models.ChatBox
             foreach(var roomChat in listRoomChat)
             {
                 var participant = db.NgThamGia.Where(x=> x.MaTaiKhoan != user_id)
-                    .SingleOrDefault(x => x.MaPhongChat == roomChat);
+                    .SingleOrDefault(x => x.MaPhongChat == roomChat);//get all participants of this room chat except me
                 var conversation = new PhongChatViewModel();
-                var informarion = GetInfoOf(participant.MaTaiKhoan);
+                var informarion = GetInfoOf(participant.MaTaiKhoan);//get information of these participants
                 var lastMessage = db.TinNhan.Where(x => x.MaPhongChat == participant.MaPhongChat)
                     .OrderByDescending(x => x.MaTinNhan)
                     .FirstOrDefault();
@@ -48,16 +49,18 @@ namespace CoffeeShopProject.Models.ChatBox
                     conversation.Time = lastMessage.NgayTao.Value.ToString("o");
                     conversation.Status = lastMessage.TrangThai.Value;
                     conversation.OwnLastMessage = lastMessage.MaTaiKhoan.Value;
-                    conversation.QuantityNewMessages = GetQuantityNewMessages(roomChat);
+                    conversation.QuantityNewMessages = GetQuantityNewMessages(roomChat, user_id);
                 }
                 else
                 {
-                    conversation.LastMessage = "You are now connected";
+                    conversation.LastMessage = "Group chat has been created";
                     conversation.Time = DateTime.Now.ToString("o");
                     conversation.Status = 0;
                     conversation.OwnLastMessage = -1;
                     conversation.QuantityNewMessages = 1;
                 }
+
+                conversation.IsActive = (informarion.IsActive == 0) ? 0 : 1;
 
                 listConversations.Add(conversation);
             }
@@ -75,7 +78,8 @@ namespace CoffeeShopProject.Models.ChatBox
             var res = new PhongChatViewModel
             {
                 RealName = (employeeInfo!=null)?employeeInfo.HoTen: accountInfo.TenTaiKhoan,
-                Avatar = accountInfo.AnhDaiDien
+                Avatar = accountInfo.AnhDaiDien,
+                IsActive = accountInfo.DangHoatDong
             };
             return res;
         }
@@ -86,14 +90,13 @@ namespace CoffeeShopProject.Models.ChatBox
             return messages;
         }
 
-        public int GetQuantityNewMessages(int room_id)
+        public int GetQuantityNewMessages(int room_id, int user_id)
         {
-            var myId = Common.CommonConstant.ACCID_SESSION;
             var listMessageOfRoom = db.TinNhan.Where(x => x.MaPhongChat == room_id).OrderByDescending(x => x.NgayTao);
             var count = 0;
             foreach(var mess in listMessageOfRoom)
             {
-                if (mess.MaTaiKhoan != int.Parse(myId))
+                if (mess.MaTaiKhoan != user_id)
                 {
                     if (mess.TrangThai == 1)
                     {

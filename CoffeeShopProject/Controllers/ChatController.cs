@@ -55,6 +55,17 @@ namespace CoffeeShopProject.Controllers
             var respone = newMess;
             return Json(respone);
         }
+
+        public IActionResult SetUserActive(int userId, int yes)
+        {
+            var queryAcc = new TaiKhoanViewModel(db);
+            var thisAcc = db.TaiKhoan.SingleOrDefault(x => x.MaTaiKhoan == userId);
+            thisAcc.DangHoatDong = (yes == 1) ? 1 : 0;
+
+            queryAcc.EditTaiKhoan(thisAcc);
+            var response = thisAcc;
+            return Json(response);
+        }
         
     }
 }

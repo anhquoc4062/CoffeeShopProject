@@ -1,5 +1,5 @@
 ﻿"use strict";
-
+console.log("vào chat hub");
 var EnterKeyPressed = false;
 var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 
@@ -10,14 +10,17 @@ function LoadRoomsList() {
         dataType: 'json',
         success: function (response) {
             var htmlString = '';
+            var newNoti = 0;
             for (var i in response) {
                 //load append
                 var checkRead = "unread";
                 var checkMe = "";
+                var checkActive = "";
                 var myId = $("#myId").text();
                 var quantityNew = '';
                 if (response[i].quantityNewMessages > 0) {
                     quantityNew += ' (' + response[i].quantityNewMessages + ')';
+                    newNoti++;
                 }
                 if (response[i].ownLastMessage != myId) {
                     if (response[i].status == 1) {
@@ -28,18 +31,32 @@ function LoadRoomsList() {
                     checkRead = "read";
                     checkMe += "You: "
                 }
+                if (response[i].isActive == 1) {
+                    checkActive = "online";
+                }
                 htmlString += '<div class="au-message__item ' + checkRead + '" data-room-id="' + response[i].maPhongChat + '">';
-                htmlString += '<div class="au-message__item-inner"><div class="au-message__item-text"><div class="avatar-wrap online"><div class="avatar">';
+                htmlString += '<div class="au-message__item-inner"><div class="au-message__item-text"><div class="avatar-wrap ' + checkActive + '"><div class="avatar">';
                 htmlString += '<img src="uploads/employee/' + response[i].avatar + '" alt="Michelle Sims"></div></div><div class="text">';
                 htmlString += '<h5 class="name">' + response[i].realName + quantityNew + '</h5><p>' + checkMe + response[i].lastMessage + '</p></div></div>';
                 htmlString += '<div class="au-message__item-time">';
                 htmlString += '<time class="timeago" datetime="' + response[i].time + '" title="' + response[i].time + '">đổi dùm con</time>';
                 htmlString += '</div ></div ></div >';
             }
+            $("#newMessages").html(newNoti);
             $("#roomsList > div").remove();
             $("#roomsList").append(htmlString);
             $("time").timeago();
         }
+    });
+}
+
+function SetUserActive(userId, yes) {
+    $.ajax({
+        type: "GET",
+        url: '/Chat/SetUserActive?userId=' + userId + '&yes=' + yes,
+        dataType: 'json',
+        success: function (response) {
+            LoadRoomsList();        }
     });
 }
 
@@ -51,6 +68,7 @@ function AutoScrollDown() {
 }
 
 connection.on("ReceiveMessage", function (user_id, message) {
+    LoadRoomsList();
     //var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
     var check = document.getElementById("myAccountId").value;
     var avatar = $("#chatAvatar").attr("src");
@@ -58,23 +76,29 @@ connection.on("ReceiveMessage", function (user_id, message) {
     if (check == user_id) {
         htmlString += '<div class="send-mess-wrap"><div class="send-mess__inner"><div class="send-mess-list">';
         htmlString += '<div class="send-mess">' + message + '</div></div></div></div>';
-        console.log("Đã nhận từ tôi");
     }
     else {
         htmlString += '<div class="recei-mess-wrap"><div class="recei-mess__inner"><div class="avatar avatar--tiny">';
         htmlString += '<img src="' + avatar + '" alt="John Smith"></div>';
         htmlString += '<div class="recei-mess-list"><div class="recei-mess">' + message + '</div></div></div></div>';
 
-        console.log("Đã nhận từ ngta");
+        //sound
+        var audioElement = document.createElement('audio');
+        audioElement.setAttribute('src', 'sound/ChatNotification.mp3');
+        audioElement.play();
+        
     }
     $("#messagesList").append(htmlString);
     AutoScrollDown();
-    LoadRoomsList();
 });
 
-//connection.on("UserConnected", function (user_id) {
-//    console.log(user_id + " has connected");
-//});
+connection.on("UserConnected", function (connection_id, user_id) {
+    SetUserActive(user_id, 1);
+});
+
+connection.on("UserDisConnected", function (connection_id, user_id) {
+    SetUserActive(user_id, 0);
+});
 
 connection.on("IsTyping", function (user) {
     //var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -133,7 +157,6 @@ function OutAllGroupsChatExcept(room_id) {
                 console.log("Đã out group " + response[i].maPhongChat);
             }
             JoinGroupChat(room_id);
-            console.log("Bạn đang ở room " + room_id);
         }
     });
 }
@@ -188,6 +211,13 @@ $(document).ready(function () {
             success: function (response) {
                 avatar = response.avatar;
                 name = response.realName;
+                var active = response.isActive;
+                if (active == 1) {
+                    $(".avatar-wrap").addClass("online");
+                }
+                else {
+                    $(".avatar-wrap").removeClass("online");
+                }
                 $("#chatName").text(name);
                 $("#chatAvatar").attr("src", "uploads/employee/" + avatar);
                 $("#sendButton").attr("data-room-id", room_id);
