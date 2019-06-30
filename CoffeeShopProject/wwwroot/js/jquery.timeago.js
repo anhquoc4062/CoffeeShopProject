@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Timeago is a jQuery plugin that makes it easy to support automatically
  * updating fuzzy timestamps (e.g. "4 minutes ago" or "about 1 day ago").
  *
@@ -49,20 +49,20 @@
       strings: {
         prefixAgo: null,
         prefixFromNow: null,
-        suffixAgo: "ago",
-        suffixFromNow: "from now",
+        suffixAgo: "trước",
+        suffixFromNow: "từ giờ",
         inPast: 'any moment now',
-        seconds: "less than a minute",
-        minute: "about a minute",
-        minutes: "%d minutes",
-        hour: "about an hour",
-        hours: "about %d hours",
-        day: "a day",
-        days: "%d days",
-        month: "about a month",
-        months: "%d months",
-        year: "about a year",
-        years: "%d years",
+        seconds: "vài giây",
+        minute: "khoảng một phút",
+        minutes: "%d phút",
+        hour: "khoảng một giờ",
+        hours: "khoảng %d giờ",
+        day: "một ngày",
+        days: "%d ngày",
+        month: "khoảng một tháng",
+        months: "%d tháng",
+        year: "khoảng một năm",
+        years: "%d năm",
         wordSeparator: " ",
         numbers: []
       }

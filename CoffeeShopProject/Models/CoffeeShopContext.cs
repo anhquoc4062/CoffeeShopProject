@@ -40,7 +40,7 @@ namespace CoffeeShopProject.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=USERMIC-7EHB531\\SQLEXPRESSS; Database=CoffeeShop;Integrated Security=True;");
+                optionsBuilder.UseSqlServer("Server=.; Database=CoffeeShop;Integrated Security=True;");
             }
         }
 
@@ -57,8 +57,7 @@ namespace CoffeeShopProject.Models
 
             modelBuilder.Entity<Coupon>(entity =>
             {
-                entity.HasKey(e => e.MaCoupon)
-                    .ForSqlServerIsClustered(false);
+                entity.HasKey(e => e.MaCoupon);
 
                 entity.Property(e => e.MaCoupon).HasColumnName("maCoupon");
 
@@ -66,8 +65,7 @@ namespace CoffeeShopProject.Models
 
                 entity.Property(e => e.MaNhap)
                     .HasColumnName("maNhap")
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+                    .HasMaxLength(50);
             });
 
             modelBuilder.Entity<ChiTietGioHang>(entity =>
@@ -156,8 +154,6 @@ namespace CoffeeShopProject.Models
                     .ForSqlServerIsClustered(false);
 
                 entity.Property(e => e.MaGioHang).HasColumnName("maGioHang");
-
-                entity.Property(e => e.MaCoupon).HasColumnName("maCoupon");
 
                 entity.Property(e => e.MaKhachHang).HasColumnName("maKhachHang");
 
@@ -258,7 +254,9 @@ namespace CoffeeShopProject.Models
             {
                 entity.HasKey(e => e.MaNgThamGia);
 
-                entity.Property(e => e.MaNgThamGia).HasColumnName("maNgThamGia");
+                entity.Property(e => e.MaNgThamGia)
+                    .HasColumnName("maNgThamGia")
+                    .ValueGeneratedNever();
 
                 entity.Property(e => e.MaPhongChat).HasColumnName("maPhongChat");
 
@@ -374,9 +372,6 @@ namespace CoffeeShopProject.Models
                     .HasColumnName("anhDaiDien")
                     .HasMaxLength(254);
 
-                entity.Property(e => e.DangHoatDong)
-                    .HasColumnName("dangHoatDong");
-
                 entity.Property(e => e.Email)
                     .HasColumnName("email")
                     .HasMaxLength(50)
@@ -395,6 +390,11 @@ namespace CoffeeShopProject.Models
                 entity.Property(e => e.TenTaiKhoan)
                     .IsRequired()
                     .HasColumnName("tenTaiKhoan")
+                    .HasMaxLength(254);
+
+                entity.Property(e => e.DangHoatDong)
+                    .IsRequired()
+                    .HasColumnName("dangHoatDong")
                     .HasMaxLength(254);
 
                 entity.HasOne(d => d.MaPhanQuyenNavigation)
@@ -418,10 +418,10 @@ namespace CoffeeShopProject.Models
                     .HasColumnType("datetime");
 
                 entity.Property(e => e.TinNhan1)
-                    .HasColumnName("tinNhan")
-                    .HasColumnType("ntext");
-                entity.Property(e => e.TrangThai)
-                    .HasColumnName("trangThai");
+                    .HasColumnName("tinNhan1")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.TrangThai).HasColumnName("trangThai");
             });
 
             modelBuilder.Entity<TinhThanh>(entity =>

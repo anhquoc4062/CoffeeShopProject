@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CoffeeShopProject.Models.ChatBox
 {
-    public class PhongChatViewModel:NgThamGia
+    public class PhongChatViewModel : NgThamGia
     {
         public string Avatar { get; set; }
         public string RealName { get; set; }
@@ -28,11 +28,11 @@ namespace CoffeeShopProject.Models.ChatBox
         //}
         public List<PhongChatViewModel> GetAllConversationsOf(int user_id)
         {
-            var listRoomChat = (from pc in db.NgThamGia select pc).Where(x => x.MaTaiKhoan == user_id).Select(x=>x.MaPhongChat);
+            var listRoomChat = (from pc in db.NgThamGia select pc).Where(x => x.MaTaiKhoan == user_id).Select(x => x.MaPhongChat);
             var listConversations = new List<PhongChatViewModel>();
-            foreach(var roomChat in listRoomChat)
+            foreach (var roomChat in listRoomChat)
             {
-                var participant = db.NgThamGia.Where(x=> x.MaTaiKhoan != user_id)
+                var participant = db.NgThamGia.Where(x => x.MaTaiKhoan != user_id)
                     .SingleOrDefault(x => x.MaPhongChat == roomChat);//get all participants of this room chat except me
                 var conversation = new PhongChatViewModel();
                 var informarion = GetInfoOf(participant.MaTaiKhoan);//get information of these participants
@@ -65,7 +65,7 @@ namespace CoffeeShopProject.Models.ChatBox
                 listConversations.Add(conversation);
             }
             return listConversations;
-        } 
+        }
         public PhongChatViewModel GetParticipantByRoomId(int user_id, int room_id)
         {
             var participant = GetAllConversationsOf(user_id).SingleOrDefault(x => x.MaPhongChat == room_id);
@@ -77,7 +77,7 @@ namespace CoffeeShopProject.Models.ChatBox
             var employeeInfo = db.NhanVien.SingleOrDefault(x => x.MaTaiKhoan == user_id);
             var res = new PhongChatViewModel
             {
-                RealName = (employeeInfo!=null)?employeeInfo.HoTen: accountInfo.TenTaiKhoan,
+                RealName = (employeeInfo != null) ? employeeInfo.HoTen : accountInfo.TenTaiKhoan,
                 Avatar = accountInfo.AnhDaiDien,
                 IsActive = accountInfo.DangHoatDong
             };
@@ -94,7 +94,7 @@ namespace CoffeeShopProject.Models.ChatBox
         {
             var listMessageOfRoom = db.TinNhan.Where(x => x.MaPhongChat == room_id).OrderByDescending(x => x.NgayTao);
             var count = 0;
-            foreach(var mess in listMessageOfRoom)
+            foreach (var mess in listMessageOfRoom)
             {
                 if (mess.MaTaiKhoan != user_id)
                 {
@@ -111,7 +111,7 @@ namespace CoffeeShopProject.Models.ChatBox
                 {
                     break;
                 }
-                
+
             }
             return count;
         }

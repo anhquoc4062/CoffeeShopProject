@@ -40,7 +40,7 @@ namespace CoffeeShopProject.Controllers
             var response = query.GetMessageByRoomId(room_id);
             return Json(response);
         }
-        public IActionResult AddMessageToDatabase(int room_id ,string message)
+        public IActionResult AddMessageToDatabase(int room_id, string message)
         {
             TinNhan newMess = new TinNhan
             {
@@ -66,6 +66,6 @@ namespace CoffeeShopProject.Controllers
             var response = thisAcc;
             return Json(response);
         }
-        
+
     }
 }
