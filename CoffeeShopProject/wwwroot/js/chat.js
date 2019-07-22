@@ -172,11 +172,56 @@ function SetReadMessage(room_id) {
 
 }
 
+$(function () {
+
+   
+});
+
 $(document).ready(function () {
 
     LoadRoomsList();
     JoinAllGroupsChat();
     $(".timeago").timeago();
+    console.log('vô hàm');
+    $('#list_account').tagsInput({
+        
+        'autocomplete_url': '/EmployeeAdmin/GetListEmployee',
+        'autocomplete': {
+            source: function (request, response) {
+                $.ajax({
+                    url: "/EmployeeAdmin/GetListEmployee?keyword="+request.term,
+                    dataType: "json",
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            if (item.maTaiKhoan != null) {
+                                console.log(item);
+                                return {
+                                    label: item.tenTaiKhoan,
+                                    value: item.maTaiKhoan
+                                }
+                            }
+                            
+                        }));
+                    }
+                })
+            }   
+        }
+    });
+
+    var countries = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        prefetch: {
+            url: 'data/countries.json',
+            filter: function (list) {
+                return $.map(list, function (name) {
+                    return { name: name };
+                });
+            }
+        }
+    });
+    countries.initialize();
+
 
     function AddMessage(room_id, message) {
         $.ajax({
@@ -194,6 +239,13 @@ $(document).ready(function () {
 
     $(document).on('click', '#backToMessageList', function (event) {
         $(".show-chat-box").removeClass("show-chat-box");
+        LoadRoomsList();
+        JoinAllGroupsChat();
+    });
+
+   //add_conversation_btn
+
+    $(document).on('click', '#addConversationBtn', function (event) {
         LoadRoomsList();
         JoinAllGroupsChat();
     });

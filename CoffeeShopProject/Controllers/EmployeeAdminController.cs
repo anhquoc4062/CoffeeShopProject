@@ -27,6 +27,20 @@ namespace CoffeeShopProject.Controllers
             return View();
         }
 
+        public IActionResult GetListEmployee(string keyword = null) {
+            TaiKhoanViewModel query = new TaiKhoanViewModel(db);
+            if (keyword != null)
+            {
+                var data = query.GetTaiKhoanByName(keyword);
+                return Json(data);
+            }
+            else {
+                var data = query.GetAllTaiKhoan();
+                return Json(data);
+            }
+            
+        }
+
         public IActionResult BindDataToForm(string id)
         {
             NhanVienViewModel query = new NhanVienViewModel(db);

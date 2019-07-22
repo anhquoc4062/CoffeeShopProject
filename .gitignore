@@ -259,3 +259,5 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+CoffeeShopProject/.vscode/tasks.json
+CoffeeShopProject/.vscode/launch.json

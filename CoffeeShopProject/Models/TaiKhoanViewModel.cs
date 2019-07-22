@@ -34,6 +34,12 @@ namespace CoffeeShopProject.Models
             return tk;
         }
 
+        public IEnumerable<TaiKhoanViewModel> GetTaiKhoanByName(string name)
+        {
+            var tk = GetAllTaiKhoan().Where(self => self.TenTaiKhoan.ToString().ToLower().Contains(name.ToLower()));
+            return tk;
+        }
+
         //public bool DeleteTaiKhoan(string i)
         //{
         //    var loai = db.TaiKhoan.Where(x => x.MaTaiKhoan == int.Parse(i)).SingleOrDefault();

@@ -19,11 +19,39 @@
         min-width: 1200px;
         margin-left: -220px;
     }
+    .ui-autocomplete {
+        position: absolute;
+        z-index: 100000;
+        cursor: default;
+        padding: 0;
+        margin-top: 2px;
+        list-style: none;
+        background-color: #ffffff;
+        border: 1px solid #ccc;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+
+        .ui-autocomplete > li {
+            padding: 3px 20px;
+        }
+
+            .ui-autocomplete > li.ui-state-focus {
+                background-color: #DDD;
+            }
+
+    .ui-helper-hidden-accessible {
+        display: none;
+    }
 </style>
 
 <!--ADD MODAL-->
 <form id="" method="post" enctype="multipart/form-data" class="form-horizontal" action="#">
-    <div class="modal fade parent_modal" id="add_conversation_form">
+    <div class="modal fade parent_modal" id="add_conversation_modal">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
 
@@ -37,98 +65,21 @@
                 <div class="modal-body">
                     <div class="card-body card-block">
                         <div class="row">
-                            <div class="col-md-6">
-                                <input hidden="" name="id" id="product_id">
+                            <div class="col-md-12">
                                 <div class="row form-group">
                                     <div class="col col-md-3 text-right">
-                                        <label for="text-input" class=" form-control-label">Tên thực đơn</label>
+                                        <label for="text-input" class=" form-control-label">Tên cuộc trò chuyện</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="text" id="product_name" placeholder="Nhập tên thực đơn..." class="form-control" value="" name="emp_name">
+                                        <input type="text" class="form-control">
                                     </div>
                                 </div>
                                 <div class="row form-group">
                                     <div class="col col-md-3 text-right">
-                                        <label for="file-input" class=" form-control-label">Hình ảnh</label>
+                                        <label for="text-input" class=" form-control-label">Người tham gia</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="file" id="product_img" name="image" class="form-control-file" onchange="previewImg(this, 'preview_img')">
-                                        <br>
-                                        <input hidden="" value="" id="old_product_img" name="old_image">
-                                        <img id="preview_img" src="/images/product/no-preview.jpg" width="100" height="100">
-                                    </div>
-                                    <script>
-                                        function previewImg(input, id_string) {
-                                            var exp_string = "#";
-                                            exp_string += id_string;
-                                            if (input.files && input.files[0]) {
-                                                var reader = new FileReader();
-
-                                                reader.onload = function (e) {
-                                                    $(exp_string).attr('src', e.target.result);
-                                                }
-
-                                                reader.readAsDataURL(input.files[0]);
-                                            }
-                                        }
-                                    </script>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3 text-right">
-                                        <label for="select" class=" form-control-label">Loại</label>
-                                    </div>
-                                    <div class="col-12 col-md-9">
-                                        <select name="emp_position" id="category_select" class="form-control">
-                                            <option selected="" disabled="" value="0">--- Chọn loại thực đơn ---</option>
-                                            @foreach (var parent in ViewBag.ListCate)
-                                            {
-                                                if (parent.MaLoaiCha == 0)
-                                                {
-                                                    <optgroup label="@parent.TenLoai">
-                                                        @foreach (var child in ViewBag.ListCate)
-                                                        {
-                                                            if (child.MaLoaiCha == parent.MaLoai)
-                                                            {
-                                                                <option value="@child.MaLoai">@child.TenLoai</option>
-                                                            }
-
-                                                        }
-
-                                                    </optgroup>
-                                                }
-
-                                            }
-
-
-                                        </select>
-                                        <button type="button" class="btn btn-primary" id="category_modal" data-toggle="modal" data-target="#cate_modal"><i class="fas fa-plus"></i></button>
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3 text-right">
-                                        <label for="text-input" class=" form-control-label">Giá</label>
-                                    </div>
-                                    <div class="col-12 col-md-9">
-                                        <input type="number" id="product_price" placeholder="Nhập giá..." class="form-control" value="" name="emp_name">
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3 text-right">
-                                        <label for="text-input" class=" form-control-label">Khuyến mãi</label>
-                                    </div>
-                                    <div class="col-12 col-md-9">
-                                        <input type="number" id="product_discount" value="0" class="form-control" value="" name="emp_address">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="row form-group">
-                                    <div class="col col-md-3 text-right">
-                                        <label for="text-input" class=" form-control-label">Mô tả</label>
-                                    </div>
-                                    <div class="col-12 col-md-9">
-                                        <textarea class="form-control" placeholder="Nhập mô tả..." style="margin-top: 0px; margin-bottom: 0px; height: 369px;" id="product_info"></textarea>
+                                        <input type="text" id="list_account" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -141,62 +92,12 @@
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success" id="add_product_btn" data-action="add_submit">Thêm</button>
+                    <button type="button" class="btn btn-success" id="addConversationBtn" data-action="add_submit">Thêm</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
                 </div>
 
             </div>
         </div>
     </div>
-    <!--CATEGORY MODAL-->
-    <div class="modal fade child_modal" id="cate_modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Thêm loại thực đơn</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-
-                </div>
-                <div class="modal-body">
-
-                    <div class="card-body card-block">
-                        <div class="row form-group">
-                            <div class="col col-md-3 text-right">
-                                <label for="text-input" class=" form-control-label">Tên loại</label>
-                            </div>
-                            <div class="col-12 col-md-9">
-                                <input type="text" id="category_name" name="category_name" placeholder="Nhập tên loại cần thêm..." class="form-control" value="">
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col col-md-3 text-right">
-                                <label for="text-input" class=" form-control-label">Danh mục</label>
-                            </div>
-                            <div class="col-12 col-md-9">
-                                <select id="category_parent" class="form-control">
-                                    <option selected disabled>--Chọn danh mục cho loại--</option>
-                                    <option value="0">Là danh mục</option>
-                                    @foreach (var parent in ViewBag.ListCate)
-                                    {
-                                        if (parent.MaLoaiCha == 0)
-                                        {
-                                            <option value="@parent.MaLoai">@parent.TenLoai</option>
-                                        }
-                                    }
-
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="add_category_btn">Thêm</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Thoát</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--end CATEGORY MODAL-->
 </form>
 <!--END ADD MODAL-->
