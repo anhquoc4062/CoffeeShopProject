@@ -44,7 +44,7 @@
                         <tbody>
                             @foreach (var item in ViewBag.ListOrder)
                             {
-                            <tr>
+                            <tr data-id-cart="@item.MaGioHang">
                                 <td>@item.TenKhachHang</td>
                                 <td>@item.Email</td>
                                 @if (item.TrangThai == 1)
@@ -65,7 +65,7 @@
                                     </button>
                                 </td>
                                 <td>@string.Format("{0:d}", item.NgayDat) </td>
-                                <td><a asp-action="RemoveOrder" asp-controller="OrderAdmin" asp-route-id="@item.MaGioHang" style="color: #c0392b"><i class="fas fa-trash-alt"></i></a></td>
+                                <td><a href="#" class="remove_order" style="color: #c0392b"><i class="fas fa-trash-alt"></i></a></td>
                             </tr>
                             }
 

@@ -8,6 +8,14 @@
             "infoFiltered": "(filtered from _MAX_ total records)"
         }
     });
+
+    $(document).on('click', '.remove_order', function(event) {
+        console.log('clicked');
+        event.preventDefault();
+        var row = $(this).closest('tr');
+        var order_id = row.attr("data-id-cart");
+        removeOrder(order_id, row);
+    });
 }
 
 function ChangeProgress(id, status) {
@@ -26,7 +34,6 @@ function GetCustomerInfo(customer_id) {
         url: '/CustomerAdmin/GetCustomerInfo?customer_id=' + customer_id,
         dataType: 'json',
         success: function(data) {
-            console.log(data);
             $("#customer_name").val(data.tenKhachHang);
             $("#customer_email").val(data.email);
             $("#customer_address").val(data.diaChi);
@@ -56,13 +63,14 @@ function GetListDetail(cart_id) {
     });
 }
 
-function removeOrder(order_id) {
+function removeOrder(order_id, row) {
     $.ajax({
         type: "GET",
-        url: '/OrderAdmin/RemoveOrder/' + order_id,
-        dataType: 'json',
+        url: '/OrderAdmin/RemoveOrder?id=' + order_id,
+        dataType: 'text',
         success: function(data) {
-
+            console.log('success', data);
+            $('#order_table').DataTable().row(row).remove().draw(false);
         },
         error: function(error) {}
     });

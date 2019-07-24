@@ -32,7 +32,8 @@ namespace CoffeeShopProject.Controllers
             query_ctdh.DeleteChiTietGioHangByCartId(id);
             GioHangViewModel query_dh = new GioHangViewModel(db);
             query_dh.DeleteGioHangById(id);
-            return RedirectToAction("Index");
+            //var response = { 'Name': 'Jon Smith', 'Address': { 'City': 'New York', 'State': 'NY' }, 'Age': 42 };
+            return Json(true);
         }
         public IActionResult ChangeProgress(int id, int status)
         {
