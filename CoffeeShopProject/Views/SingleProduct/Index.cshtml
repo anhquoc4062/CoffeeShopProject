@@ -4,7 +4,12 @@
     Layout = "~/Views/Layout/User/Layout.cshtml";
 }
 @using Microsoft.AspNetCore.Http
-
+<style>
+    button#share_facebook {
+        background-color: #4267b2;
+        margin-bottom: 20px
+    }
+</style>
 <section class="generic-banner relative">
     <div class="container">
         <div class="row height align-items-center justify-content-center">
@@ -35,6 +40,9 @@
                 <p>
                     <span style="text-transform:uppercase; font-weight:bold; color: #262626">Thể loại:</span> @Model.TenLoai
                 </p>
+                <button id="share_facebook" class="btn btn-primary" style="background-color: 'blue'">
+                    <i class="fab fa-facebook-f" style="margin-right: 10px"></i> Chia sẻ
+                </button>
                 <div id="exTab1">
                     <ul class="nav nav-pills">
                         <li class="active">
@@ -75,6 +83,7 @@
             </div>
         </div>
     </div>
+    <div  id="fb-root"></div>
 </section>
 <!-- End video-sec Area -->
 @{
@@ -109,3 +118,5 @@
     </div>
 </div>
 <!-- End Related Product -->
+
+<script type="text/javascript" src="~/user/js/detail_product.js"></script>
