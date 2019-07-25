@@ -20,6 +20,7 @@ namespace CoffeeShopProject.Controllers
         {
             db = _db;
         }
+        [Route("dang-nhap")]
         public IActionResult Index()
         {
             return View();
@@ -69,6 +70,7 @@ namespace CoffeeShopProject.Controllers
             HttpContext.Session.SetString("CREDENTITY_SESSION", "kh");
             return RedirectToAction("Index", "TrangChu");
         }
+        [Route("dang-ky")]
         public IActionResult SignUp()
         {
             ViewBag.City = from tt in db.TinhThanh select tt;

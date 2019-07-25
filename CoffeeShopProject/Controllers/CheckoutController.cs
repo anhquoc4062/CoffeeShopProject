@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeeShopProject.Controllers
 {
+    [Route("thanh-toan")]
     public class CheckoutController : Controller
     {
         private readonly CoffeeShopContext db;

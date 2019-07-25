@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeeShopProject.Controllers
 {
+    [Route("lien-he")]
     public class ContactController : Controller
     {
         public IActionResult Index()

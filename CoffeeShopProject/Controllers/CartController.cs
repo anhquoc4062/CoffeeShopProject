@@ -15,6 +15,7 @@ namespace CoffeeShopProject.Controllers
         {
             db = _db;
         }
+        [Route("gio-hang")]
         public IActionResult Index()
         {
             ViewBag.Cart = GetGioHang;

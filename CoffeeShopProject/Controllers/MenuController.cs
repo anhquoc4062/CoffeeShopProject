@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeeShopProject.Controllers
 {
+    
     public class MenuController : Controller
     {
         private readonly CoffeeShopContext db;
@@ -14,6 +15,7 @@ namespace CoffeeShopProject.Controllers
         {
             db = _db;
         }
+        [Route("thuc-don")]
         public IActionResult Index()
         {
             ThucDonViewModel query_thucdon = new ThucDonViewModel(db);
