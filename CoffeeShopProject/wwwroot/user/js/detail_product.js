@@ -18,24 +18,44 @@ function initFBServer() {
 function ShareToFacebook() {
     $(document).ready(function () {
         $('#share_facebook').click(function (e) {
-            e.preventDefault();
+            //e.preventDefault();
+            console.log(GLOBAR_VAR.domain_name);
+             FB.ui({
+                method: 'share_open_graph',
+                action_type: 'og.shares',
+                action_properties: JSON.stringify({
+                    object : {
+                       'og:url': GLOBAR_VAR.domain_name + '/SingleProduct/Index/3',
+                       'og:title': 'Test Title',
+                       'og:description': 'Dialogs provide a simple, consistent interface for applications to interface with users.',
+                       'og:image': GLOBAR_VAR.domain_name + '/uploads/product/Americano.png',
+                       'og:og:image:width': '300',
+                       'og:image:height': '300',
+                    }
+                })
+             });
+
+            /*var link = "https://127.0.0.1:5001/SingleProduct/Index/3";
+            var desc = "your caption here";
+            var title = 'your title here';
+            var img = 'http://127.0.0.1:5000/uploads/product/Americano.png';
+
+            // Open FB share popup
             FB.ui({
-
-                method: 'feed',
-
-                name: 'jQuery Dialog',
-
-                link: 'https://localhost:5001',
-
-                picture: 'https://www.gravatar.com/avatar/d5478f8e118cf5be65a366f4f292cf15?s=328&d=identicon&r=PG',
-
-                caption: 'This article demonstrates how to use the jQuery dialog feature in ASP.Net.',
-
-                description: 'First of all make a new website in ASP.Net and add a new stylesheet and add .js files and put images in the images folder and make a reference to the page.',
-
-                message: 'hello raj message'
-
-            });
+                method: 'share_open_graph',
+                action_type: 'og.shares',
+                action_properties: JSON.stringify({
+                    object: {
+                        'og:url': link,
+                        'og:title': title,
+                        'og:description': desc,
+                        'og:image': img
+                    }
+                })
+            },
+            function (response) {
+                // Action after response
+            });*/
 
         });
 
