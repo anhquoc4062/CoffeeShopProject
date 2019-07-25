@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeeShopProject.Controllers
 {
-    [Route("trang-chu")]
     public class TrangChuController : Controller
     {
         private readonly CoffeeShopContext db;
