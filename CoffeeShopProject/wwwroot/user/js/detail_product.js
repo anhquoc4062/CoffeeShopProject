@@ -19,8 +19,26 @@ function initFBServer() {
     }(document, 'script', 'facebook-jssdk'));
 }
 
+function onLoadProductDetail() {
+    var url = window.location.href
+    var id = url.substr(url.length - 1);
+    $.ajax({
+        type: "GET",
+        url: '/SingleProduct/GetProductDetail?id=' + id,
+        dataType: 'json',
+        success: function(response) {
+            $("meta[property='og\\:title']").attr('content', response.tenThucDon);
+            $("meta[property='og\\:image']").attr('content', GLOBAL_VAR.domain_name + 'uploads/product/' + response.hinhAnh);
+            $("meta[property='og\\:description']").attr('content', response.moTa);
+            $("meta[property='og\\:url']").attr('content', url);
+        },
+        error: function(error) {}
+    });
+}
+
 function ShareToFacebook() {
     $(document).ready(function() {
+
         $('#share_facebook').click(function(e) {
             e.preventDefault();
             FB.init({
@@ -40,7 +58,7 @@ function ShareToFacebook() {
             //     description: 'Dialogs provide a simple, consistent interface for applications to interface with users.'
             // })
 
-            FB.ui({
+            /*FB.ui({
                     method: 'share_open_graph',
                     action_type: 'og.likes',
                     action_properties: JSON.stringify({
@@ -55,6 +73,17 @@ function ShareToFacebook() {
                 function(response) {
                     // Action after response
                 });
+                */
+
+            var url = 'https://tlecoffeeshop.azurewebsites.net/chi-tiet/coffee/cappuchino-1'
+            var image = 'https://tlecoffeeshop.azurewebsites.net/uploads/product/cappuccino_PNG26.png'
+
+
+            window.open(
+                'http://www.facebook.com/sharer.php?s=100&&p[url]=' + url,
+                'facebook-share-dialog',
+                'width=626,height=436'
+            );
         });
 
 
@@ -65,6 +94,8 @@ function ShareToFacebook() {
 
 $(document).ready(function() {
     initFBServer();
+
+    onLoadProductDetail();
 
     ShareToFacebook();
 });

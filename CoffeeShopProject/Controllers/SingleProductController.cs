@@ -43,5 +43,11 @@ namespace CoffeeShopProject.Controllers
             return RedirectToAction("Index", new RouteValueDictionary(
                                         new { controller = "SingleProduct", action = "Index", id = product_id }));
         }
+
+        public IActionResult GetProductDetail(string id) {
+            ThucDonViewModel query = new ThucDonViewModel(db);
+            var td = query.GetDataById(id);
+            return Json(td);
+        }
     }
 }
