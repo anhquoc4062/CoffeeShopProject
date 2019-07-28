@@ -48,7 +48,7 @@ function ShareToFacebook() {
                             'og:url': GLOBAL_VAR.domain_name + '/chi-tiet/coffee/cappuchino-1',
                             'og:title': 'ABC',
                             'og:description': 'Dialogs provide a simple, consistent interface for applications to interface with users.',
-                            'og:image': GLOBAL_VAR.domain_name + +'/uploads/product/cappuccino_PNG26.png'
+                            'og:image': GLOBAL_VAR.domain_name + '/uploads/product/cappuccino_PNG26.png'
                         }
                     })
                 },
