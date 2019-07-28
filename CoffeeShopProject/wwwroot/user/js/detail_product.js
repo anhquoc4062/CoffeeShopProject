@@ -29,46 +29,40 @@ function ShareToFacebook() {
 
             console.log(GLOBAL_VAR.domain_name);
             FB.ui({
-                method: 'share_open_graph',
-                action_type: 'og.shares',
-                action_properties: JSON.stringify({
-                    object: {
-                        'og:url': 'https://tlecoffeeshop.azurewebsites.net/chi-tiet/coffee/cappuchino-1',
-                        'og:title': 'Test Title',
-                        'og:description': 'Dialogs provide a simple, consistent interface for applications to interface with users.',
-                        'og:image': 'https://tlecoffeeshop.azurewebsites.net/uploads/product/cappuccino_PNG26.png',
-                        'og:image:width': '300',
-                        'og:image:height': '300',
-                    }
-                })
-            });
-
-            /*var link = "https://127.0.0.1:5001/SingleProduct/Index/3";
-            var desc = "your caption here";
-            var title = 'your title here';
-            var img = 'http://127.0.0.1:5000/uploads/product/Americano.png';
-
-            // Open FB share popup
-            FB.ui({
-                method: 'share_open_graph',
-                action_type: 'og.shares',
-                action_properties: JSON.stringify({
-                    object: {
-                        'og:url': link,
-                        'og:title': title,
-                        'og:description': desc,
-                        'og:image': img
-                    }
-                })
-            },
-            function (response) {
-                // Action after response
-            });*/
-
+                method: 'feed',
+                name: 'Facebook Dialogs',
+                link: GLOBAL_VAR.domain_name + '/chi-tiet/coffee/cappuchino-1',
+                picture: GLOBAL_VAR.domain_name + +'/uploads/product/cappuccino_PNG26.png',
+                caption: 'Reference Documentation',
+                description: 'Dialogs provide a simple, consistent interface for applications to interface with users.'
+            })
         });
 
+        /*var link = "https://127.0.0.1:5001/SingleProduct/Index/3";
+        var desc = "your caption here";
+        var title = 'your title here';
+        var img = 'http://127.0.0.1:5000/uploads/product/Americano.png';
+
+        // Open FB share popup
+        FB.ui({
+            method: 'share_open_graph',
+            action_type: 'og.shares',
+            action_properties: JSON.stringify({
+                object: {
+                    'og:url': link,
+                    'og:title': title,
+                    'og:description': desc,
+                    'og:image': img
+                }
+            })
+        },
+        function (response) {
+            // Action after response
+        });*/
+
     });
-}
+
+};
 
 $(document).ready(function() {
     initFBServer();
