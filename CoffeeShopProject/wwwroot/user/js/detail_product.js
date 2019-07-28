@@ -27,10 +27,10 @@ function onLoadProductDetail() {
         url: '/SingleProduct/GetProductDetail?id=' + id,
         dataType: 'json',
         success: function(response) {
+            $("meta[property='og\\:url']").attr('content', url);
             $("meta[property='og\\:title']").attr('content', response.tenThucDon);
             $("meta[property='og\\:image']").attr('content', GLOBAL_VAR.domain_name + 'uploads/product/' + response.hinhAnh);
             $("meta[property='og\\:description']").attr('content', response.moTa);
-            $("meta[property='og\\:url']").attr('content', url);
         },
         error: function(error) {}
     });
@@ -75,9 +75,7 @@ function ShareToFacebook() {
                 });
                 */
 
-            var url = 'https://tlecoffeeshop.azurewebsites.net/chi-tiet/coffee/cappuchino-1'
-            var image = 'https://tlecoffeeshop.azurewebsites.net/uploads/product/cappuccino_PNG26.png'
-
+            var url = window.location.href;
 
             window.open(
                 'http://www.facebook.com/sharer.php?s=100&&p[url]=' + url,
@@ -94,8 +92,6 @@ function ShareToFacebook() {
 
 $(document).ready(function() {
     initFBServer();
-
-    onLoadProductDetail();
 
     ShareToFacebook();
 });

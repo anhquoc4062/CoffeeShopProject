@@ -19,12 +19,17 @@ namespace CoffeeShopProject.Controllers
         [Route("chi-tiet/{category}/{name}-{id}")]
         public IActionResult Index(string name, string id, string category)
         {
+            
             //var friendlyName = FriendlyUrlHelper.GetFriendlyTitle(name);
             ThucDonViewModel query = new ThucDonViewModel(db);
             var td = query.GetDataById(id);
             ViewBag.CungLoai = query.GetAllDataByCate(td.MaLoai.ToString()).Take(4);
             DanhGiaViewModel query_dg = new DanhGiaViewModel(db);
             ViewBag.ListDanhGia = query_dg.GetDanhGiaByProduct(id).OrderByDescending(x => x.MaDanhGia);
+            ViewBag.OGUrl = DomainName.main_url + "chi-tiet/" + category + "/" + name +"-"+id;
+            ViewBag.OGImage = DomainName.main_url + "uploads/product/" + td.HinhAnh;
+            ViewBag.OGDescription = td.MoTa;
+            ViewBag.OGTitle = td.TenThucDon;
             return View(td);
             
         }
