@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Routing;
 
 namespace CoffeeShopProject.Controllers
 {
-    [Route("chi-tiet")]
     public class SingleProductController : Controller
     {
         private readonly CoffeeShopContext db;
@@ -17,8 +16,8 @@ namespace CoffeeShopProject.Controllers
         {
             db = _db;
         }
-        [HttpGet("{name}-{id}")]
-        public IActionResult Index(string name, string id)
+        [Route("chi-tiet/{category}/{name}-{id}")]
+        public IActionResult Index(string name, string id, string category)
         {
             //var friendlyName = FriendlyUrlHelper.GetFriendlyTitle(name);
             ThucDonViewModel query = new ThucDonViewModel(db);

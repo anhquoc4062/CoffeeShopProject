@@ -89,8 +89,7 @@ function friendlyUrl(alias) {
     str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
     str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
     str = str.replace(/đ/g, "d");
-    str = str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g, " ");
-    str = str.replace(/ + /g, " ");
+    str = str.replace(/ + /g, "-");
     str = str.replace(' ', '-')
     str = str.trim();
     return str;
@@ -102,7 +101,8 @@ function LoadMenuProduct(data) {
         for (i in data) {
             htmlString += '<div class="col-lg-4"><div class="menu-image">';
             var friendlyName = friendlyUrl(data[i].tenThucDon);
-            htmlString += '<a href="/chi-tiet/' + friendlyName + '-' + data[i].maThucDon + '"><img src="/uploads/product/' + data[i].hinhAnh + '" alt="" width="200" height="200"></a></div>';
+            var friendlyCategory = friendlyUrl(data[i].tenLoai);
+            htmlString += '<a href="/chi-tiet/' + friendlyCategory + '/' + friendlyName + '-' + data[i].maThucDon + '"><img src="/uploads/product/' + data[i].hinhAnh + '" alt="" width="200" height="200"></a></div>';
             htmlString += '<div class="single-menu"><div class="title-div justify-content-between d-flex">';
             htmlString += '<h4>' + data[i].tenThucDon + '</h4></div><p class="price">';
             if (data[i].khuyenMai == 0) {

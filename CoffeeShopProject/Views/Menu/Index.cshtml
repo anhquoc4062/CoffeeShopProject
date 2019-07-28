@@ -63,7 +63,7 @@
                             <div class="col-lg-4">
 
                                 <div class="menu-image">
-                                    <a asp-action="Index" asp-controller="SingleProduct" asp-route-id="@product.MaThucDon" asp-route-name="@FriendlyUrlHelper.GetFriendlyTitle(product.TenThucDon)"><img src="~/uploads/product/@product.HinhAnh" alt="" width="200" height="200"></a>
+                                    <a asp-action="Index" asp-controller="SingleProduct" asp-route-id="@product.MaThucDon" asp-route-name="@FriendlyUrlHelper.GetFriendlyTitle(product.TenThucDon)" asp-route-category="@FriendlyUrlHelper.GetFriendlyTitle(product.TenLoai)"><img src="~/uploads/product/@product.HinhAnh" alt="" width="200" height="200"></a>
                                 </div>
                                 <div class="single-menu">
                                     <div class="title-div justify-content-between d-flex">
