@@ -21,7 +21,7 @@ function initFBServer() {
 
 function onLoadProductDetail() {
     var url = window.location.href
-    var id = url.substr(url.length - 1);
+    var id = $("#product_id").text();
     $.ajax({
         type: "GET",
         url: '/SingleProduct/GetProductDetail?id=' + id,
