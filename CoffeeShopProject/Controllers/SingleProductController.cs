@@ -26,9 +26,9 @@ namespace CoffeeShopProject.Controllers
             ViewBag.CungLoai = query.GetAllDataByCate(td.MaLoai.ToString()).Take(4);
             DanhGiaViewModel query_dg = new DanhGiaViewModel(db);
             ViewBag.ListDanhGia = query_dg.GetDanhGiaByProduct(id).OrderByDescending(x => x.MaDanhGia);
-            ViewBag.OGUrl = DomainName.main_url + "chi-tiet/" + category + "/" + name +"-"+id;
-            ViewBag.OGImage = DomainName.main_url + "uploads/product/" + td.HinhAnh;
-            ViewBag.OGDescription = td.MoTa;
+            ViewBag.OGUrl = DomainName.main_url + "/chi-tiet/" + category + "/" + name +"-"+id;
+            ViewBag.OGImage = DomainName.main_url + "/uploads/product/" + td.HinhAnh;
+            ViewBag.OGDescription = td.MoTa.Substring(0, 40) + "...";
             ViewBag.OGTitle = td.TenThucDon;
             return View(td);
             
