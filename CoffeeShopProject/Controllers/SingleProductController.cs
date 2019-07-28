@@ -28,7 +28,8 @@ namespace CoffeeShopProject.Controllers
             ViewBag.ListDanhGia = query_dg.GetDanhGiaByProduct(id).OrderByDescending(x => x.MaDanhGia);
             ViewBag.OGUrl = DomainName.main_url + "/chi-tiet/" + category + "/" + name +"-"+id;
             ViewBag.OGImage = DomainName.main_url + "/uploads/product/" + td.HinhAnh;
-            ViewBag.OGDescription = td.MoTa.Substring(0, 40) + "...";
+            ViewBag.OGDescription = td.MoTa.Length > 40 ? td.MoTa.Substring(0, 40) + "..." : td.MoTa;
+            
             ViewBag.OGTitle = td.TenThucDon;
             return View(td);
             
