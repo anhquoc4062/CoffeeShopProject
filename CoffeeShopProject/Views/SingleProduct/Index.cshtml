@@ -10,6 +10,14 @@
         margin-bottom: 20px
     }
 </style>
+<script src="https://www.paypal.com/sdk/js?client-id=SB_CLIENT_ID">
+</script>
+
+<div id="paypal-button-container"></div>
+
+<script>
+    paypal.Buttons().render('#paypal-button-container');
+</script>
 <section class="generic-banner relative">
     <div class="container">
         <div class="row height align-items-center justify-content-center">
@@ -41,9 +49,10 @@
                 <p>
                     <span style="text-transform:uppercase; font-weight:bold; color: #262626">Thể loại:</span> @Model.TenLoai
                 </p>
-                <button id="share_facebook" class="btn btn-primary" style="background-color: 'blue'">
+                <button id="share_facebook" class="btn btn-primary" style="background-color:'blue'">
                     <i class="fab fa-facebook-f" style="margin-right: 10px"></i> Chia sẻ
                 </button>
+
                 <div id="exTab1">
                     <ul class="nav nav-pills">
                         <li class="active">
@@ -63,61 +72,62 @@
                                 {
                                     <form asp-action="AddRating" asp-controller="SingleProduct" method="post">
                                         <label>Lời nhận xét</label>
-                                        <input hidden value="@Model.MaThucDon" name="product_id"/>
+                                        <input hidden value="@Model.MaThucDon" name="product_id" />
                                         <textarea style="margin-top: 0px; margin-bottom: 0px; height: 195px;" class="form-control" name="rating" placeholder="Nhập lời nhận xét..."></textarea>
                                         <button class="btn btn-primary">GỬI ĐÁNH GIÁ</button>
                                     </form>
-                                }else
+                                }
+                                else
                                 {
                                     <div class="alert-login">
-                                        <p style="font-size: 15px; text-align: center">Để nhận xét về sản phẩm bạn phải đăng nhập</p>
-                                        <form asp-action="Index" asp-controller="Login">
-                                            <button class="btn btn-default">Đăng nhập</button>
-                                        </form>
-                                    </div>
+                                <p style="font-size: 15px; text-align: center">Để nhận xét về sản phẩm bạn phải đăng nhập</p>
+                                <form asp-action="Index" asp-controller="Login">
+                                    <button class="btn btn-default">Đăng nhập</button>
+                                </form>
+                            </div>
 
-                                }
-                            </p>
+                        }
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div  id="fb-root"></div>
-</section>
-<!-- End video-sec Area -->
-@{
-    Html.RenderPartial("RatingArea");
-}
+            </div>
+            <div id="fb-root"></div>
+        </section>
+        <!-- End video-sec Area -->
+        @{
+            Html.RenderPartial("RatingArea");
+        }
 
-<!-- Start Related Product -->
-<div class="related-product">
-    <div class="container">
-        <div class="row">
-            <h2>CÁC SẢN PHẨM CÙNG LOẠI</h2>
-        </div>
-
-        <div class="row">
-            @foreach (var product in ViewBag.CungLoai)
-            {
-                <div class="col-md-3 text-center">
-                    <div class="image-related" width="400" height="400">
-                        <img src="~/uploads/product/@product.HinhAnh" alt="" width="100%" height="100%">
-                        <div class="button-add-to-cart">
-                            <a href="#" data-id="@product.MaThucDon">THÊM VÀO GIỎ</a>
-                        </div>
-                    </div>
-                    <div class="content-related">
-                        <h5><a asp-action="Index" asp-controller="SingleProduct" asp-route-id="@product.MaThucDon">@product.TenThucDon</a></h5>
-                        <span class="price">$@string.Format("{0:N2}", product.GetGiaKhuyenMai)</span>
-                    </div>
+        <!-- Start Related Product -->
+        <div class="related-product">
+            <div class="container">
+                <div class="row">
+                    <h2>CÁC SẢN PHẨM CÙNG LOẠI</h2>
                 </div>
-            }
 
+                <div class="row">
+                    @foreach (var product in ViewBag.CungLoai)
+                    {
+                        <div class="col-md-3 text-center">
+                            <div class="image-related" width="400" height="400">
+                                <img src="~/uploads/product/@product.HinhAnh" alt="" width="100%" height="100%">
+                                <div class="button-add-to-cart">
+                                    <a href="#" data-id="@product.MaThucDon">THÊM VÀO GIỎ</a>
+                                </div>
+                            </div>
+                            <div class="content-related">
+                                <h5><a asp-action="Index" asp-controller="SingleProduct" asp-route-id="@product.MaThucDon">@product.TenThucDon</a></h5>
+                                <span class="price">$@string.Format("{0:N2}", product.GetGiaKhuyenMai)</span>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-<!-- End Related Product -->
+        <!-- End Related Product -->
 
-<script type="text/javascript" src="~/user/js/detail_product.js"></script>
+        <script type="text/javascript" src="~/user/js/detail_product.js"></script>

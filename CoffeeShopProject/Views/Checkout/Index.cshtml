@@ -4,6 +4,12 @@
     Layout = "~/Views/Layout/User/Layout.cshtml";
 }
 
+<style>
+    .checkout-group {
+        height: 100px;
+    }
+</style>
+
 <section class="generic-banner relative">
     <div class="container">
         <div class="row height align-items-center justify-content-center">
@@ -43,102 +49,121 @@
                 Nếu bạn có tài khoản. Hãy <a asp-action="Index" asp-controller="Login">đăng nhập</a> để có thể xem thông tin đơn hàng
             </div>
         }
-        <form asp-controller="Checkout" asp-action="AddOrder">
-            <input name="account_id" value="@Context.Session.GetString("ACCID_SESSION")" hidden />
-            <div class="form-field">
-                <label for="fullname" style="text-align: left">
-                    Họ tên
-                    <abbr title="required" class="required">*</abbr>
-                </label>
-                <input type="text" name="fullname" id="fullname" class="form-control">
-            </div>
-            <div class="form-field">
-                <label for="address" style="text-align: left">
-                    Địa chỉ
-                    <abbr title="required" class="required">*</abbr>
-                </label>
-                <input type="text" name="address" id="address" class="form-control">
-            </div>
-            <div class="form-field">
-                <label for="email" style="text-align: left">
-                    Email
-                    <abbr title="required" class="required">*</abbr>
-                </label>
-                <input type="text" name="email" id="email" class="form-control">
-            </div>
-            <div class="form-field">
-                <label for="city" style="text-align: left">
-                    Thành phố
-                    <abbr title="required" class="required">*</abbr>
-                </label>
-                <select name="city" id="city" class="form-control">
-                    @foreach (var city in ViewBag.City)
+    <form asp-controller="Checkout" asp-action="AddOrder" id="checkout-form">
+        <input name="account_id" value="@Context.Session.GetString("ACCID_SESSION")" hidden />
+        <div class="form-field">
+            <label for="fullname" style="text-align: left">
+                Họ tên
+                <abbr title="required" class="required">*</abbr>
+            </label>
+            <input type="text" name="fullname" id="fullname" class="form-control">
+        </div>
+        <div class="form-field">
+            <label for="address" style="text-align: left">
+                Địa chỉ
+                <abbr title="required" class="required">*</abbr>
+            </label>
+            <input type="text" name="address" id="address" class="form-control">
+        </div>
+        <div class="form-field">
+            <label for="email" style="text-align: left">
+                Email
+                <abbr title="required" class="required">*</abbr>
+            </label>
+            <input type="text" name="email" id="email" class="form-control">
+        </div>
+        <div class="form-field">
+            <label for="city" style="text-align: left">
+                Thành phố
+                <abbr title="required" class="required">*</abbr>
+            </label>
+            <select name="city" id="city" class="form-control">
+                @foreach (var city in ViewBag.City)
+                {
+                    <option value="@city.MaTinhThanh">@city.TenTinhThanh</option>
+                }
+            </select>
+        </div>
+        <div class="form-field">
+            <label for="email" style="text-align: left">
+                Số điện thoại
+                <abbr title="required" class="required">*</abbr>
+            </label>
+            <input type="text" name="tel" id="email" class="form-control">
+        </div>
+        <div class="form-field">
+            <label for="email" style="text-align: left">
+                Ghi chú đặt hàng
+            </label>
+            <textarea name="" id="" cols="30" rows="5" class="form-control" placeholder="Ghi chú về đơn đặt hàng"></textarea>
+        </div>
+        <div class="form-field cart-checkout">
+            <h5>Đơn hàng của bạn</h5>
+            <table class="cart-item">
+                <thead>
+                    <tr>
+                        <th>Sản phẩm</th>
+                        <th style="width: 70%">Tổng cộng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (ViewBag.Cart != null)
                     {
-                        <option value="@city.MaTinhThanh">@city.TenTinhThanh</option>
-                    }
-                </select>
-            </div>
-            <div class="form-field">
-                <label for="email" style="text-align: left">
-                    Số điện thoại
-                    <abbr title="required" class="required">*</abbr>
-                </label>
-                <input type="text" name="tel" id="email" class="form-control">
-            </div>
-            <div class="form-field">
-                <label for="email" style="text-align: left">
-                    Ghi chú đặt hàng
-                </label>
-                <textarea name="" id="" cols="30" rows="5" class="form-control" placeholder="Ghi chú về đơn đặt hàng"></textarea>
-            </div>
-            <div class="form-field cart-checkout">
-                <h5>Đơn hàng của bạn</h5>
-                <table class="cart-item">
-                    <thead>
-                        <tr>
-                            <th>Sản phẩm</th>
-                            <th style="width: 70%">Tổng cộng</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if (ViewBag.Cart != null)
-                        {
-                            foreach (var item in ViewBag.Cart)
-                            {
-                                <tr>
-                                    <td>@item.TenThucDon x @item.SoLuong</td>
-                                    <td>$@string.Format("{0:N2}", item.GiaBan)</td>
-                                </tr>
-                            }
-                        }
-                        @if (ViewBag.Total == 0)
+                        foreach (var item in ViewBag.Cart)
                         {
                             <tr>
-                                <td colspan="2" style="padding-left: 80px">Chưa có sản phẩm trong giỏ</td>
+                                <td>@item.TenThucDon x @item.SoLuong</td>
+                                <td>$@string.Format("{0:N2}", item.GiaBan)</td>
                             </tr>
                         }
+                    }
+                    @if (ViewBag.Total == 0)
+                    {
+                        <tr>
+                            <td colspan="2" style="padding-left: 80px">Chưa có sản phẩm trong giỏ</td>
+                        </tr>
+                    }
 
-                        <tr>
-                            <td><strong>Subtotal</strong></td>
-                            <td>$@string.Format("{0:N2}", ViewBag.Total)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Coupon</strong></td>
-                            <td>None</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Total</strong></td>
-                            <td><strong>$@string.Format("{0:N2}", ViewBag.Total)</strong></td>
-                        </tr>
+                    <tr>
+                        <td><strong>Subtotal</strong></td>
+                        <td>$@string.Format("{0:N2}", ViewBag.Total)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Coupon</strong></td>
+                        <td>None</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Total</strong></td>
+                        <td><strong>$@string.Format("{0:N2}", ViewBag.Total)</strong></td>
+                    </tr>
 
-                    </tbody>
-                </table>
+                </tbody>
+            </table>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="radio-checkout" id="cod-checkbox" value="option2" checked>
+            <label class="form-check-label" for="cod-checkbox">
+                Thanh toán khi giao hàng
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="radio-checkout" id="paypal-checkbox" value="option1">
+            <label class="form-check-label" for="paypal-checkbox">
+                Thanh toán bằng Paypal
+            </label>
+        </div>
+        <div class="form-field">
+            <div class="checkout-group">
+                <button id="general-checkout-button" class="checkout-button btn btn-default">THANH TOÁN</button>
+                <div id="check-out-paypal" class="btn btn-default" style="display: none"></div>
             </div>
-            <div class="form-field">
-                <button class="checkout-button btn btn-default">THANH TOÁN</button>
-            </div>
+            
+        </div>
 
-        </form>
+
+    </form>
     </div>
 </div>
+<script src="https://www.paypal.com/sdk/js?client-id=AWIsppPl1e8gcyxUC9laSS0sTWzs_KMntrb6Z2oS3lwjJCUCZpIRLnvm3MQ73pU-Q8mNOT8dreWQ09I4"></script>
+<script src="~/user/js/checkout_paypal.js"></script>
 
