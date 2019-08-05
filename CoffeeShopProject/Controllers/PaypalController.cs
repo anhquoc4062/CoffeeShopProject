@@ -82,7 +82,7 @@ namespace CoffeeShopProject.Controllers
                 RedirectUrls = new RedirectUrls()
                 {
                     CancelUrl = DomainName.main_url + "Paypal/Fail",
-                    ReturnUrl = DomainName.main_url + "Paypal/Success"
+                    ReturnUrl = DomainName.main_url + "thanh-toan/AddOrder"
                 },
                 Payer = new Payer()
                 {
