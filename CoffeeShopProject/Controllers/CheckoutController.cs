@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeeShopProject.Controllers
 {
-    [Route("thanh-toan")]
+    
     public class CheckoutController : Controller
     {
         private readonly CoffeeShopContext db;
@@ -15,6 +15,7 @@ namespace CoffeeShopProject.Controllers
         {
             db = _db;
         }
+        [Route("thanh-toan")]
         public IActionResult Index()
         {
             ViewBag.City = (from tt in db.TinhThanh select tt);
@@ -89,6 +90,52 @@ namespace CoffeeShopProject.Controllers
                 ViewBag.Total = 0;
             }
             return View("Index");
+        }
+
+        [HttpPost]
+        public IActionResult AddOrderPaypal(
+            string fullname,
+            string address,
+            string email
+        ) {
+            var gioHang = SessionHelper.Get<List<CartItem>>(HttpContext.Session, "cart");
+            if (gioHang == null || gioHang.Count() == 0)
+            {
+                return Json(false);
+            }
+            else
+            {
+                KhachHang newKh = new KhachHang
+                {
+                    TenKhachHang = fullname,
+                    DiaChi = address,
+                    Email = email
+                };
+                db.KhachHang.Add(newKh);
+                db.SaveChanges();
+                GioHang newOrder = new GioHang
+                {
+                    MaKhachHang = newKh.MaKhachHang,
+                    NgayDat = DateTime.Now,
+                    TrangThai = 0
+                };
+                db.GioHang.Add(newOrder);
+                db.SaveChanges();
+                var cart = SessionHelper.Get<List<CartItem>>(HttpContext.Session, "cart");
+                foreach (var item in cart)
+                {
+                    ChiTietGioHang newDetail = new ChiTietGioHang
+                    {
+                        MaGioHang = newOrder.MaGioHang,
+                        MaThucDon = item.MaThucDon,
+                        SoLuong = item.SoLuong
+                    };
+                    db.ChiTietGioHang.Add(newDetail);
+                    db.SaveChanges();
+                }
+                HttpContext.Session.Remove("cart");
+                return Json(true);
+            }
         }
     }
 }
