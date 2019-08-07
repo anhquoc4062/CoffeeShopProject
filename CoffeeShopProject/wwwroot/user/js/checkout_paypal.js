@@ -15,8 +15,23 @@ function RenderPaypalButton() {
                     return actions.order.create({
                         purchase_units: [{
                             amount: {
-                                value: totalAmount
-                            }
+                                value: '7',
+                                currency_code: 'USD',
+                                breakdown: {
+                                    item_total: {value: '7', currency_code: 'USD'}
+                                }
+                            },
+                            items: [{
+                                name: 'Hafer',
+                                unit_amount: {value: '3', currency_code: 'USD'},
+                                quantity: '1',
+                                sku: 'haf001'
+                            }, {
+                                name: 'Discount',
+                                unit_amount: {value: '4', currency_code: 'USD'},
+                                quantity: '1',
+                                sku: 'dsc002'
+                            }]
                         }]
                     });
                 },
