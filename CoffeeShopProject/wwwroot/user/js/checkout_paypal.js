@@ -73,9 +73,6 @@
     });
 
 }
-
-
-
 $(document).ready(function() {
     renderButtonCheckout();
 
