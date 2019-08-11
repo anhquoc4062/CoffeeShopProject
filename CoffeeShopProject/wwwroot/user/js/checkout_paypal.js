@@ -1,10 +1,9 @@
-﻿
-function renderButtonCheckout() {
+﻿function renderButtonCheckout() {
     $.ajax({
         type: "get",
         url: "Cart/LoadCartHidden",
         dataType: "json",
-        success: function (response) {
+        success: function(response) {
             var totalAmount = 0;
             var orderItems = [];
             response.forEach(item => {
@@ -12,7 +11,8 @@ function renderButtonCheckout() {
                 var orderItem = {
                     name: item.tenThucDon,
                     unit_amount: {
-                        value: item.giaBan, currency_code: 'USD'
+                        value: item.giaBan,
+                        currency_code: 'USD'
                     },
                     quantity: item.soLuong,
                     sku: item.maThucDon
@@ -20,7 +20,7 @@ function renderButtonCheckout() {
                 orderItems.push(orderItem);
             });
             paypal.Buttons({
-                createOrder: function (data, actions) {
+                createOrder: function(data, actions) {
                     // Set up the transaction
                     return actions.order.create({
                         purchase_units: [{
@@ -28,7 +28,7 @@ function renderButtonCheckout() {
                                 value: totalAmount,
                                 currency_code: 'USD',
                                 breakdown: {
-                                    item_total: {value: totalAmount, currency_code: 'USD'}
+                                    item_total: { value: totalAmount, currency_code: 'USD' }
                                 }
                             },
                             items: orderItems
@@ -60,7 +60,7 @@ function renderButtonCheckout() {
                                 email: email
                             },
                             dataType: "json",
-                            success: function (response) {
+                            success: function(response) {
                                 if (response == true) {
                                     swal("Thành công", "Thanh toán thành công", "success");
                                 }
@@ -71,15 +71,15 @@ function renderButtonCheckout() {
             }).render('#check-out-paypal');
         }
     });
-    
+
 }
 
 
 
-$(document).ready(function () {
+$(document).ready(function() {
     renderButtonCheckout();
-    
-    $(document).on('click', '#general-checkout-button', function (event) {
+
+    $(document).on('click', '#general-checkout-button', function(event) {
         event.preventDefault();
         if ($("#paypal-checkbox").is(":checked")) {
             let iframe = $('iframe[title=paypal_buttons]');
@@ -87,19 +87,17 @@ $(document).ready(function () {
             let button = iframe.contents().find('.paypal-button.paypal-button-number-0.paypal-button-layout-vertical.paypal-button-shape-rect.paypal-button-number-multiple.paypal-button-env-sandbox.paypal-button-color-gold.paypal-logo-color-blue');
             console.log(button);
             button.click();
-        }
-        else {
+        } else {
             $("#checkout-form").submit();
         }
     });
-   
-    $('input[name="radio-checkout"]').click(function (event) {
+
+    $('input[name="radio-checkout"]').click(function(event) {
         let id = $(this).attr("id");
         if (id == "paypal-checkbox") {
             $("#general-checkout-button").hide();
             $("#check-out-paypal").slideDown("slow");
-        }
-        else {
+        } else {
             $("#general-checkout-button").slideDown("slow");
             $("#check-out-paypal").hide();
         }
