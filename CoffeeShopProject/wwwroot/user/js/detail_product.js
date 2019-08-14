@@ -48,15 +48,15 @@ function ShareToFacebook() {
                 version: 'v2.10'
             });
 
-            // console.log(GLOBAL_VAR.domain_name);
-            // FB.ui({
-            //     method: 'feed',
-            //     name: 'Facebook Dialogs',
-            //     link: GLOBAL_VAR.domain_name + '/chi-tiet/coffee/cappuchino-1',
-            //     picture: GLOBAL_VAR.domain_name + +'/uploads/product/cappuccino_PNG26.png',
-            //     caption: 'Reference Documentation',
-            //     description: 'Dialogs provide a simple, consistent interface for applications to interface with users.'
-            // })
+            console.log(GLOBAL_VAR.domain_name);
+            FB.ui({
+                method: 'feed',
+                name: 'Facebook Dialogs',
+                link: GLOBAL_VAR.domain_name + '/chi-tiet/coffee/cappuchino-1',
+                picture: GLOBAL_VAR.domain_name + +'/uploads/product/cappuccino_PNG26.png',
+                caption: 'Reference Documentation',
+                description: 'Dialogs provide a simple, consistent interface for applications to interface with users.'
+            })
 
             /*FB.ui({
                     method: 'share_open_graph',
@@ -75,13 +75,13 @@ function ShareToFacebook() {
                 });
                 */
 
-            var url = window.location.href;
+            // var url = window.location.href;
 
-            window.open(
-                'http://www.facebook.com/sharer.php?s=100&&p[url]=' + url,
-                'facebook-share-dialog',
-                'width=626,height=436'
-            );
+            // window.open(
+            //     'http://www.facebook.com/sharer.php?s=100&&p[url]=' + url,
+            //     'facebook-share-dialog',
+            //     'width=626,height=436'
+            // );
         });
 
 
