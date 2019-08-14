@@ -9,14 +9,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 @Html.Partial("~/Views/Layout/User/Head.cshtml")
 <body>
-    
+
+    <!-- Load Facebook SDK for JavaScript -->
     <!-- Load Facebook SDK for JavaScript -->
     <div id="fb-root"></div>
     <script>
         window.fbAsyncInit = function () {
             FB.init({
                 xfbml: true,
-                version: 'v3.3'
+                version: 'v4.0'
             });
         };
 
@@ -31,7 +32,9 @@
     <!-- Your customer chat code -->
     <div class="fb-customerchat"
          attribution=setup_tool
-         page_id="958586334316355">
+         page_id="958586334316355"
+         logged_in_greeting="TLE Coffee Shop xin chào <3"
+         logged_out_greeting="TLE Coffee Shop xin chào <3">
     </div>
 
     @Html.Partial("~/Views/Layout/User/Header.cshtml")<!-- #header -->
