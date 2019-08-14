@@ -47,12 +47,12 @@ function ShareToFacebook() {
                 xfbml: true,
                 version: 'v2.10'
             });
-
+            var url = window.location.href;
             console.log(GLOBAL_VAR.domain_name);
             FB.ui({
                 method: 'feed',
                 name: 'Facebook Dialogs',
-                link: GLOBAL_VAR.domain_name + '/chi-tiet/coffee/cappuchino-1',
+                link: url,
                 picture: GLOBAL_VAR.domain_name + +'/uploads/product/cappuccino_PNG26.png',
                 caption: 'Reference Documentation',
                 description: 'Dialogs provide a simple, consistent interface for applications to interface with users.'
