@@ -1,14 +1,8 @@
-@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Layout/Admin/Layout.cshtml";
-}
-
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Layout/Admin/Layout.cshtml";
 }
-
 <style>
     #order_detail .modal-content {
         height: 100%;
@@ -20,22 +14,37 @@
     #order_detail .table-data .table td {
         border-bottom: 1px solid #d5d0d0;
     }
+
     .table-responsive.table-data {
         height: 100%;
         overflow: auto;
     }
+
     .table-responsive {
-        height: 1200px;
-    }
+    height: 650px;
+}
+
+.main-content {
+    min-height: 80vh;
+}
 </style>
 <div class="section__content section__content--p30">
     <div class="container-fluid">
         <h3 class="title-5 m-b-35">DANH SÁCH NGƯỜI ĐĂNG KÝ</h3>
+        <div class="table-data__tool">
+            <div class="table-data__tool-left">
+            </div>
+            <div class="table-data__tool-right">
+                 <button class="au-btn au-btn-icon au-btn--green au-btn--small product_btn" style="width: 180px" id="export-excel-subscriber">
+                    <i class="zmdi zmdi-plus"></i>xuất file excel
+                </button>
+            </div>
+        </div>
         <div class="row m-t-30">
             <div class="col-md-12">
                 <!-- DATA TABLE-->
                 <div class="table-responsive m-b-40">
-                    <table class="table table-borderless table-data3"  id="subscriber_table">
+                    <table class="table table-borderless table-data3" id="subscriber_table">
                         <thead>
                             <tr>
                                 <th>email</th>
@@ -47,7 +56,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            
+                            <!-- <tr>
+                                <td>Đang tải xin chờ chút</td>
+                            </tr> -->
                         </tbody>
                     </table>
                 </div>
