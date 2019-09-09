@@ -10,8 +10,7 @@ namespace CoffeeShopProject.Models
         public int? MaThucDon { get; set; }
         public int? SoLuong { get; set; }
         public double? DonGia { get; set; }
-
-        public HoaDon MaHoaDonNavigation { get; set; }
-        public ThucDon MaThucDonNavigation { get; set; }
+        public string MaChiTietLocal { get; set; }
+        public int TrangThai { get; set; }
     }
 }

@@ -20,7 +20,7 @@ namespace CoffeeShopProject.Models
                       select new BanAnViewModel
                       {
                           MaBan=td.MaBan,
-                          SoGhe=td.SoGhe,
+                          TenBan=td.TenBan,
 
                       }).ToList();
             return ds;

@@ -41,7 +41,7 @@ namespace CoffeeShopProject.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=tcp:tlecoffeeshop.database.windows.net,1433;Initial Catalog=CoffeeShop;Persist Security Info=False;User ID=anhquoc4062;Password=Anhquoc123.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+                optionsBuilder.UseSqlServer("Server=.; Database=CoffeeShop; Integrated Security=True;");
             }
         }
 
@@ -53,7 +53,7 @@ namespace CoffeeShopProject.Models
 
                 entity.Property(e => e.MaBan).HasColumnName("maBan");
 
-                entity.Property(e => e.SoGhe).HasColumnName("soGhe");
+                entity.Property(e => e.TenBan).HasColumnName("tenBan");
             });
 
             modelBuilder.Entity<Coupon>(entity =>
@@ -87,10 +87,9 @@ namespace CoffeeShopProject.Models
                     .HasForeignKey(d => d.MaGioHang)
                     .HasConstraintName("FK_CHITIETGIOHANG_REFERENCE_GIOHANG");
 
-                entity.HasOne(d => d.MaThucDonNavigation)
-                    .WithMany(p => p.ChiTietGioHang)
-                    .HasForeignKey(d => d.MaThucDon)
-                    .HasConstraintName("FK_CHITIETGIOHANG_REFERENCE_THUCDON");
+                //entity.HasOne(d => d.MaThucDonNavigation)
+                    //.HasForeignKey(d => d.MaThucDon)
+                    //.HasConstraintName("FK_CHITIETGIOHANG_REFERENCE_THUCDON");
             });
 
             modelBuilder.Entity<ChiTietHoaDon>(entity =>
@@ -107,15 +106,18 @@ namespace CoffeeShopProject.Models
 
                 entity.Property(e => e.SoLuong).HasColumnName("soLuong");
 
-                entity.HasOne(d => d.MaHoaDonNavigation)
-                    .WithMany(p => p.ChiTietHoaDon)
-                    .HasForeignKey(d => d.MaHoaDon)
-                    .HasConstraintName("FK_CHITIETH_REFERENCE_HOADON");
+                entity.Property(e => e.MaChiTietLocal).HasColumnName("maChiTietLocal");
 
-                entity.HasOne(d => d.MaThucDonNavigation)
-                    .WithMany(p => p.ChiTietHoaDon)
-                    .HasForeignKey(d => d.MaThucDon)
-                    .HasConstraintName("FK_CHITIETH_REFERENCE_THUCDON");
+                entity.Property(e => e.TrangThai).HasColumnName("trangThai");
+
+                //entity.HasOne(d => d.MaHoaDonNavigation)
+                //    .WithMany(p => p.ChiTietHoaDon)
+                //    .HasForeignKey(d => d.MaHoaDon)
+                //    .HasConstraintName("FK_CHITIETH_REFERENCE_HOADON");
+
+                //entity.HasOne(d => d.MaThucDonNavigation)
+                //    //.HasForeignKey(d => d.MaThucDon)
+                //    .HasConstraintName("FK_CHITIETH_REFERENCE_THUCDON");
             });
 
             modelBuilder.Entity<ChucVu>(entity =>
@@ -193,15 +195,19 @@ namespace CoffeeShopProject.Models
 
                 entity.Property(e => e.TongTien).HasColumnName("tongTien");
 
-                entity.HasOne(d => d.MaBanNavigation)
-                    .WithMany(p => p.HoaDon)
-                    .HasForeignKey(d => d.MaBan)
-                    .HasConstraintName("FK_HOADON_REFERENCE_BANAN");
+                entity.Property(e => e.MaHoaDonLocal).HasColumnName("maHoaDonLocal");
 
-                entity.HasOne(d => d.MaNhanVienNavigation)
-                    .WithMany(p => p.HoaDon)
-                    .HasForeignKey(d => d.MaNhanVien)
-                    .HasConstraintName("FK_HOADON_REFERENCE_NHANVIEN");
+                entity.Property(e => e.TrangThai).HasColumnName("trangThai");
+
+                //entity.HasOne(d => d.MaBanNavigation)
+                //    .WithMany(p => p.HoaDon)
+                //    .HasForeignKey(d => d.MaBan)
+                //    .HasConstraintName("FK_HOADON_REFERENCE_BANAN");
+
+                //entity.HasOne(d => d.MaNhanVienNavigation)
+                //    .WithMany(p => p.HoaDon)
+                //    .HasForeignKey(d => d.MaNhanVien)
+                //    .HasConstraintName("FK_HOADON_REFERENCE_NHANVIEN");
             });
 
             modelBuilder.Entity<KhachHang>(entity =>
@@ -329,10 +335,10 @@ namespace CoffeeShopProject.Models
                     .HasColumnName("ngayPhanCong")
                     .HasColumnType("datetime");
 
-                entity.HasOne(d => d.MaBanNavigation)
-                    .WithMany(p => p.PhanCong)
-                    .HasForeignKey(d => d.MaBan)
-                    .HasConstraintName("FK_PHANCONG_REFERENCE_BANAN");
+                //entity.HasOne(d => d.MaBanNavigation)
+                //    .WithMany(p => p.PhanCong)
+                //    .HasForeignKey(d => d.MaBan)
+                //    .HasConstraintName("FK_PHANCONG_REFERENCE_BANAN");
             });
 
             modelBuilder.Entity<PhanQuyen>(entity =>
@@ -460,11 +466,6 @@ namespace CoffeeShopProject.Models
                 entity.Property(e => e.TenThucDon)
                     .HasColumnName("tenThucDon")
                     .HasMaxLength(254);
-
-                entity.HasOne(d => d.MaLoaiNavigation)
-                    .WithMany(p => p.ThucDon)
-                    .HasForeignKey(d => d.MaLoai)
-                    .HasConstraintName("FK_THUCDON_REFERENCE_LOAITHUC");
             });
         }
     }

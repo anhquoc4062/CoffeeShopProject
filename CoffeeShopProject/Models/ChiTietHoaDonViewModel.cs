@@ -8,22 +8,29 @@ namespace CoffeeShopProject.Models
     public class ChiTietHoaDonViewModel:ChiTietHoaDon
     {
         private readonly CoffeeShopContext db;
+        private string TenThucDon { get; set; } 
         public ChiTietHoaDonViewModel() { }
         public ChiTietHoaDonViewModel(CoffeeShopContext _db)
         {
             db = _db;
         }
 
-        public List<ChiTietHoaDonViewModel> GetDsChiTietHoaDon()
+        public List<ChiTietHoaDonViewModel> GetDsChiTietHoaDon(int maHoaDon)
         {
-            var ds = (from td in db.ChiTietHoaDon
+            var ds = (from cthd in db.ChiTietHoaDon
+                      join td in db.ThucDon
+                      on cthd.MaThucDon equals td.MaThucDon
+                      where cthd.MaHoaDon.Equals(maHoaDon)
                       select new ChiTietHoaDonViewModel
                       {
-                          MaChiTiet=td.MaChiTiet,
-                          MaHoaDon = td.MaHoaDon,
-                          MaThucDon = td.MaThucDon,
-                          SoLuong = td.SoLuong,
-                          DonGia=td.DonGia
+                          MaChiTiet= cthd.MaChiTiet,
+                          MaHoaDon = cthd.MaHoaDon,
+                          MaThucDon = cthd.MaThucDon,
+                          SoLuong = cthd.SoLuong,
+                          DonGia = cthd.DonGia,
+                          TenThucDon = td.TenThucDon,
+                          MaChiTietLocal = cthd.MaChiTietLocal,
+                          TrangThai = cthd.TrangThai
 
                       }).ToList();
             return ds;

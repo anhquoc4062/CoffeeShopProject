@@ -39,6 +39,29 @@ namespace CoffeeShopProject.Models
 
             return dsThucDon;
         }
+
+        public List<ThucDonViewModel> GetAllDataApi()
+        {
+            var dsThucDon = (from td in db.ThucDon
+                             join ltd in db.LoaiThucDon
+                             on td.MaLoai equals ltd.MaLoai
+                             orderby td.MaThucDon descending
+                             select new ThucDonViewModel
+                             {
+                                 MaThucDon = td.MaThucDon,
+                                 TenThucDon = td.TenThucDon,
+                                 HinhAnh = td.HinhAnh,
+                                 TenLoai = ltd.TenLoai,
+                                 MaLoai = td.MaLoai,
+                                 Gia = td.Gia,
+                                 KhuyenMai = td.KhuyenMai,
+                                 GetGiaKhuyenMai = td.GiaKhuyenMai,
+                                 MoTa = td.MoTa
+                             }).ToList();
+
+            return dsThucDon;
+        }
+
         public IEnumerable<ThucDonViewModel> GetAllDataByCate(string MaLoai)
         {
             var dsThucdon = Enumerable.Empty<ThucDonViewModel>();
