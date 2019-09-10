@@ -8,7 +8,8 @@ namespace CoffeeShopProject.Models
     public class ChiTietHoaDonViewModel:ChiTietHoaDon
     {
         private readonly CoffeeShopContext db;
-        private string TenThucDon { get; set; } 
+        public string TenThucDon { get; set; }
+        public double? GiaMon { get; set; }
         public ChiTietHoaDonViewModel() { }
         public ChiTietHoaDonViewModel(CoffeeShopContext _db)
         {
@@ -27,7 +28,8 @@ namespace CoffeeShopProject.Models
                           MaHoaDon = cthd.MaHoaDon,
                           MaThucDon = cthd.MaThucDon,
                           SoLuong = cthd.SoLuong,
-                          DonGia = cthd.DonGia,
+                          GiaMon = td.GiaKhuyenMai,
+                          DonGia = cthd.SoLuong * td.GiaKhuyenMai,
                           TenThucDon = td.TenThucDon,
                           MaChiTietLocal = cthd.MaChiTietLocal,
                           TrangThai = cthd.TrangThai

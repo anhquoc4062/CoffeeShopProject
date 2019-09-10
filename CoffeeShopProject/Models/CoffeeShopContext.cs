@@ -17,6 +17,7 @@ namespace CoffeeShopProject.Models
         }
 
         public virtual DbSet<BanAn> BanAn { get; set; }
+        public virtual DbSet<Tang> Tang { get; set; }
         public virtual DbSet<Coupon> Coupon { get; set; }
         public virtual DbSet<ChiTietGioHang> ChiTietGioHang { get; set; }
         public virtual DbSet<ChiTietHoaDon> ChiTietHoaDon { get; set; }
@@ -41,7 +42,7 @@ namespace CoffeeShopProject.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=.; Database=CoffeeShop; Integrated Security=True;");
+                optionsBuilder.UseSqlServer("workstation id=TLECoffeeDB.mssql.somee.com;packet size=4096;user id=anhquoc4062_SQLLogin_1;pwd=qprknsdfus;data source=TLECoffeeDB.mssql.somee.com;persist security info=False;initial catalog=TLECoffeeDB");
             }
         }
 
@@ -54,6 +55,17 @@ namespace CoffeeShopProject.Models
                 entity.Property(e => e.MaBan).HasColumnName("maBan");
 
                 entity.Property(e => e.TenBan).HasColumnName("tenBan");
+
+                entity.Property(e => e.MaTang).HasColumnName("maTang");
+            });
+
+            modelBuilder.Entity<Tang>(entity =>
+            {
+                entity.HasKey(e => e.MaTang);
+
+                entity.Property(e => e.MaTang).HasColumnName("maTang");
+
+                entity.Property(e => e.TenTang).HasColumnName("tenTang");
             });
 
             modelBuilder.Entity<Coupon>(entity =>

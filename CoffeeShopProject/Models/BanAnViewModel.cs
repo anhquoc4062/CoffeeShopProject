@@ -14,13 +14,19 @@ namespace CoffeeShopProject.Models
             db = _db;
         }
 
+        public string TenTang { get; set; }
+
         public List<BanAnViewModel> GetDsBanAn()
         {
-            var ds = (from td in db.BanAn
+            var ds = (from b in db.BanAn
+                      join t in db.Tang
+                      on b.MaTang equals t.MaTang
                       select new BanAnViewModel
                       {
-                          MaBan=td.MaBan,
-                          TenBan=td.TenBan,
+                          MaBan = b.MaBan,
+                          TenBan = b.TenBan,
+                          MaTang = b.MaTang,
+                          TenTang = t.TenTang
 
                       }).ToList();
             return ds;

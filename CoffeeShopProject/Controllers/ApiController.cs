@@ -48,6 +48,7 @@ namespace CoffeeShopProject.Controllers
                 loaiThucDon = new LoaiThucDonViewModel(db).GetLoaiThucDon(),
                 thucDon = new ThucDonViewModel(db).GetAllData(),
                 banAn = new BanAnViewModel(db).GetDsBanAn(),
+                tang = new TangViewModel(db).GetDsTang(),
                 hoaDon = new HoaDonViewModel(db).GetDsHoaDon()
             };
             Console.WriteLine(new HoaDonViewModel(db).GetDsHoaDon());
