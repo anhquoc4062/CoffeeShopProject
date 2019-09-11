@@ -38,8 +38,11 @@ namespace CoffeeShopProject
             //    options.CheckConsentNeeded = context => false;
             //    options.MinimumSameSitePolicy = SameSiteMode.None;
             //});
-
+            services.AddCors(o => o.AddPolicy("CorsPolicy", builder => builder.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader().AllowCredentials()));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            
             services.AddSession();
             services.AddDbContext<CoffeeShopContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CoffeeShop")));
             services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -61,13 +64,15 @@ namespace CoffeeShopProject
             });
 
             services.AddSignalR();
+            
+            
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-
+            app.UseCors("CorsPolicy");
             app.UseAuthentication();
             app.UseSession();
 
@@ -88,12 +93,15 @@ namespace CoffeeShopProject
             {
                 routes.MapHub<ChatHub>("/chatHub");
             });
+            
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=TrangChu}/{action=Index}/{id?}");
             });
+            
+            
         }
     }
 }

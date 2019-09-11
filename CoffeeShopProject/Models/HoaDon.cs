@@ -7,7 +7,6 @@ namespace CoffeeShopProject.Models
     {
         public int MaHoaDon { get; set; }
         public DateTime? ThoiGianLap { get; set; }
-        public int? SoKhach { get; set; }
         public int? MaNhanVien { get; set; }
         public int? MaBan { get; set; }
         public double? TongTien { get; set; }

@@ -199,8 +199,6 @@ namespace CoffeeShopProject.Models
 
                 entity.Property(e => e.MaNhanVien).HasColumnName("maNhanVien");
 
-                entity.Property(e => e.SoKhach).HasColumnName("soKhach");
-
                 entity.Property(e => e.ThoiGianLap)
                     .HasColumnName("thoiGianLap")
                     .HasColumnType("datetime");
