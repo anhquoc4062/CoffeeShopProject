@@ -197,7 +197,7 @@ namespace CoffeeShopProject.Models
 
                 entity.Property(e => e.MaBan).HasColumnName("maBan");
 
-                entity.Property(e => e.MaNhanVien).HasColumnName("maNhanVien");
+                entity.Property(e => e.MaNhanVienOrder).HasColumnName("maNhanVienOrder");
 
                 entity.Property(e => e.ThoiGianLap)
                     .HasColumnName("thoiGianLap")
@@ -208,6 +208,9 @@ namespace CoffeeShopProject.Models
                 entity.Property(e => e.MaHoaDonLocal).HasColumnName("maHoaDonLocal");
 
                 entity.Property(e => e.TrangThai).HasColumnName("trangThai");
+                entity.Property(e => e.GiamGia).HasColumnName("giamGia");
+                entity.Property(e => e.ThanhTien).HasColumnName("thanhTien");
+                entity.Property(e => e.MaThuNgan).HasColumnName("maThuNgan");
 
                 //entity.HasOne(d => d.MaBanNavigation)
                 //    .WithMany(p => p.HoaDon)

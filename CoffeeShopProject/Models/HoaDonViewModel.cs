@@ -8,6 +8,7 @@ namespace CoffeeShopProject.Models
     public class HoaDonViewModel:HoaDon
     {
         private readonly CoffeeShopContext db;
+        public string TenBan { get; set; }
         public List<ChiTietHoaDonViewModel> DsMon { get; set; }
         public HoaDonViewModel() { }
         public HoaDonViewModel(CoffeeShopContext _db)
@@ -18,15 +19,21 @@ namespace CoffeeShopProject.Models
         public List<HoaDonViewModel> GetDsHoaDon()
         {
             var ds = (from hd in db.HoaDon
+                      join b in db.BanAn
+                      on hd.MaBan equals b.MaBan
                       select new HoaDonViewModel
                       {
                           MaHoaDon = hd.MaHoaDon,
                           ThoiGianLap = hd.ThoiGianLap,
-                          MaNhanVien = hd.MaNhanVien,
+                          MaNhanVienOrder = hd.MaNhanVienOrder,
                           MaBan = hd.MaBan,
+                          TenBan = b.TenBan,
                           TongTien = hd.TongTien,
                           MaHoaDonLocal = hd.MaHoaDonLocal,
                           TrangThai = hd.TrangThai,
+                          MaThuNgan = hd.MaThuNgan,
+                          GiamGia = hd.GiamGia,
+                          ThanhTien = hd.ThanhTien,
                           DsMon = new ChiTietHoaDonViewModel(db).GetDsChiTietHoaDon(1)
 
                       }).ToList();
