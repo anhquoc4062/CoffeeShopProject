@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "678616141467",
+    "firebase_url": "https://tlecoffeeshop-19101508.firebaseio.com",
+    "project_id": "tlecoffeeshop-19101508",
+    "storage_bucket": "tlecoffeeshop-19101508.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:678616141467:android:1f191ca155d8245a11803e",
+        "android_client_info": {
+          "package_name": "tle.thanh.coffeeshop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "678616141467-0tqlrbfamtvm6g9ls6t62fs1fe3u55sj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBw9duv63YBAzxIRz_2uG-1nt91_QSUIcQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "678616141467-0tqlrbfamtvm6g9ls6t62fs1fe3u55sj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
