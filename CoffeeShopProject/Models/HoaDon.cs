@@ -11,7 +11,7 @@ namespace CoffeeShopProject.Models
         public int? MaBan { get; set; }
         public double? TongTien { get; set; }
         public string MaHoaDonLocal { get; set; }
-        public string TrangThai { get; set; }
+        public int? TrangThai { get; set; }
         public int? GiamGia { get; set; }
         public double? ThanhTien { get; set; }
         public int? MaThuNgan { get; set; }
