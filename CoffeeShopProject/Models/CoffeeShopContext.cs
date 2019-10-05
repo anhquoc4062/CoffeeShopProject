@@ -25,6 +25,7 @@ namespace CoffeeShopProject.Models
         public virtual DbSet<DanhGia> DanhGia { get; set; }
         public virtual DbSet<GioHang> GioHang { get; set; }
         public virtual DbSet<HoaDon> HoaDon { get; set; }
+        public virtual DbSet<HoaDonX> HoaDonX { get; set; }
         public virtual DbSet<KhachHang> KhachHang { get; set; }
         public virtual DbSet<LoaiThucDon> LoaiThucDon { get; set; }
         public virtual DbSet<NgThamGia> NgThamGia { get; set; }
@@ -36,13 +37,15 @@ namespace CoffeeShopProject.Models
         public virtual DbSet<TinNhan> TinNhan { get; set; }
         public virtual DbSet<TinhThanh> TinhThanh { get; set; }
         public virtual DbSet<ThucDon> ThucDon { get; set; }
+        public virtual DbSet<PushDevice> PushDevice { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("workstation id=TLECoffeeDB.mssql.somee.com;packet size=4096;user id=anhquoc4062_SQLLogin_1;pwd=qprknsdfus;data source=TLECoffeeDB.mssql.somee.com;persist security info=False;initial catalog=TLECoffeeDB");
+                //optionsBuilder.UseSqlServer("workstation id=TLECoffeeDB.mssql.somee.com;packet size=4096;user id=anhquoc4062_SQLLogin_1;pwd=qprknsdfus;data source=TLECoffeeDB.mssql.somee.com;persist security info=False;initial catalog=TLECoffeeDB");
+                optionsBuilder.UseSqlServer("Server=.; Database=CoffeeShop; Integrated Security=True;");
             }
         }
 
@@ -190,8 +193,41 @@ namespace CoffeeShopProject.Models
 
             modelBuilder.Entity<HoaDon>(entity =>
             {
-                entity.HasKey(e => e.MaHoaDon)
-                    .ForSqlServerIsClustered(false);
+                entity.HasKey(e => e.MaHoaDon);
+
+                entity.Property(e => e.MaHoaDon).HasColumnName("maHoaDon");
+
+                entity.Property(e => e.MaBan).HasColumnName("maBan");
+
+                entity.Property(e => e.MaNhanVienOrder).HasColumnName("maNhanVienOrder");
+
+                entity.Property(e => e.ThoiGianLap)
+                    .HasColumnName("thoiGianLap")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.TongTien).HasColumnName("tongTien");
+
+                entity.Property(e => e.MaHoaDonLocal).HasColumnName("maHoaDonLocal");
+
+                entity.Property(e => e.TrangThai).HasColumnName("trangThai");
+                entity.Property(e => e.GiamGia).HasColumnName("giamGia");
+                entity.Property(e => e.ThanhTien).HasColumnName("thanhTien");
+                entity.Property(e => e.MaThuNgan).HasColumnName("maThuNgan");
+
+                //entity.HasOne(d => d.MaBanNavigation)
+                //    .WithMany(p => p.HoaDon)
+                //    .HasForeignKey(d => d.MaBan)
+                //    .HasConstraintName("FK_HOADON_REFERENCE_BANAN");
+
+                //entity.HasOne(d => d.MaNhanVienNavigation)
+                //    .WithMany(p => p.HoaDon)
+                //    .HasForeignKey(d => d.MaNhanVien)
+                //    .HasConstraintName("FK_HOADON_REFERENCE_NHANVIEN");
+            });
+
+            modelBuilder.Entity<HoaDonX>(entity =>
+            {
+                entity.HasKey(e => e.MaHoaDon);
 
                 entity.Property(e => e.MaHoaDon).HasColumnName("maHoaDon");
 
@@ -479,6 +515,13 @@ namespace CoffeeShopProject.Models
                 entity.Property(e => e.TenThucDon)
                     .HasColumnName("tenThucDon")
                     .HasMaxLength(254);
+            });
+
+            modelBuilder.Entity<PushDevice> (entity =>
+            {
+                entity.HasKey(e => e.PushID);
+                entity.Property(e => e.PushID).HasColumnName("pushID");
+                entity.Property(e => e.Token).HasColumnName("token");
             });
         }
     }

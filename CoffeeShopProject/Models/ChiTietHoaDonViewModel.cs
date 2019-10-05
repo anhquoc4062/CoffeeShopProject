@@ -80,5 +80,17 @@ namespace CoffeeShopProject.Models
             return false;
             //return new ChiTietHoaDonViewModel(db).GetDsChiTietHoaDon();
         }
+
+        public bool InserOrUpdateChiTietHoaDon(ChiTietHoaDon cthd) {
+            ChiTietHoaDon exist = db.ChiTietHoaDon.Find(cthd.MaChiTiet);
+            if (exist != null)
+            {
+                db.Entry(exist).CurrentValues.SetValues(cthd);
+            } else {
+                db.ChiTietHoaDon.Add(cthd);
+            }
+            db.SaveChanges();
+            return true;
+        }
     }
 }

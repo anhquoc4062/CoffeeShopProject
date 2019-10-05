@@ -18,7 +18,7 @@ namespace CoffeeShopProject.Models
 
         public List<HoaDonViewModel> GetDsHoaDon()
         {
-            var ds = (from hd in db.HoaDon
+            var ds = (from hd in db.HoaDonX
                       join b in db.BanAn
                       on hd.MaBan equals b.MaBan
                       select new HoaDonViewModel
@@ -34,42 +34,46 @@ namespace CoffeeShopProject.Models
                           MaThuNgan = hd.MaThuNgan,
                           GiamGia = hd.GiamGia,
                           ThanhTien = hd.ThanhTien,
-                          DsMon = new ChiTietHoaDonViewModel(db).GetDsChiTietHoaDon(1)
+                          // DsMon = new ChiTietHoaDonViewModel(db).GetDsChiTietHoaDon(hd.MaHoaDon)
 
                       }).ToList();
+            foreach (var item in ds)
+            {
+                item.DsMon = new ChiTietHoaDonViewModel(db).GetDsChiTietHoaDon(item.MaHoaDon);
+            }
             return ds;
         }
 
         public bool DeleteHoaDonById(String id)
         {
-            if (db.HoaDon.Find(int.Parse(id)) != null)
+            if (db.HoaDonX.Find(int.Parse(id)) != null)
             {
-                db.HoaDon.Remove(db.HoaDon.Find(int.Parse(id)));
+                db.HoaDonX.Remove(db.HoaDonX.Find(int.Parse(id)));
                 db.SaveChanges();
                 return true;
             }
             return false;
             //return new HoaDonViewModel(db).GetDsHoaDon();
         }
-        public HoaDon GetHoaDonById(String id)
+        public HoaDonX GetHoaDonById(String id)
         {
-            return db.HoaDon.Find(int.Parse(id));
+            return db.HoaDonX.Find(int.Parse(id));
         }
-        public bool InsertHoaDon(HoaDon nv)
+        public bool InsertHoaDon(HoaDonX hd)
         {
-            if (nv != null)
+            if (hd != null)
             {
-                db.HoaDon.Add(nv);
+                db.HoaDonX.Add(hd);
                 db.SaveChanges();
                 return true;
             }
             return false;
             //return new HoaDonViewModel(db).GetDsHoaDon();
         }
-        public bool EditHoaDon(HoaDon HoaDon)
+        public bool EditHoaDon(HoaDonX HoaDon)
         {
             //Edit bằng id nghe
-            HoaDon nv = db.HoaDon.Find(HoaDon.MaHoaDon);
+            HoaDonX nv = db.HoaDonX.Find(HoaDon.MaHoaDon);
             if (nv != null)
             {
                 db.Entry(nv).CurrentValues.SetValues(HoaDon);
@@ -78,6 +82,28 @@ namespace CoffeeShopProject.Models
             }
             return false;
             //return new HoaDonViewModel(db).GetDsHoaDon();
+        }
+
+        public bool InserOrUpdateHoaDon(HoaDonX hd) {
+            HoaDonX nv = db.HoaDonX.Where(x => x.MaHoaDonLocal.Equals(hd.MaHoaDonLocal)).FirstOrDefault();
+            if (nv != null)
+            {
+                nv.MaHoaDonLocal = hd.MaHoaDonLocal;
+                nv.MaNhanVienOrder = hd.MaNhanVienOrder;
+                nv.TongTien = hd.TongTien;
+                nv.GiamGia = hd.GiamGia;
+                nv.ThoiGianLap = hd.ThoiGianLap;
+                nv.MaBan = hd.MaBan;
+                nv.TrangThai = hd.TrangThai;
+                nv.ThanhTien = hd.ThanhTien;
+                nv.MaThuNgan = hd.MaThuNgan;
+                // db.Entry(nv).CurrentValues.SetValues(hd);
+                db.HoaDonX.Update(nv);
+            } else {
+                db.HoaDonX.Add(hd);
+            }
+            db.SaveChanges();
+            return true;
         }
     }
 }

@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 using CoffeeShopProject.Models;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace CoffeeShopProject.Controllers
 {
@@ -53,8 +58,110 @@ namespace CoffeeShopProject.Controllers
                 tang = new TangViewModel(db).GetDsTang(),
                 hoaDon = new HoaDonViewModel(db).GetDsHoaDon()
             };
-            Console.WriteLine(new HoaDonViewModel(db).GetDsHoaDon());
             return Respond(data);
+        }
+        public async Task<bool> SendPushNotification(OrderPostData order, string exceptToken)
+        {
+            var applicationID = "AAAAngCsjps:APA91bGIORNVRh56qyK6aQuVs9r41EoWnzRIGikVITD9N-KXHlNIUQCcrS3ADLn84urJSmdgXj81jU8781M5tB2nOKtJg1soSYFUS0lwVCs3kyM06oxn23Z69FYc1It_h86473lPk_3c";
+            // var senderId = "xxx";
+            // var deviceId = "xxxx";
+
+
+            using (var client = new HttpClient())
+            {
+                //do something with http client
+                client.BaseAddress = new Uri("https://fcm.googleapis.com");
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", $"key={applicationID}");
+                // client.DefaultRequestHeaders.TryAddWithoutValidation("Sender", $"id={senderId}");
+
+                var pushDeviceQuery = new PushDeviceViewModel(db);
+
+                pushDeviceQuery.Insert(exceptToken);
+
+                var statusMessage = order.TenBan + ' ';
+
+                switch(order.TrangThai)
+                {
+                    case 1:
+                        statusMessage += "có order mới";
+                        break;
+                    case 2:
+                        statusMessage += "có cập nhật";
+                        break;
+                    case 3:
+                        statusMessage += "đã hủy order";
+                        break;
+                    case 8:
+                        statusMessage += "đã thanh toán order";
+                        break;
+                }
+
+                var param = new
+                {
+                    registration_ids = new PushDeviceViewModel(db).GetAllTokenExcept(exceptToken),
+                    data = new
+                    {
+                        order_local_id = order.MaHoaDonLocal,
+                        order_id = order.MaHoaDon,
+                        created_date = order.ThoiGianLap,
+                        message = statusMessage,
+                    }
+
+                };
+
+                var json = JsonConvert.SerializeObject(param);
+                var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+                var result = await client.PostAsync("/fcm/send", httpContent);
+            }
+            return true;
+        }
+        [HttpPost]
+        public IActionResult SyncOrder(OrderPostData order) {
+            HoaDonX newhd = new HoaDonX();
+            newhd.MaHoaDon = 0;
+            newhd.MaHoaDonLocal = order.MaHoaDonLocal;
+            newhd.MaBan = order.MaBan;
+            newhd.TrangThai = order.TrangThai;
+            newhd.TongTien = order.TongTien;
+            newhd.ThanhTien = order.ThanhTien;
+            newhd.GiamGia = order.GiamGia;
+            newhd.MaThuNgan = order.MaThuNgan;
+            newhd.MaNhanVienOrder = order.MaNhanVienOrder;
+            newhd.ThoiGianLap = order.ThoiGianLap;
+
+            var hdQuery = new HoaDonViewModel(db).InserOrUpdateHoaDon(newhd);
+            if (hdQuery) {
+                foreach (var item in order.DsMon)
+                {
+                    ChiTietHoaDon ctHd = new ChiTietHoaDon
+                    {
+                        MaHoaDon = newhd.MaHoaDon,
+                        MaChiTiet = item.MaChiTiet,
+                        MaChiTietLocal = item.MaChiTietLocal,
+                        SoLuong = item.SoLuong,
+                        MaThucDon = item.MaThucDon,
+                        TrangThai = item.TrangThai,
+                        DonGia = item.DonGia
+                    };
+                    var cthdQuery = new ChiTietHoaDonViewModel(db).InserOrUpdateChiTietHoaDon(ctHd);
+                    if (!cthdQuery)
+                    {
+                        return Respond("", false);
+                    } 
+                }
+                this.SendPushNotification(order, order.TokenThietBi);
+                return Respond(new PushDeviceViewModel(db).GetAllTokenExcept(order.TokenThietBi), true);
+            }
+            else {
+                return Respond("", false);
+            }
+        }
+        [HttpPost]
+        public IActionResult testPost(OrderPostData data)
+        {
+            return Respond(data, true);
         }
     }
 }
