@@ -135,6 +135,9 @@ namespace CoffeeShopProject.Controllers
             var hdQuery = new HoaDonViewModel(db).InserOrUpdateHoaDon(newhd);
             if (hdQuery) {
                 order.MaHoaDon = newhd.MaHoaDon;
+                if (order.DsMon == null && order.DsMonJson != null) {
+                    order.DsMon = JsonConvert.DeserializeObject<ChiTietHoaDon[]>(order.DsMonJson);
+                }
                 foreach (var item in order.DsMon)
                 {
                     ChiTietHoaDon ctHd = new ChiTietHoaDon

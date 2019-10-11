@@ -5,5 +5,6 @@ namespace CoffeeShopProject.Models
         public ChiTietHoaDon[] DsMon { get; set; }
         public string TokenThietBi { get; set; }
         public string TenBan { get; set; }
+        public string DsMonJson {get; set;}
     }
 }
