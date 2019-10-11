@@ -7,6 +7,7 @@ namespace CoffeeShopProject.Models
     {
         public int MaChiTiet { get; set; }
         public int? MaHoaDon { get; set; }
+        public string MaHoaDonLocal { get; set; }
         public int? MaThucDon { get; set; }
         public int? SoLuong { get; set; }
         public double? DonGia { get; set; }

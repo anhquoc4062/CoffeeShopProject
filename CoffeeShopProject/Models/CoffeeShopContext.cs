@@ -116,6 +116,7 @@ namespace CoffeeShopProject.Models
                 entity.Property(e => e.DonGia).HasColumnName("donGia");
 
                 entity.Property(e => e.MaHoaDon).HasColumnName("maHoaDon");
+                entity.Property(e => e.MaHoaDonLocal).HasColumnName("maHoaDonLocal");
 
                 entity.Property(e => e.MaThucDon).HasColumnName("maThucDon");
 

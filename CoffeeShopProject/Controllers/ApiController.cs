@@ -104,6 +104,7 @@ namespace CoffeeShopProject.Controllers
                     {
                         order_local_id = order.MaHoaDonLocal,
                         order_id = order.MaHoaDon,
+                        status = order.TrangThai,
                         created_date = order.ThoiGianLap,
                         message = statusMessage,
                     }
@@ -120,8 +121,8 @@ namespace CoffeeShopProject.Controllers
         [HttpPost]
         public IActionResult SyncOrder(OrderPostData order) {
             HoaDonX newhd = new HoaDonX();
-            newhd.MaHoaDon = 0;
             newhd.MaHoaDonLocal = order.MaHoaDonLocal;
+            newhd.MaHoaDon = order.MaHoaDon;
             newhd.MaBan = order.MaBan;
             newhd.TrangThai = order.TrangThai;
             newhd.TongTien = order.TongTien;
@@ -133,6 +134,7 @@ namespace CoffeeShopProject.Controllers
 
             var hdQuery = new HoaDonViewModel(db).InserOrUpdateHoaDon(newhd);
             if (hdQuery) {
+                order.MaHoaDon = newhd.MaHoaDon;
                 foreach (var item in order.DsMon)
                 {
                     ChiTietHoaDon ctHd = new ChiTietHoaDon
@@ -162,6 +164,12 @@ namespace CoffeeShopProject.Controllers
         public IActionResult testPost(OrderPostData data)
         {
             return Respond(data, true);
+        }
+        [HttpPost]
+        public IActionResult getOrderFromServer(string id)
+        {
+            var query = new HoaDonViewModel(db).GetHoaDonById_v2(id);
+            return Respond(query, true);
         }
     }
 }

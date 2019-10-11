@@ -26,6 +26,7 @@ namespace CoffeeShopProject.Models
                       {
                           MaChiTiet= cthd.MaChiTiet,
                           MaHoaDon = cthd.MaHoaDon,
+                          MaHoaDonLocal = cthd.MaHoaDonLocal,
                           MaThucDon = cthd.MaThucDon,
                           SoLuong = cthd.SoLuong,
                           GiaMon = td.GiaKhuyenMai,
