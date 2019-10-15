@@ -83,10 +83,18 @@ namespace CoffeeShopProject.Models
         }
 
         public bool InserOrUpdateChiTietHoaDon(ChiTietHoaDon cthd) {
-            ChiTietHoaDon exist = db.ChiTietHoaDon.Find(cthd.MaChiTiet);
+            ChiTietHoaDon exist = db.ChiTietHoaDon.Where(x => x.MaChiTietLocal.Equals(cthd.MaChiTietLocal)).FirstOrDefault();
             if (exist != null)
             {
-                db.Entry(exist).CurrentValues.SetValues(cthd);
+                exist.MaHoaDon = cthd.MaHoaDon;
+                exist.MaHoaDonLocal = cthd.MaHoaDonLocal;
+                // exist.MaChiTiet = cthd.MaChiTiet;
+                exist.MaChiTietLocal = cthd.MaChiTietLocal;
+                exist.SoLuong = cthd.SoLuong;
+                exist.MaThucDon = cthd.MaThucDon;
+                exist.TrangThai = cthd.TrangThai;
+                exist.DonGia = cthd.DonGia;
+                db.ChiTietHoaDon.Update(exist);
             } else {
                 db.ChiTietHoaDon.Add(cthd);
             }

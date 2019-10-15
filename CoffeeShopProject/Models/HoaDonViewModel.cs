@@ -79,7 +79,8 @@ namespace CoffeeShopProject.Models
                                 ThoiGianLap = hd.ThoiGianLap,
                                 MaNhanVienOrder = hd.MaNhanVienOrder,
                                 MaBan = hd.MaBan,
-                                TenBan = b.TenBan + '-' + t.TenTang,
+                                TenBan = b.TenBan,
+                                TenTang = t.TenTang,
                                 TongTien = hd.TongTien,
                                 MaHoaDonLocal = hd.MaHoaDonLocal,
                                 TrangThai = hd.TrangThai,
@@ -119,7 +120,7 @@ namespace CoffeeShopProject.Models
             //return new HoaDonViewModel(db).GetDsHoaDon();
         }
 
-        public bool InserOrUpdateHoaDon(HoaDonX hd) {
+        public HoaDonX InserOrUpdateHoaDon(HoaDonX hd) {
             HoaDonX nv = db.HoaDonX.Where(x => x.MaHoaDonLocal.Equals(hd.MaHoaDonLocal)).FirstOrDefault();
             if (nv != null)
             {
@@ -134,12 +135,12 @@ namespace CoffeeShopProject.Models
                 nv.MaThuNgan = hd.MaThuNgan;
                 // db.Entry(nv).CurrentValues.SetValues(hd);
                 db.HoaDonX.Update(nv);
+                hd = nv;
             } else {
                 db.HoaDonX.Add(hd);
             }
-            hd = nv;
             db.SaveChanges();
-            return true;
+            return hd;
         }
     }
 }

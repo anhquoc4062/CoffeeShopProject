@@ -122,7 +122,7 @@ namespace CoffeeShopProject.Controllers
         public IActionResult SyncOrder(OrderPostData order) {
             HoaDonX newhd = new HoaDonX();
             newhd.MaHoaDonLocal = order.MaHoaDonLocal;
-            newhd.MaHoaDon = order.MaHoaDon;
+            // newhd.MaHoaDon = order.MaHoaDon;
             newhd.MaBan = order.MaBan;
             newhd.TrangThai = order.TrangThai;
             newhd.TongTien = order.TongTien;
@@ -133,8 +133,8 @@ namespace CoffeeShopProject.Controllers
             newhd.ThoiGianLap = order.ThoiGianLap;
 
             var hdQuery = new HoaDonViewModel(db).InserOrUpdateHoaDon(newhd);
-            if (hdQuery) {
-                order.MaHoaDon = newhd.MaHoaDon;
+            if (hdQuery != null) {
+                order.MaHoaDon = hdQuery.MaHoaDon;
                 if (order.DsMon == null && order.DsMonJson != null) {
                     order.DsMon = JsonConvert.DeserializeObject<ChiTietHoaDon[]>(order.DsMonJson);
                 }
@@ -142,7 +142,8 @@ namespace CoffeeShopProject.Controllers
                 {
                     ChiTietHoaDon ctHd = new ChiTietHoaDon
                     {
-                        MaHoaDon = newhd.MaHoaDon,
+                        MaHoaDon = order.MaHoaDon,
+                        MaHoaDonLocal = newhd.MaHoaDonLocal,
                         MaChiTiet = item.MaChiTiet,
                         MaChiTietLocal = item.MaChiTietLocal,
                         SoLuong = item.SoLuong,
@@ -157,16 +158,20 @@ namespace CoffeeShopProject.Controllers
                     } 
                 }
                 this.SendPushNotification(order, order.TokenThietBi);
-                return Respond(new PushDeviceViewModel(db).GetAllTokenExcept(order.TokenThietBi), true);
+                return Respond(hdQuery, true);
             }
             else {
                 return Respond("", false);
             }
         }
         [HttpPost]
-        public IActionResult testPost(OrderPostData data)
+        public IActionResult testPost(OrderPostData order)
         {
-            return Respond(data, true);
+            if (order.DsMon == null && order.DsMonJson != null)
+            {
+                order.DsMon = JsonConvert.DeserializeObject<ChiTietHoaDon[]>(order.DsMonJson);
+            }
+            return Respond(order, true);
         }
         [HttpPost]
         public IActionResult getOrderFromServer(string id)
