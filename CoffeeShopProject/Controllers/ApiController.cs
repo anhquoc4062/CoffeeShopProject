@@ -179,5 +179,39 @@ namespace CoffeeShopProject.Controllers
             var query = new HoaDonViewModel(db).GetHoaDonById_v2(id);
             return Respond(query, true);
         }
+        [HttpPost]
+        public IActionResult login(string username, string password)
+        {
+            var tk = db.TaiKhoan.SingleOrDefault(x => x.TenTaiKhoan == username && x.MatKhau == password);
+            if (tk == null) {
+                return Respond("", false);
+            } else {
+                return Respond(tk);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult pushToken(string token)
+        {
+            var pushDeviceQuery = new PushDeviceViewModel(db);
+
+            if(pushDeviceQuery.Insert(token)) {
+                return Respond("");
+            }
+            return Respond("", false);
+        }
+
+        [HttpPost]
+        public IActionResult popToken(string token)
+        {
+            var pushDeviceQuery = new PushDeviceViewModel(db);
+
+            if (pushDeviceQuery.Delete(token))
+            {
+                return Respond("");
+            }
+            return Respond("", false);
+        }
+
     }
 }

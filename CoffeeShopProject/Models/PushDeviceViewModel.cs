@@ -28,6 +28,16 @@ namespace CoffeeShopProject.Models
             return true;
         }
 
+        public bool Delete(string token) {
+            PushDevice dv = db.PushDevice.Where(x => x.Token.Equals(token)).FirstOrDefault();
+            if (dv != null)
+            {
+                db.PushDevice.Remove(dv);
+                db.SaveChanges();
+            }
+            return true;
+        }
+
         public string[] GetAllTokenExcept(string exceptToken)
         {
             string[] arrToken = db.PushDevice.Where(x => x.Token != exceptToken).Select(x => x.Token).ToArray();
