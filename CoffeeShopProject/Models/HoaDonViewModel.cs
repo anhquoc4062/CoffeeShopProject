@@ -9,6 +9,8 @@ namespace CoffeeShopProject.Models
     {
         private readonly CoffeeShopContext db;
         public string TenBan { get; set; }
+        public string TenNhanVienOrder { get; set; }
+        public string TenNhanVienThuNgan { get; set; }
         public string TenTang { get; set; }
         public List<ChiTietHoaDonViewModel> DsMon { get; set; }
         public HoaDonViewModel() { }
@@ -24,6 +26,12 @@ namespace CoffeeShopProject.Models
                       on hd.MaBan equals b.MaBan
                       join t in db.Tang
                       on b.MaTang equals t.MaTang
+                      join nv in db.TaiKhoan
+                      on hd.MaNhanVienOrder equals nv.MaTaiKhoan into jnv
+                      from subnv in jnv.DefaultIfEmpty()
+                      join tn in db.TaiKhoan
+                      on hd.MaThuNgan equals tn.MaTaiKhoan into jtn
+                      from subtn in jtn.DefaultIfEmpty() 
                       where !hd.TrangThai.Equals(3) && !hd.TrangThai.Equals(4) && !hd.TrangThai.Equals(8)
                       select new HoaDonViewModel
                       {
@@ -37,6 +45,8 @@ namespace CoffeeShopProject.Models
                           MaHoaDonLocal = hd.MaHoaDonLocal,
                           TrangThai = hd.TrangThai,
                           MaThuNgan = hd.MaThuNgan,
+                          TenNhanVienOrder = subnv.TenTaiKhoan,
+                          TenNhanVienThuNgan = subtn.TenTaiKhoan,
                           GiamGia = hd.GiamGia,
                           ThanhTien = hd.ThanhTien,
                           // DsMon = new ChiTietHoaDonViewModel(db).GetDsChiTietHoaDon(hd.MaHoaDon)

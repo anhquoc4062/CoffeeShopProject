@@ -10,6 +10,8 @@ namespace CoffeeShopProject.Models
         public string TenKhachHang { get; set; }
         public string Email { get; set; }
         private readonly CoffeeShopContext db;
+
+        private readonly int CurrentYear = DateTime.Now.Year;
         public GioHangViewModel() { }
         public GioHangViewModel(CoffeeShopContext _db)
         {
@@ -75,7 +77,7 @@ namespace CoffeeShopProject.Models
 
         public double? GetEarningByMonth(int month)
         {
-            var listGh = db.GioHang.Where(x => x.NgayDat.Value.Month == month).ToList();
+            var listGh = db.GioHang.Where(x => x.NgayDat.Value.Month == month && x.NgayDat.Value.Year == CurrentYear).ToList();
             double? total = 0.0;
             foreach (var gh in listGh)
             {
@@ -87,12 +89,25 @@ namespace CoffeeShopProject.Models
                     total += giaTd*ctgh.SoLuong;
                 }
             }
+
+            var listHd = db.HoaDonX.Where(x => x.ThoiGianLap.Value.Month == month && x.ThoiGianLap.Value.Year == CurrentYear).ToList();
+            foreach (var hd in listHd)
+            {
+                var listDetail = db.ChiTietHoaDon.Where(x => x.MaHoaDon == hd.MaHoaDon).ToList();
+                foreach (var cthd in listDetail)
+                {
+                    var giaTd = (from td in db.ThucDon
+                                 select td).Where(x => x.MaThucDon == cthd.MaThucDon).Select(x => x.GiaKhuyenMai).SingleOrDefault();
+                    total += giaTd * cthd.SoLuong;
+                }
+            }
+
             return total;
         }
 
         public int? GetItemCountByMonth(int month)
         {
-            var listGh = db.GioHang.Where(x => x.NgayDat.Value.Month == month).ToList();
+            var listGh = db.GioHang.Where(x => x.NgayDat.Value.Month == month && x.NgayDat.Value.Year == CurrentYear).ToList();
             int? total = 0;
             foreach (var gh in listGh)
             {
@@ -104,12 +119,25 @@ namespace CoffeeShopProject.Models
                     total += ctgh.SoLuong;
                 }
             }
+
+            var listHd = db.HoaDonX.Where(x => x.ThoiGianLap.Value.Month == month && x.ThoiGianLap.Value.Year == CurrentYear).ToList();
+            foreach (var hd in listHd)
+            {
+                var listDetail = db.ChiTietHoaDon.Where(x => x.MaHoaDon == hd.MaHoaDon && (x.TrangThai == 1 || x.TrangThai == 2)).ToList();
+                foreach (var cthd in listDetail)
+                {
+                    var giaTd = (from td in db.ThucDon
+                                 select td).Where(x => x.MaThucDon == cthd.MaThucDon).Select(x => x.GiaKhuyenMai).SingleOrDefault();
+                    total += cthd.SoLuong;
+                }
+            }
             return total;
         }
 
         public int GetOrderCountByMonth(int month)
         {
-            int count = db.GioHang.Where(x => x.NgayDat.Value.Month == month).Count();
+            int count = db.GioHang.Where(x => x.NgayDat.Value.Month == month && x.NgayDat.Value.Year == CurrentYear).Count();
+            count += db.HoaDonX.Where(x => x.ThoiGianLap.Value.Month == month && x.ThoiGianLap.Value.Year == CurrentYear).Count();
             return count;
         }
     }
