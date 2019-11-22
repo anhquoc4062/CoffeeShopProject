@@ -6,7 +6,7 @@ namespace CoffeeShopProject.Models
     public partial class HoaDonX
     {
         public int MaHoaDon { get; set; }
-        public DateTime? ThoiGianLap { get; set; }
+        public string ThoiGianLap { get; set; }
         public int? MaNhanVienOrder { get; set; }
         public int? MaBan { get; set; }
         public double? TongTien { get; set; }

@@ -90,7 +90,7 @@ namespace CoffeeShopProject.Models
                 }
             }
 
-            var listHd = db.HoaDonX.Where(x => x.ThoiGianLap.Value.Month == month && x.ThoiGianLap.Value.Year == CurrentYear).ToList();
+            var listHd = db.HoaDonX.Where(x => Convert.ToDateTime(x.ThoiGianLap).Month == month && Convert.ToDateTime(x.ThoiGianLap).Year == CurrentYear).ToList();
             foreach (var hd in listHd)
             {
                 var listDetail = db.ChiTietHoaDon.Where(x => x.MaHoaDon == hd.MaHoaDon).ToList();
@@ -120,7 +120,7 @@ namespace CoffeeShopProject.Models
                 }
             }
 
-            var listHd = db.HoaDonX.Where(x => x.ThoiGianLap.Value.Month == month && x.ThoiGianLap.Value.Year == CurrentYear).ToList();
+            var listHd = db.HoaDonX.Where(x => Convert.ToDateTime(x.ThoiGianLap).Month == month && Convert.ToDateTime(x.ThoiGianLap).Year == CurrentYear).ToList();
             foreach (var hd in listHd)
             {
                 var listDetail = db.ChiTietHoaDon.Where(x => x.MaHoaDon == hd.MaHoaDon && (x.TrangThai == 1 || x.TrangThai == 2)).ToList();
@@ -137,7 +137,7 @@ namespace CoffeeShopProject.Models
         public int GetOrderCountByMonth(int month)
         {
             int count = db.GioHang.Where(x => x.NgayDat.Value.Month == month && x.NgayDat.Value.Year == CurrentYear).Count();
-            count += db.HoaDonX.Where(x => x.ThoiGianLap.Value.Month == month && x.ThoiGianLap.Value.Year == CurrentYear).Count();
+            count += db.HoaDonX.Where(x => Convert.ToDateTime(x.ThoiGianLap).Month == month && Convert.ToDateTime(x.ThoiGianLap).Year == CurrentYear).Count();
             return count;
         }
     }

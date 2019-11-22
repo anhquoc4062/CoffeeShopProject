@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace CoffeeShopProject.Models
 {
-    public class HoaDonViewModel:HoaDon
+    public class HoaDonViewModel:HoaDonX
     {
         private readonly CoffeeShopContext db;
         public string TenBan { get; set; }

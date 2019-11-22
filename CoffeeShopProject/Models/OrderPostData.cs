@@ -1,6 +1,6 @@
 namespace CoffeeShopProject.Models
 {
-    public class OrderPostData : HoaDon
+    public class OrderPostData : HoaDonX
     {
         public ChiTietHoaDon[] DsMon { get; set; }
         public string TokenThietBi { get; set; }

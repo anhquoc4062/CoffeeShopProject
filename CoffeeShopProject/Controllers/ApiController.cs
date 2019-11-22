@@ -120,6 +120,15 @@ namespace CoffeeShopProject.Controllers
         }
         [HttpPost]
         public IActionResult SyncOrder(OrderPostData order) {
+
+            PostLog postLog = new PostLog();
+            postLog.LocalId = order.MaHoaDonLocal;
+            postLog.Api = "syncOrder";
+            postLog.RegDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            postLog.Params = JsonConvert.SerializeObject(order);
+            PostLogViewModel postLogViewModel = new PostLogViewModel(db);
+            postLogViewModel.InsertData(postLog);
+
             HoaDonX newhd = new HoaDonX();
             newhd.MaHoaDonLocal = order.MaHoaDonLocal;
             // newhd.MaHoaDon = order.MaHoaDon;

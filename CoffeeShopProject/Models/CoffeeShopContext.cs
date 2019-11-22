@@ -38,6 +38,7 @@ namespace CoffeeShopProject.Models
         public virtual DbSet<TinhThanh> TinhThanh { get; set; }
         public virtual DbSet<ThucDon> ThucDon { get; set; }
         public virtual DbSet<PushDevice> PushDevice { get; set; }
+        public virtual DbSet<PostLog> PostLog { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -237,8 +238,7 @@ namespace CoffeeShopProject.Models
                 entity.Property(e => e.MaNhanVienOrder).HasColumnName("maNhanVienOrder");
 
                 entity.Property(e => e.ThoiGianLap)
-                    .HasColumnName("thoiGianLap")
-                    .HasColumnType("datetime");
+                    .HasColumnName("thoiGianLap");
 
                 entity.Property(e => e.TongTien).HasColumnName("tongTien");
 
@@ -523,6 +523,26 @@ namespace CoffeeShopProject.Models
                 entity.HasKey(e => e.PushID);
                 entity.Property(e => e.PushID).HasColumnName("pushID");
                 entity.Property(e => e.Token).HasColumnName("token");
+            });
+
+
+            modelBuilder.Entity<PostLog>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.Api).HasColumnName("api");
+
+                entity.Property(e => e.Params)
+                    .HasColumnName("params");
+
+                entity.Property(e => e.Response)
+                    .HasColumnName("response");
+
+                entity.Property(e => e.RegDate)
+                    .HasColumnName("reg_date");
+
+                entity.Property(e => e.LocalId)
+                .HasColumnName("local_id");
             });
         }
     }
