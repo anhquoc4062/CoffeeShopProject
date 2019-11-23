@@ -45,8 +45,8 @@ namespace CoffeeShopProject.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                //optionsBuilder.UseSqlServer("workstation id=TLECoffeeDB.mssql.somee.com;packet size=4096;user id=anhquoc4062_SQLLogin_1;pwd=qprknsdfus;data source=TLECoffeeDB.mssql.somee.com;persist security info=False;initial catalog=TLECoffeeDB");
-                optionsBuilder.UseSqlServer("Server=.; Database=CoffeeShop; Integrated Security=True;");
+                optionsBuilder.UseSqlServer("workstation id=TLECoffeeDB.mssql.somee.com;packet size=4096;user id=anhquoc4062_SQLLogin_1;pwd=9o25twlvdp;data source=TLECoffeeDB.mssql.somee.com;persist security info=False;initial catalog=TLECoffeeDB");
+                // optionsBuilder.UseSqlServer("Server=.; Database=CoffeeShop; Integrated Security=True;");
             }
         }
 
