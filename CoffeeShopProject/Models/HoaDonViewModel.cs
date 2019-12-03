@@ -82,12 +82,19 @@ namespace CoffeeShopProject.Models
                             on hd.MaBan equals b.MaBan
                             join t in db.Tang
                             on b.MaTang equals t.MaTang
+                            join nv in db.TaiKhoan
+                            on hd.MaNhanVienOrder equals nv.MaTaiKhoan into jnv
+                            from subnv in jnv.DefaultIfEmpty()
+                            join tn in db.TaiKhoan
+                            on hd.MaThuNgan equals tn.MaTaiKhoan into jtn
+                            from subtn in jtn.DefaultIfEmpty()
                             where hd.MaHoaDon == int.Parse(id)
                             select new HoaDonViewModel
                             {
                                 MaHoaDon = hd.MaHoaDon,
                                 ThoiGianLap = hd.ThoiGianLap,
                                 MaNhanVienOrder = hd.MaNhanVienOrder,
+                                TenNhanVienOrder = subnv.TenTaiKhoan,
                                 MaBan = hd.MaBan,
                                 TenBan = b.TenBan,
                                 TenTang = t.TenTang,
@@ -95,6 +102,7 @@ namespace CoffeeShopProject.Models
                                 MaHoaDonLocal = hd.MaHoaDonLocal,
                                 TrangThai = hd.TrangThai,
                                 MaThuNgan = hd.MaThuNgan,
+                                TenNhanVienThuNgan = subtn.TenTaiKhoan,
                                 GiamGia = hd.GiamGia,
                                 ThanhTien = hd.ThanhTien,
 

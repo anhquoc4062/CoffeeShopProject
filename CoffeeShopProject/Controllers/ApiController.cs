@@ -95,6 +95,9 @@ namespace CoffeeShopProject.Controllers
                     case 8:
                         statusMessage += "đã thanh toán order";
                         break;
+                    case 7:
+                        statusMessage += "đã chế biến xong";
+                        break;
                 }
 
                 var param = new
