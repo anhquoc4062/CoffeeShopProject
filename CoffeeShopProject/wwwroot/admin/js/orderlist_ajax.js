@@ -57,6 +57,7 @@ function GetListDetail(cart_id) {
             }
             $("#order_detail .item").remove();
             $("#amount").before(htmlString);
+            $('#print-order').attr('cart-data', JSON.stringify(data));
             $("#total_amount").html('$' + total.toFixed(2));
         },
         error: function(error) {}

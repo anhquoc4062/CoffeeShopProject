@@ -151,9 +151,52 @@
                     
                 </div>
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="print-order">In</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+            </div>
         </div>
     </div>
 </div>
 
 <script src="~/admin/js/orderlist_ajax.js"></script>
+<script src="~/admin/js/print-order.js"></script>
+
+<div id="bill-print">
+ <div class="not-show-kitchen" style="display: flex;align-items: center;place-content: space-around;visible:none">
+    <div class="logo-area"><img src="/images/icon/logo.png" alt="" title="" width="200" height="200"></div>
+    <div class="center" style="font-size: 20px;text-align: center;">
+    <div class="name_shop" style="font-weight:bold">
+        TLE Coffee Shop
+    </div>
+    <div class="address_shop">
+        01234567890
+    </div>
+    <div class="address_shop">
+        280 An Dương Vương, phường 4, quận 5
+     </div>
+ </div>
+                     
+                
+</div>    
+    <div class="bill_name" id="bill_print_name" style="text-align: center;font-size: 40px;font-weight: bold;margin-top: -20px;margin-bottom: 40px;">
+        Hóa đơn
+    </div>
+    <table class="info-bill" style="text-align: left; width: 100%; margin-bottom: 20px; font-size: 18px">
+            <tr style="padding: 5px; height: 50px">
+                <th width="60%">
+                    <span class="bold">Tên khách hàng:</span> <span id="customer-name-parse" style="font-weight: normal">{{Ten_Khach_Hang}}</span>
+                </th>
+                <th width="40%">
+                    <span class="bold">Số điện thoại:</span> <span id="customer-tel-parse" style="font-weight: normal">{{So_Dien_Thoai}}</span>
+                </th>
+            </tr>
+            <tr style="padding: 5px">
+                <th colspan="2">
+                    <span class="bold">Địa chỉ:</span> <span id="customer-address-parse" style="font-weight: normal">{{Dia_Chi}}</span>
+                </th>
+            </tr>
+        </table>
+</div>
+ 
 

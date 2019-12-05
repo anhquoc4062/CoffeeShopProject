@@ -20,7 +20,7 @@ namespace CoffeeShopProject.Controllers
         {
             db = _db;
         }
-        [Route("dang-nhap")]
+        //[Route("dang-nhap")]
         public IActionResult Index()
         {
             return View();
